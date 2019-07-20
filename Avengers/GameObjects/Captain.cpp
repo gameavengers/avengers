@@ -177,6 +177,15 @@ void Captain::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	// CAPTAIN_ANI_DIVING
+	anim = new Animation(300);
+	for (int i = 41; i < 44; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
 }
 
 void Captain::Reset()

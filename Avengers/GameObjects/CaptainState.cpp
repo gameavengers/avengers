@@ -169,7 +169,7 @@ void CaptainState::state_crouch()
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z))//bay xuống
 	{
 		
-		captain->SetPositionY(captain->GetPositionY() - 1);
+		captain->SetPositionY(captain->GetPositionY() - 0.5);
 		return;
 	}
 
@@ -194,6 +194,23 @@ void CaptainState::state_crouch()
 void CaptainState::state_swimming()
 {
 	this->SetState(STATE_SWIMMING);
+
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z)) // Bàn phím ấn nút Z thì nhảy
+	{
+		startJumpY = captain->GetPositionY();
+		captain->SetSpeedY(CAPTAIN_JUMP_SPEED_Y);
+		this->SetState(STATE_JUMPING); //Chuyển sang trạng thái nhảy
+
+		captain->SetIsSwimming(false);
+		return;
+	}
+
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_DOWN) && !Keyboard::GetInstance()->IsKeyDown(DIK_Z)) // Lặn
+	{
+		this->state_diving();
+		return;
+	}
+
 	anim = captain->GetAnimationsList()[STATE_SWIMMING];
 }
 
@@ -262,6 +279,14 @@ void CaptainState::state_dieing()
 	anim = captain->GetAnimationsList()[STATE_DIEING];
 }
 
+void CaptainState::state_diving()
+{
+	captain->SetSpeedX(0);
+	
+	this->SetState(STATE_DIVING);
+	anim = captain->GetAnimationsList()[STATE_DIVING];
+}
+
 void CaptainState::KeyHandle()
 {
 	//Do viết hàm nên không có lệnh
@@ -308,6 +333,9 @@ void CaptainState::Update(DWORD dt)
 	}
 	else
 		captain->SetSpeedX(0);
+
+	if (captain->GetPositionX() < 10)
+		captain->SetPositionX(10);
 
 	//Update theo state
 	switch (stateCaptain)
@@ -374,6 +402,10 @@ void CaptainState::Update(DWORD dt)
 
 	case STATE_DIEING:
 		this->state_dieing();
+		break;
+
+	case STATE_DIVING:
+		this->state_diving();
 		break;
 
 	default:

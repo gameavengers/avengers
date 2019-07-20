@@ -70,6 +70,12 @@ bool Keyboard::IsKeyDown(int key)
 	return key_buffer[key] & 0x80;//0x80 xác định bit đầu tiên
 }
 
+bool Keyboard::IsKeyUp(int key)
+{
+	//Trả về phím có được nhả hay không
+	return !(key_buffer[key] & 0x80);//0x80 xác định bit đầu tiên
+}
+
 //Hủy phím
 void Keyboard::KillKeyboard()
 {

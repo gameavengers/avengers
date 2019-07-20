@@ -51,15 +51,14 @@ void CaptainState::state_standing()
 
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_RIGHT) || Keyboard::GetInstance()->IsKeyDown(DIK_LEFT)) // Bàn phím nhấn nút trái phải
 	{
-		bool doubleKey = false;//Nhấn qua lại 2 lần tự viết
-		if (doubleKey)
-		{
-			this->SetState(STATE_DASH); //dash
-			return;
-		}
-
 		this->SetState(STATE_WALKING); //Chuyển sang trạng thái di chuyển
 		return;//Phải có return để không làm câu lệnh dưới
+	}
+
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_C))
+	{
+		this->state_dash(); //Dash
+		return;
 	}
 
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_UP))
@@ -257,6 +256,21 @@ void CaptainState::state_crouch_shield()
 
 void CaptainState::state_dash()
 {
+	int maxDistance = captain->GetPositionX() + 20;
+	captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -5 : 5));
+
+	if (captain->GetPositionX() > maxDistance)
+	{
+		this->SetState(STATE_STANDING);
+		this->state_standing();
+	}
+
+	if (Keyboard::GetInstance()->IsKeyUp(DIK_C)) // Nhả phím dash
+	{
+		this->SetState(STATE_STANDING); //Chuyển sang trạng thái đứng
+		return;
+	}
+	
 	this->SetState(STATE_DASH);
 	anim = captain->GetAnimationsList()[STATE_DASH];
 }

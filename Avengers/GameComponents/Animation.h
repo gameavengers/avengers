@@ -20,6 +20,7 @@ public:
 
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }	
+	void SetCurFrame(int frame) { this->curFrame = frame; }
 	int GetCurFrame() { return curFrame; }
 	bool IsDone() { return done; }
 

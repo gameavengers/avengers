@@ -21,6 +21,8 @@ public:
 	void Update();
 	//Nhận diện phím nhấn
 	bool IsKeyDown(int key);
+	//Nhận diện phím nhả
+	bool IsKeyUp(int key);
 	//Hủy phím
 	void KillKeyboard();
 	//Lấy đối tượng

@@ -185,12 +185,14 @@ void CaptainState::state_crouch()
 
 void CaptainState::state_swimming()
 {
-	this->SetState(STATE_STANDING);
+	this->SetState(STATE_SWIMMING);
+	anim = captain->GetAnimationsList()[STATE_SWIMMING];
 }
 
 void CaptainState::state_throw_shield()
 {
-	this->SetState(STATE_STANDING);
+	this->SetState(STATE_THROW_SHIELD);
+	anim = captain->GetAnimationsList()[STATE_THROW_SHIELD];
 }
 
 void CaptainState::state_punch()
@@ -224,27 +226,32 @@ void CaptainState::state_crouch_punch()
 
 void CaptainState::state_crouch_shield()
 {
-	this->SetState(STATE_STANDING);
+	this->SetState(STATE_CROUCH_SHIELD);
+	anim = captain->GetAnimationsList()[STATE_CROUCH_SHIELD];
 }
 
 void CaptainState::state_dash()
 {
-	this->SetState(STATE_STANDING);
+	this->SetState(STATE_DASH);
+	anim = captain->GetAnimationsList()[STATE_DASH];
 }
 
 void CaptainState::state_throw_shield_2()
 {
-	this->SetState(STATE_STANDING);
+	this->SetState(STATE_THROW_SHIELD_2);
+	anim = captain->GetAnimationsList()[STATE_THROW_SHIELD_2];
 }
 
 void CaptainState::state_bleeing()
 {
-	this->SetState(STATE_STANDING);
+	this->SetState(STATE_BLEEING);
+	anim = captain->GetAnimationsList()[STATE_BLEEING];
 }
 
 void CaptainState::state_dieing()
 {
-	this->SetState(STATE_STANDING);
+	this->SetState(STATE_DIEING);
+	anim = captain->GetAnimationsList()[STATE_DIEING];
 }
 
 void CaptainState::KeyHandle()

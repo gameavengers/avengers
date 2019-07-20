@@ -70,7 +70,7 @@ void Captain::LoadResources()
 	}
 	animations.push_back(anim);
 
-	// CAPTAIN_ANI_JUMP
+	// CAPTAIN_ANI_JUMP_ROLE
 	anim = new Animation(50);
 	for (int i = 8; i < 10; i++)
 	{
@@ -90,7 +90,7 @@ void Captain::LoadResources()
 
 	// CAPTAIN_ANI_SWIM
 	anim = new Animation(100);
-	for (int i = 6; i < 7; i++)
+	for (int i = 44; i < 46; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
@@ -124,9 +124,54 @@ void Captain::LoadResources()
 	}
 	animations.push_back(anim);
 
-		// CAPTAIN_ANI_CROUCH_PUNCH
+	// CAPTAIN_ANI_CROUCH_PUNCH
 	anim = new Animation(300);
 	for (int i = 15; i < 17; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+
+	// CAPTAIN_ANI_CROUCH_SHIELD
+	anim = new Animation(300);
+	for (int i = 19; i < 20; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+
+	// CAPTAIN_ANI_DASH
+	anim = new Animation(300);
+	for (int i = 17; i < 19; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+
+	// CAPTAIN_ANI_THROW_SHIELD_2
+	anim = new Animation(300);
+	for (int i = 11; i < 13; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+
+	// CAPTAIN_ANI_BLEEING
+	anim = new Animation(300);
+	for (int i = 33; i < 34; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+
+	// CAPTAIN_ANI_DIEING
+	anim = new Animation(300);
+	for (int i = 34; i < 36; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);

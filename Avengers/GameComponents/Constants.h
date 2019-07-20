@@ -54,7 +54,7 @@ enum ObjectType
 #define CAPTAIN_WALK_SPEED		0.125f
 #define CAPTAIN_JUMP_SPEED_Y	0.3f
 #define CAPTAIN_GRAVITY			0.04f
-#define CAPTAIN_JUMP_MAX		100
+#define CAPTAIN_JUMP_MAX		70
 
 #define CAPTAIN_TEXTURE_LOCATION L"Resources\\Captain\\Captain.png"
 #define CAPTAIN_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(255, 0, 255)

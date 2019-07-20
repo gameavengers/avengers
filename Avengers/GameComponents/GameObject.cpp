@@ -89,9 +89,19 @@ void GameObject::CalcPotentialMapCollisions(
 				delete e;
 			}
 		}
-		else 
+		else if (curTile->type == ObjectType::RIVER)
 		{
-			
+			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
+			e->collisionID = 2;
+
+			if (e->t >= 0 && e->t < 1.0f && e->ny == 1)
+			{
+				coEvents.push_back(e);
+			}
+			else
+			{
+				delete e;
+			}
 		}
 	}
 }

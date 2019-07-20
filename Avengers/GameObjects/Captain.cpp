@@ -9,7 +9,7 @@ Captain::Captain()
 
 	state = new CaptainState(this);
 
-	this->x = 50;
+	this->x = 200;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -136,7 +136,7 @@ void Captain::LoadResources()
 
 void Captain::Reset()
 {
-	this->SetPositionX(50);
+	this->SetPositionX(200);
 	this->SetPositionY(200);
 	Viewport::GetInstance()->Reset();
 }
@@ -149,7 +149,7 @@ void Captain::Update(DWORD dt)
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
-#pragma region	Collide with brick
+#pragma region	Collide with brick and river
 	vector<Tile *> tiles = Grid::GetInstance()->GetCurTiles();
 	
 	coEvents.clear();
@@ -184,6 +184,15 @@ void Captain::Update(DWORD dt)
 			if (ny == 1)
 			{
 				this->SetIsGrounded(true);
+			}
+		}
+
+		if (coEventsResult[0]->collisionID == 2)
+		{
+			if (ny == 1)
+			{
+				this->SetIsGrounded(false);
+				this->SetIsSwimming(true);
 			}
 		}
 	}

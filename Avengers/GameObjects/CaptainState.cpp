@@ -7,8 +7,6 @@ CaptainState::CaptainState(Captain *captain)
 	this->stateCaptain = STATE_JUMPING;
 	this->startJumpY == NULL;
 	this->captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
-	LoadTXT loadTXT;
-	RECT* listSprite = loadTXT.LoadRect((char*)"Resources\\Captain\\Captain.txt");
 }
 
 CaptainState::~CaptainState() 

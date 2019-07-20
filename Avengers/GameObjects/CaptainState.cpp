@@ -166,6 +166,13 @@ void CaptainState::state_jumping_role()
 void CaptainState::state_crouch()
 {
 	//HandleKey
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z))//bay xuống
+	{
+		
+		captain->SetPositionY(captain->GetPositionY() - 1);
+		return;
+	}
+
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_RIGHT) || Keyboard::GetInstance()->IsKeyDown(DIK_LEFT) ||
 		Keyboard::GetInstance()->IsKeyDown(DIK_Z) || //Các state ưu tiên đưa ra trước
 		!Keyboard::GetInstance()->IsKeyDown(DIK_DOWN)) //Không bấm lên thì đổi state
@@ -177,6 +184,7 @@ void CaptainState::state_crouch()
 	{
 		this->SetState(STATE_CROUCH_PUNCH);
 	}
+
 	//Update state
 	captain->SetSpeedX(0);
 	captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
@@ -273,6 +281,13 @@ void CaptainState::Colision()
 			this->SetState(STATE_STANDING);
 			this->state_standing();
 		}
+	}
+
+	//Nếu chạm sông thì bơi
+	if (captain->IsSwimming())
+	{
+		this->SetState(STATE_SWIMMING);
+		this->state_swimming();
 	}
 
 	captain->SetIsGrounded(false);

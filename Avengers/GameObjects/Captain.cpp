@@ -238,6 +238,7 @@ void Captain::Update(DWORD dt)
 			{
 				this->SetIsGrounded(false);
 				this->SetIsSwimming(true);
+				this->SetPositionX(this->GetPositionX() - 0.5);
 			}
 		}
 	}

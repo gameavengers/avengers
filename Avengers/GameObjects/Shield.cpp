@@ -66,9 +66,9 @@ void Shield::LoadResources()
 
 void Shield::Update(DWORD dt)
 {
-	/*this->SetSpeedY(0);
+	this->SetSpeedY(0);
 	Captain* captain = Captain::GetInstance();
-	CaptainState* capstate;
+	CaptainState* capstate = CaptainState::GetInstance(captain);
 	if (!captain->IsShield())
 	{
 		this->state = SHIELD_UP;
@@ -136,14 +136,14 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX() + 3);
 			this->SetPositionY(captain->GetPositionY() - 25);
 		}
-		if (capstate->GetState() == STATE_SWIMMING || STATE_JUMPING_ROLE)
+		/*if (capstate->GetState() == STATE_SWIMMING || STATE_JUMPING_ROLE)
 		{
 			this->state = SHIELD_HIDE;
-		}
+		}*/
 	}
 
 	this->SetPositionX((float)(this->GetPositionX() + this->GetSpeedX()* dt*(isLeft == true ? -1 : 1)));
-	this->SetPositionY((float)(this->GetPositionY() + this->GetSpeedY()* dt));*/
+	this->SetPositionY((float)(this->GetPositionY() + this->GetSpeedY()* dt));
 }
 
 void Shield::ShieldFlying()
@@ -198,9 +198,9 @@ void Shield::ShieldFlying()
 
 void Shield::Render()
 {
-	/*int state = this->state;
+	int state = this->state;
 	Captain * captain = Captain::GetInstance();
-	CaptainState * capstate;
+	CaptainState * capstate = CaptainState::GetInstance(captain);
 	if (capstate->GetState() == STATE_JUMPING_KICK)
 	{
 		SpriteData spriteData;
@@ -258,7 +258,7 @@ void Shield::Render()
 		}
 		break;
 		}
-	}*/
+	}
 }
 
 Shield::~Shield()

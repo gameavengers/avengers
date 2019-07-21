@@ -1,6 +1,16 @@
 ﻿#include "CaptainState.h"
 #include <math.h>
 
+CaptainState * CaptainState::__instance = NULL;
+
+CaptainState *CaptainState::GetInstance(Captain *captain)
+{
+	if (__instance == NULL)
+		__instance = new CaptainState(captain);
+	return __instance;
+}
+
+
 CaptainState::CaptainState(Captain *captain)
 {
 	this->captain = captain;

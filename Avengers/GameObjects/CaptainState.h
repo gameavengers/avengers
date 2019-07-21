@@ -31,6 +31,7 @@ enum StateCaptain //đặt tên không trùng tên class nào
 class CaptainState : public State
 {
 protected:
+	static CaptainState * __instance;
 	StateCaptain stateCaptain;
 	Captain *captain;
 	Animation * anim;
@@ -40,6 +41,8 @@ protected:
 public: 
 	CaptainState(Captain *captain);
 	~CaptainState();
+
+	static CaptainState * GetInstance(Captain *captain);
 
 	//Lấy trạng thái
 	StateCaptain GetState();

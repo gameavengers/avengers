@@ -146,6 +146,16 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX() + 3);
 			this->SetPositionY(captain->GetPositionY() - 25);
 		}
+		if (capstate->GetState() == STATE_DASH)
+		{
+			this->state = SHIELD_SIDE;
+			this->SetSpeedX(0);
+			if (captain->IsLeft())
+				this->SetPositionX(captain->GetPositionX() - 2);
+			else
+				this->SetPositionX(captain->GetPositionX() + 11);
+			this->SetPositionY(captain->GetPositionY() - 22);
+		}
 		if (capstate->GetState() == STATE_SWIMMING || capstate->GetState() == STATE_JUMPING_ROLE || capstate->GetState() == STATE_DIVING)
 		{
 			this->state = SHIELD_HIDE;

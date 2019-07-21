@@ -7,7 +7,7 @@ Captain::Captain()
 {
 	LoadResources();
 
-	state = new CaptainState(this);
+	state = CaptainState::GetInstance(this);
 
 	shield = new Shield();
 

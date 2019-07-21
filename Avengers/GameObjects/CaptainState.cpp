@@ -183,16 +183,18 @@ void CaptainState::state_crouch()
 		return;
 	}
 
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_X))//ngồi đấm
+	{
+		this->SetState(STATE_CROUCH_PUNCH);
+		return;
+	}
+
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_RIGHT) || Keyboard::GetInstance()->IsKeyDown(DIK_LEFT) ||
 		Keyboard::GetInstance()->IsKeyDown(DIK_Z) || //Các state ưu tiên đưa ra trước
 		!Keyboard::GetInstance()->IsKeyDown(DIK_DOWN)) //Không bấm lên thì đổi state
 	{
 		this->SetState(STATE_STANDING);
 		return;
-	}
-	if (Keyboard::GetInstance()->IsKeyDown(DIK_X))//ngồi đấm
-	{
-		this->SetState(STATE_CROUCH_PUNCH);
 	}
 
 	//Update state
@@ -244,6 +246,11 @@ void CaptainState::state_jumping_kick()
 {
 	//Update
 	anim = captain->GetAnimationsList()[STATE_JUMPING_KICK];//Cái này làm cho có thêm thời gian tấn công với event upKey vô
+
+	if (anim->IsDone())
+	{
+		this->SetState(STATE_JUMPING);
+	}
 }
 void CaptainState::state_crouch_punch()
 {
@@ -254,8 +261,8 @@ void CaptainState::state_crouch_punch()
 
 	if (anim->IsDone())//Hàm isDone hình như bị lỗi
 	{
-		this->SetState(STATE_STANDING);
-		this->state_standing();
+		this->SetState(STATE_CROUCH);
+		//this->state_crouch();
 	}
 }
 

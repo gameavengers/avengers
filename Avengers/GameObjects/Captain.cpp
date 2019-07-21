@@ -200,7 +200,6 @@ void Captain::Reset()
 void Captain::Update(DWORD dt)
 {
 	state->Update(dt);
-	shield->Update(dt);
 
 	//Colision với state để riêng ra
 	vector<LPCOLLISIONEVENT> coEvents;
@@ -259,6 +258,7 @@ void Captain::Update(DWORD dt)
 #pragma endregion
 
 	state->Colision();
+	shield->Update(dt);
 }
 void Captain::Render()
 {

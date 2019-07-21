@@ -37,6 +37,12 @@ void CaptainState::state_standing()
 		return;
 	}
 
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_C))
+	{
+		this->state_dash(); //Dash
+		return;
+	}
+
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_X)) //Tấn công 
 	{
 		if (captain->IsShield()) // Nếu có khiên
@@ -55,11 +61,6 @@ void CaptainState::state_standing()
 		return;//Phải có return để không làm câu lệnh dưới
 	}
 
-	if (Keyboard::GetInstance()->IsKeyDown(DIK_C))
-	{
-		this->state_dash(); //Dash
-		return;
-	}
 
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_UP))
 	{
@@ -105,7 +106,7 @@ void CaptainState::state_walking()
 	captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_RIGHT) || Keyboard::GetInstance()->IsKeyDown(DIK_LEFT)) //Ưu tiên qua lại nên để trước
 	{
-		if (Keyboard::GetInstance()->IsKeyDown(DIK_Z) || Keyboard::GetInstance()->IsKeyDown(DIK_X))//Đang đi mà nhảy hay tấn công chuyển state
+		if (Keyboard::GetInstance()->IsKeyDown(DIK_Z) || Keyboard::GetInstance()->IsKeyDown(DIK_X) || Keyboard::GetInstance()->IsKeyDown(DIK_C))//Đang đi mà nhảy, tấn công hay dash thì chuyển state
 		{
 			this->SetState(STATE_STANDING);
 			return;

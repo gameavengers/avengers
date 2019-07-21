@@ -4,6 +4,7 @@
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
 #include "State.h"
+#include "Shield.h"
 
 class Captain : public GameObject
 {
@@ -14,11 +15,13 @@ class Captain : public GameObject
 	State *state;
 
 	bool isGrounded = false;
-	bool isShield = false;
+	bool isShield = true;
 	bool isSwimming = false;
 
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
+
+	Shield *shield;
 
 public: 
 	void LoadResources();

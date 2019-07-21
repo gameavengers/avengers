@@ -142,6 +142,7 @@
     <ClInclude Include="GameComponents\Viewport.h" />
     <ClInclude Include="GameObjects\Captain.h" />
     <ClInclude Include="GameObjects\CaptainState.h" />
+    <ClInclude Include="GameObjects\Shield.h" />
     <ClInclude Include="GameObjects\State.h" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +161,7 @@
     <ClCompile Include="GameComponents\Viewport.cpp" />
     <ClCompile Include="GameObjects\Captain.cpp" />
     <ClCompile Include="GameObjects\CaptainState.cpp" />
+    <ClCompile Include="GameObjects\Shield.cpp" />
     <ClCompile Include="GameObjects\State.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

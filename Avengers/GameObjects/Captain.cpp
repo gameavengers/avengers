@@ -9,6 +9,8 @@ Captain::Captain()
 
 	state = new CaptainState(this);
 
+	shield = new Shield();
+
 	this->x = 200;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
@@ -144,7 +146,7 @@ void Captain::LoadResources()
 
 	// CAPTAIN_ANI_DASH
 	anim = new Animation(300);
-	for (int i = 17; i < 19; i++)
+	for (int i = 18; i < 19; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
@@ -198,6 +200,7 @@ void Captain::Reset()
 void Captain::Update(DWORD dt)
 {
 	state->Update(dt);
+	shield->Update(dt);
 
 	//Colision với state để riêng ra
 	vector<LPCOLLISIONEVENT> coEvents;
@@ -260,4 +263,5 @@ void Captain::Update(DWORD dt)
 void Captain::Render()
 {
 	state->Render();
+	shield->Render();
 }

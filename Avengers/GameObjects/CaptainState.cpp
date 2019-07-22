@@ -136,6 +136,12 @@ void CaptainState::state_walking()
 
 void CaptainState::state_jumping()
 {
+	/*if (Keyboard::GetInstance()->IsKeyDown(DIK_DOWN) && captain->IsShield())
+	{
+		this->state_crouch_shield();
+		return;
+	}*/
+
 	//HandleKey
 	if (!Keyboard::GetInstance()->IsKeyDown(DIK_Z))
 	{
@@ -150,7 +156,7 @@ void CaptainState::state_jumping()
 	}
 
 	anim = captain->GetAnimationsList()[STATE_JUMPING];
-	if (Keyboard::GetInstance()->IsKeyDown(DIK_X))//Đá
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_X) && captain->IsShield())//Đá
 	{
 		this->state_jumping_kick();
 		return;
@@ -162,7 +168,8 @@ void CaptainState::state_jumping_role()
 	//HandleKey
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_DOWN) && captain->IsShield())//Ngồi lên khiên
 	{
-		this->SetState(STATE_CROUCH_SHIELD);
+		this->state_crouch_shield();
+		return;
 	}
 	//Update
 	captain->SetSpeedY(captain->GetSpeedY() - CAPTAIN_GRAVITY);
@@ -173,7 +180,7 @@ void CaptainState::state_jumping_role()
 		this->startJumpY == NULL;
 	}
 	anim = captain->GetAnimationsList()[STATE_JUMPING_ROLE];
-	if (Keyboard::GetInstance()->IsKeyDown(DIK_X))//Đá
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_X) && captain->IsShield())//Đá
 	{
 		this->state_jumping_kick();
 		return;
@@ -285,6 +292,14 @@ void CaptainState::state_crouch_shield()
 {
 	this->SetState(STATE_CROUCH_SHIELD);
 
+	if (!Keyboard::GetInstance()->IsKeyDown(DIK_DOWN))
+	{
+		this->SetState(STATE_STANDING);
+		this->state_standing();
+		return;
+	}
+
+	captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
 	captain->SetSpeedX(0);
 	anim = captain->GetAnimationsList()[STATE_CROUCH_SHIELD];
 }

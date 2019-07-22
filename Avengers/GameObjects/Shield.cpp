@@ -196,12 +196,12 @@ void Shield::ShieldFlying()
 		{
 			if (this->GetPositionY() > cpos)
 			{
-				float temp = this->GetPositionY() - 5;
+				float temp = this->GetPositionY() - 2.5;
 				this->SetPositionY(temp);
 			}
 			else
 			{
-				float temp = this->GetPositionY() + 5;
+				float temp = this->GetPositionY() + 2.5;
 				this->SetPositionY(temp);
 			}
 		}

@@ -58,11 +58,16 @@ void CaptainState::state_standing()
 		if (captain->IsShield()) // Nếu có khiên
 		{
 			this->SetState(STATE_THROW_SHIELD); //Ném khiên
+			this->state_throw_shield();
+			captain->SetIsShield(false);
+			return;
+		}
+		else
+		{
+			this->SetState(STATE_PUNCH); //Tạm thời thôi chứ hình như là phải xét bên state ném khiên nếu anim->IsDone() thì chuyển sang đấm
 			return;
 		}
 
-		this->SetState(STATE_PUNCH); //Đấm
-		return;
 	}
 
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_RIGHT) || Keyboard::GetInstance()->IsKeyDown(DIK_LEFT)) // Bàn phím nhấn nút trái phải
@@ -148,6 +153,7 @@ void CaptainState::state_jumping()
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_X))//Đá
 	{
 		this->state_jumping_kick();
+		return;
 	}
 }
 
@@ -170,6 +176,7 @@ void CaptainState::state_jumping_role()
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_X))//Đá
 	{
 		this->state_jumping_kick();
+		return;
 	}
 }
 
@@ -228,8 +235,15 @@ void CaptainState::state_swimming()
 
 void CaptainState::state_throw_shield()
 {
-	this->SetState(STATE_THROW_SHIELD);
+	captain->SetSpeedX(0);
+
 	anim = captain->GetAnimationsList()[STATE_THROW_SHIELD];
+
+	if (anim->IsDone())//Hàm isDone hình như bị lỗi
+	{
+		this->SetState(STATE_PUNCH); //Đấm
+		return;
+	}
 }
 
 void CaptainState::state_punch()
@@ -244,13 +258,15 @@ void CaptainState::state_punch()
 
 void CaptainState::state_jumping_kick()
 {
+	this->SetState(STATE_JUMPING_KICK);
+	
 	//Update
 	anim = captain->GetAnimationsList()[STATE_JUMPING_KICK];//Cái này làm cho có thêm thời gian tấn công với event upKey vô
 
-	if (anim->IsDone())
+	/*if (anim->IsDone())
 	{
 		this->SetState(STATE_JUMPING);
-	}
+	}*/
 }
 void CaptainState::state_crouch_punch()
 {
@@ -259,16 +275,17 @@ void CaptainState::state_crouch_punch()
 	captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
 	anim = captain->GetAnimationsList()[STATE_CROUCH_PUNCH];
 
-	if (anim->IsDone())//Hàm isDone hình như bị lỗi
+	if (anim->IsDone())
 	{
 		this->SetState(STATE_CROUCH);
-		//this->state_crouch();
 	}
 }
 
 void CaptainState::state_crouch_shield()
 {
 	this->SetState(STATE_CROUCH_SHIELD);
+
+	captain->SetSpeedX(0);
 	anim = captain->GetAnimationsList()[STATE_CROUCH_SHIELD];
 }
 
@@ -331,7 +348,7 @@ void CaptainState::Colision()
 	{
 		this->SetState(STATE_JUMPING);
 	}
-	else if (this->GetState() == STATE_JUMPING || this->GetState() == STATE_JUMPING_ROLE)
+	else if (this->GetState() == STATE_JUMPING || this->GetState() == STATE_JUMPING_ROLE || this->GetState() == STATE_JUMPING_KICK || this->GetState() == STATE_THROW_SHIELD)
 	{
 		if (captain->GetSpeedY() < 0)
 		{

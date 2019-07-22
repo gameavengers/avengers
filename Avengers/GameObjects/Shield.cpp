@@ -26,7 +26,7 @@ Shield::Shield()
 	collider.width = SHIELD_WIDTH;
 	collider.height = SHIELD_HEIGHT;
 
-	maxDistance = SCREEN_WIDTH / 2;
+	maxDistance = SCREEN_WIDTH / 2.5;
 }
 
 void Shield::LoadResources()
@@ -141,10 +141,10 @@ void Shield::Update(DWORD dt)
 			this->state = SHIELD_DOWN;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX() + 6);
+				this->SetPositionX(captain->GetPositionX());
 			else
-				this->SetPositionX(captain->GetPositionX() + 3);
-			this->SetPositionY(captain->GetPositionY() - 25);
+				this->SetPositionX(captain->GetPositionX() + 10);
+			this->SetPositionY(captain->GetPositionY() - 40);
 		}
 		if (capstate->GetState() == STATE_DASH)
 		{
@@ -186,7 +186,7 @@ void Shield::ShieldFlying()
 	else
 	{
 
-		int cpos = captain->GetPositionY() - 20;
+		int cpos = captain->GetPositionY() - 16;
 		if ((isCaptainLeft ? (this->GetPositionX() < this->distance) : (this->GetPositionX() >= this->distance) && isReturn))
 		{
 			this->SetSpeedX(SHIELD_SPEED * -1 * (isCaptainLeft ? -1 : 1));
@@ -196,12 +196,12 @@ void Shield::ShieldFlying()
 		{
 			if (this->GetPositionY() > cpos)
 			{
-				float temp = this->GetPositionY() - 1.25;
+				float temp = this->GetPositionY() - 5;
 				this->SetPositionY(temp);
 			}
 			else
 			{
-				float temp = this->GetPositionY() + 1.25;
+				float temp = this->GetPositionY() + 5;
 				this->SetPositionY(temp);
 			}
 		}

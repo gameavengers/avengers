@@ -15,8 +15,8 @@
 //
 enum Stage {
 	STAGE_1,
-	STAGE_2,
 	STAGE_BOSS_1,
+	STAGE_2,
 	STAGE_BOSS_2
 };
 enum ObjectType
@@ -32,13 +32,13 @@ enum ObjectType
 //
 // MAP
 #define BACKGROUND_1 L"Resources\\TiledMap\\Map-Charleston.png"
-#define BACKGROUND_2 L"Resources\\TiledMap\\Map-Pittsburgh.png"
 #define BACKGROUND_BOSS_1 L"Resources\\TiledMap\\Map-Boss1.png"
+#define BACKGROUND_2 L"Resources\\TiledMap\\Map-Pittsburgh.png"
 #define BACKGROUND_BOSS_2 L"Resources\\TiledMap\\Map-Boss2.png"
 // TILE
 #define TILES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Map-Charleston-Matrix.txt"
-#define TILES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
 #define TILES_MATRIX_STAGE_BOSS_1 L"Resources\\TiledMap\\Map-Boss1-Matrix.txt"
+#define TILES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
 #define TILES_MATRIX_STAGE_BOSS_2 L"Resources\\TiledMap\\Map-Boss2-Matrix.txt"
 
 #define TILES_MATRIX_DELIMITER ","
@@ -54,7 +54,7 @@ enum ObjectType
 #define CAPTAIN_WALK_SPEED		0.125f
 #define CAPTAIN_JUMP_SPEED_Y	0.3f
 #define CAPTAIN_GRAVITY			0.04f
-#define CAPTAIN_JUMP_MAX		70
+#define CAPTAIN_JUMP_MAX		85
 
 #define CAPTAIN_TEXTURE_LOCATION L"Resources\\Captain\\Captain.png"
 #define CAPTAIN_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(255, 0, 255)

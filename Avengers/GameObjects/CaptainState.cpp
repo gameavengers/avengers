@@ -136,12 +136,6 @@ void CaptainState::state_walking()
 
 void CaptainState::state_jumping()
 {
-	/*if (Keyboard::GetInstance()->IsKeyDown(DIK_DOWN) && captain->IsShield())
-	{
-		this->state_crouch_shield();
-		return;
-	}*/
-
 	//HandleKey
 	if (!Keyboard::GetInstance()->IsKeyDown(DIK_Z))
 	{

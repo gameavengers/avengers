@@ -222,6 +222,16 @@ void Captain::Update(DWORD dt)
 			Grid::SetNewGrid();
 			Game::GetInstance()->SetGrid(Grid::GetInstance());
 		}
+		if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
+		{
+			this->SetPositionX(50);
+			this->SetPositionY(100);
+			Viewport::GetInstance()->Reset();
+			Game::GetInstance()->GetTiledMap()->ResetTiledMap();
+			Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_2));
+			Grid::SetNewGrid();
+			Game::GetInstance()->SetGrid(Grid::GetInstance());
+		}
 
 	}
 	

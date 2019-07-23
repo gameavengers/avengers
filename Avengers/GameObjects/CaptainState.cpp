@@ -141,6 +141,11 @@ void CaptainState::state_jumping()
 	{
 		captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
 	}
+
+	if (this->GetState() == STATE_CROUCH_SHIELD)
+	{
+		return;
+	}
 	//Update
 	if (this->startJumpY != NULL && captain->GetPositionY() - this->startJumpY >= CAPTAIN_JUMP_MAX)//Nhảy đủ cao thì role
 	{
@@ -148,6 +153,8 @@ void CaptainState::state_jumping()
 		this->state_jumping_role();
 		return;
 	}
+
+	this->SetState(STATE_JUMPING);
 
 	anim = captain->GetAnimationsList()[STATE_JUMPING];
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_X) && captain->IsShield())//Đá
@@ -355,7 +362,7 @@ void CaptainState::Colision()
 	//Không chạm đất thì rơi
 	if (!captain->IsGrounded())
 	{
-		this->SetState(STATE_JUMPING);
+		this->state_jumping();
 	}
 	else if (this->GetState() == STATE_JUMPING || this->GetState() == STATE_JUMPING_ROLE || this->GetState() == STATE_JUMPING_KICK || this->GetState() == STATE_THROW_SHIELD)
 	{

@@ -3,6 +3,10 @@
 #include "Constants.h" 
 #include "GridCell.h"
 #include "../GameObjects/Captain.h"
+#include "../GameObjects/RunningMan.h"
+#include "../GameObjects/Domesto.h"
+#include "../GameObjects/Gigi.h"
+#include "../GameObjects/RedBox.h"
 
 #include <vector>
 
@@ -19,6 +23,10 @@ class Cell;
 
 typedef vector<GridCell *> CellRow;
 typedef vector<CellRow> CellMatrix;
+class RunningMan;
+class Domesto;
+class Gigi;
+class RedBox;
 class Grid {
 private:
 	static Grid *__instance;
@@ -33,6 +41,14 @@ private:
 	Viewport *viewport;
 
 	Captain * captain;
+
+	RunningMan *runningMan;
+
+	Domesto *domesto;
+
+	Gigi *gigi;
+
+	RedBox *redbox;
 
 	Grid();
 

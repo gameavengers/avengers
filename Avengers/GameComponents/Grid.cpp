@@ -29,6 +29,14 @@ Grid::Grid()
 	//Lưu captain
 	this->captain = Captain::GetInstance();
 
+	this->runningMan = RunningMan::GetInstance();
+
+	this->domesto = Domesto::GetInstance();
+
+	this->gigi = Gigi::GetInstance();
+
+	this->redbox = RedBox::GetInstance();
+
 }
 
 void Grid::LoadCells()
@@ -142,6 +150,10 @@ void Grid::Render()
 	}
 
 	captain->Render();
+	runningMan->Render();
+	domesto->Render();
+	gigi->Render();
+	redbox->Render();
 }
 
 Grid *Grid::GetInstance()

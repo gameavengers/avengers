@@ -140,9 +140,16 @@
     <ClInclude Include="GameComponents\Sprite.h" />
     <ClInclude Include="GameComponents\TiledMap.h" />
     <ClInclude Include="GameComponents\Viewport.h" />
+    <ClInclude Include="GameObjects\BigEnergy.h" />
+    <ClInclude Include="GameObjects\BigPowerStone.h" />
     <ClInclude Include="GameObjects\Captain.h" />
     <ClInclude Include="GameObjects\CaptainState.h" />
+    <ClInclude Include="GameObjects\FivePoint.h" />
+    <ClInclude Include="GameObjects\Item.h" />
+    <ClInclude Include="GameObjects\KeyCrystal.h" />
     <ClInclude Include="GameObjects\Shield.h" />
+    <ClInclude Include="GameObjects\SmallEnergy.h" />
+    <ClInclude Include="GameObjects\SmallPowerStone.h" />
     <ClInclude Include="GameObjects\State.h" />
   </ItemGroup>
   <ItemGroup>
@@ -159,9 +166,16 @@
     <ClCompile Include="GameComponents\Sprite.cpp" />
     <ClCompile Include="GameComponents\TiledMap.cpp" />
     <ClCompile Include="GameComponents\Viewport.cpp" />
+    <ClCompile Include="GameObjects\BigEnergy.cpp" />
+    <ClCompile Include="GameObjects\BigPowerStone.cpp" />
     <ClCompile Include="GameObjects\Captain.cpp" />
     <ClCompile Include="GameObjects\CaptainState.cpp" />
+    <ClCompile Include="GameObjects\FivePoint.cpp" />
+    <ClCompile Include="GameObjects\Item.cpp" />
+    <ClCompile Include="GameObjects\KeyCrystal.cpp" />
     <ClCompile Include="GameObjects\Shield.cpp" />
+    <ClCompile Include="GameObjects\SmallEnergy.cpp" />
+    <ClCompile Include="GameObjects\SmallPowerStone.cpp" />
     <ClCompile Include="GameObjects\State.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -71,3 +71,31 @@ enum ObjectType
 #define SHIELD_WIDTH 16
 #define SHIELD_HEIGHT 16
 #define SHIELD_SPEED 0.4f
+
+//Items
+#define ITEM_APPEAR 0
+#define ITEM_ALMOST_DISAPPEAR 1
+
+//Five Point
+#define FIVE_POINT_ITEM_WIDTH 8
+#define FIVE_POINT_ITEM_HEIGHT 14
+
+//Big Power Stone
+#define BIG_POWER_STONE_WIDTH 11
+#define BIG_POWER_STONE_HEIGHT 16
+
+//Small Power Stone
+#define SMALL_POWER_STONE_WIDTH 8
+#define SMALL_POWER_STONE_HEIGHT 13
+
+//Big Energy
+#define BIG_ENERGY_WIDTH 8
+#define BIG_ENERGY_HEIGHT 9
+
+//Small Energy
+#define SMALL_ENERGY_WIDTH 8
+#define SMALL_ENERGY_HEIGHT 9
+
+//Key Crystal
+#define KEY_CRYSTAL_WIDTH 12
+#define KEY_CRYSTAL_HEIGHT 12

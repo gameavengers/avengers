@@ -35,31 +35,31 @@ void Shield::LoadResources()
 	RECT* listSprite = loadTXT.LoadRect((char*)"Resources\\Captain\\Captain.txt");
 	Animation * anim = new Animation(100);
 	//SHIELD_SIDE
-	Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[46], CAPTAIN_TEXTURE_TRANS_COLOR);
+	Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[46], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
 	//SHIELD_CENTER
 	anim = new Animation(100);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[47], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[47], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
 	//SHIELD_UP
 	anim = new Animation(100);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[48], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[48], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
 	//SHIELD_DOWN
 	anim = new Animation(100);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[49], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[49], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 
 	//SHIELD_HIDE
 	anim = new Animation(100);
-	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[66], CAPTAIN_TEXTURE_TRANS_COLOR);
+	sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[66], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 	animations.push_back(anim);
 }

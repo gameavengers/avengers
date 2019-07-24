@@ -36,7 +36,7 @@ void BigEnergy::LoadResources()
 	Animation * anim = new Animation(100);
 	for (int i = 61; i < 62; i++)
 	{
-		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], CAPTAIN_TEXTURE_TRANS_COLOR);
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -44,10 +44,10 @@ void BigEnergy::LoadResources()
 	// ALMOST DISAPPEAR
 	anim = new Animation(100);
 
-	Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[61], CAPTAIN_TEXTURE_TRANS_COLOR);
+	Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[61], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
 
-	Sprite * sprite1 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[66], CAPTAIN_TEXTURE_TRANS_COLOR);
+	Sprite * sprite1 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[66], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite1);
 
 	animations.push_back(anim);

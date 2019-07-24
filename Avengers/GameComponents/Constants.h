@@ -57,7 +57,7 @@ enum ObjectType
 #define CAPTAIN_JUMP_MAX		85
 
 #define CAPTAIN_TEXTURE_LOCATION L"Resources\\Captain\\Captain.png"
-#define CAPTAIN_TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(255, 0, 255)
+#define TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(255, 0, 255)
 #define CAPTAIN_SPRITE_WIDTH 25
 #define CAPTAIN_SPRITE_HEIGHT 45
 
@@ -99,3 +99,10 @@ enum ObjectType
 //Key Crystal
 #define KEY_CRYSTAL_WIDTH 12
 #define KEY_CRYSTAL_HEIGHT 12
+
+//
+//Enemy
+//
+#define ENEMIES_TEXTURE_LOCATION L"Resources\\Enemies\\Enemies.png"
+#define ENEMIES_SPRITE_WIDTH 24
+#define ENEMIES_SPRITE_HEIGHT 43

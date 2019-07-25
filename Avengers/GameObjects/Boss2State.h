@@ -14,6 +14,7 @@ enum StateBoss2
 	BOSS2_STATE_BLEEDING,//Bị thương
 	BOSS2_STATE_LOSS_HEAD_IDLE,//Mất đầu
 	BOSS2_STATE_LOSS_HEAD_RUNNING,//Chạy khi mất đầu
+	BOSS2_STATE_DEAD,
 };
 
 class Boss2State : public State
@@ -42,6 +43,7 @@ public:
 	void state_bleeding();
 	void state_loss_head_idle();
 	void state_loss_head_running();
+	void state_dead();
 
 	void Colision() override;
 	void Update(DWORD dt) override;

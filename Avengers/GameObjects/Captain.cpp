@@ -183,7 +183,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_DIVING
-	anim = new Animation(100);
+	anim = new Animation(200);
 	for (int i = 41; i < 44; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);

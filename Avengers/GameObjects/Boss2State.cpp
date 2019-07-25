@@ -81,6 +81,12 @@ void Boss2State::state_loss_head_running()
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_LOSS_HEAD_RUNNING];
 }
 
+void Boss2State::state_dead()
+{
+	this->SetState(BOSS2_STATE_DEAD);
+	anim = boss2->GetAnimationsList()[BOSS2_STATE_DEAD];
+}
+
 void Boss2State::Colision()
 {
 
@@ -122,6 +128,10 @@ void Boss2State::Update(DWORD dt)
 
 	case BOSS2_STATE_LOSS_HEAD_RUNNING:
 		this->state_loss_head_running();
+		break;
+
+	case BOSS2_STATE_DEAD:
+		this->state_dead();
 		break;
 
 	default:

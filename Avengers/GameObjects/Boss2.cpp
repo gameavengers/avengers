@@ -108,6 +108,17 @@ void Boss2::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	// BOSS2_ANI_DEAD
+	anim = new Animation(50);
+		
+	Sprite * sprite2 = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite2);
+
+	Sprite * sprite3 = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[41], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite3);
+	
+	animations.push_back(anim);
 }
 
 void Boss2::Update(DWORD dt)

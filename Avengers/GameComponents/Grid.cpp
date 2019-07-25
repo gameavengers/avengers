@@ -37,6 +37,12 @@ Grid::Grid()
 
 	this->redbox = RedBox::GetInstance();
 
+	this->boss1 = Boss1::GetInstance();
+
+	this->boss2 = Boss2::GetInstance();
+
+	this->tank = Tank::GetInstance();
+
 }
 
 void Grid::LoadCells()
@@ -154,6 +160,9 @@ void Grid::Render()
 	domesto->Render();
 	gigi->Render();
 	redbox->Render();
+	boss1->Render();
+	boss2->Render();
+	tank->Render();
 }
 
 Grid *Grid::GetInstance()

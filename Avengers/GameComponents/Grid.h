@@ -7,6 +7,9 @@
 #include "../GameObjects/Domesto.h"
 #include "../GameObjects/Gigi.h"
 #include "../GameObjects/RedBox.h"
+#include "../GameObjects/Tank.h"
+#include "../GameObjects/Boss1.h"
+#include "../GameObjects/Boss2.h"
 
 #include <vector>
 
@@ -27,6 +30,9 @@ class RunningMan;
 class Domesto;
 class Gigi;
 class RedBox;
+class Boss1;
+class Boss2;
+class Tank;
 class Grid {
 private:
 	static Grid *__instance;
@@ -49,6 +55,12 @@ private:
 	Gigi *gigi;
 
 	RedBox *redbox;
+
+	Tank *tank;
+
+	Boss1 *boss1;
+
+	Boss2 *boss2;
 
 	Grid();
 

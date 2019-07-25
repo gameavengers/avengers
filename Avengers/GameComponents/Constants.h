@@ -106,3 +106,17 @@ enum ObjectType
 #define ENEMIES_TEXTURE_LOCATION L"Resources\\Enemies\\Enemies.png"
 #define ENEMIES_SPRITE_WIDTH 24
 #define ENEMIES_SPRITE_HEIGHT 43
+
+//
+//Boss 1
+//
+#define BOSS1_TEXTURE_LOCATION L"Resources\\Enemies\\Boss1.png"
+#define BOSS1_SPRITE_WIDTH 23
+#define BOSS1_SPRITE_HEIGHT 48
+
+//
+//Boss 2
+//
+#define BOSS2_TEXTURE_LOCATION L"Resources\\Enemies\\Boss2.png"
+#define BOSS2_SPRITE_WIDTH 30
+#define BOSS2_SPRITE_HEIGHT 43

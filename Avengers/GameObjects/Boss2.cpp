@@ -36,7 +36,7 @@ void Boss2::LoadResources()
 	RECT* listSprite = loadTXT.LoadRect((char*)"Resources\\Enemies\\Boss2.txt");
 
 	// BOSS2_ANI_IDLE
-	Animation * anim = new Animation(200);
+	Animation * anim = new Animation(100);
 	for (int i = 6; i < 7; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -45,7 +45,7 @@ void Boss2::LoadResources()
 	animations.push_back(anim);
 
 	// BOSS2_ANI_RUNNING
-	anim = new Animation(200);
+	anim = new Animation(100);
 	for (int i = 0; i < 3; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -54,7 +54,7 @@ void Boss2::LoadResources()
 	animations.push_back(anim);
 
 	// BOSS2_ANI_STANDING_PUNCH
-	anim = new Animation(200);
+	anim = new Animation(100);
 	for (int i = 4; i < 5; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -63,7 +63,7 @@ void Boss2::LoadResources()
 	animations.push_back(anim);
 
 	// BOSS2_ANI_HOLD_BOX
-	anim = new Animation(200);
+	anim = new Animation(100);
 	for (int i = 7; i < 8; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -72,7 +72,7 @@ void Boss2::LoadResources()
 	animations.push_back(anim);
 
 	// BOSS2_ANI_THROW_BOX
-	anim = new Animation(200);
+	anim = new Animation(100);
 	for (int i = 8; i < 9; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -81,7 +81,7 @@ void Boss2::LoadResources()
 	animations.push_back(anim);
 
 	// BOSS2_ANI_BLEEDING
-	anim = new Animation(200);
+	anim = new Animation(100);
 
 	Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[6], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
@@ -92,7 +92,7 @@ void Boss2::LoadResources()
 	animations.push_back(anim);
 
 	// BOSS2_ANI_LOSS_HEAD_IDLE
-	anim = new Animation(200);
+	anim = new Animation(100);
 	for (int i = 15; i < 16; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -101,7 +101,7 @@ void Boss2::LoadResources()
 	animations.push_back(anim);
 
 	// BOSS2_ANI_LOSS_HEAD_RUNNING
-	anim = new Animation(200);
+	anim = new Animation(100);
 	for (int i = 16; i < 19; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);

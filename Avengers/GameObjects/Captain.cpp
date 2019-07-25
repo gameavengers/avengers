@@ -102,7 +102,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_THROW_SHIELD
-	anim = new Animation(300);
+	anim = new Animation(50);
 	for (int i = 11; i < 13; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -111,7 +111,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_PUNCH
-	anim = new Animation(150);
+	anim = new Animation(80);
 	for (int i = 13; i < 15; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -120,7 +120,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_KICK
-	anim = new Animation(300);
+	anim = new Animation(100);
 	for (int i = 10; i < 11; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -129,7 +129,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_CROUCH_PUNCH
-	anim = new Animation(300);
+	anim = new Animation(80);
 	for (int i = 15; i < 17; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -183,7 +183,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_DIVING
-	anim = new Animation(300);
+	anim = new Animation(100);
 	for (int i = 41; i < 44; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);

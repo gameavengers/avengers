@@ -36,7 +36,7 @@ void Tank::LoadResources()
 	RECT* listSprite = loadTXT.LoadRect((char*)"Resources\\Enemies\\Enemies.txt");
 
 	// TANK_ANI_BLEEDING
-	Animation * anim = new Animation(100);
+	Animation * anim = new Animation(20);
 	for (int i = 79; i < 87; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);

@@ -78,6 +78,18 @@
     <ClInclude Include="GameObjects\Shield.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="GameComponents\TileMap2.h">
+      <Filter>Header Files\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponents\Grid2.h">
+      <Filter>Header Files\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponents\Collision.h">
+      <Filter>Header Files\GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponents\CollideEvent.h">
+      <Filter>Header Files\GameComponents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameComponents\Animation.cpp">
@@ -130,6 +142,18 @@
     </ClCompile>
     <ClCompile Include="GameObjects\Shield.cpp">
       <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponents\TileMap2.cpp">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponents\Grid2.cpp">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponents\Collision.cpp">
+      <Filter>Source Files\GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponents\CollideEvent.cpp">
+      <Filter>Source Files\GameComponents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

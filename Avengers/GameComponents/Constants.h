@@ -28,6 +28,10 @@ enum ObjectType
 	RIVER,
 	SWING
 };
+
+#define EVENT_BRICK 1
+#define EVENT_WATER 2
+
 //TiledMap
 //
 // MAP
@@ -40,15 +44,15 @@ enum ObjectType
 #define TILES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
 #define TILES_MATRIX_STAGE_BOSS_1 L"Resources\\TiledMap\\Map-Boss1-Matrix.txt"
 #define TILES_MATRIX_STAGE_BOSS_2 L"Resources\\TiledMap\\Map-Boss2-Matrix.txt"
+#define TILES_SET_STAGE_BOSS_1 L"Resources\\TiledMap\\Map-Boss1-Tiles.png"
 
 #define TILES_MATRIX_DELIMITER ","
 #define TILES_WIDTH_PER_TILE	16
 #define TILES_HEIGHT_PER_TILE	16
 #define TILES_TRANSCOLOR D3DCOLOR_XRGB(255, 0, 255)
 
+#define TILE_SIZE 16
 #define GRID_SIZE 64
-#define GRID_MAX_X 48
-#define GRID_MAX_Y 5
 
 //Giá trị tốc độ đi, tốc độ nhảy, trọng lực
 #define CAPTAIN_WALK_SPEED		0.125f

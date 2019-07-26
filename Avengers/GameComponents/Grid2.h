@@ -1,7 +1,6 @@
 #pragma once
 #include "GameObject.h"
 #include "Constants.h" 
-#include "GridCell.h"
 #include "../GameObjects/Captain.h"
 
 #include <vector>

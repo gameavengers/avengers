@@ -84,8 +84,8 @@ void Game::LoadResources()
 		tiledMap = TiledMap::GetInstance(TILES_MATRIX_STAGE_1);
 	if (viewport == NULL)
 		viewport = Viewport::GetInstance();
-	if (grid == NULL)
-		grid = Grid::GetInstance();
+	/*if (grid == NULL)
+		grid = Grid::GetInstance();*/
 }
 
 void Game::Update(DWORD dt)

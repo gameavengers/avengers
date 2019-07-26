@@ -59,16 +59,16 @@ void SmallPowerStone::Update(DWORD dt)
 	if (Viewport::GetInstance()->IsObjectInCamera(this) == true)
 	{
 		this->SetActive(true);
-		vector<LPCOLLISIONEVENT> coEvents;
-		vector<LPCOLLISIONEVENT> coEventsResult;
+		vector<ColliedEvent*> coEvents;
+		vector<ColliedEvent*> coEventsResult;
 
-		vector<Tile *> tiles = Grid::GetInstance()->GetCollisionTiles();
+		vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
 
 		this->SetSpeedY(this->GetSpeedY() - CAPTAIN_GRAVITY);
 
 		coEvents.clear();
 		this->SetDt(dt);
-		this->CalcPotentialCollisions(tiles, coEvents);
+		this->MapCollisions(tiles, coEvents);
 
 		if (coEvents.size() == 0)
 		{
@@ -79,7 +79,7 @@ void SmallPowerStone::Update(DWORD dt)
 		{
 			float min_tx, min_ty, nx = 0, ny;
 
-			this->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+			Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
 			float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
 			float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;

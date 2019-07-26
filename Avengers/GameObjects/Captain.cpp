@@ -213,8 +213,8 @@ void Captain::Update(DWORD dt)
 			Viewport::GetInstance()->Reset();
 			Game::GetInstance()->GetTiledMap()->ResetTiledMap();
 			Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_1));
-			Grid::SetNewGrid();
-			Game::GetInstance()->SetGrid(Grid::GetInstance());
+			//Grid::SetNewGrid();
+			//Game::GetInstance()->SetGrid(Grid::GetInstance());
 		}
 		if (STAGE_2 == Game::GetInstance()->GetStage())
 		{
@@ -223,8 +223,8 @@ void Captain::Update(DWORD dt)
 			Viewport::GetInstance()->Reset();
 			Game::GetInstance()->GetTiledMap()->ResetTiledMap();
 			Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_2));
-			Grid::SetNewGrid();
-			Game::GetInstance()->SetGrid(Grid::GetInstance());
+			//Grid::SetNewGrid();
+			//Game::GetInstance()->SetGrid(Grid::GetInstance());
 		}
 		if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
 		{
@@ -233,8 +233,8 @@ void Captain::Update(DWORD dt)
 			Viewport::GetInstance()->Reset();
 			Game::GetInstance()->GetTiledMap()->ResetTiledMap();
 			Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_2));
-			Grid::SetNewGrid();
-			Game::GetInstance()->SetGrid(Grid::GetInstance());
+			//Grid::SetNewGrid();
+			//Game::GetInstance()->SetGrid(Grid::GetInstance());
 		}
 
 	}

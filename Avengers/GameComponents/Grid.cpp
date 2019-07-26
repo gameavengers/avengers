@@ -107,48 +107,6 @@ void Grid::Update(DWORD dt)
 	}
 
 	UpdateCurrentTiles();
-
-	//* Cần phải sửa
-	//for (int i = captainBCell; i <= captainTCell; i++)
-	//{
-	//	for (int j = captainLCell; j <= captainRCell; j++)
-	//	{
-	//		
-	//		cells[i][j]->InsertTiles(curTiles);
-	//	}
-	//	//if (captainLCell - 2 >= 0)
-	//	/*{
-	//		if (captainRCell + 5 < 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
-	//		{
-	//			for (int j = captainLCell; j <= captainRCell; j++)
-	//			{
-	//				cells[i][j]->InsertTiles(curTiles);
-	//			}
-	//		}
-	//		else if (captainRCell + 5 >= 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
-	//		{
-	//			for (int j = captainLCell; j <= captainRCell; j++)
-	//			{
-	//				cells[i][j]->InsertTiles(curTiles);
-	//			}
-	//		}
-	//		else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS_1)
-	//		{
-	//			for (int j = captainLCell; j <= captainRCell; j++)
-	//			{
-	//				cells[i][j]->InsertTiles(curTiles);
-	//			}
-	//		}
-	//		else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS_2)
-	//		{
-	//			for (int j = captainLCell; j <= captainRCell; j++)
-	//			{
-	//				cells[i][j]->InsertTiles(curTiles);
-	//			}
-	//		}
-	//	}*/
-	//}
-
 	captain->Update(dt);
 }
 void Grid::Render()

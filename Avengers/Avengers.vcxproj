@@ -135,9 +135,7 @@
     <ClInclude Include="GameComponents\Game.h" />
     <ClInclude Include="GameComponents\GameObject.h" />
     <ClInclude Include="GameComponents\Graphics.h" />
-    <ClInclude Include="GameComponents\Grid.h" />
     <ClInclude Include="GameComponents\Grid2.h" />
-    <ClInclude Include="GameComponents\GridCell.h" />
     <ClInclude Include="GameComponents\Keyboard.h" />
     <ClInclude Include="GameComponents\LoadTXT.h" />
     <ClInclude Include="GameComponents\Sprite.h" />
@@ -178,9 +176,7 @@
     <ClCompile Include="GameComponents\Game.cpp" />
     <ClCompile Include="GameComponents\GameObject.cpp" />
     <ClCompile Include="GameComponents\Graphics.cpp" />
-    <ClCompile Include="GameComponents\Grid.cpp" />
     <ClCompile Include="GameComponents\Grid2.cpp" />
-    <ClCompile Include="GameComponents\GridCell.cpp" />
     <ClCompile Include="GameComponents\Keyboard.cpp" />
     <ClCompile Include="GameComponents\LoadTXT.cpp" />
     <ClCompile Include="GameComponents\Main.cpp" />

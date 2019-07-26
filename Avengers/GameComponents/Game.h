@@ -4,7 +4,6 @@
 #include "Keyboard.h"
 #include "TiledMap.h"
 #include "TileMap2.h"
-#include "Grid.h"
 #include "Grid2.h"
 #include "../GameObjects/Captain.h"
 
@@ -12,7 +11,7 @@
 
 class Graphics;
 class Keyboard;
-class Grid;
+//class Grid;
 
 class Game
 {
@@ -30,7 +29,7 @@ class Game
 	TiledMap *tiledMap;
 	Viewport *viewport;
 
-	Grid *grid;
+	//Grid *grid;
 
 	Stage stage;
 public:
@@ -53,10 +52,10 @@ public:
 	void SetTileMap(TiledMap *tiledMap) {
 		this->tiledMap = tiledMap;
 	}
-	void SetGrid(Grid *grid)
+	/*void SetGrid(Grid *grid)
 	{
 		this->grid = grid;
-	}
+	}*/
 
 	static Game *GetInstance();
 	~Game();

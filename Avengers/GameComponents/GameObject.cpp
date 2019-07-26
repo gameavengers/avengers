@@ -84,7 +84,7 @@ void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &co
 //
 //void GameObject::CalcPotentialMapCollisions(
 //	vector<Tile *> &tiles,
-//	vector<LPCOLLISIONEVENT> &coEvents)
+//	vector<ColliedEvent*> &coEvents)
 //{
 //	LPGAMEOBJECT solidTileDummy = new GameObject(0, 0, 16, 16);
 //	for (int i = 0; i < tiles.size(); i++)
@@ -96,7 +96,7 @@ void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &co
 //
 //		if (curTile->type == ObjectType::BRICK || curTile->type == ObjectType::BRICK_NOCOLLISION_BOTTOM)
 //		{	
-//			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
+//			ColliedEvent* e = SweptAABBEx(solidTileDummy);
 //			e->collisionID = 1;
 //
 //			if (e->t >= 0 && e->t < 1.0f && e->ny == 1)
@@ -110,7 +110,7 @@ void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &co
 //		}
 //		else if (curTile->type == ObjectType::RIVER)
 //		{
-//			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
+//			ColliedEvent* e = SweptAABBEx(solidTileDummy);
 //			e->collisionID = 2;
 //
 //			if (e->t >= 0 && e->t < 1.0f && e->ny == 1)

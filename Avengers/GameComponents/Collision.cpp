@@ -171,8 +171,8 @@ void Collision::FilterCollision(
 	vector<ColliedEvent*> &coEventsResult,
 	float &min_tx, float &min_ty,
 	float &nx, float &ny)
-{
-	if (coEvents.size == 1)
+{	
+	if (coEvents.size() == 1)
 	{
 		min_tx = coEvents[0]->time;
 	}

@@ -13,7 +13,7 @@ Captain::Captain()
 
 	fivePoint = new KeyCrystal();
 
-	this->x = 200;
+	this->x = 00;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -29,7 +29,9 @@ Captain::Captain()
 Captain *Captain::GetInstance()
 {
 	if (__instance == NULL)
+	{
 		__instance = new Captain();
+	}
 	return __instance;
 }
 
@@ -238,15 +240,18 @@ void Captain::Update(DWORD dt)
 	}
 	
 	//Colision với state để riêng ra
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
+	vector<ColliedEvent*> coEvents;
+	vector<ColliedEvent*> coEventsResult;
 
 #pragma region	Collide with brick and river
-	vector<Tile *> tiles = Grid::GetInstance()->GetCurTiles();
+	//vector<Tile *> tiles = Grid::GetInstance()->GetCurTiles();
+	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
 	
 	coEvents.clear();
 	this->SetDt(dt);
-	this->CalcPotentialCollisions(tiles, coEvents);
+	this->UpdateObjectCollider();
+	//CalcPotentialCollisions(tiles, coEvents);
+	this->MapCollisions(tiles, coEvents);
 
 	if (coEvents.size() == 0)
 	{
@@ -259,17 +264,13 @@ void Captain::Update(DWORD dt)
 	{
 		float min_tx, min_ty, nx = 0, ny;
 
-		this->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
 		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
 		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
 
 		this->SetPositionX(this->GetPositionX() + moveX);
 		this->SetPositionY(this->GetPositionY() + moveY);
-
-
-		//if (nx != 0) this->SetSpeedX(0);
-		//if (ny != 0) this->SetSpeedY(0);
 
 		if (coEventsResult[0]->collisionID == 1)
 		{
@@ -289,10 +290,9 @@ void Captain::Update(DWORD dt)
 			}
 		}
 	}
-	for (UINT i = 0; i < coEvents.size(); i++)
+	for (int i = 0; i < coEvents.size(); i++)
 		delete coEvents[i];
 #pragma endregion
-
 	shield->Update(dt);
 	fivePoint->Update(dt);
 	state->Colision();

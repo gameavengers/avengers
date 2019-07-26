@@ -1,7 +1,7 @@
 ﻿#include "CaptainState.h"
 #include <math.h>
 
-CaptainState * CaptainState::__instance = NULL;
+CaptainState *CaptainState::__instance = NULL;
 
 CaptainState *CaptainState::GetInstance(Captain *captain)
 {
@@ -28,6 +28,8 @@ CaptainState::~CaptainState()
 //Lấy trạng thái
 StateCaptain CaptainState::GetState()
 {
+	if (this->stateCaptain == STATE_STANDING)
+		int a = 0;
 	return this->stateCaptain;
 }
 //Set trạng thái

@@ -67,15 +67,6 @@ void Grid::LoadCells()
 	}
 }
 
-void Grid::GetCaptainPosOnGrid(int &l, int &r, int &t, int &b)
-{
-	RECT rect = captain->GetRect();
-	l = (int)(rect.left / GRID_SIZE);
-	t = (int)(rect.top % GRID_SIZE == 0 ? rect.top / GRID_SIZE - 1 : rect.top / GRID_SIZE);
-	r = (int)(rect.right / GRID_SIZE);
-	b = (int)(rect.bottom / GRID_SIZE);
-}
-
 void Grid::GetCameraPosOnGrid(int &l, int &r, int &t, int &b) {
 	RECT rect = viewport->GetRect();
 	l = (int)(rect.left / GRID_SIZE);
@@ -84,11 +75,26 @@ void Grid::GetCameraPosOnGrid(int &l, int &r, int &t, int &b) {
 	b = (int)(rect.bottom / GRID_SIZE);
 }
 
+void Grid::UpdateCurrentTiles()
+{
+	RECT rect = captain->GetRect();
+	int left = (int)(rect.left / GRID_SIZE);
+	int right = (int)(rect.right / GRID_SIZE);
+	int top = (int)(rect.top % GRID_SIZE == 0 ? rect.top / GRID_SIZE - 1 : rect.top / GRID_SIZE);	
+	int bottom = (int)(rect.bottom / GRID_SIZE);
+
+	for (int i = left; i <= right; i++)
+	{
+		for (int j = bottom; j <= top; j++)
+		{
+			cells[j][i]->InsertTiles(curTiles);
+		}
+	}
+}
+
 void Grid::Update(DWORD dt)
 {
-	int lCell, rCell, tCell, bCell;
-	this->GetCameraPosOnGrid(lCell, rCell, tCell, bCell);
-
+	//int captainLCell, captainRCell, captainTCell, captainBCell;
 	//Update captain
 	curTiles.clear();
 
@@ -100,44 +106,48 @@ void Grid::Update(DWORD dt)
 		}
 	}
 
-	int captainLCell, captainRCell, captainTCell, captainBCell;
+	UpdateCurrentTiles();
 
-	this->GetCaptainPosOnGrid(captainLCell, captainRCell, captainTCell, captainBCell);
-
-	for (int i = captainBCell; i <= captainTCell; i++)
-	{
-		//if (captainLCell - 2 >= 0)
-		{
-			if (captainRCell + 5 < 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
-			{
-				for (int j = captainLCell; j <= captainRCell; j++)
-				{
-					cells[i][j]->InsertTiles(curTiles);
-				}
-			}
-			else if (captainRCell + 5 >= 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
-			{
-				for (int j = captainLCell; j <= captainRCell; j++)
-				{
-					cells[i][j]->InsertTiles(curTiles);
-				}
-			}
-			else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS_1)
-			{
-				for (int j = captainLCell; j <= captainRCell; j++)
-				{
-					cells[i][j]->InsertTiles(curTiles);
-				}
-			}
-			else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS_2)
-			{
-				for (int j = captainLCell; j <= captainRCell; j++)
-				{
-					cells[i][j]->InsertTiles(curTiles);
-				}
-			}
-		}
-	}
+	//* Cần phải sửa
+	//for (int i = captainBCell; i <= captainTCell; i++)
+	//{
+	//	for (int j = captainLCell; j <= captainRCell; j++)
+	//	{
+	//		
+	//		cells[i][j]->InsertTiles(curTiles);
+	//	}
+	//	//if (captainLCell - 2 >= 0)
+	//	/*{
+	//		if (captainRCell + 5 < 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
+	//		{
+	//			for (int j = captainLCell; j <= captainRCell; j++)
+	//			{
+	//				cells[i][j]->InsertTiles(curTiles);
+	//			}
+	//		}
+	//		else if (captainRCell + 5 >= 34 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_1 && Game::GetInstance()->GetStage() != Stage::STAGE_BOSS_2)
+	//		{
+	//			for (int j = captainLCell; j <= captainRCell; j++)
+	//			{
+	//				cells[i][j]->InsertTiles(curTiles);
+	//			}
+	//		}
+	//		else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS_1)
+	//		{
+	//			for (int j = captainLCell; j <= captainRCell; j++)
+	//			{
+	//				cells[i][j]->InsertTiles(curTiles);
+	//			}
+	//		}
+	//		else if (Game::GetInstance()->GetStage() == Stage::STAGE_BOSS_2)
+	//		{
+	//			for (int j = captainLCell; j <= captainRCell; j++)
+	//			{
+	//				cells[i][j]->InsertTiles(curTiles);
+	//			}
+	//		}
+	//	}*/
+	//}
 
 	captain->Update(dt);
 }
@@ -145,7 +155,6 @@ void Grid::Render()
 {
 	int lCell, rCell, tCell, bCell;
 	this->GetCameraPosOnGrid(lCell, rCell, tCell, bCell);
-	curTiles.clear();
 
 	for (int i = bCell; i <= tCell; i++)
 	{

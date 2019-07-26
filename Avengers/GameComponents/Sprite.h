@@ -13,6 +13,16 @@ struct SpriteData {
 	float angle = 0;
 	bool isLeft = false;
 	bool isFlipped = false;
+
+	SpriteData(float iX = 0, float iY = 0, int iWidth = 1, int iHeight = 1)
+	{
+		x = iX;
+		y = iY;
+		width = iWidth;
+		height = iHeight;
+		scale = 1;
+		angle = 0;
+	}
 };
 class Sprite
 {

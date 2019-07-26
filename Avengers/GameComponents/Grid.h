@@ -22,8 +22,6 @@
 
 using namespace std;
 
-class Cell;
-
 typedef vector<GridCell *> CellRow;
 typedef vector<CellRow> CellMatrix;
 class RunningMan;
@@ -69,7 +67,7 @@ public:
 	void LoadCells();
 
 	void GetCameraPosOnGrid(int &l, int &r, int &t, int &b);
-	void GetCaptainPosOnGrid(int &l, int &r, int &t, int &b);
+	void UpdateCurrentTiles();
 
 	vector<Tile *> GetCurTiles() { return this->curTiles; }
 	vector<Tile *> GetCollisionTiles() { return this->CollisionTiles; }

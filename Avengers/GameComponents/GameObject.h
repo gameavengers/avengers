@@ -8,34 +8,14 @@
 #include "Sprite.h"
 #include "Animation.h"
 #include "LoadTXT.h"
-
-struct Collider
-{
-	float x, y;
-	float width, height;
-	float vx = 0, vy = 0;
-	float dt = 0;
-	int direction;
-};
+#include "CollideEvent.h"
+#include "Collision.h"
 
 class GameObject;
 typedef GameObject *LPGAMEOBJECT;
 
-struct CollisionEvent;
-typedef CollisionEvent *LPCOLLISIONEVENT;
-struct CollisionEvent
-{
-	int collisionID;
-	LPGAMEOBJECT coO;
-	float t, nx, ny;
-	CollisionEvent(float t, float nx, float ny, LPGAMEOBJECT coO = NULL) { this->t = t; this->nx = nx; this->ny = ny; this->coO = coO; }
-
-	static bool compare(const LPCOLLISIONEVENT &a, LPCOLLISIONEVENT &b)
-	{
-		return a->t < b->t;
-	}
-};
 struct Tile;
+struct Tile2;
 
 typedef vector<Tile> Row;
 typedef vector<Row> Matrix;
@@ -87,27 +67,7 @@ public:
 	float GetDt() { return dt; }
 
 	Collider GetCollider() { return this->collider; }
-	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
-
-	void CalcPotentialGameObjectCollisions(
-		vector<LPGAMEOBJECT> &coObjects,
-		vector<LPCOLLISIONEVENT> &coEvents);
-
-	void CalcPotentialMapCollisions(
-		vector<Tile *> &tiles,
-		vector<LPCOLLISIONEVENT> &coEvents);
-
-	void CalcPotentialCollisions(
-		vector<Tile *> &tiles,
-		vector<LPCOLLISIONEVENT> &coEvents);
-
-	void FilterCollision(
-		vector<LPCOLLISIONEVENT> &coEvents,
-		vector<LPCOLLISIONEVENT> &coEventsResult,
-		float &min_tx,
-		float &min_ty,
-		float &nx,
-		float &ny);
+	void MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &coEvents);
 
 	bool IsCollide(GameObject *CollisionObject);
 

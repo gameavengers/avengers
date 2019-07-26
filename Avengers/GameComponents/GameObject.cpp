@@ -43,117 +43,98 @@ void GameObject::Render()
 
 }
 
-LPCOLLISIONEVENT GameObject::SweptAABBEx(LPGAMEOBJECT coO)
+void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &coEvents)
 {
-	float t, nx, ny;
-
-	t = Game::SweptAABB(
-		this->collider,
-		coO->GetCollider(),
-		nx,
-		ny
-	);
-
-	LPCOLLISIONEVENT e = new CollisionEvent(t, nx, ny, coO);
-	return e;
-}
-void GameObject::CalcPotentialGameObjectCollisions(
-	vector<LPGAMEOBJECT> &coObjects,
-	vector<LPCOLLISIONEVENT> &coEvents)
-{
-	return;
-}
-void GameObject::CalcPotentialMapCollisions(
-	vector<Tile *> &tiles,
-	vector<LPCOLLISIONEVENT> &coEvents)
-{
-	LPGAMEOBJECT solidTileDummy = new GameObject(0, 0, 16, 16);
+	Collider tileCollider;
+	tileCollider.width = TILE_SIZE;
+	tileCollider.height = TILE_SIZE / 2;
 	for (int i = 0; i < tiles.size(); i++)
 	{
-		Tile *curTile = tiles[i];
-		solidTileDummy->SetPositionX(curTile->x);
-		solidTileDummy->SetPositionY(curTile->y);
-		solidTileDummy->UpdateTileCollider();
+		tileCollider.x = tiles[i]->x * TILE_SIZE;
+		tileCollider.y = tiles[i]->y * TILE_SIZE - TILE_SIZE / 2;
 
-		if (curTile->type == ObjectType::BRICK || curTile->type == ObjectType::BRICK_NOCOLLISION_BOTTOM)
-		{	
-			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
-			e->collisionID = 1;
+		if (tiles[i]->type == ObjectType::BRICK || tiles[i]->type == ObjectType::BRICK_NOCOLLISION_BOTTOM)
+		{
+			float time;
+			float normalX;
+			float normalY;
 
-			if (e->t >= 0 && e->t < 1.0f && e->ny == 1)
+			time = Collision::GetInstance()->SweptAABB(this->GetCollider(), tileCollider, normalX, normalY);
+
+			if (time >= 0 && time < 1.0f && normalY == 1)
 			{
-				coEvents.push_back(e);
-			}
-			else
-			{
-				delete e;
+				coEvents.push_back(new ColliedEvent(EVENT_BRICK, time, normalX, normalY));
 			}
 		}
-		else if (curTile->type == ObjectType::RIVER)
+		else if (tiles[i]->type == ObjectType::RIVER)
 		{
-			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
-			e->collisionID = 2;
+			float time;
+			float normalX;
+			float normalY;
 
-			if (e->t >= 0 && e->t < 1.0f && e->ny == 1)
+			time = Collision::GetInstance()->SweptAABB(this->GetCollider(), tileCollider, normalX, normalY);
+
+			if (time >= 0 && time < 1.0f && normalY == 1)
 			{
-				coEvents.push_back(e);
-			}
-			else
-			{
-				delete e;
+				coEvents.push_back(new ColliedEvent(EVENT_WATER, time, normalX, normalY));
 			}
 		}
 	}
 }
+//
+//void GameObject::CalcPotentialMapCollisions(
+//	vector<Tile *> &tiles,
+//	vector<LPCOLLISIONEVENT> &coEvents)
+//{
+//	LPGAMEOBJECT solidTileDummy = new GameObject(0, 0, 16, 16);
+//	for (int i = 0; i < tiles.size(); i++)
+//	{
+//		Tile *curTile = tiles[i];
+//		solidTileDummy->SetPositionX(curTile->x);
+//		solidTileDummy->SetPositionY(curTile->y);
+//		solidTileDummy->UpdateTileCollider();
+//
+//		if (curTile->type == ObjectType::BRICK || curTile->type == ObjectType::BRICK_NOCOLLISION_BOTTOM)
+//		{	
+//			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
+//			e->collisionID = 1;
+//
+//			if (e->t >= 0 && e->t < 1.0f && e->ny == 1)
+//			{
+//				coEvents.push_back(e);
+//			}
+//			else
+//			{
+//				delete e;
+//			}
+//		}
+//		else if (curTile->type == ObjectType::RIVER)
+//		{
+//			LPCOLLISIONEVENT e = SweptAABBEx(solidTileDummy);
+//			e->collisionID = 2;
+//
+//			if (e->t >= 0 && e->t < 1.0f && e->ny == 1)
+//			{
+//				coEvents.push_back(e);
+//			}
+//			else
+//			{
+//				delete e;
+//			}
+//		}
+//	}
+//}
 
-void GameObject::CalcPotentialCollisions(
-	vector<Tile *> &tiles,
-	vector<LPCOLLISIONEVENT> &coEvents)
-{
-	this->UpdateObjectCollider();
-	CalcPotentialMapCollisions(tiles, coEvents);
-
-	sort(coEvents.begin(), coEvents.end(), CollisionEvent::compare);
-}
-
-void GameObject::FilterCollision(
-	vector<LPCOLLISIONEVENT> &coEvents,
-	vector<LPCOLLISIONEVENT> &coEventsResult,
-	float &min_tx, float &min_ty,
-	float &nx, float &ny)
-{
-	min_tx = 1.0f;
-	min_ty = 1.0f;
-	int min_ix = -1;
-	int min_iy = -1;
-
-	nx = 0.0f;
-	ny = 0.0f;
-
-	coEventsResult.clear();
-
-	for (UINT i = 0; i < coEvents.size(); i++)
-	{
-		LPCOLLISIONEVENT c = coEvents[i];
-
-		if (c->t < min_tx && c->nx != 0) 
-		{
-			min_tx = c->t; 
-			nx = c->nx; 
-			min_ix = i;
-		}
-
-		if (c->t < min_ty  && c->ny != 0) 
-		{
-			min_ty = c->t; 
-			ny = c->ny; 
-			min_iy = i;
-		}
-	}
-
-	if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
-	if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
-}
+//New
+//void GameObject::CalcPotentialCollisions(
+//	vector<Tile2 *> &tiles,
+//	vector<LPCOLLISIONEVENT> &coEvents)
+//{
+//	UpdateObjectCollider();
+//	CalcPotentialMapCollisions(tiles, coEvents);
+//
+//	sort(coEvents.begin(), coEvents.end(), CollisionEvent::compare);
+//}
 
 bool GameObject::IsCollide(GameObject *CollisionObject)
 {

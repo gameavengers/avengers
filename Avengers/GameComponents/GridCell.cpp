@@ -16,6 +16,8 @@ void GridCell::Render()
 	{
 		TiledMap::GetInstance()->RenderTile(tiles[i]);
 	}
+
+	//for (int  )
 }
 
 GridCell::~GridCell()

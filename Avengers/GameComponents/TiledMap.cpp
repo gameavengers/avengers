@@ -24,6 +24,7 @@ Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
 	string token;
 	Row result = Row();
 	int rowNum = 0;
+	//* Làm class Stage
 	Stage stage = Game::GetInstance()->GetStage();
 	while ((pos = line.find(delimiter)) != string::npos)
 	{
@@ -40,6 +41,7 @@ Row TiledMap::GetMatrixRow(int lineNum, string line, string delimiter)
 		curTile.colider->height = TILES_HEIGHT_PER_TILE;
 
 		curTile.tileId = stoi(token);
+		//* Sửa cái này. Thấy cái gì thì render cái đó, khỏi chia stage
 		if (Stage::STAGE_1 == stage)
 		{
 			if (find(_BrickStage_1.begin(), _BrickStage_1.end(), curTile.tileId) != _BrickStage_1.end())
@@ -185,6 +187,7 @@ void TiledMap::LoadTileSet(LPCWSTR tilesLocation)
 
 		tiles[i + 1] = tile;
 	}
+
 }
 
 void TiledMap::AddObjects(Stage stage)
@@ -213,29 +216,7 @@ int TiledMap::GetTileHeight()
 {
 	return this->tileSetHeight;
 }
-void TiledMap::Render()
-{
-	for (int i = 0; i < matrix.size(); i++)
-	{
-		Row curRow = matrix[i];
-		for (int j = 0; j < curRow.size(); j++)
-		{
-			if (curRow[j].tileId != 0)
-			{
-				SpriteData spriteData;
-				spriteData.width = TILES_WIDTH_PER_TILE;
-				spriteData.height = TILES_HEIGHT_PER_TILE;
-				spriteData.x = j * TILES_WIDTH_PER_TILE;
-				spriteData.y = (matrix.size() - i) * TILES_HEIGHT_PER_TILE;
-				spriteData.scale = 1;
-				spriteData.angle = 0;
-				
-				tiles.at(curRow[j].tileId)->SetData(spriteData);
-				Graphics::GetInstance()->Draw(tiles.at(curRow[j].tileId));
-			}
-		}
-	}
-}
+
 void TiledMap::RenderTile(Tile *curTile)
 {
 	SpriteData spriteData;

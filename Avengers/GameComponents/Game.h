@@ -3,7 +3,9 @@
 #include "Graphics.h"
 #include "Keyboard.h"
 #include "TiledMap.h"
+#include "TileMap2.h"
 #include "Grid.h"
+#include "Grid2.h"
 #include "../GameObjects/Captain.h"
 
 #include <chrono>
@@ -55,8 +57,7 @@ public:
 	{
 		this->grid = grid;
 	}
-	
-	static float SweptAABB(Collider c1, Collider c2, float &normalx, float &normaly);
+
 	static Game *GetInstance();
 	~Game();
 };

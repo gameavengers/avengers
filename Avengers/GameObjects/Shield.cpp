@@ -69,6 +69,12 @@ void Shield::Update(DWORD dt)
 	this->SetSpeedY(0);
 	Captain* captain = Captain::GetInstance();
 	CaptainState* capstate = CaptainState::GetInstance(captain);
+	capstate->GetState();
+	if (capstate->GetState() == STATE_STANDING)
+	{
+		int a = 0;
+	}
+
 	if (!captain->IsShield())
 	{
 		this->state = SHIELD_UP;

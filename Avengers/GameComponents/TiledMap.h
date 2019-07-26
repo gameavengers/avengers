@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <d3dx9.h>
 #include <d3d9.h>
@@ -23,6 +23,7 @@ struct Tile {
 	Collider *colider;
 };
 
+//* Đưa về mảng 2 chiều
 typedef vector<Tile> Row;
 typedef vector<Row> Matrix;
 
@@ -66,7 +67,6 @@ public:
 		__instance = NULL;
 	}
 	void RenderTile(Tile *curTile);
-	void Render();
 
 	~TiledMap();
 };

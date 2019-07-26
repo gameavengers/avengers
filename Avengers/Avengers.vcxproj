@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{9C1EA460-FBC4-492F-8401-D39586D7F0EB}</ProjectGuid>
     <RootNamespace>Avengers</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -128,17 +128,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="GameComponents\Animation.h" />
+    <ClInclude Include="GameComponents\CollideEvent.h" />
+    <ClInclude Include="GameComponents\Collision.h" />
     <ClInclude Include="GameComponents\Constants.h" />
     <ClInclude Include="GameComponents\Debug.h" />
     <ClInclude Include="GameComponents\Game.h" />
     <ClInclude Include="GameComponents\GameObject.h" />
     <ClInclude Include="GameComponents\Graphics.h" />
     <ClInclude Include="GameComponents\Grid.h" />
+    <ClInclude Include="GameComponents\Grid2.h" />
     <ClInclude Include="GameComponents\GridCell.h" />
     <ClInclude Include="GameComponents\Keyboard.h" />
     <ClInclude Include="GameComponents\LoadTXT.h" />
     <ClInclude Include="GameComponents\Sprite.h" />
     <ClInclude Include="GameComponents\TiledMap.h" />
+    <ClInclude Include="GameComponents\TileMap2.h" />
     <ClInclude Include="GameComponents\Viewport.h" />
     <ClInclude Include="GameObjects\BigEnergy.h" />
     <ClInclude Include="GameObjects\BigPowerStone.h" />
@@ -168,17 +172,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameComponents\Animation.cpp" />
+    <ClCompile Include="GameComponents\CollideEvent.cpp" />
+    <ClCompile Include="GameComponents\Collision.cpp" />
     <ClCompile Include="GameComponents\Debug.cpp" />
     <ClCompile Include="GameComponents\Game.cpp" />
     <ClCompile Include="GameComponents\GameObject.cpp" />
     <ClCompile Include="GameComponents\Graphics.cpp" />
     <ClCompile Include="GameComponents\Grid.cpp" />
+    <ClCompile Include="GameComponents\Grid2.cpp" />
     <ClCompile Include="GameComponents\GridCell.cpp" />
     <ClCompile Include="GameComponents\Keyboard.cpp" />
     <ClCompile Include="GameComponents\LoadTXT.cpp" />
     <ClCompile Include="GameComponents\Main.cpp" />
     <ClCompile Include="GameComponents\Sprite.cpp" />
     <ClCompile Include="GameComponents\TiledMap.cpp" />
+    <ClCompile Include="GameComponents\TileMap2.cpp" />
     <ClCompile Include="GameComponents\Viewport.cpp" />
     <ClCompile Include="GameObjects\BigEnergy.cpp" />
     <ClCompile Include="GameObjects\BigPowerStone.cpp" />

@@ -13,7 +13,7 @@ Captain::Captain()
 
 	fivePoint = new KeyCrystal();
 
-	this->x = 00;
+	this->x = 50;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -244,13 +244,11 @@ void Captain::Update(DWORD dt)
 	vector<ColliedEvent*> coEventsResult;
 
 #pragma region	Collide with brick and river
-	//vector<Tile *> tiles = Grid::GetInstance()->GetCurTiles();
 	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
-	
+
 	coEvents.clear();
 	this->SetDt(dt);
 	this->UpdateObjectCollider();
-	//CalcPotentialCollisions(tiles, coEvents);
 	this->MapCollisions(tiles, coEvents);
 
 	if (coEvents.size() == 0)

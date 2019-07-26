@@ -47,11 +47,11 @@ void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &co
 {
 	Collider tileCollider;
 	tileCollider.width = TILE_SIZE;
-	tileCollider.height = TILE_SIZE / 2;
+	tileCollider.height = TILE_SIZE;
 	for (int i = 0; i < tiles.size(); i++)
 	{
 		tileCollider.x = tiles[i]->x * TILE_SIZE;
-		tileCollider.y = tiles[i]->y * TILE_SIZE - TILE_SIZE / 2;
+		tileCollider.y = tiles[i]->y * TILE_SIZE;
 
 		if (tiles[i]->type == ObjectType::BRICK || tiles[i]->type == ObjectType::BRICK_NOCOLLISION_BOTTOM)
 		{

@@ -30,6 +30,7 @@ void Grid2::InitializeMapGrid()
 					Tile2* tempTile = TileMap2::GetInstance()->currentMap->GetTile(xx + x * GRID_SIZE_BY_TILE, yy + y * GRID_SIZE_BY_TILE);
 					(listCell + x + y * mapSize)->tiles.push_back(tempTile);
 				}
+	int a = 0;
 }
 
 void Grid2::GetCameraPosOnGrid(int &l, int &r, int &t, int &b) {
@@ -95,6 +96,11 @@ vector<Tile2 *> Grid2::GetNearbyTiles(RECT rect)
 		{
 			nearbyTiles.insert(nearbyTiles.end(), GetCell(x, y)->tiles.begin(), GetCell(x, y)->tiles.end());
 		}
+	}
+
+	if (nearbyTiles[0]->tileId == 0)
+	{
+		int a = 0;
 	}
 
 	return nearbyTiles;

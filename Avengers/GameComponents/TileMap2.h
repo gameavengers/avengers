@@ -30,6 +30,7 @@ struct TileSet {
 
 struct MapPack {
 	int size;
+	int height;
 	Tile2* tiles;
 	vector <TileSet> tileSet;
 	vector <Sprite*> TilesSetSprite;

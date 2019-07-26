@@ -8,7 +8,7 @@ TileMap2 * TileMap2::GetInstance()
 	{
 		_instance = new TileMap2();
 
-		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_1, TILES_SET_STAGE_BOSS_1);
+		_instance->LoadTilesData(TILES_MATRIX_STAGE_1, TILES_SET_MATRIX_STAGE_1);
 	}
 	return _instance;
 }
@@ -26,22 +26,30 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation)
 	int size = stoi(data);
 
 	map.size = size;
-
-	// Bỏ qua không lấy tileSize
+	
 	tilesData >> data;
+	map.height = stoi(data);
 
 	map.tiles = new Tile2[size*size];
 
-	for (int y = map.size - 1; y >= 0; y--)
+	for (int y = map.height - 1; y >= 0; y--)
 		for (int x = 0; x < map.size; x++)
 		{
 			tilesData >> data;
 			(map.tiles + x + y * size)->tileId = stoi(data);
 
-			if ((map.tiles + x + y * size)->tileId == 11)
+			if ((map.tiles + x + y * size)->tileId == 10 || (map.tiles + x + y * size)->tileId == 91)
 			{
 				(map.tiles + x + y * size)->type = ObjectType::BRICK;
 			}
+			(map.tiles + x + y * size)->x = x;
+			(map.tiles + x + y * size)->y = y;
+		}
+
+	for (int y = map.size - 1; y > map.height - 1; y--)
+		for (int x = 0; x < map.size; x++)
+		{
+			(map.tiles + x + y * size)->tileId = -1;
 			(map.tiles + x + y * size)->x = x;
 			(map.tiles + x + y * size)->y = y;
 		}
@@ -95,7 +103,7 @@ void TileMap2::Render(Tile2* itile)
 	spriteData.width = TILE_SIZE;
 	spriteData.height = TILE_SIZE;
 	spriteData.x = itile->x * TILE_SIZE;
-	spriteData.y = itile->y * TILE_SIZE - TILE_SIZE * 1;
+	spriteData.y = itile->y * TILE_SIZE;
 	
 	spriteData.isLeft = true;
 

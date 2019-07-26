@@ -40,10 +40,12 @@ enum ObjectType
 #define BACKGROUND_2 L"Resources\\TiledMap\\Map-Pittsburgh.png"
 #define BACKGROUND_BOSS_2 L"Resources\\TiledMap\\Map-Boss2.png"
 // TILE
-#define TILES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Map-Charleston-Matrix.txt"
+#define TILES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Map-1-Matrix.txt"
 #define TILES_MATRIX_STAGE_BOSS_1 L"Resources\\TiledMap\\Map-Boss1-Matrix.txt"
 #define TILES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Map-Pittsburgh-Matrix.txt"
 #define TILES_MATRIX_STAGE_BOSS_2 L"Resources\\TiledMap\\Map-Boss2-Matrix.txt"
+// TILE SET
+#define TILES_SET_MATRIX_STAGE_1 L"Resources\\TiledMap\\Map-1-Tiles.png"
 #define TILES_SET_STAGE_BOSS_1 L"Resources\\TiledMap\\Map-Boss1-Tiles.png"
 
 #define TILES_MATRIX_DELIMITER ","
@@ -56,7 +58,7 @@ enum ObjectType
 
 //Giá trị tốc độ đi, tốc độ nhảy, trọng lực
 #define CAPTAIN_WALK_SPEED		0.125f
-#define CAPTAIN_JUMP_SPEED_Y	0.3f
+#define CAPTAIN_JUMP_SPEED_Y	0.5f
 #define CAPTAIN_GRAVITY			0.04f
 #define CAPTAIN_JUMP_MAX		85
 

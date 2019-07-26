@@ -5,7 +5,6 @@
 #include "../GameComponents/Game.h"
 #include "State.h"
 #include "Shield.h"
-#include "KeyCrystal.h"
 
 class Captain : public GameObject
 {
@@ -23,8 +22,6 @@ class Captain : public GameObject
 	DWORD lastFrameTime;
 
 	Shield *shield;
-
-	KeyCrystal *fivePoint;
 
 public: 
 	void LoadResources();

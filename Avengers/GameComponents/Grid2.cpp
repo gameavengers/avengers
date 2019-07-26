@@ -15,6 +15,11 @@ Grid2::Grid2()
 {
 	captain = Captain::GetInstance();
 	viewport = Viewport::GetInstance();
+	runningMan = RunningMan::GetInstance();
+	domesto = Domesto::GetInstance();
+	gigi = Gigi::GetInstance();
+	boss1 = Boss1::GetInstance();
+	boss2 = Boss2::GetInstance();
 }
 
 void Grid2::InitializeMapGrid()
@@ -126,4 +131,9 @@ void Grid2::Render()
 	}
 
 	captain->Render();
+	runningMan->Render();
+	domesto->Render();
+	gigi->Render();
+	boss1->Render();
+	boss2->Render();
 }

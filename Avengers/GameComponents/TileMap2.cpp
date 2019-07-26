@@ -38,9 +38,13 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation)
 			tilesData >> data;
 			(map.tiles + x + y * size)->tileId = stoi(data);
 
-			if ((map.tiles + x + y * size)->tileId == 10 || (map.tiles + x + y * size)->tileId == 91)
+			if (find(_BrickStage_1.begin(), _BrickStage_1.end(), (map.tiles + x + y * size)->tileId) != _BrickStage_1.end())
 			{
 				(map.tiles + x + y * size)->type = ObjectType::BRICK;
+			}
+			if ((map.tiles + x + y * size)->tileId == 100)
+			{
+				(map.tiles + x + y * size)->type = ObjectType::RIVER;
 			}
 			(map.tiles + x + y * size)->x = x;
 			(map.tiles + x + y * size)->y = y;

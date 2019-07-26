@@ -11,9 +11,8 @@ Captain::Captain()
 
 	shield = new Shield();
 
-	fivePoint = new KeyCrystal();
 
-	this->x = 50;
+	this->x = 300;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -203,41 +202,41 @@ void Captain::Reset()
 
 void Captain::Update(DWORD dt)
 {
-	if (this->GetSpeedX() > 0 && this->GetPositionX() > Game::GetInstance()->GetTiledMap()->GetWidth() - 50)
-	{
-		Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
-		if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
-		{
-			this->SetPositionX(50);
-			this->SetPositionY(100);
-			Viewport::GetInstance()->Reset();
-			Game::GetInstance()->GetTiledMap()->ResetTiledMap();
-			Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_1));
-			//Grid::SetNewGrid();
-			//Game::GetInstance()->SetGrid(Grid::GetInstance());
-		}
-		if (STAGE_2 == Game::GetInstance()->GetStage())
-		{
-			this->SetPositionX(50);
-			this->SetPositionY(100);
-			Viewport::GetInstance()->Reset();
-			Game::GetInstance()->GetTiledMap()->ResetTiledMap();
-			Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_2));
-			//Grid::SetNewGrid();
-			//Game::GetInstance()->SetGrid(Grid::GetInstance());
-		}
-		if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
-		{
-			this->SetPositionX(50);
-			this->SetPositionY(100);
-			Viewport::GetInstance()->Reset();
-			Game::GetInstance()->GetTiledMap()->ResetTiledMap();
-			Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_2));
-			//Grid::SetNewGrid();
-			//Game::GetInstance()->SetGrid(Grid::GetInstance());
-		}
+	//if (this->GetSpeedX() > 0 && this->GetPositionX() > Game::GetInstance()->GetTiledMap()->GetWidth() - 50)
+	//{
+	//	Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
+	//	if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
+	//	{
+	//		this->SetPositionX(50);
+	//		this->SetPositionY(100);
+	//		Viewport::GetInstance()->Reset();
+	//		Game::GetInstance()->GetTiledMap()->ResetTiledMap();
+	//		Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_1));
+	//		//Grid::SetNewGrid();
+	//		//Game::GetInstance()->SetGrid(Grid::GetInstance());
+	//	}
+	//	if (STAGE_2 == Game::GetInstance()->GetStage())
+	//	{
+	//		this->SetPositionX(50);
+	//		this->SetPositionY(100);
+	//		Viewport::GetInstance()->Reset();
+	//		Game::GetInstance()->GetTiledMap()->ResetTiledMap();
+	//		Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_2));
+	//		//Grid::SetNewGrid();
+	//		//Game::GetInstance()->SetGrid(Grid::GetInstance());
+	//	}
+	//	if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
+	//	{
+	//		this->SetPositionX(50);
+	//		this->SetPositionY(100);
+	//		Viewport::GetInstance()->Reset();
+	//		Game::GetInstance()->GetTiledMap()->ResetTiledMap();
+	//		Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_2));
+	//		//Grid::SetNewGrid();
+	//		//Game::GetInstance()->SetGrid(Grid::GetInstance());
+	//	}
 
-	}
+	//}
 	
 	//Colision với state để riêng ra
 	vector<ColliedEvent*> coEvents;
@@ -292,7 +291,6 @@ void Captain::Update(DWORD dt)
 		delete coEvents[i];
 #pragma endregion
 	shield->Update(dt);
-	fivePoint->Update(dt);
 	state->Colision();
 	state->Update(dt);
 }
@@ -300,5 +298,4 @@ void Captain::Render()
 {
 	state->Render();
 	shield->Render();
-	fivePoint->Render();
 }

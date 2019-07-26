@@ -58,7 +58,7 @@ enum ObjectType
 
 //Giá trị tốc độ đi, tốc độ nhảy, trọng lực
 #define CAPTAIN_WALK_SPEED		0.125f
-#define CAPTAIN_JUMP_SPEED_Y	0.5f
+#define CAPTAIN_JUMP_SPEED_Y	0.3f
 #define CAPTAIN_GRAVITY			0.04f
 #define CAPTAIN_JUMP_MAX		85
 

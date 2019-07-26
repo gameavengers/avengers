@@ -58,6 +58,8 @@ private:
 
 	void LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation);
 
+	const vector<int> _BrickStage_1{ 10, 11, 12, 33, 41, 64, 91, 92, 95, 96 };
+
 public:
 	static TileMap2* GetInstance();
 	MapPack* currentMap;

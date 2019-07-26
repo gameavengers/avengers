@@ -14,6 +14,11 @@
 
 using namespace std;
 
+#define MAP_1_ID 0
+#define MAP_BOSS_1_ID 1
+#define MAP_2_ID 2
+#define MAP_BOSS_2_ID 3
+
 struct Tile2 {
 	int tileId;
 	ObjectType type;
@@ -61,6 +66,9 @@ private:
 public:
 	static TileMap2* GetInstance();
 	MapPack* currentMap;
+
+	void SetCurrentMap(int mapID);
+
 	void Render(int x, int y);
 	void Render(Tile2* itile);
 };

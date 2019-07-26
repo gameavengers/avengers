@@ -6,7 +6,6 @@
 #include "TileMap2.h"
 #include "Grid2.h"
 #include "../GameObjects/Captain.h"
-
 #include <chrono>
 
 class Graphics;
@@ -28,8 +27,6 @@ class Game
 
 	TiledMap *tiledMap;
 	Viewport *viewport;
-
-	//Grid *grid;
 
 	Stage stage;
 public:

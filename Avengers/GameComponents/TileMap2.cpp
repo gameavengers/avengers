@@ -9,6 +9,9 @@ TileMap2 * TileMap2::GetInstance()
 		_instance = new TileMap2();
 
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_1, TILES_SET_MATRIX_STAGE_1);
+		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_1, TILES_SET_STAGE_BOSS_1);
+		_instance->LoadTilesData(TILES_MATRIX_STAGE_2, TILES_SET_MATRIX_STAGE_2);
+		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_2, TILES_SET_STAGE_BOSS_2);
 	}
 	return _instance;
 }
@@ -74,6 +77,11 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation)
 	}
 	mapList.push_back(map);
 	currentMap = &mapList.at(0);
+}
+
+void TileMap2::SetCurrentMap(int mapID)
+{
+	currentMap = &mapList[mapID];
 }
 
 void TileMap2::Render(int x, int y)

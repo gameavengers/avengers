@@ -2,6 +2,11 @@
 #include "GameObject.h"
 #include "Constants.h" 
 #include "../GameObjects/Captain.h"
+#include "../GameObjects/RunningMan.h"
+#include "../GameObjects/Domesto.h"
+#include "../GameObjects/Gigi.h"
+#include "../GameObjects/Boss1.h"
+#include "../GameObjects/Boss2.h"
 
 #include <vector>
 
@@ -29,7 +34,11 @@ struct GridData
 };
 
 
-
+class RunningMan;
+class Domesto;
+class Gigi;
+class Boss1;
+class Boss2;
 class Grid2
 {
 private:
@@ -40,6 +49,12 @@ private:
 	Viewport* viewport;
 
 	Captain* captain;
+
+	RunningMan* runningMan;
+	Domesto* domesto;
+	Gigi* gigi;
+	Boss1* boss1;
+	Boss2* boss2;
 
 	void UpdateCurrentTiles();
 public:

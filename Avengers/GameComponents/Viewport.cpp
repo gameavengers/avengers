@@ -45,9 +45,9 @@ void Viewport::Reset()
 void Viewport::Update(DWORD dt)
 {
 	Captain * captain = Captain::GetInstance();
-	int right = (int)(Game::GetInstance()->GetTiledMap()->GetWidth() - SCREEN_WIDTH / 2);
+	int right = (int)(2048 - SCREEN_WIDTH / 2);
 	int left = (int)SCREEN_WIDTH / 2;
-	int bottom = (int)(Game::GetInstance()->GetTiledMap()->GetHeight() - SCREEN_HEIGHT / 2 - 1);
+	int bottom = (int)(476 - SCREEN_HEIGHT / 2 - 1);
 	int top = (int)SCREEN_HEIGHT / 2;
 	if (captain->GetPositionX() > left && captain->GetPositionX() < right)
 	{

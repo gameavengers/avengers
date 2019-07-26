@@ -11,9 +11,8 @@ Captain::Captain()
 
 	shield = new Shield();
 
-	fivePoint = new KeyCrystal();
 
-	this->x = 50;
+	this->x = 300;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -292,7 +291,6 @@ void Captain::Update(DWORD dt)
 		delete coEvents[i];
 #pragma endregion
 	shield->Update(dt);
-	fivePoint->Update(dt);
 	state->Colision();
 	state->Update(dt);
 }
@@ -300,5 +298,4 @@ void Captain::Render()
 {
 	state->Render();
 	shield->Render();
-	fivePoint->Render();
 }

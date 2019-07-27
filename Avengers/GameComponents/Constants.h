@@ -128,3 +128,12 @@ enum ObjectType
 #define BOSS2_TEXTURE_LOCATION L"Resources\\Enemies\\Boss2.png"
 #define BOSS2_SPRITE_WIDTH 30
 #define BOSS2_SPRITE_HEIGHT 43
+
+////AI////
+
+//
+//RUNNING MAN
+//
+#define RUNNING_MAN_TIME_OUT_CROUCH	1500
+#define RUNNING_MAN_TIME_OUT_STAND	1000
+#define RUNNING_MAN_TIME_OUT_RUN	1000

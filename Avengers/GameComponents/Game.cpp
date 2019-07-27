@@ -87,7 +87,6 @@ void Game::LoadResources()
 void Game::Update(DWORD dt)
 {
 	keyboard->Update();
-	//grid->Update(dt);
 	Grid2::GetInstance()->Update(dt);
 	viewport->Update(dt);
 }

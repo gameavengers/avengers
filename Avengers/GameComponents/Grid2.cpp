@@ -115,6 +115,7 @@ void Grid2::Update(DWORD dt)
 {
 	//UpdateCurrentTiles();
 	captain->Update(dt);
+	runningMan->Update(dt);
 }
 
 void Grid2::Render()
@@ -132,9 +133,9 @@ void Grid2::Render()
 
 	captain->Render();
 	runningMan->Render();
-	domesto->Render();
+	/*domesto->Render();
 	gigi->Render();
 	boss1->Render();
 	boss2->Render();
-	barrel->Render();
+	barrel->Render();*/
 }

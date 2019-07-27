@@ -11,7 +11,6 @@ Captain::Captain()
 
 	shield = new Shield();
 
-
 	this->x = 300;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;

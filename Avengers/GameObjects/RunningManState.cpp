@@ -14,7 +14,18 @@ RunningManState *RunningManState::GetInstance(RunningMan *runningMan)
 RunningManState::RunningManState(RunningMan *runningMan)
 {
 	this->runningMan = runningMan;
-	this->state_running();
+
+	switch (runningMan->GetRunningManType())
+	{
+	case RunningManType::ONLY_CROUCH:
+		this->state_crouch_shoot();
+		break;
+	case RunningManType::NORMAL:
+	case RunningManType::ONLY_RUN:
+		this->state_running();
+		break;
+	}
+
 }
 
 RunningManState::~RunningManState()
@@ -37,18 +48,64 @@ void RunningManState::state_running()
 {
 	this->SetState(RUNNING_MAN_STATE_RUNNING);
 	anim = runningMan->GetAnimationsList()[RUNNING_MAN_STATE_RUNNING];
+
+	runningMan->SetSpeedX(CAPTAIN_WALK_SPEED * (runningMan->IsLeft() ? -1 : 1));
+
+	switch (runningMan->GetRunningManType())
+	{
+	case RunningManType::NORMAL:
+		if (this->timeCount > RUNNING_MAN_TIME_OUT_RUN)
+		{
+			this->timeCount = 0;
+			this->state_standing_shoot();
+		}
+		break;
+	case RunningManType::ONLY_CROUCH:
+		// Type này thì không chuyển sagn state CROUCH được
+		break;
+	case RunningManType::ONLY_RUN:
+		// Nếu là type ONLY_RUN thì không đi vào state nào khác
+		break;
+	}
 }
 
 void RunningManState::state_standing_shoot()
 {
 	this->SetState(RUNNING_MAN_STATE_STANDING_SHOOT);
 	anim = runningMan->GetAnimationsList()[RUNNING_MAN_STATE_STANDING_SHOOT];
+
+	runningMan->SetSpeedX(0);
+
+	if (this->timeCount > RUNNING_MAN_TIME_OUT_STAND)
+	{
+		this->timeCount = 0;
+		switch (runningMan->GetRunningManType())
+		{
+		case RunningManType::NORMAL:
+			this->state_running();
+			break;
+		case RunningManType::ONLY_CROUCH:
+			this->state_crouch_shoot();
+			break;
+		case RunningManType::ONLY_RUN:
+			// Nếu là type ONLY_RUN thì không đi vào state này được
+			break;
+		}
+	}
 }
 
 void RunningManState::state_crouch_shoot()
 {
 	this->SetState(RUNNING_MAN_STATE_CROUCH_SHOOT);
 	anim = runningMan->GetAnimationsList()[RUNNING_MAN_STATE_CROUCH_SHOOT];
+
+	runningMan->SetSpeedX(0);
+
+	if (this->timeCount > RUNNING_MAN_TIME_OUT_CROUCH)
+	{
+		this->timeCount = 0;
+		this->state_standing_shoot();
+	}
 }
 
 void RunningManState::state_dead()
@@ -64,7 +121,10 @@ void RunningManState::Colision()
 
 void RunningManState::Update(DWORD dt)
 {
-	
+	// Cap nhat Delta Time
+	this->dt = dt; 
+
+	this->timeCount += dt;
 	//Update theo state
 	switch (stateRunningMan)
 	{

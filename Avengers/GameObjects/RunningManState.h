@@ -19,6 +19,10 @@ protected:
 	StateRunningMan stateRunningMan;
 	RunningMan *runningMan;
 	Animation * anim;
+	DWORD dt;
+
+	float timeCount;
+
 public:
 	RunningManState(RunningMan *runningMan);
 	~RunningManState();

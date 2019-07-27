@@ -5,6 +5,13 @@
 #include "../GameComponents/Game.h"
 #include "State.h"
 
+enum RunningManType
+{
+	NORMAL,
+	ONLY_RUN,
+	ONLY_CROUCH,
+};
+
 class RunningMan : public GameObject
 {
 	RunningMan();
@@ -15,6 +22,10 @@ class RunningMan : public GameObject
 
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
+
+	RunningManType type;
+
+	bool isGrounded;
 
 public:
 	void LoadResources();
@@ -31,6 +42,8 @@ public:
 	}
 
 	vector<Animation *> GetAnimationsList() { return animations; }
+
+	RunningManType GetRunningManType() {return type;}
 
 	void Update(DWORD dt) override;
 

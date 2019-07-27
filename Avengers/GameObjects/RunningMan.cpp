@@ -9,6 +9,7 @@ RunningMan::RunningMan()
 	LoadResources();
 
 	state = RunningManState::GetInstance(this);
+	type = RunningManType::NORMAL;
 
 	this->x = 250;
 	this->y = 80;
@@ -49,7 +50,7 @@ void RunningMan::LoadResources()
 	for (int i = 3; i < 4; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		anim->AddFrame(sprite);
+		anim->AddFrame(sprite,5000);
 	}
 	animations.push_back(anim);
 
@@ -74,6 +75,11 @@ void RunningMan::LoadResources()
 
 void RunningMan::Update(DWORD dt)
 {
+	float moveX = trunc(this->GetSpeedX()* dt);
+	float moveY = trunc(this->GetSpeedY()* dt);
+	this->SetPositionX(this->GetPositionX() + moveX);
+	this->SetPositionY(this->GetPositionY() + moveY);
+
 	state->Colision();
 	state->Update(dt);
 }

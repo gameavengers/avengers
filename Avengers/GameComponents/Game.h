@@ -2,7 +2,6 @@
 #include "Constants.h"
 #include "Graphics.h"
 #include "Keyboard.h"
-#include "TiledMap.h"
 #include "TileMap2.h"
 #include "Grid2.h"
 #include "../GameObjects/Captain.h"
@@ -25,7 +24,6 @@ class Game
 
 	Captain *captain;
 
-	TiledMap *tiledMap;
 	Viewport *viewport;
 
 	Stage stage;
@@ -45,10 +43,10 @@ public:
 
 	Captain *GetCaptain();
 
-	TiledMap *GetTiledMap() { return tiledMap; }
+	/*TiledMap *GetTiledMap() { return tiledMap; }
 	void SetTileMap(TiledMap *tiledMap) {
 		this->tiledMap = tiledMap;
-	}
+	}*/
 	/*void SetGrid(Grid *grid)
 	{
 		this->grid = grid;

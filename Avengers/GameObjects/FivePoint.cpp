@@ -1,5 +1,5 @@
 ﻿#include "FivePoint.h"
-#include "../GameComponents/Grid.h"
+#include "../GameComponents/Grid2.h"
 
 FivePoint::FivePoint()
 {

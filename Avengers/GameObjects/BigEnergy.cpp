@@ -1,5 +1,5 @@
 ﻿#include "BigEnergy.h"
-#include "../GameComponents/Grid.h"
+#include "../GameComponents/Grid2.h"
 
 BigEnergy::BigEnergy()
 {

@@ -1,5 +1,5 @@
 ﻿#include "BigPowerStone.h"
-#include "../GameComponents/Grid.h"
+#include "../GameComponents/Grid2.h"
 
 BigPowerStone::BigPowerStone()
 {

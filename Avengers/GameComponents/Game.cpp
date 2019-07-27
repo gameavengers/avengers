@@ -80,12 +80,8 @@ void Game::LoadResources()
 	Grid2::GetInstance()->InitializeMapGrid();
 	if (NULL == captain)
 		captain = Captain::GetInstance();
-	if (NULL == tiledMap)
-		tiledMap = TiledMap::GetInstance(TILES_MATRIX_STAGE_1);
 	if (viewport == NULL)
 		viewport = Viewport::GetInstance();
-	/*if (grid == NULL)
-		grid = Grid::GetInstance();*/
 }
 
 void Game::Update(DWORD dt)

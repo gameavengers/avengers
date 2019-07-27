@@ -33,9 +33,6 @@
     <ClCompile Include="GameComponents\Viewport.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponents\TiledMap.cpp">
-      <Filter>Source\Component</Filter>
-    </ClCompile>
     <ClCompile Include="GameComponents\TileMap2.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>
@@ -220,9 +217,6 @@
       <Filter>Header\Component</Filter>
     </ClInclude>
     <ClInclude Include="GameComponents\TileMap2.h">
-      <Filter>Header\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="GameComponents\TiledMap.h">
       <Filter>Header\Component</Filter>
     </ClInclude>
     <ClInclude Include="GameComponents\Sprite.h">

@@ -68,6 +68,7 @@ void SmallPowerStone::Update(DWORD dt)
 
 		coEvents.clear();
 		this->SetDt(dt);
+		this->UpdateObjectCollider();
 		this->MapCollisions(tiles, coEvents);
 
 		if (coEvents.size() == 0)

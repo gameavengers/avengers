@@ -45,6 +45,18 @@ void TankState::state_top()
 	anim = tank->GetAnimationsList()[TANK_STATE_TOP];
 }
 
+void TankState::state_top_right()
+{
+	this->SetState(TANK_STATE_TOP_RIGHT);
+	anim = tank->GetAnimationsList()[TANK_STATE_TOP_RIGHT];
+}
+
+void TankState::state_right()
+{
+	this->SetState(TANK_STATE_RIGHT);
+	anim = tank->GetAnimationsList()[TANK_STATE_RIGHT];
+}
+
 void TankState::Colision()
 {
 
@@ -62,6 +74,14 @@ void TankState::Update(DWORD dt)
 
 	case TANK_STATE_TOP:
 		this->state_top();
+		break;
+
+	case TANK_STATE_TOP_RIGHT:
+		this->state_top_right();
+		break;
+
+	case TANK_STATE_RIGHT:
+		this->state_right();
 		break;
 
 	default:

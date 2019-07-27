@@ -9,8 +9,8 @@ enum StateBoss2
 	BOSS2_STATE_IDLE,//Đứng 
 	BOSS2_STATE_RUNNING,//Chạy
 	BOSS2_STATE_STANDING_PUNCH,//Đứng đấm
-	BOSS2_STATE_HOLD_BOX,//Bê thùng
-	BOSS2_STATE_THROW_BOX,//Ném thùng
+	BOSS2_STATE_HOLD_BARREL,//Bê thùng
+	BOSS2_STATE_THROW_BARREL,//Ném thùng
 	BOSS2_STATE_BLEEDING,//Bị thương
 	BOSS2_STATE_LOSS_HEAD_IDLE,//Mất đầu
 	BOSS2_STATE_LOSS_HEAD_RUNNING,//Chạy khi mất đầu
@@ -38,8 +38,8 @@ public:
 	void state_idle();
 	void state_running();
 	void state_standing_punch();
-	void state_hold_box();
-	void state_throw_box();
+	void state_hold_barrel();
+	void state_throw_barrel();
 	void state_bleeding();
 	void state_loss_head_idle();
 	void state_loss_head_running();

@@ -52,6 +52,24 @@ void Tank::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	// TANK_ANI_TOP_RIGHT
+	anim = new Animation(100);
+	for (int i = 80; i < 81; i++)
+	{
+		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+
+	// TANK_ANI_RIGHT
+	anim = new Animation(100);
+	for (int i = 81; i < 82; i++)
+	{
+		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
 }
 
 void Tank::Update(DWORD dt)

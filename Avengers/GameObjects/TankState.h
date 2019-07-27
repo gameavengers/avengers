@@ -8,6 +8,8 @@ enum StateTank
 {
 	TANK_STATE_BLEEDING,
 	TANK_STATE_TOP,
+	TANK_STATE_TOP_RIGHT,
+	TANK_STATE_RIGHT,
 };
 
 class TankState : public State
@@ -30,6 +32,8 @@ public:
 
 	void state_bleeding();
 	void state_top();
+	void state_top_right();
+	void state_right();
 
 	void Colision() override;
 	void Update(DWORD dt) override;

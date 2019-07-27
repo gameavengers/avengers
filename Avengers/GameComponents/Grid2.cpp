@@ -20,6 +20,7 @@ Grid2::Grid2()
 	gigi = Gigi::GetInstance();
 	boss1 = Boss1::GetInstance();
 	boss2 = Boss2::GetInstance();
+	barrel = new Barrel();
 }
 
 void Grid2::InitializeMapGrid()
@@ -135,4 +136,5 @@ void Grid2::Render()
 	gigi->Render();
 	boss1->Render();
 	boss2->Render();
+	barrel->Render();
 }

@@ -57,16 +57,16 @@ void Boss2State::state_standing_punch()
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_STANDING_PUNCH];
 }
 
-void Boss2State::state_hold_box()
+void Boss2State::state_hold_barrel()
 {
-	this->SetState(BOSS2_STATE_HOLD_BOX);
-	anim = boss2->GetAnimationsList()[BOSS2_STATE_HOLD_BOX];
+	this->SetState(BOSS2_STATE_HOLD_BARREL);
+	anim = boss2->GetAnimationsList()[BOSS2_STATE_HOLD_BARREL];
 }
 
-void Boss2State::state_throw_box()
+void Boss2State::state_throw_barrel()
 {
-	this->SetState(BOSS2_STATE_THROW_BOX);
-	anim = boss2->GetAnimationsList()[BOSS2_STATE_THROW_BOX];
+	this->SetState(BOSS2_STATE_THROW_BARREL);
+	anim = boss2->GetAnimationsList()[BOSS2_STATE_THROW_BARREL];
 }
 
 void Boss2State::state_loss_head_idle()
@@ -114,12 +114,12 @@ void Boss2State::Update(DWORD dt)
 		this->state_standing_punch();
 		break;
 
-	case BOSS2_STATE_HOLD_BOX:
-		this->state_hold_box();
+	case BOSS2_STATE_HOLD_BARREL:
+		this->state_hold_barrel();
 		break;
 
-	case BOSS2_STATE_THROW_BOX:
-		this->state_throw_box();
+	case BOSS2_STATE_THROW_BARREL:
+		this->state_throw_barrel();
 		break;
 
 	case BOSS2_STATE_LOSS_HEAD_IDLE:

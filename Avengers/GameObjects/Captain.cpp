@@ -102,7 +102,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_THROW_SHIELD
-	anim = new Animation(50);
+	anim = new Animation(150);
 	for (int i = 11; i < 13; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -111,7 +111,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_PUNCH
-	anim = new Animation(80);
+	anim = new Animation(100);
 	for (int i = 13; i < 15; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -120,7 +120,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_KICK
-	anim = new Animation(100);
+	anim = new Animation(500);
 	for (int i = 10; i < 11; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -201,41 +201,41 @@ void Captain::Reset()
 
 void Captain::Update(DWORD dt)
 {
-	//if (this->GetSpeedX() > 0 && this->GetPositionX() > Game::GetInstance()->GetTiledMap()->GetWidth() - 50)
-	//{
-	//	Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
-	//	if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
-	//	{
-	//		this->SetPositionX(50);
-	//		this->SetPositionY(100);
-	//		Viewport::GetInstance()->Reset();
-	//		Game::GetInstance()->GetTiledMap()->ResetTiledMap();
-	//		Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_1));
-	//		//Grid::SetNewGrid();
-	//		//Game::GetInstance()->SetGrid(Grid::GetInstance());
-	//	}
-	//	if (STAGE_2 == Game::GetInstance()->GetStage())
-	//	{
-	//		this->SetPositionX(50);
-	//		this->SetPositionY(100);
-	//		Viewport::GetInstance()->Reset();
-	//		Game::GetInstance()->GetTiledMap()->ResetTiledMap();
-	//		Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_2));
-	//		//Grid::SetNewGrid();
-	//		//Game::GetInstance()->SetGrid(Grid::GetInstance());
-	//	}
-	//	if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
-	//	{
-	//		this->SetPositionX(50);
-	//		this->SetPositionY(100);
-	//		Viewport::GetInstance()->Reset();
-	//		Game::GetInstance()->GetTiledMap()->ResetTiledMap();
-	//		Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_2));
-	//		//Grid::SetNewGrid();
-	//		//Game::GetInstance()->SetGrid(Grid::GetInstance());
-	//	}
+	if (this->GetSpeedX() > 0 && this->GetPositionX() > TileMap2::GetInstance()->currentMap->size*16 - 50)
+	{
+		Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
+		if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
+		{
+			this->SetPositionX(50);
+			this->SetPositionY(100);
+			Viewport::GetInstance()->Reset();
+			TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
+			//TileMap2::GetInstance()->LoadTilesData(TILES_MATRIX_STAGE_BOSS_1, TILES_SET_STAGE_BOSS_1);
+			//Grid::SetNewGrid();
+			//Game::GetInstance()->SetGrid(Grid::GetInstance());
+		}
+		//if (STAGE_2 == Game::GetInstance()->GetStage())
+		//{
+		//	this->SetPositionX(50);
+		//	this->SetPositionY(100);
+		//	Viewport::GetInstance()->Reset();
+		//	Game::GetInstance()->GetTiledMap()->ResetTiledMap();
+		//	Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_2));
+		//	//Grid::SetNewGrid();
+		//	//Game::GetInstance()->SetGrid(Grid::GetInstance());
+		//}
+		//if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
+		//{
+		//	this->SetPositionX(50);
+		//	this->SetPositionY(100);
+		//	Viewport::GetInstance()->Reset();
+		//	Game::GetInstance()->GetTiledMap()->ResetTiledMap();
+		//	Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_2));
+		//	//Grid::SetNewGrid();
+		//	//Game::GetInstance()->SetGrid(Grid::GetInstance());
+		//}
 
-	//}
+	}
 	
 	//Colision với state để riêng ra
 	vector<ColliedEvent*> coEvents;

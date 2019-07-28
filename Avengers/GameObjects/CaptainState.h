@@ -37,7 +37,7 @@ protected:
 	Animation * anim;
 	RECT* listSprite;
 	float startJumpY;
-	float timeAttack = 0;
+	float startDash;
 public: 
 	CaptainState(Captain *captain);
 	~CaptainState();

@@ -3,12 +3,22 @@
 vector<Animation *> Domesto::animations = vector<Animation *>();
 Domesto *Domesto::__instance = NULL;
 
-
 Domesto::Domesto()
 {
 	LoadResources();
 
-	state = DomestoState::GetInstance(this);
+	type = DemestoType::WALK_FIRE_STAIGHT;
+	
+	if (type == DemestoType::STAY_FIRE_STRAIGHT)
+	{
+		state = DomestoStayState::GetInstance(this);
+	}
+	else
+	{
+		state = DomestoWalkState::GetInstance(this);
+	}
+	//state = DomestoState::GetInstance(this);
+	
 
 	this->x = 280;
 	this->y = 85;
@@ -74,6 +84,11 @@ void Domesto::LoadResources()
 
 void Domesto::Update(DWORD dt)
 {
+	float moveX = trunc(this->GetSpeedX()* dt);
+	float moveY = trunc(this->GetSpeedY()* dt);
+	this->SetPositionX(this->GetPositionX() + moveX);
+	this->SetPositionY(this->GetPositionY() + moveY);
+
 	state->Colision();
 	state->Update(dt);
 }

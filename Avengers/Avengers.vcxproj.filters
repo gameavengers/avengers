@@ -63,9 +63,6 @@
     <ClCompile Include="GameObjects\Domesto.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\DomestoState.cpp">
-      <Filter>Source\Object</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjects\FivePoint.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
@@ -123,6 +120,12 @@
     <ClCompile Include="GameObjects\Barrel.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjects\DomestoStayState.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\DomestoWalkState.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameComponents\Debug.h" />
@@ -158,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="GameComponents\Collision.h">
       <Filter>Header\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjects\DomestoState.h">
-      <Filter>Header\Object</Filter>
     </ClInclude>
     <ClInclude Include="GameObjects\Domesto.h">
       <Filter>Header\Object</Filter>
@@ -247,6 +247,12 @@
       <Filter>Header\Object</Filter>
     </ClInclude>
     <ClInclude Include="GameObjects\Barrel.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\DomestoStayState.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\DomestoWalkState.h">
       <Filter>Header\Object</Filter>
     </ClInclude>
   </ItemGroup>

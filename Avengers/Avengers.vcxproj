@@ -152,7 +152,8 @@
     <ClInclude Include="GameObjects\Captain.h" />
     <ClInclude Include="GameObjects\CaptainState.h" />
     <ClInclude Include="GameObjects\Domesto.h" />
-    <ClInclude Include="GameObjects\DomestoState.h" />
+    <ClInclude Include="GameObjects\DomestoStayState.h" />
+    <ClInclude Include="GameObjects\DomestoWalkState.h" />
     <ClInclude Include="GameObjects\FivePoint.h" />
     <ClInclude Include="GameObjects\Gigi.h" />
     <ClInclude Include="GameObjects\GigiState.h" />
@@ -196,7 +197,8 @@
     <ClCompile Include="GameObjects\Captain.cpp" />
     <ClCompile Include="GameObjects\CaptainState.cpp" />
     <ClCompile Include="GameObjects\Domesto.cpp" />
-    <ClCompile Include="GameObjects\DomestoState.cpp" />
+    <ClCompile Include="GameObjects\DomestoStayState.cpp" />
+    <ClCompile Include="GameObjects\DomestoWalkState.cpp" />
     <ClCompile Include="GameObjects\FivePoint.cpp" />
     <ClCompile Include="GameObjects\Gigi.cpp" />
     <ClCompile Include="GameObjects\GigiState.cpp" />

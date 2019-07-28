@@ -4,31 +4,28 @@
 #include "Domesto.h"
 
 class Domesto;
-enum StateDomesto
-{
-	DOMESTO_STATE_WALKING,//Đi
-	DOMESTO_STATE_STANDING_SHOOT,//Đứng bắn
-	DOMESTO_STATE_CROUCH_SHOOT,//Ngồi bắn
-	DOMESTO_STATE_DEAD,//Chết
-};
 
-class DomestoState : public State
+class DomestoWalkState : public State
 {
 protected:
-	static DomestoState * __instance;
+	static DomestoWalkState * __instance;
 	StateDomesto stateDomesto;
+	StateDomesto previousStateDomesto;
 	Domesto *domesto;
 	Animation * anim;
-public:
-	DomestoState(Domesto *domesto);
-	~DomestoState();
 
-	static DomestoState * GetInstance(Domesto *domesto);
+	float timeCount;
+public:
+	DomestoWalkState(Domesto *domesto);
+	~DomestoWalkState();
+
+	static DomestoWalkState * GetInstance(Domesto *domesto);
 
 	//Lấy trạng thái
 	StateDomesto GetState();
 	//Set trạng thái
 	void SetState(StateDomesto State);
+	bool ChangeStateOverTime(StateDomesto state, float timeOut);
 
 	void state_walking();
 	void state_standing_shoot();

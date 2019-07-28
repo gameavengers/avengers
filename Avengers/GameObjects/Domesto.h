@@ -1,9 +1,19 @@
-#pragma once
+﻿#pragma once
 #include "../GameComponents/GameObject.h"
-#include "DomestoState.h"
+//#include "DomestoState.h"
+#include "DomestoStayState.h"
+#include "DomestoWalkState.h"
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
 #include "State.h"
+
+enum DemestoType
+{
+	STAY_FIRE_STRAIGHT,
+	WALK_FIRE_STAIGHT,
+};
+
+
 
 class Domesto : public GameObject
 {
@@ -12,10 +22,10 @@ class Domesto : public GameObject
 	static Domesto *__instance;
 
 	State *state;
+	DemestoType type;
 
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
-
 public:
 	void LoadResources();
 
@@ -31,6 +41,8 @@ public:
 	}
 
 	vector<Animation *> GetAnimationsList() { return animations; }
+
+	DemestoType GetType() { return type; }
 
 	void Update(DWORD dt) override;
 

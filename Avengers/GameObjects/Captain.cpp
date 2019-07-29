@@ -201,6 +201,7 @@ void Captain::Reset()
 
 void Captain::Update(DWORD dt)
 {
+	// Xử lý chuyển màn
 	if (this->GetSpeedX() > 0 && this->GetPositionX() > TileMap2::GetInstance()->currentMap->size*16 - 50)
 	{
 		if (Game::GetInstance()->GetStage() < 4)
@@ -216,8 +217,8 @@ void Captain::Update(DWORD dt)
 			}
 			if (STAGE_2 == Game::GetInstance()->GetStage())
 			{
-				this->SetPositionX(50);
-				this->SetPositionY(100);
+				this->SetPositionX(280);
+				this->SetPositionY(900);
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
@@ -232,6 +233,44 @@ void Captain::Update(DWORD dt)
 			}
 		}
 		else this->SetSpeedX(0);
+	}
+
+	//Chuyển màn nhanh bằng phím
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_F1))
+	{
+		Game::GetInstance()->SetStage(STAGE_1);
+		this->SetPositionX(50);
+		this->SetPositionY(100);
+		Viewport::GetInstance()->Reset();
+		TileMap2::GetInstance()->SetCurrentMap(STAGE_1);
+		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+	}
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_F2))
+	{
+		Game::GetInstance()->SetStage(STAGE_BOSS_1);
+		this->SetPositionX(50);
+		this->SetPositionY(100);
+		Viewport::GetInstance()->Reset();
+		TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
+		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+	}
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_F3))
+	{
+		Game::GetInstance()->SetStage(STAGE_2);
+		this->SetPositionX(280);
+		this->SetPositionY(900);
+		Viewport::GetInstance()->Reset();
+		TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
+		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+	}
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_F4))
+	{
+		Game::GetInstance()->SetStage(STAGE_BOSS_2);
+		this->SetPositionX(50);
+		this->SetPositionY(100);
+		Viewport::GetInstance()->Reset();
+		TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
+		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
 	}
 	
 	//Colision với state để riêng ra

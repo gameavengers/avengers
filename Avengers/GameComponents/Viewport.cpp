@@ -39,8 +39,16 @@ void Viewport::Reset()
 {
 	width = SCREEN_WIDTH;
 	height = SCREEN_HEIGHT;
-	x = 0;
-	y = 225;
+	if (Game::GetInstance()->GetStage() == STAGE_2)
+	{
+		x = 280;
+		y = 900;
+	}
+	else
+	{
+		x = 0;
+		y = 225;
+	}
 }
 void Viewport::Update(DWORD dt)
 {

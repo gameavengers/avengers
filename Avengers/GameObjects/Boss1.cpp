@@ -76,7 +76,7 @@ void Boss1::LoadResources()
 	for (int i = 8; i < 12; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		anim->AddFrame(sprite);
+		anim->AddFrame(sprite,200);
 	}
 	animations.push_back(anim);
 
@@ -85,7 +85,7 @@ void Boss1::LoadResources()
 	for (int i = 12; i < 14; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		anim->AddFrame(sprite);
+		anim->AddFrame(sprite,250);
 	}
 	animations.push_back(anim);
 
@@ -110,6 +110,11 @@ void Boss1::LoadResources()
 
 void Boss1::Update(DWORD dt)
 {
+	float moveX = trunc(this->GetSpeedX()* dt);
+	float moveY = trunc(this->GetSpeedY()* dt);
+	this->SetPositionX(this->GetPositionX() + moveX);
+	this->SetPositionY(this->GetPositionY() + moveY);
+
 	state->Colision();
 	state->Update(dt);
 }

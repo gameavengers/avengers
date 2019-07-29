@@ -16,13 +16,31 @@ enum StateBoss1
 	BOSS1_STATE_FLYING_SHOOT,//Bắn xuống khi bay
 };
 
+enum BehaviorBoss1
+{
+	Shoot,
+	ComboShoot,
+	FlyNShoot,
+	Fly,
+};
+
 class Boss1State : public State
 {
 protected:
 	static Boss1State * __instance;
 	StateBoss1 stateBoss1;
+	BehaviorBoss1 behaviorBoss1;
 	Boss1 *boss1;
 	Animation * anim;
+
+
+	//////Boss State/////
+	//Boss behavior State
+	int behaviorState;
+	float timeCount;
+	//Behavior parameter
+
+
 public:
 	Boss1State(Boss1 *boss1);
 	~Boss1State();
@@ -42,6 +60,14 @@ public:
 	void state_standing_shoot_2();
 	void state_flying();
 	void state_flying_shoot();
+
+	void Behavior_Shoot();
+	void Behavior_ComboShoot();
+	void Behavior_FlyAndShoot();
+	void Behavior_Fly();
+	void RandomNextState();
+	bool NextStateIn(float time);
+	bool SetStateIn(int behaviorState, float time);
 
 	void Colision() override;
 	void Update(DWORD dt) override;

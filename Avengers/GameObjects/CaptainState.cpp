@@ -16,6 +16,7 @@ CaptainState::CaptainState(Captain *captain)
 	this->captain = captain;
 	this->stateCaptain = STATE_JUMPING;
 	this->startJumpY == NULL;
+	this->startDash == NULL;
 	this->captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
 }
 
@@ -49,9 +50,10 @@ void CaptainState::state_standing()
 		return;
 	}
 
-	if (Keyboard::GetInstance()->IsKeyDown(DIK_C))
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_C) && startDash == NULL)
 	{
-		this->state_dash(); //Dash
+		startDash = captain->GetPositionX();
+		this->SetState(STATE_DASH);
 		return;
 	}
 
@@ -123,7 +125,7 @@ void CaptainState::state_walking()
 	captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_RIGHT) || Keyboard::GetInstance()->IsKeyDown(DIK_LEFT)) //Ưu tiên qua lại nên để trước
 	{
-		if (Keyboard::GetInstance()->IsKeyDown(DIK_Z) || Keyboard::GetInstance()->IsKeyDown(DIK_X) || Keyboard::GetInstance()->IsKeyDown(DIK_C))//Đang đi mà nhảy, tấn công hay dash thì chuyển state
+		if (Keyboard::GetInstance()->IsKeyDown(DIK_Z) || Keyboard::GetInstance()->IsKeyDown(DIK_X) || (Keyboard::GetInstance()->IsKeyDown(DIK_C) && startDash == NULL))//Đang đi mà nhảy, tấn công hay dash thì chuyển state
 		{
 			this->SetState(STATE_STANDING);
 			return;
@@ -159,7 +161,8 @@ void CaptainState::state_jumping()
 	this->SetState(STATE_JUMPING);
 
 	anim = captain->GetAnimationsList()[STATE_JUMPING];
-	if (Keyboard::GetInstance()->IsKeyDown(DIK_X) && captain->IsShield())//Đá
+
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_X))//Đá
 	{
 		this->state_jumping_kick();
 		return;
@@ -183,7 +186,8 @@ void CaptainState::state_jumping_role()
 		this->startJumpY == NULL;
 	}
 	anim = captain->GetAnimationsList()[STATE_JUMPING_ROLE];
-	if (Keyboard::GetInstance()->IsKeyDown(DIK_X) && captain->IsShield())//Đá
+
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_X))//Đá
 	{
 		this->state_jumping_kick();
 		return;
@@ -246,7 +250,7 @@ void CaptainState::state_swimming()
 void CaptainState::state_throw_shield()
 {
 	captain->SetSpeedX(0);
-
+	captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
 	anim = captain->GetAnimationsList()[STATE_THROW_SHIELD];
 
 	if (anim->IsDone())//Hàm isDone hình như bị lỗi
@@ -309,17 +313,17 @@ void CaptainState::state_crouch_shield()
 
 void CaptainState::state_dash()
 {
-	int maxDistance = captain->GetPositionX() + 20;
 	captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -5 : 5));
 
-	if (captain->GetPositionX() > maxDistance)
+	if (startDash != NULL && abs(captain->GetPositionX() - startDash) >= 150)
 	{
 		this->SetState(STATE_STANDING);
-		this->state_standing();
+		return;
 	}
 
 	if (Keyboard::GetInstance()->IsKeyUp(DIK_C)) // Nhả phím dash
 	{
+		startDash = NULL;
 		this->SetState(STATE_STANDING); //Chuyển sang trạng thái đứng
 		return;
 	}
@@ -361,12 +365,17 @@ void CaptainState::KeyHandle()
 
 void CaptainState::Colision()
 {
+	if (Keyboard::GetInstance()->IsKeyUp(DIK_C)) // Nhả phím dash
+	{
+		startDash = NULL;
+	}
+	
 	//Không chạm đất thì rơi
 	if (!captain->IsGrounded())
 	{
 		this->state_jumping();
 	}
-	else if (this->GetState() == STATE_JUMPING || this->GetState() == STATE_JUMPING_ROLE || this->GetState() == STATE_JUMPING_KICK || this->GetState() == STATE_THROW_SHIELD)
+	else if (this->GetState() == STATE_JUMPING || this->GetState() == STATE_JUMPING_ROLE || this->GetState() == STATE_JUMPING_KICK)
 	{
 		if (captain->GetSpeedY() < 0)
 		{

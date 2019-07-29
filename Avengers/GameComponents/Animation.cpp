@@ -9,6 +9,8 @@ void Animation::AddFrame(Sprite *sprite, DWORD time)
 	pair <Sprite *, DWORD> frame(sprite, t);
 	//Thêm frame mới vào vector frames
 	frames.push_back(frame);
+	curFrame = -1;
+	done = false;
 }
 void Animation::Render(SpriteData spriteData)
 {
@@ -40,7 +42,7 @@ void Animation::Render(SpriteData spriteData)
 		//Nếu là frame cuối thì quay lại frame đầu
 		if (curFrame == frames.size())
 		{
-			curFrame = 0;
+			curFrame = -1;
 			done = true;
 		}
 		else

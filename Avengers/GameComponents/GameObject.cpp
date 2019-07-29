@@ -79,6 +79,19 @@ void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &co
 				coEvents.push_back(new ColliedEvent(EVENT_WATER, time, normalX, normalY));
 			}
 		}
+		else if (tiles[i]->type == ObjectType::ROPE_SWING)
+		{
+			float time;
+			float normalX;
+			float normalY;
+
+			time = Collision::GetInstance()->SweptAABB(this->GetCollider(), tileCollider, normalX, normalY);
+
+			if (time >= 0 && time < 1.0f && normalY == 1)
+			{
+				coEvents.push_back(new ColliedEvent(EVENT_ROPE_SWING, time, normalX, normalY));
+			}
+		}
 	}
 }
 //

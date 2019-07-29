@@ -69,6 +69,10 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation, int mapI
 				{
 					(map.tiles + x + y * size)->type = ObjectType::BRICK;
 				}
+				if (find(_RopeSwingStage_2.begin(), _RopeSwingStage_2.end(), (map.tiles + x + y * size)->tileId) != _RopeSwingStage_2.end())
+				{
+					(map.tiles + x + y * size)->type = ObjectType::ROPE_SWING;
+				}
 			}
 			break;
 			case MAP_BOSS_2_ID:

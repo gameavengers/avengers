@@ -24,6 +24,7 @@ enum StateCaptain //đặt tên không trùng tên class nào
 	STATE_BLEEING, //Bị thương và bất tử trong mấy giây
 	STATE_DIEING, //Chết
 	STATE_DIVING, //Lặn
+	STATE_SWING, //Đu dây
 };
 
 //Có 2 cách viết state là viết hàm hoặc viết class ( theo patten state là viết class) mà t thấy mấy ông thích ít class nên t viết hàm
@@ -66,6 +67,7 @@ public:
 	void state_bleeing();
 	void state_dieing();
 	void state_diving();
+	void state_swing();
 
 	void KeyHandle();
 	void Colision() override;

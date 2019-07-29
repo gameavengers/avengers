@@ -190,6 +190,15 @@ void Captain::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	// CAPTAIN_ANI_SWING
+	anim = new Animation(200);
+	for (int i = 27; i < 30; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
 }
 
 void Captain::Reset()
@@ -277,7 +286,7 @@ void Captain::Update(DWORD dt)
 	vector<ColliedEvent*> coEvents;
 	vector<ColliedEvent*> coEventsResult;
 
-#pragma region	Collide with brick and river
+#pragma region	Collide with map
 	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
 
 	coEvents.clear();
@@ -319,6 +328,14 @@ void Captain::Update(DWORD dt)
 				this->SetIsGrounded(false);
 				this->SetIsSwimming(true);
 				this->SetPositionX(this->GetPositionX() - 1);
+			}
+		}
+
+		if (coEventsResult[0]->collisionID == 3)
+		{
+			if (ny == 1)
+			{
+				this->SetIsSwing(true);
 			}
 		}
 	}

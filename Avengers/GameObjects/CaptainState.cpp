@@ -364,6 +364,21 @@ void CaptainState::state_diving()
 	anim = captain->GetAnimationsList()[STATE_DIVING];
 }
 
+void CaptainState::state_swing()
+{
+	captain->SetSpeedX(0);
+	captain->SetSpeedY(0);
+
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z))
+	{
+		this->state_jumping();
+		return;
+	}
+
+	this->SetState(STATE_SWING);
+	anim = captain->GetAnimationsList()[STATE_SWING];
+}
+
 void CaptainState::KeyHandle()
 {
 	//Do viết hàm nên không có lệnh
@@ -395,6 +410,13 @@ void CaptainState::Colision()
 	{
 		this->SetState(STATE_SWIMMING);
 		this->state_swimming();
+	}
+
+	//Đu dây
+	if (captain->IsSwing())
+	{
+		this->SetState(STATE_SWING);
+		this->state_swing();
 	}
 
 	captain->SetIsGrounded(false);

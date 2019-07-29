@@ -67,6 +67,8 @@ private:
 	const vector<int> _BrickStage_2{ 4, 10, 11, 12, 13, 14, 20, 21, 53, 54, 55, 56, 57, 75, 76, 77, 78, 79, 93, 97, 118, 125, 126, 127, 238, 239, 240, 241, 242, 251, 252 };
 	const vector<int> _BrickStage_BOSS_1{ 0, 1, 6, 7, 8, 10 };
 
+	const vector<int> _RopeSwingStage_2{ 60, 61, 73 };
+
 public:
 	static TileMap2* GetInstance();
 	MapPack* currentMap;

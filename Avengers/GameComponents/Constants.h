@@ -38,6 +38,7 @@ enum StateDomesto
 
 #define EVENT_BRICK 1
 #define EVENT_WATER 2
+#define EVENT_ROPE_SWING 3
 
 //TiledMap
 //

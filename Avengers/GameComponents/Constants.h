@@ -26,7 +26,7 @@ enum ObjectType
 	BRICK_NOCOLLISION_BOTTOM,
 	ON_BUTTON,
 	RIVER,
-	SWING
+	ROPE_SWING
 };
 enum StateDomesto
 {

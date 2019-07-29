@@ -22,15 +22,15 @@ Domesto::Domesto()
 
 	this->x = 280;
 	this->y = 85;
-	this->width = ENEMIES_SPRITE_WIDTH;
-	this->height = ENEMIES_SPRITE_HEIGHT;
+	this->width = 24;
+	this->height = 46;
 
 	collider.x = x;
 	collider.y = y;
 	collider.vx = 0;
 	collider.vy = 0;
-	collider.width = ENEMIES_SPRITE_WIDTH;
-	collider.height = ENEMIES_SPRITE_HEIGHT;
+	collider.width = 24;
+	collider.height = 46;
 }
 
 Domesto *Domesto::GetInstance()
@@ -88,6 +88,34 @@ void Domesto::Update(DWORD dt)
 	float moveY = trunc(this->GetSpeedY()* dt);
 	this->SetPositionX(this->GetPositionX() + moveX);
 	this->SetPositionY(this->GetPositionY() + moveY);
+
+
+	// Collide with brick
+	vector<ColliedEvent*> coEvents;
+	vector<ColliedEvent*> coEventsResult;
+
+	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
+
+	this->SetSpeedY(this->GetSpeedY() - CAPTAIN_GRAVITY);
+
+	coEvents.clear();
+	this->SetDt(dt);
+	this->UpdateObjectCollider();
+	this->MapCollisions(tiles, coEvents);
+
+	if (coEvents.size() != 0)
+	{
+		float min_tx, min_ty, nx = 0, ny;
+
+		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+
+		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
+		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
+		this->SetPositionY(this->GetPositionY() + moveY);
+		if (ny != 0) this->SetSpeedY(0);
+	}
+	for (UINT i = 0; i < coEvents.size(); i++)
+		delete coEvents[i];
 
 	state->Colision();
 	state->Update(dt);

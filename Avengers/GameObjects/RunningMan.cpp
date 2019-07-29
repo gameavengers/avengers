@@ -80,6 +80,34 @@ void RunningMan::Update(DWORD dt)
 	this->SetPositionX(this->GetPositionX() + moveX);
 	this->SetPositionY(this->GetPositionY() + moveY);
 
+
+	// Collide with brick
+	vector<ColliedEvent*> coEvents;
+	vector<ColliedEvent*> coEventsResult;
+
+	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
+
+	this->SetSpeedY(this->GetSpeedY() - CAPTAIN_GRAVITY);
+
+	coEvents.clear();
+	this->SetDt(dt);
+	this->UpdateObjectCollider();
+	this->MapCollisions(tiles, coEvents);
+
+	if (coEvents.size() != 0)
+	{
+		float min_tx, min_ty, nx = 0, ny;
+
+		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+
+		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
+		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
+		this->SetPositionY(this->GetPositionY() + moveY);
+		if (ny != 0) this->SetSpeedY(0);
+	}
+	for (UINT i = 0; i < coEvents.size(); i++)
+		delete coEvents[i];
+
 	state->Colision();
 	state->Update(dt);
 }

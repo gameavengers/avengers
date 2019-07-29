@@ -137,8 +137,8 @@ void DomestoStayState::Render()
 	SpriteData spriteData;
 	if (this->domesto != NULL)
 	{
-		spriteData.width = ENEMIES_SPRITE_WIDTH;
-		spriteData.height = ENEMIES_SPRITE_HEIGHT;
+		spriteData.width = 24;
+		spriteData.height = 46;
 		spriteData.x = domesto->GetPositionX();
 		spriteData.y = domesto->GetPositionY();
 		spriteData.scale = 1;

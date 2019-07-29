@@ -26,6 +26,8 @@ class Game
 
 	Viewport *viewport;
 
+	TileMap2 *tileMap2;
+
 	Stage stage;
 public:
 	Stage GetStage() { return this->stage; }

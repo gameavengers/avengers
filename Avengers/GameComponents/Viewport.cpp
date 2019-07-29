@@ -9,7 +9,7 @@ Viewport::Viewport()
 	width = SCREEN_WIDTH;
 	height = SCREEN_HEIGHT;
 	x = 0;
-	y = 235;
+	y = 225;
 }
 
 
@@ -40,15 +40,15 @@ void Viewport::Reset()
 	width = SCREEN_WIDTH;
 	height = SCREEN_HEIGHT;
 	x = 0;
-	y = 235;
+	y = 225;
 }
 void Viewport::Update(DWORD dt)
 {
 	Captain * captain = Captain::GetInstance();
-	int right = (int)(2048 - SCREEN_WIDTH / 2);
+	int right = (int)(TileMap2::GetInstance()->currentMap->size*16 -SCREEN_WIDTH / 2);
 	int left = (int)SCREEN_WIDTH / 2;
-	int bottom = (int)(476 - SCREEN_HEIGHT / 2 - 1);
-	int top = (int)SCREEN_HEIGHT / 2;
+	int bottom = (int)(TileMap2::GetInstance()->currentMap->height * 16 - SCREEN_HEIGHT / 2 - 16);
+	int top = (int)SCREEN_HEIGHT / 2 - 4;
 	if (captain->GetPositionX() > left && captain->GetPositionX() < right)
 	{
 		this->x = captain->GetPositionX() - left;

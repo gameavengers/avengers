@@ -65,7 +65,7 @@ public:
 
 	Grid2();
 
-	void InitializeMapGrid();
+	void InitializeMapGrid(TileMap2 *tileMap2);
 
 	void GetCameraPosOnGrid(int &l, int &r, int &t, int &b);
 

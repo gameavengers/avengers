@@ -11,7 +11,7 @@ Captain::Captain()
 
 	shield = new Shield();
 
-	this->x = 300;
+	this->x = 150;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -203,38 +203,35 @@ void Captain::Update(DWORD dt)
 {
 	if (this->GetSpeedX() > 0 && this->GetPositionX() > TileMap2::GetInstance()->currentMap->size*16 - 50)
 	{
-		Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
-		if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
+		if (Game::GetInstance()->GetStage() < 4)
 		{
-			this->SetPositionX(50);
-			this->SetPositionY(100);
-			Viewport::GetInstance()->Reset();
-			TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
-			//TileMap2::GetInstance()->LoadTilesData(TILES_MATRIX_STAGE_BOSS_1, TILES_SET_STAGE_BOSS_1);
-			//Grid::SetNewGrid();
-			//Game::GetInstance()->SetGrid(Grid::GetInstance());
+			Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
+			if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
+			{
+				this->SetPositionX(50);
+				this->SetPositionY(100);
+				Viewport::GetInstance()->Reset();
+				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
+				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+			}
+			if (STAGE_2 == Game::GetInstance()->GetStage())
+			{
+				this->SetPositionX(50);
+				this->SetPositionY(100);
+				Viewport::GetInstance()->Reset();
+				TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
+				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+			}
+			if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
+			{
+				this->SetPositionX(50);
+				this->SetPositionY(100);
+				Viewport::GetInstance()->Reset();
+				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
+				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+			}
 		}
-		//if (STAGE_2 == Game::GetInstance()->GetStage())
-		//{
-		//	this->SetPositionX(50);
-		//	this->SetPositionY(100);
-		//	Viewport::GetInstance()->Reset();
-		//	Game::GetInstance()->GetTiledMap()->ResetTiledMap();
-		//	Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_2));
-		//	//Grid::SetNewGrid();
-		//	//Game::GetInstance()->SetGrid(Grid::GetInstance());
-		//}
-		//if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
-		//{
-		//	this->SetPositionX(50);
-		//	this->SetPositionY(100);
-		//	Viewport::GetInstance()->Reset();
-		//	Game::GetInstance()->GetTiledMap()->ResetTiledMap();
-		//	Game::GetInstance()->SetTileMap(TiledMap::GetInstance(TILES_MATRIX_STAGE_BOSS_2));
-		//	//Grid::SetNewGrid();
-		//	//Game::GetInstance()->SetGrid(Grid::GetInstance());
-		//}
-
+		else this->SetSpeedX(0);
 	}
 	
 	//Colision với state để riêng ra

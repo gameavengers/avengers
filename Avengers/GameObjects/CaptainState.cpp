@@ -68,7 +68,7 @@ void CaptainState::state_standing()
 		}
 		else
 		{
-			this->SetState(STATE_PUNCH); //Tạm thời thôi chứ hình như là phải xét bên state ném khiên nếu anim->IsDone() thì chuyển sang đấm
+			this->state_punch(); //Tạm thời thôi chứ hình như là phải xét bên state ném khiên nếu anim->IsDone() thì chuyển sang đấm
 			return;
 		}
 
@@ -262,6 +262,12 @@ void CaptainState::state_throw_shield()
 
 void CaptainState::state_punch()
 {
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z))
+	{
+		this->state_jumping();
+		return;
+	}
+	
 	//Update
 	captain->SetSpeedX(0);
 	captain->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);//Lúc nào nó cũng hướng xuống để xét va chạm đất

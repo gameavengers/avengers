@@ -76,8 +76,10 @@ HWND Game::CreateGameWindow(HINSTANCE hInstance, int ScreenWidth, int ScreenHeig
 }
 void Game::LoadResources()
 {
-	TileMap2::GetInstance();
-	Grid2::GetInstance()->InitializeMapGrid();
+	if (NULL == tileMap2)
+		tileMap2 = TileMap2::GetInstance();
+	tileMap2->SetCurrentMap(this->stage);
+	Grid2::GetInstance()->InitializeMapGrid(tileMap2);
 	if (NULL == captain)
 		captain = Captain::GetInstance();
 	if (viewport == NULL)

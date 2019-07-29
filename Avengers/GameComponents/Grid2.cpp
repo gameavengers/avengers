@@ -23,9 +23,9 @@ Grid2::Grid2()
 	barrel = new Barrel();
 }
 
-void Grid2::InitializeMapGrid()
+void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
 {
-	mapSize = TileMap2::GetInstance()->currentMap->size / 4;
+	mapSize = tileMap2->currentMap->size / 4;
 	listCell = new GridData[mapSize*mapSize];
 
 	for (int y = 0; y < mapSize; y++)
@@ -33,7 +33,7 @@ void Grid2::InitializeMapGrid()
 			for (int yy = 0; yy < GRID_SIZE_BY_TILE; yy++)
 				for (int xx = 0; xx < GRID_SIZE_BY_TILE; xx++)
 				{
-					Tile2* tempTile = TileMap2::GetInstance()->currentMap->GetTile(xx + x * GRID_SIZE_BY_TILE, yy + y * GRID_SIZE_BY_TILE);
+					Tile2* tempTile = tileMap2->currentMap->GetTile(xx + x * GRID_SIZE_BY_TILE, yy + y * GRID_SIZE_BY_TILE);
 					(listCell + x + y * mapSize)->tiles.push_back(tempTile);
 				}
 }

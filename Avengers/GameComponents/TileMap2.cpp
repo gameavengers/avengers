@@ -8,15 +8,15 @@ TileMap2 * TileMap2::GetInstance()
 	{
 		_instance = new TileMap2();
 
-		_instance->LoadTilesData(TILES_MATRIX_STAGE_1, TILES_SET_MATRIX_STAGE_1);
-		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_1, TILES_SET_STAGE_BOSS_1);
-		_instance->LoadTilesData(TILES_MATRIX_STAGE_2, TILES_SET_MATRIX_STAGE_2);
-		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_2, TILES_SET_STAGE_BOSS_2);
+		_instance->LoadTilesData(TILES_MATRIX_STAGE_1, TILES_SET_MATRIX_STAGE_1, MAP_1_ID);
+		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_1, TILES_SET_STAGE_BOSS_1, MAP_BOSS_1_ID);
+		_instance->LoadTilesData(TILES_MATRIX_STAGE_2, TILES_SET_MATRIX_STAGE_2, MAP_2_ID);
+		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_2, TILES_SET_STAGE_BOSS_2, MAP_BOSS_2_ID);
 	}
 	return _instance;
 }
 
-void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation)
+void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation, int mapId)
 {
 	MapPack map;
 
@@ -41,14 +41,46 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation)
 			tilesData >> data;
 			(map.tiles + x + y * size)->tileId = stoi(data);
 
-			if (find(_BrickStage_1.begin(), _BrickStage_1.end(), (map.tiles + x + y * size)->tileId) != _BrickStage_1.end())
+			switch (mapId)
 			{
-				(map.tiles + x + y * size)->type = ObjectType::BRICK;
-			}
-			if ((map.tiles + x + y * size)->tileId == 100)
+			case MAP_1_ID:
 			{
-				(map.tiles + x + y * size)->type = ObjectType::RIVER;
+				if (find(_BrickStage_1.begin(), _BrickStage_1.end(), (map.tiles + x + y * size)->tileId) != _BrickStage_1.end())
+				{
+					(map.tiles + x + y * size)->type = ObjectType::BRICK;
+				}
+				if ((map.tiles + x + y * size)->tileId == 100)
+				{
+					(map.tiles + x + y * size)->type = ObjectType::RIVER;
+				}
 			}
+			break;
+			case MAP_BOSS_1_ID:
+			{
+				if (find(_BrickStage_BOSS_1.begin(), _BrickStage_BOSS_1.end(), (map.tiles + x + y * size)->tileId) != _BrickStage_BOSS_1.end())
+				{
+					(map.tiles + x + y * size)->type = ObjectType::BRICK;
+				}
+			}
+			break;
+			case MAP_2_ID:
+			{
+				if (find(_BrickStage_2.begin(), _BrickStage_2.end(), (map.tiles + x + y * size)->tileId) != _BrickStage_2.end())
+				{
+					(map.tiles + x + y * size)->type = ObjectType::BRICK;
+				}
+			}
+			break;
+			case MAP_BOSS_2_ID:
+			{
+				if ((map.tiles + x + y * size)->tileId == 1)
+				{
+					(map.tiles + x + y * size)->type = ObjectType::BRICK;
+				}
+			}
+			break;
+			}
+			
 			(map.tiles + x + y * size)->x = x;
 			(map.tiles + x + y * size)->y = y;
 		}
@@ -80,7 +112,7 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation)
 		map.TilesSetSprite.push_back(tempTile);
 	}
 	mapList.push_back(map);
-	currentMap = &mapList.at(0);
+	//currentMap = &mapList.at(0);
 }
 
 void TileMap2::SetCurrentMap(int mapID)

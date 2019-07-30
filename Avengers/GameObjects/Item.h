@@ -21,6 +21,8 @@ protected:
 	bool Active;
 
 	ItemType Type;
+
+	float timeCount;
 public:
 	Item();
 	~Item();

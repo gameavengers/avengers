@@ -2,8 +2,8 @@
 #include "../GameComponents/GameObject.h"
 
 enum RocketState {
-	FLYING_HORIZONTAL,
-	FLYING_DIAGONAL
+	FLYING_HORIZONTAL, //bay ngang
+	FLYING_DIAGONAL, //bay xéo lên
 };
 
 class Rocket : public GameObject

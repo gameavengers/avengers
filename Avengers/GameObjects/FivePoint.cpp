@@ -42,7 +42,7 @@ void FivePoint::LoadResources()
 	animations.push_back(anim);
 
 	// ALMOST DISAPPEAR
-	anim = new Animation(100);
+	anim = new Animation(50);
 
 	Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[59], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite);
@@ -56,9 +56,19 @@ void FivePoint::LoadResources()
 
 void FivePoint::Update(DWORD dt)
 {
+	// Cap nhat Delta Time
+	this->dt = dt;
+
+	this->timeCount += dt;
+
+	if (this->timeCount > 4000)
+		this->state = ITEM_ALMOST_DISAPPEAR;
+	if (this->timeCount > 6000)
+		this->SetActive(false);
+	
 	if (Viewport::GetInstance()->IsObjectInCamera(this) == true)
 	{
-		this->SetActive(true);
+		//this->SetActive(true);
 		vector<ColliedEvent*> coEvents;
 		vector<ColliedEvent*> coEventsResult;
 
@@ -90,17 +100,20 @@ void FivePoint::Update(DWORD dt)
 		for (UINT i = 0; i < coEvents.size(); i++)
 			delete coEvents[i];
 	}
-	else
+	/*else
 	{
 		this->SetActive(false);
 		this->SetSpeedX(0);
-	}
+	}*/
 }
 
 void FivePoint::Render()
 {
-	int state = this->state;
+	if (!this->IsActive())
+		return;
 	
+	int state = this->state;
+
 	SpriteData spriteData;
 
 	spriteData.width = FIVE_POINT_ITEM_WIDTH;

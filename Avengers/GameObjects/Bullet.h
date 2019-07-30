@@ -1,10 +1,10 @@
-#pragma once
+﻿#pragma once
 #include "../GameComponents/GameObject.h"
 
 enum BulletType {
-	BULLET_NORMAL,
-	BULLET_TANK,
-	BULLET_BOSS2
+	BULLET_NORMAL, //đạn của running man
+	BULLET_TANK, //đạn của mấy tháp súng
+	BULLET_BOSS2, //đạn của con boss 2
 };
 
 

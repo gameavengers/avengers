@@ -191,28 +191,40 @@ void Boss1State::Behavior_FlyAndShoot()
 
 void Boss1State::Behavior_Fly()
 {
-	float walkSpeed = CAPTAIN_WALK_SPEED * (boss1->IsLeft() ? -1 : 1);
+	float walkSpeed = (0.125f * (boss1->IsLeft() ? -1 : 1)) /2;
 	float acceleration = (timeCount / BOSS1_TIME_FLY_UP_N_DOWN) * (BOSS1_FLY_SPEED / 2);
 	float acceleration2 = (timeCount / BOSS1_TIME_FLY_UP_N_DOWN);
+	float posX;
+	float posY;
+
 	switch (behaviorState)
 	{
 	case 0:
 		this->state_flying();
-		boss1->SetSpeedX(walkSpeed * acceleration2 *2);
-		boss1->SetSpeedY(BOSS1_FLY_SPEED - acceleration);
-		this->NextStateIn(BOSS1_TIME_FLY_UP_N_DOWN);
+		a = 0.1;
+		h = BOSS1_PARABOL_JUMP_H + boss1->GetPositionX();
+		k = BOSS1_PARABOL_JUMP_K + boss1->GetPositionY();
+		this->behaviorState++;
 		break;
 	case 1:
-		this->state_flying();
+		posX = walkSpeed + boss1->GetPositionX();
+		posY = -a * (posX - h) * (posX - h) + k;
 		boss1->SetSpeedX(walkSpeed);
-		boss1->SetSpeedY(0);
-		this->NextStateIn(500);
+		boss1->SetPositionY(posY);
+
+		if (posX > h + 32)
+			this->behaviorState++;
 		break;
 	case 2:
-		this->state_flying();
-		boss1->SetSpeedX(walkSpeed * acceleration2);
-		boss1->SetSpeedY(-BOSS1_FLY_SPEED + acceleration);
-		this->NextStateIn(BOSS1_TIME_FLY_UP_N_DOWN);
+		posX = boss1->GetPositionX() - walkSpeed;
+		posY = -a * (posX - h) * (posX - h) + k;
+
+		boss1->SetSpeedX(-walkSpeed);
+		boss1->SetPositionY(posY);
+
+		if (posX < h - 32)
+			this->behaviorState--;
+
 		break;
 	case 3:
 		boss1->SetSpeedX(0);

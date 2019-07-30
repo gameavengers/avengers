@@ -39,6 +39,11 @@ protected:
 	int behaviorState;
 	float timeCount;
 	//Behavior parameter
+	//Parabol Jump
+	// y= - a * (x-h)^2 + k
+	float a;
+	float h;
+	float k;
 
 
 public:

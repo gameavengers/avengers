@@ -218,30 +218,42 @@ void Captain::Update(DWORD dt)
 			Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
 			if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
 			{
-				this->SetPositionX(50);
+				/*this->SetPositionX(50);
 				this->SetPositionY(100);
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
-				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());*/
 			}
 			if (STAGE_2 == Game::GetInstance()->GetStage())
 			{
-				this->SetPositionX(280);
+				/*this->SetPositionX(280);
 				this->SetPositionY(900);
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
-				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());*/
 			}
 			if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
 			{
-				this->SetPositionX(50);
+				/*this->SetPositionX(50);
 				this->SetPositionY(100);
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
-				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());*/
 			}
 		}
 		else this->SetSpeedX(0);
+	}
+
+	static int p = 0;
+	if (p == 0)
+	{
+		Game::GetInstance()->SetStage(STAGE_BOSS_1);
+		this->SetPositionX(50);
+		this->SetPositionY(100);
+		Viewport::GetInstance()->Reset();
+		TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
+		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+		p++;
 	}
 
 	//Chuyển màn nhanh bằng phím

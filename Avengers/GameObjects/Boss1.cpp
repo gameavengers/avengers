@@ -76,7 +76,7 @@ void Boss1::LoadResources()
 	for (int i = 8; i < 12; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		anim->AddFrame(sprite,200);
+		anim->AddFrame(sprite,100);
 	}
 	animations.push_back(anim);
 

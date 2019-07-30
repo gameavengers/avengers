@@ -84,12 +84,6 @@ void Domesto::LoadResources()
 
 void Domesto::Update(DWORD dt)
 {
-	float moveX = trunc(this->GetSpeedX()* dt);
-	float moveY = trunc(this->GetSpeedY()* dt);
-	this->SetPositionX(this->GetPositionX() + moveX);
-	this->SetPositionY(this->GetPositionY() + moveY);
-
-
 	// Collide with brick
 	vector<ColliedEvent*> coEvents;
 	vector<ColliedEvent*> coEventsResult;
@@ -103,7 +97,14 @@ void Domesto::Update(DWORD dt)
 	this->UpdateObjectCollider();
 	this->MapCollisions(tiles, coEvents);
 
-	if (coEvents.size() != 0)
+	if (coEvents.size() == 0)
+	{
+		float moveX = trunc(this->GetSpeedX()* dt);
+		float moveY = trunc(this->GetSpeedY()* dt);
+		this->SetPositionX(this->GetPositionX() + moveX);
+		this->SetPositionY(this->GetPositionY() + moveY);
+	}
+	else
 	{
 		float min_tx, min_ty, nx = 0, ny;
 
@@ -111,8 +112,17 @@ void Domesto::Update(DWORD dt)
 
 		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
 		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
+
+		this->SetPositionX(this->GetPositionX() + moveX);
 		this->SetPositionY(this->GetPositionY() + moveY);
-		if (ny != 0) this->SetSpeedY(0);
+
+		if (coEventsResult[0]->collisionID == 1)
+		{
+			if (ny == 1)
+			{
+				this->SetIsGrounded(true);
+			}
+		}
 	}
 	for (UINT i = 0; i < coEvents.size(); i++)
 		delete coEvents[i];

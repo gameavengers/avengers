@@ -51,6 +51,14 @@ void RunningManState::state_running()
 
 	runningMan->SetSpeedX(CAPTAIN_WALK_SPEED * (runningMan->IsLeft() ? -1 : 1));
 
+	if (!Captain::GetInstance()->IsShield() && ((runningMan->IsLeft() && !Captain::GetInstance()->IsLeft() && runningMan->GetPositionX() > Captain::GetInstance()->GetPositionX()) || (!runningMan->IsLeft() && Captain::GetInstance()->IsLeft() && runningMan->GetPositionX() < Captain::GetInstance()->GetPositionX())))
+	{
+		runningMan->SetSpeedY(CAPTAIN_JUMP_SPEED_Y * 2);
+		runningMan->SetIsGrounded(false);
+		this->state_jumping();
+		return;
+	}
+
 	switch (runningMan->GetRunningManType())
 	{
 	case RunningManType::NORMAL:
@@ -114,6 +122,18 @@ void RunningManState::state_dead()
 	anim = runningMan->GetAnimationsList()[RUNNING_MAN_STATE_DEAD];
 }
 
+void RunningManState::state_jumping()
+{
+	this->SetState(RUNNING_MAN_STATE_JUMPING);
+	anim = runningMan->GetAnimationsList()[RUNNING_MAN_STATE_CROUCH_SHOOT];
+
+	if (runningMan->IsGrounded())
+	{
+		this->SetState(RUNNING_MAN_STATE_STANDING_SHOOT);
+		return;
+	}
+}
+
 void RunningManState::Colision()
 {
 
@@ -142,6 +162,10 @@ void RunningManState::Update(DWORD dt)
 
 	case RUNNING_MAN_STATE_DEAD:
 		this->state_dead();
+		break;
+
+	case RUNNING_MAN_STATE_JUMPING:
+		this->state_jumping();
 		break;
 
 	default:

@@ -10,6 +10,7 @@ enum StateRunningMan
 	RUNNING_MAN_STATE_STANDING_SHOOT,//Đứng bắn
 	RUNNING_MAN_STATE_CROUCH_SHOOT,//Ngồi bắn
 	RUNNING_MAN_STATE_DEAD,//Chết
+	RUNNING_MAN_STATE_JUMPING,//Nhảy
 };
 
 class RunningManState : public State
@@ -38,6 +39,7 @@ public:
 	void state_standing_shoot();
 	void state_crouch_shoot();
 	void state_dead();
+	void state_jumping();
 
 	void Colision() override;
 	void Update(DWORD dt) override;

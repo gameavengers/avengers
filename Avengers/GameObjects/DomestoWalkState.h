@@ -31,6 +31,7 @@ public:
 	void state_standing_shoot();
 	void state_crouch_shoot();
 	void state_dead();
+	void state_jumping();
 
 	void Colision() override;
 	void Update(DWORD dt) override;

@@ -84,6 +84,14 @@ void DomestoWalkState::state_walking()
 	
 	domesto->SetSpeedX(CAPTAIN_WALK_SPEED * (domesto->IsLeft() ? -1 : 1));
 
+	if (!Captain::GetInstance()->IsShield() && ((domesto->IsLeft() && !Captain::GetInstance()->IsLeft() && domesto->GetPositionX() > Captain::GetInstance()->GetPositionX()) || (!domesto->IsLeft() && Captain::GetInstance()->IsLeft() && domesto->GetPositionX() < Captain::GetInstance()->GetPositionX())))
+	{
+		domesto->SetSpeedY(CAPTAIN_JUMP_SPEED_Y * 2);
+		domesto->SetIsGrounded(false);
+		this->state_jumping();
+		return;
+	}
+
 	if (this->ChangeStateOverTime(StateDomesto::DOMESTO_STATE_STANDING_SHOOT,
 								DOMESTO_TIME_OUT_WALK))
 	{
@@ -125,6 +133,18 @@ void DomestoWalkState::state_dead()
 	anim = domesto->GetAnimationsList()[DOMESTO_STATE_DEAD];
 }
 
+void DomestoWalkState::state_jumping()
+{
+	this->SetState(DOMESTO_STATE_JUMPING);
+	anim = domesto->GetAnimationsList()[DOMESTO_STATE_CROUCH_SHOOT];
+
+	if (domesto->IsGrounded())
+	{
+		this->SetState(DOMESTO_STATE_STANDING_SHOOT);
+		return;
+	}
+}
+
 void DomestoWalkState::Colision()
 {
 
@@ -150,6 +170,10 @@ void DomestoWalkState::Update(DWORD dt)
 
 	case DOMESTO_STATE_DEAD:
 		this->state_dead();
+		break;
+
+	case DOMESTO_STATE_JUMPING:
+		this->state_jumping();
 		break;
 
 	default:

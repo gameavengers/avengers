@@ -25,7 +25,7 @@ class RunningMan : public GameObject
 
 	RunningManType type;
 
-	bool isGrounded;
+	bool isGrounded = false;
 
 public:
 	void LoadResources();
@@ -34,6 +34,9 @@ public:
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
+
+	void SetIsGrounded(bool isGrounded) { this->isGrounded = isGrounded; }
+	bool IsGrounded() { return isGrounded; }
 
 	void SetColliderDemension(float width, float height)
 	{

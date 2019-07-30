@@ -46,7 +46,7 @@ void RunningMan::LoadResources()
 	animations.push_back(anim);
 
 	// RUNNING_MAN_ANI_STANDING_SHOOT
-	anim = new Animation(100);
+	anim = new Animation(200);
 	for (int i = 3; i < 4; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -55,7 +55,7 @@ void RunningMan::LoadResources()
 	animations.push_back(anim);
 
 	// RUNNING_MAN_ANI_CROUCH_SHOOT
-	anim = new Animation(100);
+	anim = new Animation(200);
 	for (int i = 4; i < 5; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -75,12 +75,6 @@ void RunningMan::LoadResources()
 
 void RunningMan::Update(DWORD dt)
 {
-	float moveX = trunc(this->GetSpeedX()* dt);
-	float moveY = trunc(this->GetSpeedY()* dt);
-	this->SetPositionX(this->GetPositionX() + moveX);
-	this->SetPositionY(this->GetPositionY() + moveY);
-
-
 	// Collide with brick
 	vector<ColliedEvent*> coEvents;
 	vector<ColliedEvent*> coEventsResult;
@@ -94,7 +88,14 @@ void RunningMan::Update(DWORD dt)
 	this->UpdateObjectCollider();
 	this->MapCollisions(tiles, coEvents);
 
-	if (coEvents.size() != 0)
+	if (coEvents.size() == 0)
+	{
+		float moveX = trunc(this->GetSpeedX()* dt);
+		float moveY = trunc(this->GetSpeedY()* dt);
+		this->SetPositionX(this->GetPositionX() + moveX);
+		this->SetPositionY(this->GetPositionY() + moveY);
+	}
+	else
 	{
 		float min_tx, min_ty, nx = 0, ny;
 
@@ -102,8 +103,17 @@ void RunningMan::Update(DWORD dt)
 
 		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
 		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
+
+		this->SetPositionX(this->GetPositionX() + moveX);
 		this->SetPositionY(this->GetPositionY() + moveY);
-		if (ny != 0) this->SetSpeedY(0);
+
+		if (coEventsResult[0]->collisionID == 1)
+		{
+			if (ny == 1)
+			{
+				this->SetIsGrounded(true);
+			}
+		}
 	}
 	for (UINT i = 0; i < coEvents.size(); i++)
 		delete coEvents[i];

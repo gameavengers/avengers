@@ -5,6 +5,7 @@ enum BulletType {
 	BULLET_NORMAL, //đạn của running man
 	BULLET_TANK, //đạn của mấy tháp súng
 	BULLET_BOSS2, //đạn của con boss 2
+	ROCKET, //tên lửa
 };
 
 
@@ -30,6 +31,7 @@ public:
 	void BulletNormalUpdate(DWORD dt);
 	void BulletTankUpdate(DWORD dt);
 	void BulletBoss2Update(DWORD dt);
+	void RocketUpdate(DWORD dt);
 
 	bool IsDisable() { return disable; }
 	void Disable() { timeCount = 0; disable = true; }

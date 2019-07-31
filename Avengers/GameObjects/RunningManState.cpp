@@ -51,7 +51,9 @@ void RunningManState::state_running()
 
 	runningMan->SetSpeedX(CAPTAIN_WALK_SPEED * (runningMan->IsLeft() ? -1 : 1));
 
-	if (!Captain::GetInstance()->IsShield() && ((runningMan->IsLeft() && !Captain::GetInstance()->IsLeft() && runningMan->GetPositionX() > Captain::GetInstance()->GetPositionX()) || (!runningMan->IsLeft() && Captain::GetInstance()->IsLeft() && runningMan->GetPositionX() < Captain::GetInstance()->GetPositionX())))
+	if (!Captain::GetInstance()->IsShield() 
+		&& ((runningMan->IsLeft() && !Captain::GetInstance()->IsLeft() && runningMan->GetPositionX() > Captain::GetInstance()->GetPositionX()) 
+			|| (!runningMan->IsLeft() && Captain::GetInstance()->IsLeft() && runningMan->GetPositionX() < Captain::GetInstance()->GetPositionX())))
 	{
 		runningMan->SetSpeedY(CAPTAIN_JUMP_SPEED_Y * 2);
 		runningMan->SetIsGrounded(false);

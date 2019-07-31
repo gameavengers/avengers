@@ -1,10 +1,10 @@
 ﻿#pragma once
 #include "../GameComponents/GameObject.h"
-//#include "DomestoState.h"
 #include "DomestoStayState.h"
 #include "DomestoWalkState.h"
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
+#include "../GameComponents/SpawnProjectTile.h"
 #include "State.h"
 
 enum DemestoType

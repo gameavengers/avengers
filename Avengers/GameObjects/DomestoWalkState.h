@@ -15,6 +15,7 @@ protected:
 	Animation * anim;
 
 	float timeCount;
+	float shootTimeCount;
 public:
 	DomestoWalkState(Domesto *domesto);
 	~DomestoWalkState();

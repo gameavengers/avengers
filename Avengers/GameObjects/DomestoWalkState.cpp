@@ -84,7 +84,9 @@ void DomestoWalkState::state_walking()
 	
 	domesto->SetSpeedX(CAPTAIN_WALK_SPEED * (domesto->IsLeft() ? -1 : 1));
 
-	if (!Captain::GetInstance()->IsShield() && ((domesto->IsLeft() && !Captain::GetInstance()->IsLeft() && domesto->GetPositionX() > Captain::GetInstance()->GetPositionX()) || (!domesto->IsLeft() && Captain::GetInstance()->IsLeft() && domesto->GetPositionX() < Captain::GetInstance()->GetPositionX())))
+	if (!Captain::GetInstance()->IsShield() 
+		&& ((domesto->IsLeft() && !Captain::GetInstance()->IsLeft() && domesto->GetPositionX() > Captain::GetInstance()->GetPositionX()) 
+			|| (!domesto->IsLeft() && Captain::GetInstance()->IsLeft() && domesto->GetPositionX() < Captain::GetInstance()->GetPositionX())))
 	{
 		domesto->SetSpeedY(CAPTAIN_JUMP_SPEED_Y * 2);
 		domesto->SetIsGrounded(false);
@@ -106,6 +108,16 @@ void DomestoWalkState::state_standing_shoot()
 
 	domesto->SetSpeedX(0);
 
+	if (this->shootTimeCount > DOMESTO_TIME_OUT_STAND * 5)
+	{
+		this->shootTimeCount = 0;
+		int direction = domesto->IsLeft() ? 1 : 5;
+		float offsetX = domesto->IsLeft() ? -16 : 16;
+		float offsetY = -3;
+		SpawnProjectTile::GetInstance()->SpawnBullet(domesto->GetPositionX() + offsetX, domesto->GetPositionY() + offsetY,
+			direction, BulletType::ROCKET);
+	}
+
 	if (previousStateDomesto == StateDomesto::DOMESTO_STATE_WALKING)
 	{		
 		this->ChangeStateOverTime(StateDomesto::DOMESTO_STATE_CROUCH_SHOOT,
@@ -122,6 +134,16 @@ void DomestoWalkState::state_crouch_shoot()
 {
 	this->SetState(StateDomesto::DOMESTO_STATE_CROUCH_SHOOT);
 	anim = domesto->GetAnimationsList()[DOMESTO_STATE_CROUCH_SHOOT];
+
+	if (this->shootTimeCount > DOMESTO_TIME_OUT_CROUCH * 2)
+	{
+		this->shootTimeCount = 0;
+		int direction = domesto->IsLeft() ? 1 : 5;
+		float offsetX = domesto->IsLeft() ? -16 : 16;
+		float offsetY = -16;
+		SpawnProjectTile::GetInstance()->SpawnBullet(domesto->GetPositionX() + offsetX, domesto->GetPositionY() + offsetY,
+			direction, BulletType::ROCKET);
+	}
 
 	this->ChangeStateOverTime(StateDomesto::DOMESTO_STATE_STANDING_SHOOT,
 								DOMESTO_TIME_OUT_CROUCH + DOMESTO_TIME_OUT_CROUCH_SHOOT);
@@ -153,6 +175,8 @@ void DomestoWalkState::Colision()
 void DomestoWalkState::Update(DWORD dt)
 {
 	timeCount += dt;
+	this->shootTimeCount += dt;
+
 	//Update theo state
 	switch (stateDomesto)
 	{

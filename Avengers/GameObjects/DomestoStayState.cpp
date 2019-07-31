@@ -81,6 +81,16 @@ void DomestoStayState::state_standing_shoot()
 	this->SetState(StateDomesto::DOMESTO_STATE_STANDING_SHOOT);
 	anim = domesto->GetAnimationsList()[StateDomesto::DOMESTO_STATE_STANDING_SHOOT];
 
+	if (this->shootTimeCount > DOMESTO_TIME_OUT_STAND * 3)
+	{
+		this->shootTimeCount = 0;
+		int direction = domesto->IsLeft() ? 1 : 5;
+		float offsetX = domesto->IsLeft() ? -16 : 16;
+		float offsetY = -3;
+		SpawnProjectTile::GetInstance()->SpawnBullet(domesto->GetPositionX() + offsetX, domesto->GetPositionY() + offsetY,
+			direction, BulletType::ROCKET);
+	}
+
 	this->ChangeStateOverTime(StateDomesto::DOMESTO_STATE_CROUCH_SHOOT,
 								DOMESTO_TIME_OUT_STAND + DOMESTO_TIME_OUT_STAND_SHOOT);
 }
@@ -89,6 +99,16 @@ void DomestoStayState::state_crouch_shoot()
 {
 	this->SetState(StateDomesto::DOMESTO_STATE_CROUCH_SHOOT);
 	anim = domesto->GetAnimationsList()[StateDomesto::DOMESTO_STATE_CROUCH_SHOOT];
+
+	if (this->shootTimeCount > DOMESTO_TIME_OUT_CROUCH * 2)
+	{
+		this->shootTimeCount = 0;
+		int direction = domesto->IsLeft() ? 1 : 5;
+		float offsetX = domesto->IsLeft() ? -16 : 16;
+		float offsetY = -16;
+		SpawnProjectTile::GetInstance()->SpawnBullet(domesto->GetPositionX() + offsetX, domesto->GetPositionY() + offsetY,
+			direction, BulletType::ROCKET);
+	}
 
 	this->ChangeStateOverTime(StateDomesto::DOMESTO_STATE_STANDING_SHOOT,
 		DOMESTO_TIME_OUT_CROUCH + DOMESTO_TIME_OUT_CROUCH_SHOOT);
@@ -108,6 +128,8 @@ void DomestoStayState::Colision()
 void DomestoStayState::Update(DWORD dt)
 {
 	timeCount += dt;
+	this->shootTimeCount += dt;
+
 	//Update theo state
 	switch (stateDomesto)
 	{

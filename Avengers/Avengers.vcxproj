@@ -138,6 +138,7 @@
     <ClInclude Include="GameComponents\Grid2.h" />
     <ClInclude Include="GameComponents\Keyboard.h" />
     <ClInclude Include="GameComponents\LoadTXT.h" />
+    <ClInclude Include="GameComponents\SpawnProjectTile.h" />
     <ClInclude Include="GameComponents\Sprite.h" />
     <ClInclude Include="GameComponents\TileMap2.h" />
     <ClInclude Include="GameComponents\Viewport.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="GameComponents\Keyboard.cpp" />
     <ClCompile Include="GameComponents\LoadTXT.cpp" />
     <ClCompile Include="GameComponents\Main.cpp" />
+    <ClCompile Include="GameComponents\SpawnProjectTile.cpp" />
     <ClCompile Include="GameComponents\Sprite.cpp" />
     <ClCompile Include="GameComponents\TileMap2.cpp" />
     <ClCompile Include="GameComponents\Viewport.cpp" />

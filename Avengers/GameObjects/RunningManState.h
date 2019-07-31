@@ -23,6 +23,7 @@ protected:
 	DWORD dt;
 
 	float timeCount;
+	float shootTimeCount;
 
 public:
 	RunningManState(RunningMan *runningMan);

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "SpawnProjectTile.h"
 #include "Constants.h" 
 #include "../GameObjects/Captain.h"
 #include "../GameObjects/RunningMan.h"

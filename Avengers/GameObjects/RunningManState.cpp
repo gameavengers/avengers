@@ -84,9 +84,20 @@ void RunningManState::state_standing_shoot()
 
 	runningMan->SetSpeedX(0);
 
+	if (this->shootTimeCount > RUNNING_MAN_TIME_OUT_STAND * 1.5)
+	{
+		this->shootTimeCount = 0;
+		int direction = runningMan->IsLeft() ? 1 : 5;
+		float offsetX = runningMan->IsLeft() ? -16 : 16;
+		float offsetY = -3;
+		SpawnProjectTile::GetInstance()->SpawnBullet(runningMan->GetPositionX() + offsetX, runningMan->GetPositionY() + offsetY,
+													direction, BulletType::BULLET_NORMAL);
+	}
+
 	if (this->timeCount > RUNNING_MAN_TIME_OUT_STAND)
 	{
 		this->timeCount = 0;
+		this->shootTimeCount = 0;
 		switch (runningMan->GetRunningManType())
 		{
 		case RunningManType::NORMAL:
@@ -108,6 +119,8 @@ void RunningManState::state_crouch_shoot()
 	anim = runningMan->GetAnimationsList()[RUNNING_MAN_STATE_CROUCH_SHOOT];
 
 	runningMan->SetSpeedX(0);
+
+
 
 	if (this->timeCount > RUNNING_MAN_TIME_OUT_CROUCH)
 	{
@@ -145,6 +158,7 @@ void RunningManState::Update(DWORD dt)
 	this->dt = dt; 
 
 	this->timeCount += dt;
+	this->shootTimeCount += dt;
 	//Update theo state
 	switch (stateRunningMan)
 	{

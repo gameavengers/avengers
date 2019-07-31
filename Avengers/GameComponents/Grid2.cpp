@@ -118,6 +118,7 @@ void Grid2::Update(DWORD dt)
 	runningMan->Update(dt);
 	domesto->Update(dt);
 	boss1->Update(dt);
+	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 }
 
 void Grid2::Render()
@@ -140,4 +141,5 @@ void Grid2::Render()
 	boss1->Render();
 	/*boss2->Render();
 	barrel->Render();*/
+	SpawnProjectTile::GetInstance()->RenderBullet();
 }

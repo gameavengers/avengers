@@ -117,6 +117,10 @@ enum StateDomesto
 #define KEY_CRYSTAL_WIDTH 12
 #define KEY_CRYSTAL_HEIGHT 12
 
+//Bullet
+#define BULLET_NORMAL_SPEED 0.2f
+#define BULLET_TIME_LIFE	5000
+
 //
 //Enemy
 //

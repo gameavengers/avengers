@@ -126,6 +126,9 @@
     <ClCompile Include="GameObjects\DomestoWalkState.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
+    <ClCompile Include="GameComponents\SpawnProjectTile.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameComponents\Debug.h" />
@@ -254,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="GameObjects\DomestoWalkState.h">
       <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponents\SpawnProjectTile.h">
+      <Filter>Header\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

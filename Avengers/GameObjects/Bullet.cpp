@@ -1,17 +1,24 @@
 ﻿#include "Bullet.h"
 
-Bullet::Bullet()
+Bullet::Bullet(float x, float y, int direction, BulletType type)
 {
 	LoadResources();
+	Initialize(x, y, direction, type);
+}
 
-	this->type = BULLET_BOSS2;
+void Bullet::Initialize(float x, float y, int direction, BulletType type)
+{
+	//this->type = BULLET_BOSS2;
+	this->type = type;
+
+	this->direction = direction;
 
 	width = 8;
 	height = 8;
 
 	//Để test thôi
-	x = 200;
-	y = 200;
+	this->x = x;
+	this->y = y;
 	//=========
 
 	collider.x = x;
@@ -20,6 +27,7 @@ Bullet::Bullet()
 	collider.vy = vy;
 	collider.width = 8;
 	collider.height = 8;
+	this->disable = false;
 }
 
 void Bullet::LoadResources()
@@ -98,13 +106,58 @@ void Bullet::LoadResources()
 	//-----------------------------------------
 }
 
+void Bullet::BulletNormalUpdate(DWORD dt)
+{
+	if (direction == 1)
+	{
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+	}
+	else
+	{
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+	}
+}
+
+void Bullet::BulletTankUpdate(DWORD dt)
+{
+}
+
+void Bullet::BulletBoss2Update(DWORD dt)
+{
+}
+
 void Bullet::Update(DWORD dt)
 {
-	
+	if (disable)
+		return;
+
+	timeCount += dt;
+
+	float moveX = trunc(this->GetSpeedX()* dt);
+	float moveY = trunc(this->GetSpeedY()* dt);
+	this->SetPositionX(this->GetPositionX() + moveX);
+	this->SetPositionY(this->GetPositionY() + moveY);
+
+	switch (type)
+	{
+	case BulletType::BULLET_NORMAL:
+		BulletNormalUpdate(dt);
+		break;
+	case BulletType::BULLET_TANK:
+		break;
+	case BulletType::BULLET_BOSS2:
+		break;
+	}
+
+	if (timeCount > BULLET_TIME_LIFE)
+		Disable();
 }
 
 void Bullet::Render()
 {
+	if (this->disable)
+		return;
+
 	SpriteData spriteData;
 
 	spriteData.width = 8;
@@ -140,3 +193,4 @@ void Bullet::Render()
 Bullet::~Bullet()
 {
 }
+

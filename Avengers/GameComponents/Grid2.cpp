@@ -21,6 +21,7 @@ Grid2::Grid2()
 	boss1 = Boss1::GetInstance();
 	boss2 = Boss2::GetInstance();
 	barrel = new Barrel();
+	redbox = RedBox::GetInstance();
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -118,7 +119,9 @@ void Grid2::Update(DWORD dt)
 	runningMan->Update(dt);
 	domesto->Update(dt);
 	boss1->Update(dt);
+	redbox->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
+	SpawnProjectTile::GetInstance()->UpdateItem(dt);
 }
 
 void Grid2::Render()
@@ -139,7 +142,9 @@ void Grid2::Render()
 	domesto->Render();
 	gigi->Render();
 	boss1->Render();
+	redbox->Render();
 	/*boss2->Render();
 	barrel->Render();*/
 	SpawnProjectTile::GetInstance()->RenderBullet();
+	SpawnProjectTile::GetInstance()->RenderItem();
 }

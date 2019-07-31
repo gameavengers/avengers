@@ -4,6 +4,7 @@
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
 #include "State.h"
+#include "../GameComponents/SpawnProjectTile.h"
 
 class RedBox : public GameObject
 {

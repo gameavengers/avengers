@@ -14,7 +14,8 @@ RedBoxState *RedBoxState::GetInstance(RedBox *redbox)
 RedBoxState::RedBoxState(RedBox *redbox)
 {
 	this->redbox = redbox;
-	this->state_close();
+	this->state_open();
+	this->SetIsSpawn(true);
 }
 
 RedBoxState::~RedBoxState()
@@ -35,6 +36,8 @@ void RedBoxState::SetState(StateRedBox state)
 
 void RedBoxState::state_close()
 {
+	this->SetIsSpawn(true);
+	
 	this->SetState(RED_BOX_STATE_CLOSE);
 	anim = redbox->GetAnimationsList()[RED_BOX_STATE_CLOSE];
 }
@@ -43,6 +46,13 @@ void RedBoxState::state_open()
 {
 	this->SetState(RED_BOX_STATE_OPEN);
 	anim = redbox->GetAnimationsList()[RED_BOX_STATE_OPEN];
+
+	if (IsSpawn())
+	{
+		SpawnProjectTile::GetInstance()->SpawnItem(redbox->GetPositionX(), redbox->GetPositionY(), ItemType::KEY_CRYSTAL);
+		this->SetIsSpawn(false);
+		this->SetState(RED_BOX_STATE_CLOSE);
+	}
 }
 
 void RedBoxState::Colision()

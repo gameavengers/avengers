@@ -17,6 +17,8 @@ protected:
 	StateRedBox stateRedBox;
 	RedBox *redbox;
 	Animation * anim;
+
+	bool isSpawn = false;
 public:
 	RedBoxState(RedBox *redbox);
 	~RedBoxState();
@@ -27,6 +29,9 @@ public:
 	StateRedBox GetState();
 	//Set trạng thái
 	void SetState(StateRedBox State);
+
+	bool IsSpawn() { return this->isSpawn; }
+	void SetIsSpawn(bool isSpawn) { this->isSpawn = isSpawn; }
 
 	void state_close();
 	void state_open();

@@ -14,29 +14,29 @@ class GameObject;
 class Item : public GameObject
 {
 private:
-	static int ItemID;
-protected:
-	int ID;
 	vector<Animation *> animations;
-	bool Active;
 
-	ItemType Type;
+	ItemType type;
 
 	float timeCount;
+	bool disable;
+
+	void LoadResources();
+
+	int state;
 public:
-	Item();
+	Item(float x, float y, ItemType type);
 	~Item();
 
-	bool IsActive() { return this->Active; }
-	void SetActive(bool value) { this->Active = value; }
+	void Initialize(float x, float y, ItemType type);
 
-	static int GetItemId() { return ItemID++; }
-	int GetID() { return this->ID; }
+	void SetItemType(ItemType type) { this->type = type; };
+	ItemType GetItemType() { return this->type; }
 
-	void SetItemType(ItemType type) { this->Type = type; };
-	ItemType GetItemType() { return this->Type; }
+	bool IsDisable() { return disable; }
+	void Disable() { timeCount = 0; disable = true; }
 
-	virtual void Update(DWORD dt);
-	virtual void Render();
+	void Update(DWORD dt);
+	void Render();
 };
 

@@ -104,6 +104,24 @@ void Bullet::LoadResources()
 	}
 	animations.push_back(anim);
 	//-----------------------------------------
+
+	//-----------Rocket------------------------
+	// Bay ngang
+	anim = new Animation(100);
+	Sprite * sprite1 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite1);
+	Sprite * sprite2 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[17], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite2);
+	animations.push_back(anim);
+
+	// Bay xéo lên
+	anim = new Animation(100);
+	Sprite * sprite3 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[16], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite3);
+	Sprite * sprite4 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[18], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite4);
+	animations.push_back(anim);
+	//-----------------------------------------
 }
 
 void Bullet::BulletNormalUpdate(DWORD dt)

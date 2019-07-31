@@ -42,3 +42,35 @@ void SpawnProjectTile::RenderBullet()
 	}
 }
 
+void SpawnProjectTile::SpawnItem(float x, float y, ItemType type)
+{
+	for (int i = 0; i < listItem.size(); i++)
+	{
+		if (!listItem.at(i)->IsDisable())
+		{
+			listItem.at(i)->Initialize(x, y, type);
+			return;
+		}
+	}
+
+	Item* newItem = new Item(x, y, type);
+
+	listItem.push_back(newItem);
+}
+
+void SpawnProjectTile::UpdateItem(DWORD dt)
+{
+	for (int i = 0; i < listItem.size(); i++)
+	{
+		listItem.at(i)->Update(dt);
+	}
+}
+
+void SpawnProjectTile::RenderItem()
+{
+	for (int i = 0; i < listItem.size(); i++)
+	{
+		listItem.at(i)->Render();
+	}
+}
+

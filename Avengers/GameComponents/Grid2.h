@@ -9,6 +9,7 @@
 #include "../GameObjects/Boss1.h"
 #include "../GameObjects/Boss2.h"
 #include "../GameObjects/Barrel.h"
+#include "../GameObjects/RedBox.h"
 
 #include <vector>
 
@@ -42,6 +43,7 @@ class Gigi;
 class Boss1;
 class Boss2;
 class Barrel;
+class RedBox;
 class Grid2
 {
 private:
@@ -59,6 +61,7 @@ private:
 	Boss1* boss1;
 	Boss2* boss2;
 	Barrel* barrel;
+	RedBox* redbox;
 
 	void UpdateCurrentTiles();
 public:

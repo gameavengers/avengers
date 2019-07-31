@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "../GameObjects/Bullet.h"
+#include "../GameObjects/Item.h"
 
 class SpawnProjectTile
 {
@@ -14,4 +15,10 @@ public:
 	void SpawnBullet(float x, float y, int direction, BulletType type);
 	void UpdateBullet(DWORD dt);
 	void RenderBullet();
+
+	vector<Item*> listItem;
+
+	void SpawnItem(float x, float y, ItemType type);
+	void UpdateItem(DWORD dt);
+	void RenderItem();
 };

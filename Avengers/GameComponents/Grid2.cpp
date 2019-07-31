@@ -19,6 +19,7 @@ Grid2::Grid2()
 	domesto = Domesto::GetInstance();
 	gigi = Gigi::GetInstance();
 	boss1 = Boss1::GetInstance();
+	boss1->SetPositionX(20);
 	boss2 = Boss2::GetInstance();
 	barrel = new Barrel();
 	redbox = RedBox::GetInstance();
@@ -116,8 +117,8 @@ void Grid2::Update(DWORD dt)
 {
 	//UpdateCurrentTiles();
 	captain->Update(dt);
-	runningMan->Update(dt);
-	domesto->Update(dt);
+	//runningMan->Update(dt);
+	//domesto->Update(dt);
 	boss1->Update(dt);
 	redbox->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
@@ -138,9 +139,9 @@ void Grid2::Render()
 	}
 
 	captain->Render();
-	runningMan->Render();
-	domesto->Render();
-	gigi->Render();
+	//runningMan->Render();
+	//domesto->Render();
+	//gigi->Render();
 	boss1->Render();
 	redbox->Render();
 	/*boss2->Render();

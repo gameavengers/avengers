@@ -84,6 +84,9 @@ void Game::LoadResources()
 		captain = Captain::GetInstance();
 	if (viewport == NULL)
 		viewport = Viewport::GetInstance();
+
+
+
 }
 
 void Game::Update(DWORD dt)

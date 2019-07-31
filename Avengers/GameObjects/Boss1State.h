@@ -3,6 +3,8 @@
 #include "State.h"
 #include "Boss1.h"
 
+#include <ctime>
+
 class Boss1;
 enum StateBoss1
 {
@@ -39,6 +41,11 @@ protected:
 	int behaviorState;
 	float timeCount;
 	//Behavior parameter
+	//Parabol Jump
+	// y= - a * (x-h)^2 + k
+	float a;
+	float h;
+	float k;
 
 
 public:
@@ -68,6 +75,7 @@ public:
 	void RandomNextState();
 	bool NextStateIn(float time);
 	bool SetStateIn(int behaviorState, float time);
+	void ChangeBossDirection();
 
 	void Colision() override;
 	void Update(DWORD dt) override;

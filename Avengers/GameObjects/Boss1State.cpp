@@ -15,7 +15,7 @@ Boss1State::Boss1State(Boss1 *boss1)
 {
 	this->boss1 = boss1;
 	this->state_standing_shoot_1();
-	this->behaviorBoss1 = Fly;
+	this->behaviorBoss1 = BehaviorBoss1::Fly;
 }
 
 Boss1State::~Boss1State()
@@ -96,14 +96,13 @@ void Boss1State::Behavior_Shoot()
 	switch (behaviorState)
 	{
 	case 0:
-		this->state_standing_shoot_1();
-		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1);
+		this->state_standing_shoot_2();
+		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_2);
 		break;
 	case 1:
+		ChangeBossDirection();
 		behaviorState = 0;
-		behaviorBoss1 = BehaviorBoss1::Fly;
-		break;
-	default:
+		RandomNextState();
 		break;
 	}
 }
@@ -117,20 +116,21 @@ void Boss1State::Behavior_ComboShoot()
 		this->NextStateIn(BOSS1_TIME_RUN);
 		break;
 	case 1:
-		this->state_standing_shoot_2();
-		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_2);
+		this->state_standing_shoot_1();
+		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1);
 		break;
 	case 2:
-		this->state_standing_shoot_2();
-		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_2);
+		this->state_standing_shoot_1();
+		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1);
 		break;
 	case 3:
-		this->state_standing_shoot_2();
-		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_2);
+		this->state_standing_shoot_1();
+		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1);
 		break;
 	default:
+		ChangeBossDirection();
 		behaviorState = 0;
-		behaviorBoss1 = BehaviorBoss1::Shoot;
+		RandomNextState();
 		break;
 	}
 }
@@ -147,7 +147,12 @@ void Boss1State::Behavior_FlyAndShoot()
 		this->state_flying();
 		boss1->SetSpeedX(0);
 		boss1->SetSpeedY(BOSS1_FLY_SPEED);
-		this->NextStateIn(BOSS1_TIME_FLY_UP_N_DOWN);
+
+		if (boss1->GetPositionY() >= 185)
+		{
+			this->behaviorState++;
+		}
+
 		break;
 	case 1:
 		this->state_flying();
@@ -159,19 +164,32 @@ void Boss1State::Behavior_FlyAndShoot()
 			behaviorState = 4;
 		}
 
-		this->NextStateIn(BOSS1_TIME_FLY);
-		//behaviorBoss1 = BehaviorBoss1::ComboShoot;
+		if (!boss1->IsLeft() && boss1->GetPositionX() >= 220)
+		{
+			this->behaviorState++;
+		}
+		else if (boss1->IsLeft() && boss1->GetPositionX() <= 10)
+		{
+			this->behaviorState++;
+		}
+
 		break;
 	case 2:
 		this->state_flying();
 		boss1->SetSpeedX(0);
 		boss1->SetSpeedY(-BOSS1_FLY_SPEED);
-		this->NextStateIn(BOSS1_TIME_FLY_UP_N_DOWN);
+
+		if (boss1->GetPositionY() <= 85)
+		{
+			this->behaviorState++;
+		}
 		break;
 	case 3:
+		ChangeBossDirection();
 		boss1->SetSpeedX(0);
 		boss1->SetSpeedY(0);
 		behaviorState = 0;
+		RandomNextState();
 		break;
 	case 4:
 		this->state_flying_shoot();
@@ -183,47 +201,93 @@ void Boss1State::Behavior_FlyAndShoot()
 		{
 			behaviorState = 1;
 		}
-		
-		this->SetStateIn(2, BOSS1_TIME_FLY);
+
+		if (!boss1->IsLeft() && boss1->GetPositionX() >= 220)
+		{
+			this->behaviorState++;
+		}
+		else if (boss1->IsLeft() && boss1->GetPositionX() <= 10)
+		{
+			this->behaviorState++;
+		}
 		break;
 	}
 }
 
 void Boss1State::Behavior_Fly()
 {
-	float walkSpeed = CAPTAIN_WALK_SPEED * (boss1->IsLeft() ? -1 : 1);
+	float walkSpeed = (0.125f * (boss1->IsLeft() ? -1 : 1)) /2;
 	float acceleration = (timeCount / BOSS1_TIME_FLY_UP_N_DOWN) * (BOSS1_FLY_SPEED / 2);
 	float acceleration2 = (timeCount / BOSS1_TIME_FLY_UP_N_DOWN);
+	float posX;
+	float posY;
+
 	switch (behaviorState)
 	{
 	case 0:
 		this->state_flying();
-		boss1->SetSpeedX(walkSpeed * acceleration2 *2);
-		boss1->SetSpeedY(BOSS1_FLY_SPEED - acceleration);
-		this->NextStateIn(BOSS1_TIME_FLY_UP_N_DOWN);
+		a = 0.1;
+		if (!boss1->IsLeft())
+			h = (BOSS1_PARABOL_JUMP_H + boss1->GetPositionX());
+		else
+			h = (boss1->GetPositionX() - BOSS1_PARABOL_JUMP_H);
+
+		k = BOSS1_PARABOL_JUMP_K + boss1->GetPositionY();
+		this->behaviorState++;
 		break;
 	case 1:
-		this->state_flying();
+		posX = walkSpeed + boss1->GetPositionX();
+		posY = -a * (posX - h) * (posX - h) + k;
 		boss1->SetSpeedX(walkSpeed);
-		boss1->SetSpeedY(0);
-		this->NextStateIn(500);
+		boss1->SetPositionY(posY);
+
+		if (posX > h + BOSS1_PARABOL_JUMP_H && !boss1->IsLeft())
+			this->behaviorState++;
+		else if (posX < h - BOSS1_PARABOL_JUMP_H && boss1->IsLeft())
+			this->behaviorState++;
 		break;
+	/*case 2:
+		posX = boss1->GetPositionX() - walkSpeed;
+		posY = -a * (posX - h) * (posX - h) + k;
+
+		boss1->SetSpeedX(-walkSpeed);
+		boss1->SetPositionY(posY);
+
+		if (posX < h - 32)
+			this->behaviorState--;
+
+		break;*/
 	case 2:
-		this->state_flying();
-		boss1->SetSpeedX(walkSpeed * acceleration2);
-		boss1->SetSpeedY(-BOSS1_FLY_SPEED + acceleration);
-		this->NextStateIn(BOSS1_TIME_FLY_UP_N_DOWN);
-		break;
-	case 3:
+		ChangeBossDirection();
 		boss1->SetSpeedX(0);
 		boss1->SetSpeedY(0);
 		behaviorState = 0;
+
+		RandomNextState();
 		break;
 	}
 }
 
 void Boss1State::RandomNextState()
 {
+	srand(time(NULL));
+	int randomState = rand() % 4 + 1;
+
+	switch (randomState)
+	{
+	case 1:
+		behaviorBoss1 = BehaviorBoss1::Shoot;
+		break;
+	case 2:
+		behaviorBoss1 = BehaviorBoss1::ComboShoot;
+		break;
+	case 3:
+		behaviorBoss1 = BehaviorBoss1::Fly;
+		break;
+	case 4: 
+		behaviorBoss1 = BehaviorBoss1::FlyNShoot;
+		break;
+	}
 }
 
 bool Boss1State::NextStateIn(float time)
@@ -246,6 +310,18 @@ bool Boss1State::SetStateIn(int behaviorState, float time)
 		return true;
 	}
 	return false;
+}
+
+void Boss1State::ChangeBossDirection()
+{
+	if (Captain::GetInstance()->GetPositionX() < boss1->GetPositionX())
+	{
+		boss1->setIsLeft(true);
+	}
+	else
+	{
+		boss1->setIsLeft(false);
+	}
 }
 
 void Boss1State::Colision()

@@ -38,6 +38,18 @@ void Bullet::Initialize(float x, float y, int direction, BulletType type)
 		height = 7;
 	}
 		break;
+	case BULLET_NORMAL_BOSS1:
+	{
+		width = 8;
+		height = 5;
+	}
+		break;
+	case BULLET_SPECIAL_BOSS1:
+	{
+		width = 16;
+		height = 16;
+	}
+		break;
 	}
 
 	this->x = x;
@@ -170,12 +182,49 @@ void Bullet::RocketUpdate(DWORD dt)
 	if (direction == 1)
 	{
 		this->setIsLeft(true);
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+	}
+	else
+	{
+		this->setIsLeft(false);
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+	}
+}
+
+void Bullet::BulletNormalBoss1Update(DWORD dt)
+{
+	if (direction == 1)
+	{
+		this->setIsLeft(true);
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
+	}
+	else
+	{
+		this->setIsLeft(false);
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
+	}
+}
+
+void Bullet::BulletSpecialBoss1Update(DWORD dt)
+{
+	if (direction == 1)
+	{
+		this->setIsLeft(true);
 		this->SetSpeedX(-ROCKET_SPEED);
+		this->SetSpeedY(0);
+	}
+	else if (direction == 3)
+	{
+		this->SetSpeedX(0);
+		this->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
 	}
 	else
 	{
 		this->setIsLeft(false);
 		this->SetSpeedX(ROCKET_SPEED);
+		this->SetSpeedY(0);
 	}
 }
 
@@ -202,6 +251,12 @@ void Bullet::Update(DWORD dt)
 		break;
 	case BulletType::ROCKET:
 		RocketUpdate(dt);
+		break;
+	case BulletType::BULLET_NORMAL_BOSS1:
+		BulletNormalBoss1Update(dt);
+		break;
+	case BulletType::BULLET_SPECIAL_BOSS1:
+		BulletSpecialBoss1Update(dt);
 		break;
 	}
 
@@ -250,6 +305,21 @@ void Bullet::Render()
 	case ROCKET:
 	{
 		this->animations[ROCKET]->Render(spriteData);
+	}
+	break;
+
+	case BULLET_NORMAL_BOSS1:
+	{
+		this->animations[5]->Render(spriteData);
+	}
+	break;
+
+	case BULLET_SPECIAL_BOSS1:
+	{
+		if (direction == 3)
+			this->animations[8]->Render(spriteData);
+		else
+			this->animations[7]->Render(spriteData);
 	}
 	break;
 	}

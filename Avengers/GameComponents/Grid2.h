@@ -97,6 +97,7 @@ public:
 
 	void SpawnObject(int ObjectID, Tile2* tile);
 	bool CheckObjectInsideCamera(GameObject* object);
+	vector <OnUpdateObject> GetListUpdateObject() { return listObject; }
 
 	void Update(DWORD dt);
 	void Render();

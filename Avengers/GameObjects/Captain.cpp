@@ -345,6 +345,28 @@ void Captain::Update(DWORD dt)
 	shield->Update(dt);
 	state->Colision();
 	state->Update(dt);
+
+	
+}
+void Captain::UpdateCollision(DWORD dt)
+{
+	vector<OnUpdateObject> listUpdateObject = Grid2::GetInstance()->GetListUpdateObject();
+
+	for (int i = 0; i < listUpdateObject.size(); i++)
+	{
+		if (listUpdateObject.at(i).disable)
+			continue;
+
+		float normalX = 0;
+		float normalY = 0;
+		float time = Collision::GetInstance()->SweptAABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider(), normalX, normalY);
+
+		if (time < 0 || time >= 1)
+			continue;
+		
+		//switch (listUpdateObject.at(i).tile->SpawnObjectID)
+
+	}
 }
 void Captain::Render()
 {

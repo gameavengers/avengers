@@ -54,5 +54,7 @@ public:
 
 	void Update(DWORD dt) override;
 
+	void UpdateCollision(DWORD dt);
+
 	void Render() override;
 };

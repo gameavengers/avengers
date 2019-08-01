@@ -81,7 +81,9 @@ void Boss1::LoadResources()
 	animations.push_back(anim);
 
 	// BOSS1_ANI_STANDING_SHOOT_2
-	anim = new Animation(100);
+	anim = new Animation(50);
+	Sprite * sprite1 = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[8], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite1);
 	for (int i = 12; i < 14; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);

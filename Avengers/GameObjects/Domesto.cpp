@@ -33,6 +33,34 @@ Domesto::Domesto()
 	collider.height = 46;
 }
 
+Domesto::Domesto(float x, float y, DemestoType type)
+{
+	LoadResources();
+
+	this->type = type;
+
+	if (type == DemestoType::STAY_FIRE_STRAIGHT)
+	{
+		this->state = new DomestoStayState(this);
+	}
+	else
+	{
+		this->state = new DomestoWalkState(this);
+	}
+
+	this->x = x;
+	this->y = y;
+	this->width = 24;
+	this->height = 46;
+
+	collider.x = x;
+	collider.y = y;
+	collider.vx = 0;
+	collider.vy = 0;
+	collider.width = 24;
+	collider.height = 46;
+}
+
 Domesto *Domesto::GetInstance()
 {
 	if (__instance == NULL)

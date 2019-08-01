@@ -18,6 +18,7 @@ class RedBox : public GameObject
 	DWORD lastFrameTime;
 
 public:
+	RedBox(float x, float y);
 	void LoadResources();
 
 	static RedBox *GetInstance();

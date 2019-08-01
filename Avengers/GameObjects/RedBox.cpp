@@ -23,6 +23,25 @@ RedBox::RedBox()
 	collider.height = TILES_HEIGHT_PER_TILE;
 }
 
+RedBox::RedBox(float x, float y)
+{
+	LoadResources();
+
+	this->state = new RedBoxState(this);
+
+	this->x = x;
+	this->y = y;
+	this->width = TILES_WIDTH_PER_TILE;
+	this->height = TILES_HEIGHT_PER_TILE;
+
+	collider.x = x;
+	collider.y = y;
+	collider.vx = 0;
+	collider.vy = 0;
+	collider.width = TILES_WIDTH_PER_TILE;
+	collider.height = TILES_HEIGHT_PER_TILE;
+}
+
 RedBox *RedBox::GetInstance()
 {
 	if (__instance == NULL)

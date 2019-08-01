@@ -14,8 +14,8 @@ RedBoxState *RedBoxState::GetInstance(RedBox *redbox)
 RedBoxState::RedBoxState(RedBox *redbox)
 {
 	this->redbox = redbox;
-	this->state_open();
-	this->SetIsSpawn(true);
+	this->state_close();
+	//this->SetIsSpawn(true);
 }
 
 RedBoxState::~RedBoxState()

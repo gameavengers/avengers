@@ -18,6 +18,7 @@ class Captain : public GameObject
 	bool isShield = true;
 	bool isSwimming = false;
 	bool isSwing = false;
+	bool isBleeding = false;
 
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
@@ -36,11 +37,13 @@ public:
 	void SetIsShield(bool isShield) { this->isShield = isShield; }
 	void SetIsSwimming(bool isSwimming) { this->isSwimming = isSwimming; }
 	void SetIsSwing(bool isSwing) { this->isSwing = isSwing; }
+	void SetIsBleeding(bool isBleeding) { this->isBleeding = isBleeding; }
 
 	bool IsGrounded() { return isGrounded; }
 	bool IsShield() { return isShield; }
 	bool IsSwimming() { return isSwimming; }
 	bool IsSwing() { return isSwing; }
+	bool IsBleeding() { return isBleeding; }
 
 	void SetColliderDemension(float width, float height)
 	{

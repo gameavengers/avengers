@@ -348,6 +348,14 @@ void CaptainState::state_bleeing()
 {
 	this->SetState(STATE_BLEEING);
 	anim = captain->GetAnimationsList()[STATE_BLEEING];
+	captain->SetPositionX(captain->GetPositionX() - (captain->IsLeft() ? -2 : 2));
+
+	if (anim->IsDone())
+	{
+		this->SetState(STATE_STANDING);
+		captain->SetIsBleeding(false);
+		return;
+	}
 }
 
 void CaptainState::state_dieing()
@@ -390,6 +398,9 @@ void CaptainState::Colision()
 	{
 		startDash = NULL;
 	}
+
+	if (captain->IsBleeding())
+		this->state_bleeing();
 	
 	//Không chạm đất thì rơi
 	if (!captain->IsGrounded())

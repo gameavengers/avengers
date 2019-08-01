@@ -11,7 +11,7 @@ Captain::Captain()
 
 	shield = new Shield();
 
-	this->x = 300;
+	this->x = 250;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -179,7 +179,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_BLEEING
-	anim = new Animation(300);
+	anim = new Animation(100);
 	for (int i = 33; i < 34; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -381,6 +381,17 @@ void Captain::UpdateCollision(DWORD dt)
 
 		if (time < 0 || time >= 1)
 			continue;
+
+		switch (listUpdateObject.at(i).tile->SpawnObjectID)
+		{
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+			this->SetIsBleeding(true);
+			break;
+		}
 	}
 }
 void Captain::Render()

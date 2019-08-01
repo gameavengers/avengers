@@ -195,6 +195,7 @@ void Grid2::Update(DWORD dt)
 {
 	//UpdateCurrentTiles();
 	captain->Update(dt);
+	captain->UpdateCollision(dt);
 	//runningMan->Update(dt);
 	//domesto->Update(dt);
 	boss1->Update(dt);
@@ -238,7 +239,6 @@ void Grid2::Render()
 		}
 	}
 
-	captain->Render();
 	//runningMan->Render();
 	//domesto->Render();
 	//gigi->Render();
@@ -255,4 +255,5 @@ void Grid2::Render()
 			continue;
 		listObject.at(i).object->Render();
 	}
+	captain->Render();
 }

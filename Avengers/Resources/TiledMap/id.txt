@@ -1,0 +1,6 @@
+1: runningman normal
+2: runningman only run
+3: runningman only crouch
+4: domesto stay
+5: domesto walk
+6: redbox

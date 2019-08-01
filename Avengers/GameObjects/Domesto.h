@@ -29,6 +29,7 @@ class Domesto : public GameObject
 
 	bool isGrounded = false;
 public:
+	Domesto(float x, float y, DemestoType type = STAY_FIRE_STRAIGHT);
 	void LoadResources();
 
 	static Domesto *GetInstance();

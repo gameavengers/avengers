@@ -15,14 +15,14 @@ Grid2::Grid2()
 {
 	captain = Captain::GetInstance();
 	viewport = Viewport::GetInstance();
-	runningMan = RunningMan::GetInstance();
-	domesto = Domesto::GetInstance();
-	gigi = Gigi::GetInstance();
+	//runningMan = RunningMan::GetInstance();
+	//domesto = Domesto::GetInstance();
+	//gigi = Gigi::GetInstance();
 	boss1 = Boss1::GetInstance();
 	boss1->SetPositionX(20);
-	boss2 = Boss2::GetInstance();
-	barrel = new Barrel();
-	redbox = RedBox::GetInstance();
+	//boss2 = Boss2::GetInstance();
+	//barrel = new Barrel();
+	//redbox = RedBox::GetInstance();
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -105,12 +105,12 @@ vector<Tile2 *> Grid2::GetNearbyTiles(RECT rect)
 		}
 	}
 
-	static int a = 0;
+	/*static int a = 0;
 	if (a == 0 && viewport->GetRect().left > 100)
 	{
-		SpawnObject(1, GetCell(5, 1)->tiles.at(5));
+		SpawnObject(3, GetCell(5, 1)->tiles.at(5));
 		a++;
-	}
+	}*/
 
 	return nearbyTiles;
 }
@@ -120,13 +120,65 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 	switch (ObjectID)
 	{
 	case 1:
+	{
+		RunningMan* object = new RunningMan(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RunningManType::NORMAL);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+		listObject.push_back(temp);
+	}
+	break;
+	case 2:
+	{
+		RunningMan* object = new RunningMan(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RunningManType::ONLY_RUN);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+		listObject.push_back(temp);
+	}
+	break;
+	case 3:
+	{
 		RunningMan* object = new RunningMan(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RunningManType::ONLY_CROUCH);
 		OnUpdateObject temp;
 		temp.object = object;
 		temp.tile = tile;
 		tile->bCanSpawn = false;
 		listObject.push_back(temp);
-		break;
+	}
+	break;
+	case 4:
+	{
+		Domesto* object = new Domesto(tile->x * TILE_SIZE, tile->y * TILE_SIZE, DemestoType::STAY_FIRE_STRAIGHT);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+		listObject.push_back(temp);
+	}
+	break;
+	case 5:
+	{
+		Domesto* object = new Domesto(tile->x * TILE_SIZE, tile->y * TILE_SIZE, DemestoType::WALK_FIRE_STAIGHT);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+		listObject.push_back(temp);
+	}
+	break;
+	case 6:
+	{
+		RedBox* object = new RedBox(tile->x * TILE_SIZE, tile->y * TILE_SIZE);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+		listObject.push_back(temp);
+	}
+	break;
 	}
 }
 
@@ -144,9 +196,9 @@ void Grid2::Update(DWORD dt)
 	//UpdateCurrentTiles();
 	captain->Update(dt);
 	//runningMan->Update(dt);
-	domesto->Update(dt);
+	//domesto->Update(dt);
 	boss1->Update(dt);
-	redbox->Update(dt);
+	//redbox->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 	SpawnProjectTile::GetInstance()->UpdateItem(dt);
 
@@ -173,15 +225,25 @@ void Grid2::Render()
 		{ 
 			(listCell + x + y * mapSize)->Render();
 			//GetCell(x,y)->tiles[0]->SpawnObjectID
+			
+			for (int t = 0; t < GRID_SIZE_BY_TILE; t++)
+				for (int z = 0; z < GRID_SIZE_BY_TILE; z++)
+				{
+					if (GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn)
+					{
+						SpawnObject(GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->SpawnObjectID, GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE));
+						GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn = false;
+					}
+				}
 		}
 	}
 
 	captain->Render();
-	runningMan->Render();
-	domesto->Render();
+	//runningMan->Render();
+	//domesto->Render();
 	//gigi->Render();
 	boss1->Render();
-	redbox->Render();
+	//redbox->Render();
 	/*boss2->Render();
 	barrel->Render();*/
 	SpawnProjectTile::GetInstance()->RenderBullet();

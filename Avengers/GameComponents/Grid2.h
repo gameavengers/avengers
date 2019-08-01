@@ -25,6 +25,7 @@ struct GridData
 	vector<Tile2*> tiles;
 	int x;
 	int y;
+	vector<Tile2*> hasSpawnTiles;
 
 	void Render()
 	{
@@ -71,8 +72,11 @@ private:
 	RedBox* redbox;
 
 	vector <OnUpdateObject> listObject;
+	
 
 	void UpdateCurrentTiles();
+
+	float timeCount;
 public:
 	static Grid2* GetInstance();
 

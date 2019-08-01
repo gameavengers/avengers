@@ -37,6 +37,8 @@ void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
 				{
 					Tile2* tempTile = tileMap2->currentMap->GetTile(xx + x * GRID_SIZE_BY_TILE, yy + y * GRID_SIZE_BY_TILE);
 					(listCell + x + y * mapSize)->tiles.push_back(tempTile);
+					if (tempTile->SpawnObjectID != 0)
+						(listCell + x + y * mapSize)->hasSpawnTiles.push_back(tempTile);
 				}
 }
 
@@ -105,13 +107,6 @@ vector<Tile2 *> Grid2::GetNearbyTiles(RECT rect)
 		}
 	}
 
-	/*static int a = 0;
-	if (a == 0 && viewport->GetRect().left > 100)
-	{
-		SpawnObject(3, GetCell(5, 1)->tiles.at(5));
-		a++;
-	}*/
-
 	return nearbyTiles;
 }
 
@@ -126,6 +121,12 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 		temp.object = object;
 		temp.tile = tile;
 		tile->bCanSpawn = false;
+
+		if (captain->GetPositionX() < object->GetPositionX())
+			object->setIsLeft(true);
+		else
+			object->setIsLeft(false);
+
 		listObject.push_back(temp);
 	}
 	break;
@@ -136,6 +137,12 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 		temp.object = object;
 		temp.tile = tile;
 		tile->bCanSpawn = false;
+
+		if (captain->GetPositionX() < object->GetPositionX())
+			object->setIsLeft(true);
+		else
+			object->setIsLeft(false);
+
 		listObject.push_back(temp);
 	}
 	break;
@@ -146,6 +153,12 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 		temp.object = object;
 		temp.tile = tile;
 		tile->bCanSpawn = false;
+
+		if (captain->GetPositionX() < object->GetPositionX())
+			object->setIsLeft(true);
+		else
+			object->setIsLeft(false);
+
 		listObject.push_back(temp);
 	}
 	break;
@@ -156,6 +169,12 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 		temp.object = object;
 		temp.tile = tile;
 		tile->bCanSpawn = false;
+
+		if (captain->GetPositionX() < object->GetPositionX())
+			object->setIsLeft(true);
+		else
+			object->setIsLeft(false);
+
 		listObject.push_back(temp);
 	}
 	break;
@@ -166,6 +185,12 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 		temp.object = object;
 		temp.tile = tile;
 		tile->bCanSpawn = false;
+
+		if (captain->GetPositionX() < object->GetPositionX())
+			object->setIsLeft(true);
+		else
+			object->setIsLeft(false);
+
 		listObject.push_back(temp);
 	}
 	break;
@@ -176,6 +201,12 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 		temp.object = object;
 		temp.tile = tile;
 		tile->bCanSpawn = false;
+
+		if (captain->GetPositionX() < object->GetPositionX())
+			object->setIsLeft(true);
+		else
+			object->setIsLeft(false);
+
 		listObject.push_back(temp);
 	}
 	break;
@@ -184,15 +215,19 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 
 bool Grid2::CheckObjectInsideCamera(GameObject* object)
 {
+	if (timeCount < 2000)
+		return true;
+
 	RECT rect = viewport->GetRect();
-	if (object->GetPositionX() < rect.left || object->GetPositionX() > rect.right ||
-		object->GetPositionY() < rect.bottom || object->GetPositionY() > rect.top)
+	if (object->GetPositionX() < rect.left-50*3 || object->GetPositionX() > rect.right+50 * 3 ||
+		object->GetPositionY() < rect.bottom-50 * 3 || object->GetPositionY() > rect.top+50 * 3)
 		return false;
 	return true;
 }
 
 void Grid2::Update(DWORD dt)
 {
+	timeCount += dt;
 	//UpdateCurrentTiles();
 	captain->Update(dt);
 	captain->UpdateCollision(dt);
@@ -211,7 +246,10 @@ void Grid2::Update(DWORD dt)
 		listObject.at(i).object->Update(dt);
 
 		if (!CheckObjectInsideCamera(listObject.at(i).object))
+		{
 			listObject.at(i).disable = true;
+			listObject.at(i).tile->bCanSpawn = true;
+		}
 	}
 }
 
@@ -227,15 +265,29 @@ void Grid2::Render()
 			(listCell + x + y * mapSize)->Render();
 			//GetCell(x,y)->tiles[0]->SpawnObjectID
 			
-			for (int t = 0; t < GRID_SIZE_BY_TILE; t++)
+			/*if ((listCell + x + y * mapSize)->hasSpawnTiles.size() > 0)
+			{
+				for (int i = 0; i < (listCell + x + y * mapSize)->hasSpawnTiles.size(); i++)
+				{
+					if (!(listCell + x + y * mapSize)->hasSpawnTiles.at(i)->bCanSpawn)
+						continue;
+					SpawnObject((listCell + x + y * mapSize)->hasSpawnTiles.at(i)->SpawnObjectID, 
+								(listCell + x + y * mapSize)->hasSpawnTiles.at(i));
+					(listCell + x + y * mapSize)->hasSpawnTiles.at(i)->bCanSpawn = false;
+				}
+			}*/
+
+			/*for (int t = 0; t < GRID_SIZE_BY_TILE; t++)
 				for (int z = 0; z < GRID_SIZE_BY_TILE; z++)
 				{
 					if (GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn)
 					{
+						if (!GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn)
+							continue;
 						SpawnObject(GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->SpawnObjectID, GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE));
 						GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn = false;
 					}
-				}
+				}*/
 		}
 	}
 

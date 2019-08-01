@@ -105,12 +105,38 @@ vector<Tile2 *> Grid2::GetNearbyTiles(RECT rect)
 		}
 	}
 
-	if (nearbyTiles[0]->tileId == 0)
+	static int a = 0;
+	if (a == 0 && viewport->GetRect().left > 100)
 	{
-		int a = 0;
+		SpawnObject(1, GetCell(5, 1)->tiles.at(5));
+		a++;
 	}
 
 	return nearbyTiles;
+}
+
+void Grid2::SpawnObject(int ObjectID, Tile2* tile)
+{
+	switch (ObjectID)
+	{
+	case 1:
+		RunningMan* object = new RunningMan(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RunningManType::ONLY_CROUCH);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+		listObject.push_back(temp);
+		break;
+	}
+}
+
+bool Grid2::CheckObjectInsideCamera(GameObject* object)
+{
+	RECT rect = viewport->GetRect();
+	if (object->GetPositionX() < rect.left || object->GetPositionX() > rect.right ||
+		object->GetPositionY() < rect.bottom || object->GetPositionY() > rect.top)
+		return false;
+	return true;
 }
 
 void Grid2::Update(DWORD dt)
@@ -118,11 +144,22 @@ void Grid2::Update(DWORD dt)
 	//UpdateCurrentTiles();
 	captain->Update(dt);
 	//runningMan->Update(dt);
-	//domesto->Update(dt);
+	domesto->Update(dt);
 	boss1->Update(dt);
 	redbox->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 	SpawnProjectTile::GetInstance()->UpdateItem(dt);
+
+	for (int i = 0; i < listObject.size(); i++)
+	{
+		if (listObject.at(i).disable)
+			continue;
+
+		listObject.at(i).object->Update(dt);
+
+		if (!CheckObjectInsideCamera(listObject.at(i).object))
+			listObject.at(i).disable = true;
+	}
 }
 
 void Grid2::Render()
@@ -133,14 +170,15 @@ void Grid2::Render()
 	for (int y = bCell; y <= tCell; y++)
 	{
 		for (int x = lCell; x <= rCell; x++)
-		{
+		{ 
 			(listCell + x + y * mapSize)->Render();
+			//GetCell(x,y)->tiles[0]->SpawnObjectID
 		}
 	}
 
 	captain->Render();
-	//runningMan->Render();
-	//domesto->Render();
+	runningMan->Render();
+	domesto->Render();
 	//gigi->Render();
 	boss1->Render();
 	redbox->Render();
@@ -148,4 +186,11 @@ void Grid2::Render()
 	barrel->Render();*/
 	SpawnProjectTile::GetInstance()->RenderBullet();
 	SpawnProjectTile::GetInstance()->RenderItem();
+
+	for (int i = 0; i < listObject.size(); i++)
+	{
+		if (listObject.at(i).disable)
+			continue;
+		listObject.at(i).object->Render();
+	}
 }

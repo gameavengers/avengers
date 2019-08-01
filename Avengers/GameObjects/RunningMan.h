@@ -30,6 +30,7 @@ class RunningMan : public GameObject
 	bool isGrounded = false;
 
 public:
+	RunningMan(float x, float y, RunningManType type = NORMAL);
 	void LoadResources();
 
 	static RunningMan *GetInstance();

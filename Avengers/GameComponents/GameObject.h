@@ -40,6 +40,8 @@ protected:
 
 	Collider collider;
 public:
+	bool disable;
+
 	void SetPositionX(float x) { this->x = x; }
 	void SetPositionY(float y) { this->y = y; }
 

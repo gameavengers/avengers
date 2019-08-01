@@ -36,6 +36,13 @@ struct GridData
 	}
 };
 
+struct OnUpdateObject
+{
+	GameObject* object;
+	Tile2* tile;
+	bool disable = false;
+};
+
 
 class RunningMan;
 class Domesto;
@@ -63,6 +70,8 @@ private:
 	Barrel* barrel;
 	RedBox* redbox;
 
+	vector <OnUpdateObject> listObject;
+
 	void UpdateCurrentTiles();
 public:
 	static Grid2* GetInstance();
@@ -85,6 +94,9 @@ public:
 	{
 		return (listCell + x + y * mapSize);
 	}
+
+	void SpawnObject(int ObjectID, Tile2* tile);
+	bool CheckObjectInsideCamera(GameObject* object);
 
 	void Update(DWORD dt);
 	void Render();

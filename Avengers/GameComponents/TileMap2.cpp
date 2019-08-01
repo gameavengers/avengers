@@ -9,6 +9,7 @@ TileMap2 * TileMap2::GetInstance()
 		_instance = new TileMap2();
 
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_1, TILES_SET_MATRIX_STAGE_1, MAP_1_ID);
+		//_instance->LoadSpawnData(PATH, ID);
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_1, TILES_SET_STAGE_BOSS_1, MAP_BOSS_1_ID);
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_2, TILES_SET_MATRIX_STAGE_2, MAP_2_ID);
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_2, TILES_SET_STAGE_BOSS_2, MAP_BOSS_2_ID);
@@ -117,6 +118,34 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation, int mapI
 	}
 	mapList.push_back(map);
 	//currentMap = &mapList.at(0);
+}
+
+void TileMap2::LoadSpawnData(LPCWSTR filePath, int mapId)
+{
+	ifstream tilesData;
+	tilesData.open(filePath);
+
+	string data;
+
+	//Lấy kích thước map. Dư có thể bỏ
+	tilesData >> data;
+	//int size = stoi(data);
+
+	//
+	//map.size = size;
+
+	//Lấy kích thước map. Dư có thể bỏ//
+	tilesData >> data;
+	//map.height = stoi(data);
+
+	for (int y = mapList[mapId].height - 1; y >= 0; y--)
+		for (int x = 0; x < mapList[mapId].size; x++)
+		{
+			tilesData >> data;
+			(mapList[mapId].tiles + x + y * mapList[mapId].size)->SpawnObjectID = stoi(data);
+		}
+
+	tilesData.close();
 }
 
 void TileMap2::SetCurrentMap(int mapID)

@@ -71,7 +71,7 @@ void RunningManState::state_running()
 		}
 		break;
 	case RunningManType::ONLY_CROUCH:
-		// Type này thì không chuyển sagn state CROUCH được
+		// Type này thì không chuyển sang state CROUCH được
 		break;
 	case RunningManType::ONLY_RUN:
 		// Nếu là type ONLY_RUN thì không đi vào state nào khác
@@ -121,8 +121,6 @@ void RunningManState::state_crouch_shoot()
 	anim = runningMan->GetAnimationsList()[RUNNING_MAN_STATE_CROUCH_SHOOT];
 
 	runningMan->SetSpeedX(0);
-
-
 
 	if (this->timeCount > RUNNING_MAN_TIME_OUT_CROUCH)
 	{

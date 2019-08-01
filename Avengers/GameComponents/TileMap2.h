@@ -25,6 +25,8 @@ struct Tile2 {
 	int x, y;
 	int size = TILE_SIZE;
 	Collider *colider;
+	int SpawnObjectID;
+	bool bCanSpawn = true;
 };
 
 struct TileSet {
@@ -60,8 +62,9 @@ private:
 	static TileMap2* _instance;
 	
 	vector <MapPack> mapList;
-
+	
 	void LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation, int mapId);
+	void LoadSpawnData(LPCWSTR filePath, int mapId);
 
 	const vector<int> _BrickStage_1{ 10, 11, 12, 33, 41, 64, 91, 92, 95, 96 };
 	const vector<int> _BrickStage_2{ 4, 10, 11, 12, 13, 14, 20, 21, 53, 54, 55, 56, 57, 75, 76, 77, 78, 79, 93, 97, 118, 125, 126, 127, 238, 239, 240, 241, 242, 251, 252 };

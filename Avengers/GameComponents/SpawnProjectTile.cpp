@@ -14,7 +14,7 @@ void SpawnProjectTile::SpawnBullet(float x, float y, int direction, BulletType t
 {
 	for (int i = 0; i < listBullet.size(); i++)
 	{
-		if (!listBullet.at(i)->IsDisable())
+		if (listBullet.at(i)->IsDisable())
 		{
 			listBullet.at(i)->Initialize(x, y, direction, type);
 			return;

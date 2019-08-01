@@ -181,10 +181,10 @@ void Bullet::RocketUpdate(DWORD dt)
 
 void Bullet::Update(DWORD dt)
 {
-	if (disable)
+	if (this->disable)
 		return;
 
-	timeCount += dt;
+	this->timeCount += dt;
 
 	float moveX = trunc(this->GetSpeedX()* dt);
 	float moveY = trunc(this->GetSpeedY()* dt);

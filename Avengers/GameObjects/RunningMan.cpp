@@ -24,6 +24,41 @@ RunningMan::RunningMan()
 	collider.height = ENEMIES_SPRITE_HEIGHT;
 }
 
+RunningMan::RunningMan(float x, float y, RunningManType type)
+{
+	LoadResources();
+
+	//state = RunningManState::GetInstance(this);
+	this->state = new RunningManState(this);
+	
+	this->type = type;
+
+	switch (type)
+	{
+	case NORMAL:
+		break;
+	case ONLY_RUN:
+		break;
+	case ONLY_CROUCH:
+		((RunningManState*)state)->SetState(RUNNING_MAN_STATE_CROUCH_SHOOT);
+		break;
+	default:
+		break;
+	}
+
+	this->x = x;
+	this->y = y;
+	this->width = ENEMIES_SPRITE_WIDTH;
+	this->height = ENEMIES_SPRITE_HEIGHT;
+
+	collider.x = x;
+	collider.y = y;
+	collider.vx = 0;
+	collider.vy = 0;
+	collider.width = ENEMIES_SPRITE_WIDTH;
+	collider.height = ENEMIES_SPRITE_HEIGHT;
+}
+
 RunningMan *RunningMan::GetInstance()
 {
 	if (__instance == NULL)

@@ -222,7 +222,7 @@ void Bullet::RocketUpdate(DWORD dt)
 
 void Bullet::BulletNormalBoss1Update(DWORD dt)
 {
-	if (direction == 1)
+	/*if (direction == 1)
 	{
 		this->setIsLeft(true);
 		this->SetSpeedX(-BULLET_NORMAL_SPEED);
@@ -233,6 +233,39 @@ void Bullet::BulletNormalBoss1Update(DWORD dt)
 		this->setIsLeft(false);
 		this->SetSpeedX(BULLET_NORMAL_SPEED);
 		this->SetSpeedY(0);
+	}*/
+
+	switch (direction)
+	{
+	case 1:		//Left
+		this->setIsLeft(true);
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
+		break;
+	case 2:		//Bottom-Left
+		break;
+	case 3:		//Bottom
+		break;
+	case 4:		//Bottom-Right
+		break;
+	case 5:		//Right
+		this->setIsLeft(false);
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
+		break;
+	case 6:		//Top-Right
+		this->setIsLeft(false);
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		this->SetSpeedY(BULLET_NORMAL_SPEED * 0.5f);
+
+		break;
+	case 7:		//Top
+		break;
+	case 8:		//Top-Left
+		this->setIsLeft(true);
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+		this->SetSpeedY(BULLET_NORMAL_SPEED * 0.5f);
+		break;
 	}
 }
 

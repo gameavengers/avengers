@@ -72,7 +72,7 @@ void Boss1State::state_standing_shoot_1()
 	if (this->shootTimeCount > BOSS1_TIME_STANDING_SHOOT_1)
 	{
 		this->shootTimeCount = 0;
-		int direction = boss1->IsLeft() ? 1 : 5;
+		int direction = boss1->IsLeft() ? 8 : 6;
 		float offsetX = boss1->IsLeft() ? -8 : 20;
 		float offsetY = -10;
 		SpawnProjectTile::GetInstance()->SpawnBullet(boss1->GetPositionX() + offsetX, boss1->GetPositionY() + offsetY,

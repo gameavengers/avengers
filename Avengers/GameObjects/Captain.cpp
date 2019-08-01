@@ -363,9 +363,6 @@ void Captain::UpdateCollision(DWORD dt)
 
 		if (time < 0 || time >= 1)
 			continue;
-		
-		//switch (listUpdateObject.at(i).tile->SpawnObjectID)
-
 	}
 }
 void Captain::Render()

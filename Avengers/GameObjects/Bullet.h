@@ -24,6 +24,7 @@ private:
 	int direction;
 	bool disable;
 	float timeCount;
+
 public:
 	Bullet(float x, float y, int direction,BulletType type);
 	~Bullet();

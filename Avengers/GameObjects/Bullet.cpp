@@ -179,15 +179,44 @@ void Bullet::BulletBoss2Update(DWORD dt)
 
 void Bullet::RocketUpdate(DWORD dt)
 {
-	if (direction == 1)
+	// 1:Left	2:B-L	3:Bottom	4:B-R	5:Right	6:T-R	7:Top	8:T-L
+	switch (direction)
 	{
+	case 1:		//Left
 		this->setIsLeft(true);
 		this->SetSpeedX(-BULLET_NORMAL_SPEED);
-	}
-	else
-	{
+		break;
+	case 2:		//Bottom-Left
+		break;
+	case 3:		//Bottom
+		break;
+	case 4:		//Bottom-Right
+		break;
+	case 5:		//Right
 		this->setIsLeft(false);
 		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		break;
+	case 6:		//Top-Right
+		this->setIsLeft(false);
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+
+		if (timeCount > ROCKET_CHANGE_DIRECTION_TIME)
+		{
+			this->SetSpeedY(BULLET_NORMAL_SPEED);
+		}
+
+		break;
+	case 7:		//Top
+		break;
+	case 8:		//Top-Left
+		this->setIsLeft(true);
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+
+		if (timeCount > ROCKET_CHANGE_DIRECTION_TIME)
+		{
+			this->SetSpeedY(BULLET_NORMAL_SPEED);
+		}
+		break;
 	}
 }
 
@@ -304,7 +333,21 @@ void Bullet::Render()
 
 	case ROCKET:
 	{
-		this->animations[ROCKET]->Render(spriteData);
+		switch (direction)
+		{
+		case 1:
+		case 5:
+			this->animations[ROCKET]->Render(spriteData);
+			break;
+		case 6:
+		case 8:
+			if (timeCount < ROCKET_CHANGE_DIRECTION_TIME)
+				this->animations[ROCKET]->Render(spriteData);
+			else
+				this->animations[4]->Render(spriteData);
+			break;
+		}
+		
 	}
 	break;
 

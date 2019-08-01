@@ -111,7 +111,7 @@ void DomestoWalkState::state_standing_shoot()
 	if (this->shootTimeCount > DOMESTO_TIME_OUT_STAND * 5)
 	{
 		this->shootTimeCount = 0;
-		int direction = domesto->IsLeft() ? 1 : 5;
+		int direction = domesto->IsLeft() ? 8 : 6;
 		float offsetX = domesto->IsLeft() ? -16 : 16;
 		float offsetY = -3;
 		SpawnProjectTile::GetInstance()->SpawnBullet(domesto->GetPositionX() + offsetX, domesto->GetPositionY() + offsetY,

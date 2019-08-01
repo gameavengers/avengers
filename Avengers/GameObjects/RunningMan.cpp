@@ -76,6 +76,7 @@ void RunningMan::LoadResources()
 	for (int i = 0; i < 3; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -85,6 +86,7 @@ void RunningMan::LoadResources()
 	for (int i = 3; i < 4; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite,5000);
 	}
 	animations.push_back(anim);
@@ -94,6 +96,7 @@ void RunningMan::LoadResources()
 	for (int i = 4; i < 5; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -103,6 +106,7 @@ void RunningMan::LoadResources()
 	for (int i = 5; i < 6; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);

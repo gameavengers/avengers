@@ -102,9 +102,12 @@ void Graphics::Draw(Sprite *sprite, D3DCOLOR color)
 		return;
 	
 	D3DXVECTOR2 center = sprite->GetCenter();
+	D3DXVECTOR3 offset = D3DXVECTOR3(center.x, center.y, 0);
 	D3DXVECTOR2 translate = sprite->GetTranslate();
 	D3DXVECTOR2 scaling = sprite->GetScaling();
 	viewport->SetRenderData(center, translate, scaling);
+
+	
 
 	D3DXMATRIX matrix;
 	D3DXMatrixTransformation2D(
@@ -112,13 +115,13 @@ void Graphics::Draw(Sprite *sprite, D3DCOLOR color)
 		NULL,
 		0.0f,
 		&scaling,
-		&center,
+		NULL,
 		sprite->GetAngle(),
 		&translate
 	);
 
 	spriteHandler->SetTransform(&matrix);
-	spriteHandler->Draw(sprite->GetTexture(), &(sprite->GetRect()), NULL, NULL, color);
+	spriteHandler->Draw(sprite->GetTexture(), &(sprite->GetRect()), &offset, NULL, color);
 }
 //Hàm hủy Graphics chính
 Graphics::~Graphics()

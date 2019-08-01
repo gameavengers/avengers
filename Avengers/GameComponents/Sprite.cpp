@@ -8,6 +8,8 @@ Sprite::Sprite(LPCWSTR filePath, RECT rect, D3DCOLOR transColor)
 	height = 0;
 	x = 0;
 	y = 0;
+	offsetX = 0;
+	offsetY = 0;
 	scale = 1;
 	angle = 0;
 	flipHorizontal = false;
@@ -46,8 +48,8 @@ void Sprite::SetRect(RECT rect)
 }
 D3DXVECTOR2 Sprite::GetCenter()
 {
-	float x = (float)this->width / 2 * this->scale;
-	float y = (float)this->height / 2 * this->scale;
+	float x = ((float)this->width / 2 + offsetX) * this->scale;
+	float y = ((float)this->height / 2 + offsetY)* this->scale;
 	if (flipHorizontal)
 	{
 		x -= (float)this->width * this->scale;
@@ -57,6 +59,10 @@ D3DXVECTOR2 Sprite::GetCenter()
 		y -= (float)this->height * this->scale;
 	}
 	return D3DXVECTOR2(x, y);
+}
+D3DXVECTOR2 Sprite::GetOffset()
+{
+	return D3DXVECTOR2();
 }
 D3DXVECTOR2 Sprite::GetTranslate()
 {

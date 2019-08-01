@@ -30,6 +30,8 @@ class Sprite
 	int height;
 	float x;
 	float y;
+	float offsetX;
+	float offsetY;
 	float scale;
 	float angle;
 	bool flipHorizontal;
@@ -48,6 +50,9 @@ public:
 	RECT GetRect() { return rect; };
 	float GetAngle() { return angle; };
 	D3DXVECTOR2 GetCenter();
+	D3DXVECTOR2 GetOffset();
+	void SetOffSetX(float x) { offsetX = x;}
+	void SetOffSetY(float y) { offsetY = y;}
 	D3DXVECTOR2 GetTranslate();
 	D3DXVECTOR2 GetScaling();
 };

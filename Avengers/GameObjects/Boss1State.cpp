@@ -306,16 +306,19 @@ void Boss1State::RandomNextState()
 	switch (randomState)
 	{
 	case 1:
-		behaviorBoss1 = BehaviorBoss1::Shoot;
+		//behaviorBoss1 = BehaviorBoss1::Shoot;
+		behaviorBoss1 = BehaviorBoss1::ComboShoot;
 		break;
 	case 2:
 		behaviorBoss1 = BehaviorBoss1::ComboShoot;
 		break;
 	case 3:
-		behaviorBoss1 = BehaviorBoss1::Fly;
+		//behaviorBoss1 = BehaviorBoss1::Fly;
+		behaviorBoss1 = BehaviorBoss1::ComboShoot;
 		break;
 	case 4: 
-		behaviorBoss1 = BehaviorBoss1::FlyNShoot;
+		//behaviorBoss1 = BehaviorBoss1::FlyNShoot;
+		behaviorBoss1 = BehaviorBoss1::ComboShoot;
 		break;
 	}
 }

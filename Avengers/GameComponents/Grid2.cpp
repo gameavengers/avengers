@@ -105,12 +105,12 @@ vector<Tile2 *> Grid2::GetNearbyTiles(RECT rect)
 		}
 	}
 
-	static int a = 0;
+	/*static int a = 0;
 	if (a == 0 && viewport->GetRect().left > 100)
 	{
 		SpawnObject(3, GetCell(5, 1)->tiles.at(5));
 		a++;
-	}
+	}*/
 
 	return nearbyTiles;
 }
@@ -225,6 +225,16 @@ void Grid2::Render()
 		{ 
 			(listCell + x + y * mapSize)->Render();
 			//GetCell(x,y)->tiles[0]->SpawnObjectID
+			
+			for (int t = 0; t < GRID_SIZE_BY_TILE; t++)
+				for (int z = 0; z < GRID_SIZE_BY_TILE; z++)
+				{
+					if (GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn)
+					{
+						SpawnObject(GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->SpawnObjectID, GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE));
+						GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn = false;
+					}
+				}
 		}
 	}
 

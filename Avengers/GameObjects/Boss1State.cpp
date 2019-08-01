@@ -68,6 +68,16 @@ void Boss1State::state_standing_shoot_1()
 	this->SetState(BOSS1_STATE_STANDING_SHOOT_1);
 	anim = boss1->GetAnimationsList()[BOSS1_STATE_STANDING_SHOOT_1];
 	boss1->SetSpeedX(0);
+
+	if (this->shootTimeCount > BOSS1_TIME_STANDING_SHOOT_1)
+	{
+		this->shootTimeCount = 0;
+		int direction = boss1->IsLeft() ? 1 : 5;
+		float offsetX = boss1->IsLeft() ? -8 : 20;
+		float offsetY = -10;
+		SpawnProjectTile::GetInstance()->SpawnBullet(boss1->GetPositionX() + offsetX, boss1->GetPositionY() + offsetY,
+			direction, BulletType::BULLET_NORMAL_BOSS1);
+	}
 }
 
 void Boss1State::state_standing_shoot_2()
@@ -75,6 +85,16 @@ void Boss1State::state_standing_shoot_2()
 	this->SetState(BOSS1_STATE_STANDING_SHOOT_2);
 	anim = boss1->GetAnimationsList()[BOSS1_STATE_STANDING_SHOOT_2];
 	boss1->SetSpeedX(0);
+
+	if (this->shootTimeCount > BOSS1_TIME_STANDING_SHOOT_1 + BOSS1_TIME_STANDING_SHOOT_2 * 2)
+	{
+		this->shootTimeCount = 0;
+		int direction = boss1->IsLeft() ? 1 : 5;
+		float offsetX = boss1->IsLeft() ? -8 : 16;
+		float offsetY = -10;
+		SpawnProjectTile::GetInstance()->SpawnBullet(boss1->GetPositionX() + offsetX, boss1->GetPositionY() + offsetY,
+			direction, BulletType::BULLET_SPECIAL_BOSS1);
+	}
 }
 
 void Boss1State::state_flying()
@@ -87,6 +107,16 @@ void Boss1State::state_flying_shoot()
 {
 	this->SetState(BOSS1_STATE_FLYING_SHOOT);
 	anim = boss1->GetAnimationsList()[BOSS1_STATE_FLYING_SHOOT];
+
+	if (this->shootTimeCount > BOSS1_TIME_FLY_UP_N_DOWN)
+	{
+		this->shootTimeCount = 0;
+		int direction = 3;
+		float offsetX = boss1->IsLeft() ? -8 : 30;
+		float offsetY = -10;
+		SpawnProjectTile::GetInstance()->SpawnBullet(boss1->GetPositionX() + offsetX, boss1->GetPositionY() + offsetY,
+			direction, BulletType::BULLET_SPECIAL_BOSS1);
+	}
 }
 
 #pragma endregion
@@ -332,6 +362,7 @@ void Boss1State::Colision()
 void Boss1State::Update(DWORD dt)
 {
 	timeCount += dt;
+	this->shootTimeCount += dt;
 
 	switch (this->behaviorBoss1)
 	{

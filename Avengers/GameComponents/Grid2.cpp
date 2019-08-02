@@ -15,14 +15,8 @@ Grid2::Grid2()
 {
 	captain = Captain::GetInstance();
 	viewport = Viewport::GetInstance();
-	//runningMan = RunningMan::GetInstance();
-	//domesto = Domesto::GetInstance();
-	//gigi = Gigi::GetInstance();
 	boss1 = Boss1::GetInstance();
 	boss1->SetPositionX(48);
-	//boss2 = Boss2::GetInstance();
-	//barrel = new Barrel();
-	//redbox = RedBox::GetInstance();
 	spawnboss = false;
 }
 
@@ -231,14 +225,10 @@ bool Grid2::CheckObjectInsideCamera(GameObject* object)
 void Grid2::Update(DWORD dt)
 {
 	timeCount += dt;
-	//UpdateCurrentTiles();
 	captain->Update(dt);
 	captain->UpdateCollision(dt);
-	//runningMan->Update(dt);
-	//domesto->Update(dt);
 	if (spawnboss)
 	boss1->Update(dt);
-	//redbox->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 	SpawnProjectTile::GetInstance()->UpdateItem(dt);
 
@@ -307,16 +297,8 @@ void Grid2::Render()
 		}
 	}
 
-	//runningMan->Render();
-	//domesto->Render();
-	//gigi->Render();
 	if (spawnboss)
 		boss1->Render();
-	//redbox->Render();
-	/*boss2->Render();
-	barrel->Render();*/
-	SpawnProjectTile::GetInstance()->RenderBullet();
-	SpawnProjectTile::GetInstance()->RenderItem();
 
 	for (int i = 0; i < listObject.size(); i++)
 	{
@@ -325,4 +307,7 @@ void Grid2::Render()
 		listObject.at(i).object->Render();
 	}
 	captain->Render();
+
+	SpawnProjectTile::GetInstance()->RenderBullet();
+	SpawnProjectTile::GetInstance()->RenderItem();
 }

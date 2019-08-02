@@ -406,6 +406,8 @@ void Captain::UpdateCollision(DWORD dt)
 		}
 		return;
 	}
+
+	//Collide with enemy
 	vector<OnUpdateObject> listUpdateObject = Grid2::GetInstance()->GetListUpdateObject();	
 
 	for (int i = 0; i < listUpdateObject.size(); i++)
@@ -428,6 +430,7 @@ void Captain::UpdateCollision(DWORD dt)
 			case 3:
 			case 4:
 			case 5:
+			case 6:
 				listUpdateObject.at(i).object->OnCollision();
 				break;
 			}
@@ -451,6 +454,8 @@ void Captain::UpdateCollision(DWORD dt)
 		}
 	}
 
+
+	//Collide with bullets
 	vector<Bullet*> listBullet = SpawnProjectTile::GetInstance()->listBullet;
 	for (int i = 0; i < listBullet.size(); i++)
 	{
@@ -464,6 +469,21 @@ void Captain::UpdateCollision(DWORD dt)
 			this->SetIsBleeding(true);
 			bImortal = true;
 			return;
+		}
+	}
+
+
+	//Collide with items
+	vector<Item*> listItem = SpawnProjectTile::GetInstance()->listItem;
+	for (int i = 0; i < listItem.size(); i++)
+	{
+		if (listItem.at(i)->disable)
+			continue;
+		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listItem.at(i)->GetCollider());
+
+		if (isCollide)
+		{
+			listItem.at(i)->Disable();
 		}
 	}
 }

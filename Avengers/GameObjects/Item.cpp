@@ -66,6 +66,8 @@ void Item::Initialize(float x, float y, ItemType type)
 	collider.height = this->height;
 
 	this->disable = false;
+
+	this->SetSpeedY(CAPTAIN_JUMP_SPEED_Y);
 }
 
 void Item::LoadResources()

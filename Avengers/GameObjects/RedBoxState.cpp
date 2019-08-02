@@ -49,8 +49,12 @@ void RedBoxState::state_open()
 
 	if (IsSpawn())
 	{
-		SpawnProjectTile::GetInstance()->SpawnItem(redbox->GetPositionX(), redbox->GetPositionY(), ItemType::KEY_CRYSTAL);
+		SpawnProjectTile::GetInstance()->SpawnItem(redbox->GetPositionX(), redbox->GetPositionY(), ItemType(rand() % 5 + 0));
 		this->SetIsSpawn(false);
+	}
+
+	if (this->timeCount > 500)
+	{
 		this->SetState(RED_BOX_STATE_CLOSE);
 	}
 }
@@ -62,6 +66,10 @@ void RedBoxState::Colision()
 
 void RedBoxState::Update(DWORD dt)
 {
+	// Cap nhat Delta Time
+	this->dt = dt;
+
+	this->timeCount += dt;
 
 	//Update theo state
 	switch (stateRedBox)

@@ -19,7 +19,6 @@ private:
 	ItemType type;
 
 	float timeCount;
-	bool disable;
 
 	void LoadResources();
 
@@ -38,5 +37,7 @@ public:
 
 	void Update(DWORD dt);
 	void Render();
+
+	bool disable;
 };
 

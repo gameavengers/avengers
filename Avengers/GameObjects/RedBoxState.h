@@ -18,10 +18,14 @@ protected:
 	RedBox *redbox;
 	Animation * anim;
 
+	DWORD dt;
+
 	bool isSpawn = false;
 public:
 	RedBoxState(RedBox *redbox);
 	~RedBoxState();
+
+	float timeCount;
 
 	static RedBoxState * GetInstance(RedBox *redbox);
 

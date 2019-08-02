@@ -82,3 +82,9 @@ void RedBox::Render()
 {
 	state->Render();
 }
+
+void RedBox::OnCollision()
+{
+	((RedBoxState*)state)->timeCount = 0;
+	((RedBoxState*)state)->state_open();
+}

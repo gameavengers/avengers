@@ -111,6 +111,15 @@
     <ClCompile Include="GameComponents\SpawnProjectTile.cpp">
       <Filter>Source\Component</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjects\Bat.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Elevator.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\BatState.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameComponents\Debug.h" />
@@ -224,6 +233,15 @@
     </ClInclude>
     <ClInclude Include="GameComponents\SpawnProjectTile.h">
       <Filter>Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Bat.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Elevator.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\BatState.h">
+      <Filter>Header\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

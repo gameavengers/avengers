@@ -180,7 +180,7 @@ void Domesto::OnCollision()
 		((DomestoStayState*)state)->state_dead();
 		break;
 	case WALK_FIRE_STAIGHT:
-		((DomestoStayState*)state)->timeCount = 0;
+		((DomestoWalkState*)state)->timeCount = 0;
 		((DomestoWalkState*)state)->state_dead();
 		break;
 	}

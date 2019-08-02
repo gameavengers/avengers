@@ -400,7 +400,7 @@ void Captain::UpdateCollision(DWORD dt)
 		float normalX = 0;
 		float normalY = 0;
 		float time = Collision::GetInstance()->SweptAABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider(), normalX, normalY);
-		bool a = Collision::GetInstance()->AABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider());
+		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider());
 		bool isCollideShield = Collision::GetInstance()->AABB(shield->GetCollider(), listUpdateObject.at(i).object->GetCollider());
 		//if (time < 0 || time >= 1)
 
@@ -409,7 +409,7 @@ void Captain::UpdateCollision(DWORD dt)
 			{
 			case 1:
 			case 2:
-				//case 3:
+			case 3:
 			case 4:
 			case 5:
 				listUpdateObject.at(i).object->OnCollision();
@@ -418,14 +418,14 @@ void Captain::UpdateCollision(DWORD dt)
 		}
 	
 		
-		if(!a)
+		if(!isCollide)
 			continue;		
 
 		switch (listUpdateObject.at(i).tile->SpawnObjectID)
 		{
 		case 1:
 		case 2:
-		//case 3:
+		case 3:
 		case 4:
 		case 5:
 			((CaptainState*)state)->timeCount = 0;

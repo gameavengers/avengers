@@ -87,9 +87,9 @@ void Shield::Update(DWORD dt)
 			this->state = SHIELD_SIDE;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX() - 2);
+				this->SetPositionX(captain->GetPositionX() - 7);
 			else
-				this->SetPositionX(captain->GetPositionX() + 12);
+				this->SetPositionX(captain->GetPositionX() + 7);
 			this->SetPositionY(captain->GetPositionY() - 8);
 		}
 		if (capstate->GetState() == STATE_JUMPING)
@@ -97,9 +97,9 @@ void Shield::Update(DWORD dt)
 			this->state = SHIELD_CENTER;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX());
+				this->SetPositionX(captain->GetPositionX() - 3);
 			else
-				this->SetPositionX(captain->GetPositionX() + 8);
+				this->SetPositionX(captain->GetPositionX() + 3);
 			this->SetPositionY(captain->GetPositionY() - 4);
 		}
 		if (capstate->GetState() == STATE_CROUCH)
@@ -107,19 +107,19 @@ void Shield::Update(DWORD dt)
 			this->state = SHIELD_SIDE;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX() - 2);
+				this->SetPositionX(captain->GetPositionX() - 7);
 			else
-				this->SetPositionX(captain->GetPositionX() + 12);
-			this->SetPositionY(captain->GetPositionY() - 26);
+				this->SetPositionX(captain->GetPositionX() + 7);
+			this->SetPositionY(captain->GetPositionY() - 27);
 		}
 		if (capstate->GetState() == STATE_STANDING_UP)
 		{
 			this->state = SHIELD_UP;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX());
+				this->SetPositionX(captain->GetPositionX() - 3);
 			else
-				this->SetPositionX(captain->GetPositionX() + 8);
+				this->SetPositionX(captain->GetPositionX() + 3);
 			this->SetPositionY(captain->GetPositionY() + 2);
 		}
 		if (capstate->GetState() == STATE_JUMPING_KICK)
@@ -127,9 +127,9 @@ void Shield::Update(DWORD dt)
 			this->state = SHIELD_SIDE;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX() + 28);
+				this->SetPositionX(captain->GetPositionX() + 6);
 			else
-				this->SetPositionX(captain->GetPositionX() - 18);
+				this->SetPositionX(captain->GetPositionX() - 6);
 			this->SetPositionY(captain->GetPositionY() - 5);
 		}
 		if (capstate->GetState() == STATE_CROUCH_PUNCH)
@@ -137,7 +137,7 @@ void Shield::Update(DWORD dt)
 			this->state = SHIELD_CENTER;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX() + 6);
+				this->SetPositionX(captain->GetPositionX() - 3);
 			else
 				this->SetPositionX(captain->GetPositionX() + 3);
 			this->SetPositionY(captain->GetPositionY() - 25);
@@ -147,19 +147,19 @@ void Shield::Update(DWORD dt)
 			this->state = SHIELD_DOWN;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX());
+				this->SetPositionX(captain->GetPositionX() - 6);
 			else
-				this->SetPositionX(captain->GetPositionX() + 10);
-			this->SetPositionY(captain->GetPositionY() - 40);
+				this->SetPositionX(captain->GetPositionX() + 6);
+			this->SetPositionY(captain->GetPositionY() - 41);
 		}
 		if (capstate->GetState() == STATE_DASH)
 		{
 			this->state = SHIELD_SIDE;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX() - 2);
+				this->SetPositionX(captain->GetPositionX() - 7);
 			else
-				this->SetPositionX(captain->GetPositionX() + 11);
+				this->SetPositionX(captain->GetPositionX() + 7);
 			this->SetPositionY(captain->GetPositionY() - 22);
 		}
 		if (capstate->GetState() == STATE_SWIMMING 

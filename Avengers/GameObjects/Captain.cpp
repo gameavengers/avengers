@@ -109,23 +109,33 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_THROW_SHIELD
-	anim = new Animation(150);
-	for (int i = 11; i < 13; i++)
-	{
-		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
-		anim->AddFrame(sprite);
-	}
+	anim = new Animation(100);
+
+	Sprite * sprite3 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[11], TEXTURE_TRANS_COLOR);
+	sprite3->SetOffSetY(-16);
+	sprite3->SetOffSetX(0);
+	anim->AddFrame(sprite3);
+
+	Sprite * sprite4 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[12], TEXTURE_TRANS_COLOR);
+	sprite4->SetOffSetY(-16);
+	sprite4->SetOffSetX(16);
+	anim->AddFrame(sprite4);
+
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_PUNCH
 	anim = new Animation(100);
-	for (int i = 13; i < 15; i++)
-	{
-		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
-		anim->AddFrame(sprite);
-	}
+
+	Sprite * sprite1 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[13], TEXTURE_TRANS_COLOR);
+	sprite1->SetOffSetY(-16);
+	sprite1->SetOffSetX(16);
+	anim->AddFrame(sprite1);
+
+	Sprite * sprite2 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[14], TEXTURE_TRANS_COLOR);
+	sprite2->SetOffSetY(-16);
+	sprite2->SetOffSetX(7);
+	anim->AddFrame(sprite2);
+
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_KICK
@@ -134,18 +144,24 @@ void Captain::LoadResources()
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
 		sprite->SetOffSetY(-16);
+		sprite->SetOffSetX(16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_CROUCH_PUNCH
-	anim = new Animation(80);
-	for (int i = 15; i < 17; i++)
-	{
-		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
-		anim->AddFrame(sprite);
-	}
+	anim = new Animation(100);
+
+	Sprite * sprite5 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
+	sprite5->SetOffSetY(-16);
+	sprite5->SetOffSetX(13);
+	anim->AddFrame(sprite5);
+
+	Sprite * sprite6 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[16], TEXTURE_TRANS_COLOR);
+	sprite6->SetOffSetY(-16);
+	sprite6->SetOffSetX(4);
+	anim->AddFrame(sprite6);
+
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_CROUCH_SHIELD

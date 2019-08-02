@@ -348,9 +348,9 @@ void CaptainState::state_bleeing()
 {
 	this->SetState(STATE_BLEEING);
 	anim = captain->GetAnimationsList()[STATE_BLEEING];
-	captain->SetPositionX(captain->GetPositionX() - (captain->IsLeft() ? -2 : 2));
+	captain->SetPositionX(captain->GetPositionX() - (captain->IsLeft() ? -1 : 1));
 
-	if (timeCount >= 200)
+	if (timeCount >= 100)
 	{
 		timeCount = 0;
 		this->SetState(STATE_STANDING);

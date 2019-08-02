@@ -114,6 +114,8 @@ void RunningMan::LoadResources()
 
 void RunningMan::Update(DWORD dt)
 {
+	if (this->disable)
+		return;
 	// Collide with brick
 	vector<ColliedEvent*> coEvents;
 	vector<ColliedEvent*> coEventsResult;
@@ -162,5 +164,13 @@ void RunningMan::Update(DWORD dt)
 }
 void RunningMan::Render()
 {
+	if (this->disable)
+		return;
 	state->Render();
+}
+
+void RunningMan::OnCollision()
+{
+	((RunningManState*)state)->timeCount = 0;
+	((RunningManState*)state)->state_dead();
 }

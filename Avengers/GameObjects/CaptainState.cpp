@@ -350,8 +350,9 @@ void CaptainState::state_bleeing()
 	anim = captain->GetAnimationsList()[STATE_BLEEING];
 	captain->SetPositionX(captain->GetPositionX() - (captain->IsLeft() ? -2 : 2));
 
-	if (anim->IsDone())
+	if (timeCount >= 200)
 	{
+		timeCount = 0;
 		this->SetState(STATE_STANDING);
 		captain->SetIsBleeding(false);
 		return;
@@ -400,7 +401,9 @@ void CaptainState::Colision()
 	}
 
 	if (captain->IsBleeding())
+	{
 		this->state_bleeing();
+	}
 	
 	//Không chạm đất thì rơi
 	if (!captain->IsGrounded())
@@ -435,6 +438,7 @@ void CaptainState::Colision()
 
 void CaptainState::Update(DWORD dt)
 {
+	timeCount += dt;
 	//Kiểm tra tốc độ trục X
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_RIGHT))
 	{

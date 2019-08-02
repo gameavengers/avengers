@@ -22,10 +22,11 @@ protected:
 	Animation * anim;
 	DWORD dt;
 
-	float timeCount;
+	
 	float shootTimeCount;
 
 public:
+	float timeCount;
 	RunningManState(RunningMan *runningMan);
 	~RunningManState();
 

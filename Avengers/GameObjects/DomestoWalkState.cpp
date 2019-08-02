@@ -153,6 +153,13 @@ void DomestoWalkState::state_dead()
 {
 	this->SetState(StateDomesto::DOMESTO_STATE_DEAD);
 	anim = domesto->GetAnimationsList()[DOMESTO_STATE_DEAD];
+
+	domesto->SetSpeedX(0);
+
+	if (timeCount >= 500)
+	{
+		domesto->disable = true;
+	}
 }
 
 void DomestoWalkState::state_jumping()

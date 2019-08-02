@@ -116,6 +116,8 @@ void Domesto::LoadResources()
 
 void Domesto::Update(DWORD dt)
 {
+	if (this->disable)
+		return;
 	// Collide with brick
 	vector<ColliedEvent*> coEvents;
 	vector<ColliedEvent*> coEventsResult;
@@ -164,5 +166,22 @@ void Domesto::Update(DWORD dt)
 }
 void Domesto::Render()
 {
+	if (this->disable)
+		return;
 	state->Render();
+}
+
+void Domesto::OnCollision()
+{
+	switch (type)
+	{
+	case STAY_FIRE_STRAIGHT:
+		((DomestoStayState*)state)->timeCount = 0;
+		((DomestoStayState*)state)->state_dead();
+		break;
+	case WALK_FIRE_STAIGHT:
+		((DomestoStayState*)state)->timeCount = 0;
+		((DomestoWalkState*)state)->state_dead();
+		break;
+	}
 }

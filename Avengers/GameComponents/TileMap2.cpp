@@ -187,6 +187,7 @@ void TileMap2::Render(Tile2* itile)
 
 	Sprite* temp = currentMap->GetSpriteByID(itile->tileId);
 	temp->SetData(spriteData);
+	temp->SetOffSetX(-8);
 
 	Graphics::GetInstance()->Draw(temp);
 }

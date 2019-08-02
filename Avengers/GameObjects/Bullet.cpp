@@ -162,10 +162,12 @@ void Bullet::BulletNormalUpdate(DWORD dt)
 	if (direction == 1)
 	{
 		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
 	}
 	else
 	{
 		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
 	}
 }
 
@@ -185,6 +187,7 @@ void Bullet::RocketUpdate(DWORD dt)
 	case 1:		//Left
 		this->setIsLeft(true);
 		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
 		break;
 	case 2:		//Bottom-Left
 		break;
@@ -195,6 +198,7 @@ void Bullet::RocketUpdate(DWORD dt)
 	case 5:		//Right
 		this->setIsLeft(false);
 		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
 		break;
 	case 6:		//Top-Right
 		this->setIsLeft(false);
@@ -301,6 +305,8 @@ void Bullet::Update(DWORD dt)
 	float moveY = trunc(this->GetSpeedY()* dt);
 	this->SetPositionX(this->GetPositionX() + moveX);
 	this->SetPositionY(this->GetPositionY() + moveY);
+
+	UpdateObjectCollider();
 
 	switch (type)
 	{

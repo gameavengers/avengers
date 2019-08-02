@@ -42,6 +42,8 @@ struct OnUpdateObject
 	GameObject* object;
 	Tile2* tile;
 	bool disable = false;
+	float delaySpawn = 10000;
+	float timeCount = 0001;
 };
 
 
@@ -105,4 +107,13 @@ public:
 
 	void Update(DWORD dt);
 	void Render();
+
+	bool spawnboss;
+	void DisableAllObject()
+	{
+		for (int i = 0; i < listObject.size(); i++)
+		{
+			listObject.at(i).disable = true;
+		}
+	}
 };

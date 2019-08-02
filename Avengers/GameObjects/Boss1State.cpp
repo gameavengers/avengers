@@ -72,7 +72,7 @@ void Boss1State::state_standing_shoot_1()
 	if (this->shootTimeCount > BOSS1_TIME_STANDING_SHOOT_1)
 	{
 		this->shootTimeCount = 0;
-		int direction = boss1->IsLeft() ? 8 : 6;
+		int direction = boss1->IsLeft() ? 1 : 5;
 		float offsetX = boss1->IsLeft() ? -8 : 20;
 		float offsetY = -10;
 		SpawnProjectTile::GetInstance()->SpawnBullet(boss1->GetPositionX() + offsetX, boss1->GetPositionY() + offsetY,
@@ -189,7 +189,7 @@ void Boss1State::Behavior_FlyAndShoot()
 		boss1->SetSpeedX(CAPTAIN_WALK_SPEED * (boss1->IsLeft() ? -1 : 1));
 		boss1->SetSpeedY(0);
 
-		if (boss1->GetPositionX() == Captain::GetInstance()->GetPositionX())
+		if (abs(boss1->GetPositionX() - Captain::GetInstance()->GetPositionX()) < 16)
 		{
 			behaviorState = 4;
 		}
@@ -306,19 +306,19 @@ void Boss1State::RandomNextState()
 	switch (randomState)
 	{
 	case 1:
-		//behaviorBoss1 = BehaviorBoss1::Shoot;
-		behaviorBoss1 = BehaviorBoss1::ComboShoot;
+		behaviorBoss1 = BehaviorBoss1::Shoot;
+		//behaviorBoss1 = BehaviorBoss1::ComboShoot;
 		break;
 	case 2:
 		behaviorBoss1 = BehaviorBoss1::ComboShoot;
 		break;
 	case 3:
-		//behaviorBoss1 = BehaviorBoss1::Fly;
-		behaviorBoss1 = BehaviorBoss1::ComboShoot;
+		behaviorBoss1 = BehaviorBoss1::Fly;
+		//behaviorBoss1 = BehaviorBoss1::ComboShoot;
 		break;
 	case 4: 
-		//behaviorBoss1 = BehaviorBoss1::FlyNShoot;
-		behaviorBoss1 = BehaviorBoss1::ComboShoot;
+		behaviorBoss1 = BehaviorBoss1::FlyNShoot;
+		//behaviorBoss1 = BehaviorBoss1::ComboShoot;
 		break;
 	}
 }

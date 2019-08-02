@@ -24,7 +24,9 @@ class Captain : public GameObject
 	DWORD lastFrameTime;
 
 	Shield *shield;
-
+	bool bImortal;
+	float timeCount;
+	bool trueImortal;
 public: 
 	void LoadResources();
 

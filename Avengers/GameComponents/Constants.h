@@ -122,7 +122,7 @@ enum StateDomesto
 
 //Bullet
 #define BULLET_NORMAL_SPEED 0.2f
-#define BULLET_TIME_LIFE	6000
+#define BULLET_TIME_LIFE	2000
 #define ROCKET_SPEED 0.15f
 #define ROCKET_CHANGE_DIRECTION_TIME 300
 

@@ -228,6 +228,7 @@ void Captain::Reset()
 
 void Captain::Update(DWORD dt)
 {
+	timeCount += dt;
 	// Xử lý chuyển màn
 	if (this->GetSpeedX() > 0 && this->GetPositionX() > TileMap2::GetInstance()->currentMap->size*16 - 50)
 	{
@@ -236,6 +237,8 @@ void Captain::Update(DWORD dt)
 			Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
 			if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
 			{
+				Grid2::GetInstance()->DisableAllObject();
+				Grid2::GetInstance()->spawnboss = true;
 				this->SetPositionX(50);
 				this->SetPositionY(100);
 				Viewport::GetInstance()->Reset();
@@ -275,6 +278,8 @@ void Captain::Update(DWORD dt)
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_F2))
 	{
 		Game::GetInstance()->SetStage(STAGE_BOSS_1);
+		Grid2::GetInstance()->spawnboss = true;
+		Grid2::GetInstance()->DisableAllObject();
 		this->SetPositionX(50);
 		this->SetPositionY(100);
 		Viewport::GetInstance()->Reset();
@@ -298,6 +303,10 @@ void Captain::Update(DWORD dt)
 		Viewport::GetInstance()->Reset();
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
 		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+	}
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_F5))
+	{
+		trueImortal = !trueImortal;
 	}
 	
 	//Colision với state để riêng ra
@@ -360,6 +369,7 @@ void Captain::Update(DWORD dt)
 	for (int i = 0; i < coEvents.size(); i++)
 		delete coEvents[i];
 #pragma endregion
+	shield->UpdateObjectCollider();
 	shield->Update(dt);
 	state->Colision();
 	state->Update(dt);
@@ -368,29 +378,76 @@ void Captain::Update(DWORD dt)
 }
 void Captain::UpdateCollision(DWORD dt)
 {
-	vector<OnUpdateObject> listUpdateObject = Grid2::GetInstance()->GetListUpdateObject();
+	if (trueImortal)
+		return;
+
+	if (bImortal)
+	{
+		if (timeCount > 700)
+		{
+			timeCount = 0;
+			bImortal = false;
+		}
+		return;
+	}
+	vector<OnUpdateObject> listUpdateObject = Grid2::GetInstance()->GetListUpdateObject();	
 
 	for (int i = 0; i < listUpdateObject.size(); i++)
 	{
-		if (listUpdateObject.at(i).disable)
+		if (listUpdateObject.at(i).disable || listUpdateObject.at(i).object->disable)
 			continue;
 
 		float normalX = 0;
 		float normalY = 0;
 		float time = Collision::GetInstance()->SweptAABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider(), normalX, normalY);
+		bool a = Collision::GetInstance()->AABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider());
+		bool isCollideShield = Collision::GetInstance()->AABB(shield->GetCollider(), listUpdateObject.at(i).object->GetCollider());
+		//if (time < 0 || time >= 1)
 
-		if (time < 0 || time >= 1)
-			continue;
+		if (isCollideShield) {
+			switch (listUpdateObject.at(i).tile->SpawnObjectID)
+			{
+			case 1:
+			case 2:
+				//case 3:
+			case 4:
+			case 5:
+				listUpdateObject.at(i).object->OnCollision();
+				break;
+			}
+		}
+	
+		
+		if(!a)
+			continue;		
 
 		switch (listUpdateObject.at(i).tile->SpawnObjectID)
 		{
 		case 1:
 		case 2:
-		case 3:
+		//case 3:
 		case 4:
 		case 5:
+			((CaptainState*)state)->timeCount = 0;
 			this->SetIsBleeding(true);
-			break;
+			bImortal = true;
+			return;
+		}
+	}
+
+	vector<Bullet*> listBullet = SpawnProjectTile::GetInstance()->listBullet;
+	for (int i = 0; i < listBullet.size(); i++)
+	{
+		if (listBullet.at(i)->disable)
+			continue;
+		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listBullet.at(i)->GetCollider());
+		
+		if (isCollide)
+		{
+			((CaptainState*)state)->timeCount = 0;
+			this->SetIsBleeding(true);
+			bImortal = true;
+			return;
 		}
 	}
 }

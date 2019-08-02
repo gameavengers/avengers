@@ -133,7 +133,14 @@ void RunningManState::state_dead()
 {
 	this->SetState(RUNNING_MAN_STATE_DEAD);
 	anim = runningMan->GetAnimationsList()[RUNNING_MAN_STATE_DEAD];
+	runningMan->SetSpeedX(0);
+
+	if (this->timeCount > 500)
+	{
+		runningMan->disable = true;
+	}
 }
+
 
 void RunningManState::state_jumping()
 {

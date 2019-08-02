@@ -81,6 +81,7 @@ public:
 	GameObject(float x, float y, float width, float height);
 	virtual void Update(DWORD dt);
 	virtual void Render();
+	virtual void OnCollision() { this->disable = true; }
 	~GameObject();
 };
 

@@ -22,7 +22,7 @@ private:
 	
 	// 1:Left	2:B-L	3:Bottom	4:B-R	5:Right	6:T-R	7:Top	8:T-L
 	int direction;
-	bool disable;
+	
 	float timeCount;
 
 public:
@@ -43,6 +43,8 @@ public:
 
 	void Update(DWORD dt) override;
 	void Render() override;
+
+	bool disable;
 };
 
 

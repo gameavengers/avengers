@@ -19,10 +19,11 @@ Grid2::Grid2()
 	//domesto = Domesto::GetInstance();
 	//gigi = Gigi::GetInstance();
 	boss1 = Boss1::GetInstance();
-	boss1->SetPositionX(20);
+	boss1->SetPositionX(48);
 	//boss2 = Boss2::GetInstance();
 	//barrel = new Barrel();
 	//redbox = RedBox::GetInstance();
+	spawnboss = false;
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -218,9 +219,11 @@ bool Grid2::CheckObjectInsideCamera(GameObject* object)
 	if (timeCount < 2000)
 		return true;
 
+	int test = 1;
+
 	RECT rect = viewport->GetRect();
-	if (object->GetPositionX() < rect.left-50*3 || object->GetPositionX() > rect.right+50 * 3 ||
-		object->GetPositionY() < rect.bottom-50 * 3 || object->GetPositionY() > rect.top+50 * 3)
+	if (object->GetPositionX() < rect.left - 64* test || object->GetPositionX() > rect.right + 64 * test ||
+		object->GetPositionY() < rect.bottom - 64 * test || object->GetPositionY() > rect.top + 64 * test)
 		return false;
 	return true;
 }
@@ -233,6 +236,7 @@ void Grid2::Update(DWORD dt)
 	captain->UpdateCollision(dt);
 	//runningMan->Update(dt);
 	//domesto->Update(dt);
+	if (spawnboss)
 	boss1->Update(dt);
 	//redbox->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
@@ -248,8 +252,19 @@ void Grid2::Update(DWORD dt)
 		if (!CheckObjectInsideCamera(listObject.at(i).object))
 		{
 			listObject.at(i).disable = true;
-			listObject.at(i).tile->bCanSpawn = true;
+			// listObject.at(i).tile->bCanSpawn = true;
 		}
+
+		/*if (listObject.at(i).disable)
+		{
+			listObject.at(i).timeCount += dt;
+			if (listObject.at(i).timeCount >= listObject.at(i).delaySpawn)
+			{
+				listObject.at(i).timeCount = 0;
+				listObject.at(i).tile->bCanSpawn = true;
+			}
+
+		}*/
 	}
 }
 
@@ -265,17 +280,18 @@ void Grid2::Render()
 			(listCell + x + y * mapSize)->Render();
 			//GetCell(x,y)->tiles[0]->SpawnObjectID
 			
-			/*if ((listCell + x + y * mapSize)->hasSpawnTiles.size() > 0)
+			if ((listCell + x + y * mapSize)->hasSpawnTiles.size() > 0)
 			{
 				for (int i = 0; i < (listCell + x + y * mapSize)->hasSpawnTiles.size(); i++)
 				{
 					if (!(listCell + x + y * mapSize)->hasSpawnTiles.at(i)->bCanSpawn)
 						continue;
+
 					SpawnObject((listCell + x + y * mapSize)->hasSpawnTiles.at(i)->SpawnObjectID, 
 								(listCell + x + y * mapSize)->hasSpawnTiles.at(i));
 					(listCell + x + y * mapSize)->hasSpawnTiles.at(i)->bCanSpawn = false;
 				}
-			}*/
+			}
 
 			/*for (int t = 0; t < GRID_SIZE_BY_TILE; t++)
 				for (int z = 0; z < GRID_SIZE_BY_TILE; z++)
@@ -294,7 +310,8 @@ void Grid2::Render()
 	//runningMan->Render();
 	//domesto->Render();
 	//gigi->Render();
-	boss1->Render();
+	if (spawnboss)
+		boss1->Render();
 	//redbox->Render();
 	/*boss2->Render();
 	barrel->Render();*/

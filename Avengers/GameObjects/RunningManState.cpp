@@ -134,6 +134,7 @@ void RunningManState::state_dead()
 	this->SetState(RUNNING_MAN_STATE_DEAD);
 	anim = runningMan->GetAnimationsList()[RUNNING_MAN_STATE_DEAD];
 	runningMan->SetSpeedX(0);
+	runningMan->SetSpeedY(0);
 
 	if (this->timeCount > 500)
 	{

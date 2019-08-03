@@ -20,12 +20,22 @@ using namespace std;
 
 #define GRID_SIZE_BY_TILE (int)(GRID_SIZE / TILE_SIZE)
 
+struct OnUpdateObject
+{
+	GameObject* object;
+	Tile2* tile;
+	bool disable = false;
+	float delaySpawn = 10000;
+	float timeCount = 0001;
+};
+
 struct GridData
 {
 	vector<Tile2*> tiles;
 	int x;
 	int y;
 	vector<Tile2*> hasSpawnTiles;
+	vector<OnUpdateObject> listObject;
 
 	void Render()
 	{
@@ -36,16 +46,6 @@ struct GridData
 			}
 	}
 };
-
-struct OnUpdateObject
-{
-	GameObject* object;
-	Tile2* tile;
-	bool disable = false;
-	float delaySpawn = 10000;
-	float timeCount = 0001;
-};
-
 
 class RunningMan;
 class Domesto;

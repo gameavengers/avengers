@@ -14,18 +14,20 @@ class GameObject;
 class Item : public GameObject
 {
 private:
-	vector<Animation *> animations;
+	static vector<Animation *> animations;
 
 	ItemType type;
 
 	float timeCount;
 
-	void LoadResources();
+	
 
 	int state;
 public:
 	Item(float x, float y, ItemType type);
 	~Item();
+
+	static void LoadResources();
 
 	void Initialize(float x, float y, ItemType type);
 

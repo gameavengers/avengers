@@ -26,9 +26,6 @@ RunningMan::RunningMan()
 
 RunningMan::RunningMan(float x, float y, RunningManType type)
 {
-	LoadResources();
-
-	//state = RunningManState::GetInstance(this);
 	this->state = new RunningManState(this);
 	
 	this->type = type;

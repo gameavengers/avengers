@@ -25,8 +25,6 @@ RedBox::RedBox()
 
 RedBox::RedBox(float x, float y)
 {
-	LoadResources();
-
 	this->state = new RedBoxState(this);
 
 	this->x = x;

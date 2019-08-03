@@ -18,6 +18,10 @@ Grid2::Grid2()
 	boss1 = Boss1::GetInstance();
 	boss1->SetPositionX(48);
 	spawnboss = false;
+	RunningMan::LoadResources();
+	Domesto::LoadResources();
+	RedBox::LoadResources();
+	Item::LoadResources();
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -93,6 +97,11 @@ vector<Tile2 *> Grid2::GetNearbyTiles(RECT rect)
 	int right = (int)(rect.right / GRID_SIZE);
 	int top = (int)(rect.top % GRID_SIZE == 0 ? rect.top / GRID_SIZE - 1 : rect.top / GRID_SIZE);
 	int bottom = (int)(rect.bottom / GRID_SIZE);
+
+	if (bottom < 0)
+		bottom = 0;
+	if (left < 0)
+		left = 0;
 
 	for (int x = left; x <= right; x++)
 	{

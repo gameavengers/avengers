@@ -19,7 +19,7 @@ class RedBox : public GameObject
 
 public:
 	RedBox(float x, float y);
-	void LoadResources();
+	static void LoadResources();
 
 	static RedBox *GetInstance();
 

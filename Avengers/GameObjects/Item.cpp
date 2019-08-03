@@ -1,9 +1,11 @@
 #include "Item.h"
 #include "../GameComponents/Grid2.h"
 
+vector<Animation *> Item::animations;
+
 Item::Item(float x, float y, ItemType type)
 {
-	LoadResources();
+	//LoadResources();
 	Initialize(x, y, type);
 }
 

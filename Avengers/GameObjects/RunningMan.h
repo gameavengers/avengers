@@ -31,7 +31,7 @@ class RunningMan : public GameObject
 
 public:
 	RunningMan(float x, float y, RunningManType type = NORMAL);
-	void LoadResources();
+	static void LoadResources();
 
 	static RunningMan *GetInstance();
 

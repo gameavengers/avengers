@@ -35,8 +35,6 @@ Domesto::Domesto()
 
 Domesto::Domesto(float x, float y, DemestoType type)
 {
-	LoadResources();
-
 	this->type = type;
 
 	if (type == DemestoType::STAY_FIRE_STRAIGHT)

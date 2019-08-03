@@ -17,15 +17,19 @@ bool Collision::AABB(const Collider &c1, const Collider &c2)
 		c1.y > c2.y - c2.height &&
 		c1.y - c1.height < c2.y
 		);
+	/*if (c1.x + c1.width < c2.x || c1.x > c2.x + c2.width ||
+		c1.y + c1.height < c2.y || c1.y > c2.y + c2.height)
+		return false;
+	return true;*/
 }
 
 Collider Collision::GetSweptBroadphaseRect(const Collider &object)
 {
 	Collider broadphaseBox;
-	broadphaseBox.x = object.vx > 0 ? object.x + object.vx * object.dt : object.x;
-	broadphaseBox.y = object.vy > 0 ? object.y + object.vy * object.dt : object.y;
-	broadphaseBox.width = object.width + abs(object.vx * object.dt);
-	broadphaseBox.height = object.height + abs(object.vy * object.dt);
+	broadphaseBox.x = object.vx == 0 ? object.x : object.x + object.vx * object.dt;
+	broadphaseBox.y = object.vy < 0 ? object.y : object.y + object.vy * object.dt;
+	broadphaseBox.width = object.width +abs(object.vx * object.dt);
+	broadphaseBox.height = object.height +abs(object.vy * object.dt);
 
 	return broadphaseBox;
 }
@@ -43,11 +47,7 @@ float Collision::SweptAABB(Collider c1, Collider c2, float &normalx, float &norm
 
 
 	Collider broadphaseBox = GetSweptBroadphaseRect(c1);
-	if (AABB(broadphaseBox, c2))
-	{
-
-	}
-	else if (!AABB(broadphaseBox, c2))
+	if (!AABB(broadphaseBox, c2))
 	{
 		return 1.0f;
 	}

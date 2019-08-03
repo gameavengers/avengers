@@ -226,12 +226,21 @@ void Captain::LoadResources()
 
 	// CAPTAIN_ANI_SWING
 	anim = new Animation(200);
-	for (int i = 27; i < 30; i++)
-	{
-		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
-		anim->AddFrame(sprite);
-	}
+
+	Sprite * sprite9 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[27], TEXTURE_TRANS_COLOR);
+	sprite9->SetOffSetY(-16);
+	anim->AddFrame(sprite9);
+
+	Sprite * sprite10 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[28], TEXTURE_TRANS_COLOR);
+	sprite10->SetOffSetY(-16);
+	sprite10->SetOffSetX(1);
+	anim->AddFrame(sprite10);
+
+	Sprite * sprite11 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[29], TEXTURE_TRANS_COLOR);
+	sprite11->SetOffSetY(-16);
+	sprite11->SetOffSetX(-3);
+	anim->AddFrame(sprite11);
+
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_BLEEING_2

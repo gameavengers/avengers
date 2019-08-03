@@ -14,7 +14,6 @@ TankState *TankState::GetInstance(Tank *tank)
 TankState::TankState(Tank *tank)
 {
 	this->tank = tank;
-	this->state_top();
 }
 
 TankState::~TankState()
@@ -22,39 +21,56 @@ TankState::~TankState()
 	delete anim;
 }
 
-//Lấy trạng thái
-StateTank TankState::GetState()
-{
-	return this->stateTank;
-}
-//Set trạng thái
-void TankState::SetState(StateTank state)
-{
-	this->stateTank = state;
-}
-
 void TankState::state_bleeding()
 {
-	this->SetState(TANK_STATE_BLEEDING);
-	anim = tank->GetAnimationsList()[TANK_STATE_BLEEDING];
+	anim = tank->GetAnimationsList()[0];
+
+	if (this->timeCount > 1000)
+	{
+		this->timeCount = 0;
+		this->SetDirection(rand() % 8 + 1);
+		return;
+	}
+}
+
+void TankState::state_left()
+{
+	anim = tank->GetAnimationsList()[1];
+}
+
+void TankState::state_bottom_left()
+{
+	anim = tank->GetAnimationsList()[2];
+}
+
+void TankState::state_bottom()
+{
+	anim = tank->GetAnimationsList()[3];
+}
+
+void TankState::state_bottom_right()
+{
+	anim = tank->GetAnimationsList()[4];
 }
 
 void TankState::state_top()
 {
-	this->SetState(TANK_STATE_TOP);
-	anim = tank->GetAnimationsList()[TANK_STATE_TOP];
+	anim = tank->GetAnimationsList()[7];
+}
+
+void TankState::state_top_left()
+{
+	anim = tank->GetAnimationsList()[8];
 }
 
 void TankState::state_top_right()
 {
-	this->SetState(TANK_STATE_TOP_RIGHT);
-	anim = tank->GetAnimationsList()[TANK_STATE_TOP_RIGHT];
+	anim = tank->GetAnimationsList()[6];
 }
 
 void TankState::state_right()
 {
-	this->SetState(TANK_STATE_RIGHT);
-	anim = tank->GetAnimationsList()[TANK_STATE_RIGHT];
+	anim = tank->GetAnimationsList()[5];
 }
 
 void TankState::Colision()
@@ -64,24 +80,46 @@ void TankState::Colision()
 
 void TankState::Update(DWORD dt)
 {
+	this->timeCount += dt;
+	this->shootTimeCount += dt;
 
-	//Update theo state
-	switch (stateTank)
+	//Update state theo direction
+	switch (direction)
 	{
-	case TANK_STATE_BLEEDING:
+	case 0:
 		this->state_bleeding();
 		break;
 
-	case TANK_STATE_TOP:
-		this->state_top();
+	case 1:
+		this->state_left();
 		break;
 
-	case TANK_STATE_TOP_RIGHT:
+	case 2:
+		this->state_bottom_left();
+		break;
+
+	case 3:
+		this->state_bottom();
+		break;
+
+	case 4:
+		this->state_bottom_right();
+		break;
+
+	case 5:
+		this->state_right();
+		break;
+
+	case 6:
 		this->state_top_right();
 		break;
 
-	case TANK_STATE_RIGHT:
-		this->state_right();
+	case 7:
+		this->state_top();
+		break;
+
+	case 8:
+		this->state_top_left();
 		break;
 
 	default:
@@ -100,8 +138,8 @@ void TankState::Render()
 		spriteData.y = tank->GetPositionY();
 		spriteData.scale = 1;
 		spriteData.angle = 0;
-		spriteData.isLeft = tank->IsLeft();
-		spriteData.isFlipped = tank->IsFlipped();
+		//spriteData.isLeft = tank->IsLeft();
+		//spriteData.isFlipped = tank->IsFlipped();
 	}
 
 	anim->Render(spriteData);

@@ -10,6 +10,7 @@
 #include "../GameObjects/Boss2.h"
 #include "../GameObjects/Barrel.h"
 #include "../GameObjects/RedBox.h"
+#include "../GameObjects/Tank.h"
 
 #include <vector>
 
@@ -54,6 +55,7 @@ class Boss1;
 class Boss2;
 class Barrel;
 class RedBox;
+class Tank;
 class Grid2
 {
 private:
@@ -72,6 +74,7 @@ private:
 	Boss2* boss2;
 	Barrel* barrel;
 	RedBox* redbox;
+	Tank* tank;
 
 	vector <OnUpdateObject> listObject;
 	

@@ -5,6 +5,13 @@
 #include "../GameComponents/Game.h"
 #include "State.h"
 
+enum TankType {
+	TOP,
+	BOTTOM,
+	LEFT,
+	RIGHT
+};
+
 class Tank : public GameObject
 {
 	Tank();
@@ -16,8 +23,13 @@ class Tank : public GameObject
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
 
+	TankType type;
+
 public:
-	void LoadResources();
+	Tank(float x, float y, TankType type);
+	static void LoadResources();
+
+	TankType GetTankType() { return this->type; }
 
 	static Tank *GetInstance();
 

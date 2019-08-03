@@ -17,7 +17,7 @@ void Animation::Render(SpriteData spriteData)
 	//Lấy giá trị thời gian hiện tại
 	DWORD now = GetTickCount();
 	//Nếu currentFrame = -1 thì khởi tạo giá trị cho các biến
-	if (curFrame == -1)
+	if (this->curFrame == -1)
 	{
 		curFrame = 0;
 		lastFrameTime = now;

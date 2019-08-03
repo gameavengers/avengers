@@ -14,6 +14,7 @@ TankState *TankState::GetInstance(Tank *tank)
 TankState::TankState(Tank *tank)
 {
 	this->tank = tank;
+	this->state_bottom();
 }
 
 TankState::~TankState()

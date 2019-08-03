@@ -358,13 +358,15 @@ void Grid2::Render()
 	int lCell, rCell, tCell, bCell;
 	this->GetCameraPosOnGrid(lCell, rCell, tCell, bCell);
 
+#pragma region Spawn
+
 	for (int y = bCell; y <= tCell; y++)
 	{
 		for (int x = lCell; x <= rCell; x++)
-		{ 
+		{
 			(listCell + x + y * mapSize)->Render();
 			//GetCell(x,y)->tiles[0]->SpawnObjectID
-			
+
 			if ((listCell + x + y * mapSize)->hasSpawnTiles.size() > 0)
 			{
 				for (int i = 0; i < (listCell + x + y * mapSize)->hasSpawnTiles.size(); i++)
@@ -372,25 +374,14 @@ void Grid2::Render()
 					if (!(listCell + x + y * mapSize)->hasSpawnTiles.at(i)->bCanSpawn)
 						continue;
 
-					SpawnObject((listCell + x + y * mapSize)->hasSpawnTiles.at(i)->SpawnObjectID, 
-								(listCell + x + y * mapSize)->hasSpawnTiles.at(i));
+					SpawnObject((listCell + x + y * mapSize)->hasSpawnTiles.at(i)->SpawnObjectID,
+						(listCell + x + y * mapSize)->hasSpawnTiles.at(i));
 					(listCell + x + y * mapSize)->hasSpawnTiles.at(i)->bCanSpawn = false;
 				}
 			}
-
-			/*for (int t = 0; t < GRID_SIZE_BY_TILE; t++)
-				for (int z = 0; z < GRID_SIZE_BY_TILE; z++)
-				{
-					if (GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn)
-					{
-						if (!GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn)
-							continue;
-						SpawnObject(GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->SpawnObjectID, GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE));
-						GetCell(x, y)->tiles.at(z + t * GRID_SIZE_BY_TILE)->bCanSpawn = false;
-					}
-				}*/
 		}
 	}
+#pragma endregion
 
 	if (spawnboss)
 		boss1->Render();
@@ -405,4 +396,6 @@ void Grid2::Render()
 
 	SpawnProjectTile::GetInstance()->RenderBullet();
 	SpawnProjectTile::GetInstance()->RenderItem();
+
+	
 }

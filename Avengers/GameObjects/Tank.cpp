@@ -161,5 +161,5 @@ void Tank::Update(DWORD dt)
 }
 void Tank::Render()
 {
-	state->Render();
+	this->state->Render();
 }

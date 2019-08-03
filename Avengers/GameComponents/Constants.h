@@ -61,6 +61,7 @@ enum StateDomesto
 
 //ENEMY MATRIX
 #define ENEMIES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Enemies-Map-1-Matrix.txt"
+#define ENEMIES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Enemies-Map-2-Matrix.txt"
 
 #define TILES_MATRIX_DELIMITER ","
 #define TILES_WIDTH_PER_TILE	16

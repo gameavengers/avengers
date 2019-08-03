@@ -24,8 +24,7 @@ Grid2::Grid2()
 	Item::LoadResources();
 	Tank::LoadResources();
 	Gigi::LoadResources();
-	tank = new Tank(250, 80, TankType::LEFT);
-	gigi = new Gigi(300, 200);
+	Elevator::LoadResources();
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -210,10 +209,93 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 		temp.tile = tile;
 		tile->bCanSpawn = false;
 
-		if (captain->GetPositionX() < object->GetPositionX())
-			object->setIsLeft(true);
-		else
-			object->setIsLeft(false);
+		listObject.push_back(temp);
+	}
+	break;
+	case 7:
+	{
+		Gigi* object = new Gigi(tile->x * TILE_SIZE, tile->y * TILE_SIZE);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 8:
+	{
+		Elevator* object = new Elevator(tile->x * TILE_SIZE, tile->y * TILE_SIZE, ElevatorType::CIRCLE);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 9:
+	{
+		Elevator* object = new Elevator(tile->x * TILE_SIZE, tile->y * TILE_SIZE, ElevatorType::SLASH);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 10:
+	{
+		Elevator* object = new Elevator(tile->x * TILE_SIZE, tile->y * TILE_SIZE, ElevatorType::HORIZONTAL);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 11:
+	{
+		Tank* object = new Tank(tile->x * TILE_SIZE, tile->y * TILE_SIZE, TankType::TOP);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 12:
+	{
+		Tank* object = new Tank(tile->x * TILE_SIZE, tile->y * TILE_SIZE, TankType::BOTTOM);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 13:
+	{
+		Tank* object = new Tank(tile->x * TILE_SIZE, tile->y * TILE_SIZE, TankType::LEFT);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 14:
+	{
+		Tank* object = new Tank(tile->x * TILE_SIZE, tile->y * TILE_SIZE, TankType::RIGHT);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
 
 		listObject.push_back(temp);
 	}
@@ -242,8 +324,6 @@ void Grid2::Update(DWORD dt)
 	captain->UpdateCollision(dt);
 	if (spawnboss)
 	boss1->Update(dt);
-	tank->Update(dt);
-	gigi->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 	SpawnProjectTile::GetInstance()->UpdateItem(dt);
 
@@ -325,6 +405,4 @@ void Grid2::Render()
 
 	SpawnProjectTile::GetInstance()->RenderBullet();
 	SpawnProjectTile::GetInstance()->RenderItem();
-	tank->Render();
-	gigi->Render();
 }

@@ -23,7 +23,7 @@ Elevator::Elevator()
 
 Elevator::Elevator(float x, float y, ElevatorType type)
 {
-	LoadResources();
+	//LoadResources();
 
 	this->disable = false;
 

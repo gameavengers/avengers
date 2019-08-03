@@ -12,6 +12,7 @@ TileMap2 * TileMap2::GetInstance()
 		_instance->LoadSpawnData(ENEMIES_MATRIX_STAGE_1, MAP_1_ID);
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_1, TILES_SET_STAGE_BOSS_1, MAP_BOSS_1_ID);
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_2, TILES_SET_MATRIX_STAGE_2, MAP_2_ID);
+		_instance->LoadSpawnData(ENEMIES_MATRIX_STAGE_2, MAP_2_ID);
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_2, TILES_SET_STAGE_BOSS_2, MAP_BOSS_2_ID);
 	}
 	return _instance;

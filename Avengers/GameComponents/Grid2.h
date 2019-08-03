@@ -11,6 +11,7 @@
 #include "../GameObjects/Barrel.h"
 #include "../GameObjects/RedBox.h"
 #include "../GameObjects/Tank.h"
+#include "../GameObjects/Elevator.h"
 
 #include <vector>
 
@@ -56,6 +57,7 @@ class Boss2;
 class Barrel;
 class RedBox;
 class Tank;
+class Elevator;
 class Grid2
 {
 private:

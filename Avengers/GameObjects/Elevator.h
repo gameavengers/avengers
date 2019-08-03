@@ -23,7 +23,7 @@ class Elevator : public GameObject
 
 public:
 	Elevator(float x, float y, ElevatorType type);
-	void LoadResources();
+	static void LoadResources();
 
 	float timeCount;
 	float posx, posy;

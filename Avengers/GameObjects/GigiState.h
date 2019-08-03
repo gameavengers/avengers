@@ -7,6 +7,7 @@ class Gigi;
 enum StateGigi
 {
 	GIGI_STATE_FLYING, //Bay
+	GIGI_STATE_DEAD, //chết
 };
 
 class GigiState : public State
@@ -17,6 +18,9 @@ protected:
 	Gigi *gigi;
 	Animation * anim;
 public:
+	float timeCount;
+	float shootTimeCount;
+
 	GigiState(Gigi *gigi);
 	~GigiState();
 
@@ -28,6 +32,7 @@ public:
 	void SetState(StateGigi State);
 
 	void state_flying();
+	void state_dead();
 
 	void Colision() override;
 	void Update(DWORD dt) override;

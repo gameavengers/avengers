@@ -23,7 +23,9 @@ Grid2::Grid2()
 	RedBox::LoadResources();
 	Item::LoadResources();
 	Tank::LoadResources();
+	Gigi::LoadResources();
 	tank = new Tank(250, 80, TankType::LEFT);
+	gigi = new Gigi(300, 200);
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -241,6 +243,7 @@ void Grid2::Update(DWORD dt)
 	if (spawnboss)
 	boss1->Update(dt);
 	tank->Update(dt);
+	gigi->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 	SpawnProjectTile::GetInstance()->UpdateItem(dt);
 
@@ -323,4 +326,5 @@ void Grid2::Render()
 	SpawnProjectTile::GetInstance()->RenderBullet();
 	SpawnProjectTile::GetInstance()->RenderItem();
 	tank->Render();
+	gigi->Render();
 }

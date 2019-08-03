@@ -3,6 +3,7 @@
 #include "GigiState.h"
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
+#include "../GameComponents/SpawnProjectTile.h"
 #include "State.h"
 
 class Gigi : public GameObject
@@ -17,7 +18,10 @@ class Gigi : public GameObject
 	DWORD lastFrameTime;
 
 public:
-	void LoadResources();
+	Gigi(float x, float y);
+	static void LoadResources();
+
+	float posx, posy;
 
 	static Gigi *GetInstance();
 

@@ -184,8 +184,13 @@ enum StateDomesto
 //
 #define ELEVATOR_SPEED 0.075f
 
-
 //
 //Tank
 //
 #define DELAY_ATTACK_TIME 2000
+
+//
+//Gigi
+//
+#define GIGI_FLY_SPEED 0.07f
+#define GIGI_DELAY_ATTACK_TIME 3000

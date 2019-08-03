@@ -20,6 +20,11 @@ class Shield : public GameObject
 public:
 	Shield();
 
+	bool isFlying = false;
+
+	bool IsFlying() { return this->isFlying; }
+	void SetIsFlying(bool isFlying) { this->isFlying = isFlying; }
+
 	static Shield * GetInstance();
 
 	void LoadResources();

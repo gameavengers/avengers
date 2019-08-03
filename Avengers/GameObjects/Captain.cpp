@@ -233,6 +233,19 @@ void Captain::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	// CAPTAIN_ANI_BLEEING_2
+	anim = new Animation(10);
+
+	Sprite * sprite7 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[30], TEXTURE_TRANS_COLOR);
+	sprite7->SetOffSetY(-16);
+	anim->AddFrame(sprite7);
+
+	Sprite * sprite8 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[0], TEXTURE_TRANS_COLOR);
+	sprite8->SetOffSetY(-16);
+	anim->AddFrame(sprite8);
+	
+	animations.push_back(anim);
 }
 
 void Captain::Reset()
@@ -430,8 +443,11 @@ void Captain::UpdateCollision(DWORD dt)
 			case 3:
 			case 4:
 			case 5:
-			case 6:
 				listUpdateObject.at(i).object->OnCollision();
+				break;
+			case 6:
+				if (shield->IsFlying())
+					listUpdateObject.at(i).object->OnCollision();
 				break;
 			}
 		}
@@ -465,6 +481,7 @@ void Captain::UpdateCollision(DWORD dt)
 		
 		if (isCollide)
 		{
+			listBullet.at(i)->Disable();
 			((CaptainState*)state)->timeCount = 0;
 			this->SetIsBleeding(true);
 			bImortal = true;

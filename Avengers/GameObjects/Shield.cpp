@@ -78,11 +78,13 @@ void Shield::Update(DWORD dt)
 	if (!captain->IsShield())
 	{
 		this->state = SHIELD_UP;
+		this->SetIsFlying(true);
 		ShieldFlying();
 	}
 	else
 	{
-		if (capstate->GetState() == STATE_STANDING || capstate->GetState() == STATE_WALKING)
+		this->SetIsFlying(false);
+		if (capstate->GetState() == STATE_STANDING || capstate->GetState() == STATE_WALKING || capstate->GetState() == STATE_BLEEING_2)
 		{
 			this->state = SHIELD_SIDE;
 			this->SetSpeedX(0);

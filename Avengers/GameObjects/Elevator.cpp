@@ -25,6 +25,13 @@ Elevator::Elevator(float x, float y, ElevatorType type)
 {
 	LoadResources();
 
+	this->disable = false;
+
+	this->posx = x;
+	this->posy = y;
+
+	this->type = type;
+
 	this->x = x;
 	this->y = y;
 	this->width = 32;
@@ -59,11 +66,64 @@ void Elevator::LoadResources()
 	animations.push_back(anim);
 }
 
+void Elevator::fly_circle()
+{
+	
+}
+
+void Elevator::fly_slash()
+{
+	if (this->GetPositionX() <= posx)
+		this->SetSpeedX(ELEVATOR_SPEED);
+
+	if (this->GetPositionX() >= posx + 100)
+		this->SetSpeedX(-ELEVATOR_SPEED);
+
+	if (this->GetPositionY() <= posy)
+		this->SetSpeedY(ELEVATOR_SPEED);
+
+	if (this->GetPositionY() >= posy + 100)
+		this->SetSpeedY(-ELEVATOR_SPEED);
+}
+
+void Elevator::fly_horizontal()
+{
+	if (this->GetPositionX() <= posx)
+		this->SetSpeedX(ELEVATOR_SPEED);
+
+	if (this->GetPositionX() >= posx + 100)
+		this->SetSpeedX(-ELEVATOR_SPEED);
+}
+
 void Elevator::Update(DWORD dt)
 {
 	if (this->disable)
 		return;
 
+	this->timeCount += dt;
+
+	float moveX = trunc(this->GetSpeedX()* dt);
+	float moveY = trunc(this->GetSpeedY()* dt);
+	this->SetPositionX(this->GetPositionX() + moveX);
+	this->SetPositionY(this->GetPositionY() + moveY);
+
+	switch (type)
+	{
+	case CIRCLE:
+		this->fly_circle();
+		break;
+
+	case SLASH:
+		this->fly_slash();
+		break;
+
+	case HORIZONTAL:
+		this->fly_horizontal();
+		break;
+
+	default:
+		break;
+	}
 
 }
 void Elevator::Render()

@@ -178,3 +178,8 @@ enum StateDomesto
 #define BOSS1_RIGHT_POSITION		370
 #define BOSS1_PARABOL_JUMP_H		32
 #define BOSS1_PARABOL_JUMP_K		100
+
+//
+//Elevator
+//
+#define ELEVATOR_SPEED 0.075f

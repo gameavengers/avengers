@@ -348,13 +348,12 @@ void CaptainState::state_bleeing()
 {
 	this->SetState(STATE_BLEEING);
 	anim = captain->GetAnimationsList()[STATE_BLEEING];
-	captain->SetPositionX(captain->GetPositionX() - (captain->IsLeft() ? -1 : 1));
+	captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? 1 : -1));
 
 	if (timeCount >= 100)
 	{
-		timeCount = 0;
-		this->SetState(STATE_STANDING);
-		captain->SetIsBleeding(false);
+		captain->SetSpeedX(0);
+		this->state_bleeing_2();
 		return;
 	}
 }
@@ -386,6 +385,20 @@ void CaptainState::state_swing()
 
 	this->SetState(STATE_SWING);
 	anim = captain->GetAnimationsList()[STATE_SWING];
+}
+
+void CaptainState::state_bleeing_2()
+{
+	this->SetState(STATE_BLEEING_2);
+	anim = captain->GetAnimationsList()[STATE_BLEEING_2];
+	
+	if (timeCount >= 300)
+	{
+		timeCount = 0;
+		this->SetState(STATE_STANDING);
+		captain->SetIsBleeding(false);
+		return;
+	}
 }
 
 void CaptainState::KeyHandle()
@@ -525,6 +538,10 @@ void CaptainState::Update(DWORD dt)
 
 	case STATE_DIVING:
 		this->state_diving();
+		break;
+
+	case STATE_BLEEING_2:
+		this->state_bleeing_2();
 		break;
 
 	default:

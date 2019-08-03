@@ -1,11 +1,13 @@
-#pragma once
+﻿#pragma once
 #include "../GameComponents/GameObject.h"
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
 
 enum ElevatorType
 {
-	
+	CIRCLE, //di chuyển vòng tròn
+	SLASH, //di chuyển chéo lên xuống
+	HORIZONTAL, // di chuyển qua lại
 };
 
 class Elevator : public GameObject
@@ -23,6 +25,9 @@ public:
 	Elevator(float x, float y, ElevatorType type);
 	void LoadResources();
 
+	float timeCount;
+	float posx, posy;
+
 	static Elevator *GetInstance();
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
@@ -37,6 +42,10 @@ public:
 	vector<Animation *> GetAnimationsList() { return animations; }
 
 	ElevatorType GetElevatorType() { return type; }
+
+	void fly_circle();
+	void fly_slash();
+	void fly_horizontal();
 
 	void Update(DWORD dt) override;
 

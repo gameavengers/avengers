@@ -5,7 +5,6 @@ vector<Animation *> Item::animations;
 
 Item::Item(float x, float y, ItemType type)
 {
-	//LoadResources();
 	Initialize(x, y, type);
 }
 

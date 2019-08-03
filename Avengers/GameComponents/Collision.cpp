@@ -191,6 +191,14 @@ void Collision::FilterCollision(
 	{
 		ColliedEvent* c = coEvents[i];
 
+		if (c->isAABBCollision)
+		{
+			coEventsResult.push_back(c);
+			ny = 1;
+			return;
+		}
+
+
 		//NEED FIX
 		if (c->time < min_tx && c->nx != 0)
 		{

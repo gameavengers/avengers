@@ -81,15 +81,23 @@ void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &co
 		}
 		else if (tiles[i]->type == ObjectType::ROPE_SWING)
 		{
-			float time;
-			float normalX;
-			float normalY;
+			float topCaptainEdge = this->collider.y;
+			float topRope = tileCollider.y;
 
-			time = Collision::GetInstance()->SweptAABB(this->GetCollider(), tileCollider, normalX, normalY);
+			float distance = topCaptainEdge - topRope;
 
-			if (time >= 0 && time < 1.0f && normalY == 1)
+			if (distance < 16 && distance > 0 && abs(this->collider.x - tileCollider.x) < 16)
+				int a = 0;
+
+			//time = Collision::GetInstance()->SweptAABB(this->GetCollider(), tileCollider, normalX, normalY);
+			bool isCollide = Collision::GetInstance()->AABB(this->collider, tileCollider);			
+
+			if (isCollide)
+				int a = 0;
+
+			if (isCollide && distance < 13  && distance > 0)
 			{
-				coEvents.push_back(new ColliedEvent(EVENT_ROPE_SWING, time, normalX, normalY));
+				coEvents.push_back(new ColliedEvent(EVENT_ROPE_SWING));
 			}
 		}
 	}

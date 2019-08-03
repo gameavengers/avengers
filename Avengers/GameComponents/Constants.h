@@ -183,3 +183,9 @@ enum StateDomesto
 //Elevator
 //
 #define ELEVATOR_SPEED 0.075f
+
+
+//
+//Tank
+//
+#define DELAY_ATTACK_TIME 2000

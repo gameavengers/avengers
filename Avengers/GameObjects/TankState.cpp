@@ -37,41 +37,113 @@ void TankState::state_bleeding()
 void TankState::state_left()
 {
 	anim = tank->GetAnimationsList()[1];
+
+	if (this->shootTimeCount > DELAY_ATTACK_TIME)
+	{
+		this->shootTimeCount = 0;
+		float offsetX = 0;
+		float offsetY = 0;
+		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
+			1, BulletType::BULLET_TANK);
+	}
 }
 
 void TankState::state_bottom_left()
 {
 	anim = tank->GetAnimationsList()[2];
+
+	if (this->shootTimeCount > DELAY_ATTACK_TIME)
+	{
+		this->shootTimeCount = 0;
+		float offsetX = 0;
+		float offsetY = 0;
+		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
+			2, BulletType::BULLET_TANK);
+	}
 }
 
 void TankState::state_bottom()
 {
 	anim = tank->GetAnimationsList()[3];
+
+	if (this->shootTimeCount > DELAY_ATTACK_TIME)
+	{
+		this->shootTimeCount = 0;
+		float offsetX = 0;
+		float offsetY = 0;
+		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
+			3, BulletType::BULLET_TANK);
+	}
 }
 
 void TankState::state_bottom_right()
 {
 	anim = tank->GetAnimationsList()[4];
+
+	if (this->shootTimeCount > DELAY_ATTACK_TIME)
+	{
+		this->shootTimeCount = 0;
+		float offsetX = 0;
+		float offsetY = 0;
+		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
+			4, BulletType::BULLET_TANK);
+	}
 }
 
 void TankState::state_top()
 {
 	anim = tank->GetAnimationsList()[7];
+
+	if (this->shootTimeCount > DELAY_ATTACK_TIME)
+	{
+		this->shootTimeCount = 0;
+		float offsetX = 0;
+		float offsetY = 0;
+		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
+			7, BulletType::BULLET_TANK);
+	}
 }
 
 void TankState::state_top_left()
 {
 	anim = tank->GetAnimationsList()[8];
+
+	if (this->shootTimeCount > DELAY_ATTACK_TIME)
+	{
+		this->shootTimeCount = 0;
+		float offsetX = 0;
+		float offsetY = 0;
+		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
+			8, BulletType::BULLET_TANK);
+	}
 }
 
 void TankState::state_top_right()
 {
 	anim = tank->GetAnimationsList()[6];
+
+	if (this->shootTimeCount > DELAY_ATTACK_TIME)
+	{
+		this->shootTimeCount = 0;
+		float offsetX = 0;
+		float offsetY = 0;
+		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
+			6, BulletType::BULLET_TANK);
+	}
 }
 
 void TankState::state_right()
 {
 	anim = tank->GetAnimationsList()[5];
+
+	if (this->shootTimeCount > DELAY_ATTACK_TIME)
+	{
+		this->shootTimeCount = 0;
+		float offsetX = 0;
+		float offsetY = 0;
+		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
+			5, BulletType::BULLET_TANK);
+	}
 }
 
 void TankState::Colision()

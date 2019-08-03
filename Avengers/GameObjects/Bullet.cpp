@@ -173,6 +173,41 @@ void Bullet::BulletNormalUpdate(DWORD dt)
 
 void Bullet::BulletTankUpdate(DWORD dt)
 {
+	switch (direction)
+	{
+	case 1:		//Left
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
+		break;
+	case 2:		//Bottom-Left
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+		this->SetSpeedY(-BULLET_NORMAL_SPEED);
+		break;
+	case 3:		//Bottom
+		this->SetSpeedX(0);
+		this->SetSpeedY(-BULLET_NORMAL_SPEED);
+		break;
+	case 4:		//Bottom-Right
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		this->SetSpeedY(-BULLET_NORMAL_SPEED);
+		break;
+	case 5:		//Right
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
+		break;
+	case 6:		//Top-Right
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		this->SetSpeedY(BULLET_NORMAL_SPEED);
+		break;
+	case 7:		//Top
+		this->SetSpeedX(0);
+		this->SetSpeedY(BULLET_NORMAL_SPEED);
+		break;
+	case 8:		//Top-Left
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+		this->SetSpeedY(BULLET_NORMAL_SPEED);
+		break;
+	}
 }
 
 void Bullet::BulletBoss2Update(DWORD dt)
@@ -314,6 +349,7 @@ void Bullet::Update(DWORD dt)
 		BulletNormalUpdate(dt);
 		break;
 	case BulletType::BULLET_TANK:
+		BulletTankUpdate(dt);
 		break;
 	case BulletType::BULLET_BOSS2:
 		break;

@@ -3,6 +3,7 @@
 #include "TankState.h"
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
+#include "../GameComponents/SpawnProjectTile.h"
 #include "State.h"
 
 enum TankType {

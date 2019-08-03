@@ -38,7 +38,7 @@ Tank::Tank(float x, float y, TankType type)
 		((TankState*)state)->SetDirection(3);
 		break;
 	case LEFT:
-		((TankState*)state)->SetDirection(0);
+		((TankState*)state)->SetDirection(1);
 		break;
 	case RIGHT:
 		((TankState*)state)->SetDirection(5);

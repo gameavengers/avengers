@@ -113,8 +113,8 @@ enum StateDomesto
 #define BIG_ENERGY_HEIGHT 9
 
 //Small Energy
-#define SMALL_ENERGY_WIDTH 8
-#define SMALL_ENERGY_HEIGHT 9
+#define SMALL_ENERGY_WIDTH 7
+#define SMALL_ENERGY_HEIGHT 7
 
 //Key Crystal
 #define KEY_CRYSTAL_WIDTH 12

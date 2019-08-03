@@ -25,9 +25,10 @@ void TankState::state_bleeding()
 {
 	anim = tank->GetAnimationsList()[0];
 
-	if (this->timeCount > 1000)
+	if (this->timeCount > 500)
 	{
 		this->timeCount = 0;
+		srand((int)time(0));
 		this->SetDirection(rand() % 8 + 1);
 		return;
 	}

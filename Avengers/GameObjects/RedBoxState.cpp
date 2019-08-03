@@ -49,6 +49,7 @@ void RedBoxState::state_open()
 
 	if (IsSpawn())
 	{
+		srand((int)time(0));
 		SpawnProjectTile::GetInstance()->SpawnItem(redbox->GetPositionX(), redbox->GetPositionY(), ItemType(rand() % 5 + 0));
 		this->SetIsSpawn(false);
 	}

@@ -1,4 +1,5 @@
 ﻿#include "TileMap2.h"
+#include "Sound.h"
 
 TileMap2* TileMap2::_instance = nullptr;
 
@@ -152,6 +153,20 @@ void TileMap2::LoadSpawnData(LPCWSTR filePath, int mapId)
 void TileMap2::SetCurrentMap(int mapID)
 {
 	currentMap = &mapList[mapID];
+	switch (mapID)
+	{
+	case STAGE_1:
+		Sound::GetInstance()->LoopSound(Sound::GetInstance()->LoadSound((LPTSTR)SOUND_JUMPING_ROLE));
+		break;
+	case STAGE_BOSS_1:
+		break;
+	case STAGE_2:
+		break;
+	case STAGE_BOSS_2:
+		break;
+	default:
+		break;
+	}
 }
 
 void TileMap2::Render(int x, int y)

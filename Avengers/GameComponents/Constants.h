@@ -59,6 +59,11 @@ enum StateDomesto
 #define TILES_SET_MATRIX_STAGE_2 L"Resources\\TiledMap\\Map-2-Tiles.png"
 #define TILES_SET_STAGE_BOSS_2 L"Resources\\TiledMap\\Map-Boss2-Tiles.png"
 
+//SOUND
+//#define SOUND_BACKGROUND L"./Resource/Sound/Background.wav"
+//const LPTSTR SOUND_BACKGROUND = "./Resource/Sound/Background.wav";
+#define SOUND_JUMPING_ROLE L"Resource\\Sound\\Jump_role.wav"
+
 //ENEMY MATRIX
 #define ENEMIES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Enemies-Map-1-Matrix.txt"
 #define ENEMIES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Enemies-Map-2-Matrix.txt"

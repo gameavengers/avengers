@@ -120,6 +120,12 @@
     <ClCompile Include="GameObjects\BatState.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
+    <ClCompile Include="GameComponents\dsutil.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameComponents\Sound.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameComponents\Debug.h" />
@@ -242,6 +248,15 @@
     </ClInclude>
     <ClInclude Include="GameObjects\BatState.h">
       <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponents\dsutil.h">
+      <Filter>Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponents\dxutil.h">
+      <Filter>Header\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponents\Sound.h">
+      <Filter>Header\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -374,17 +374,25 @@ void CaptainState::state_diving()
 
 void CaptainState::state_swing()
 {
-	captain->SetSpeedX(0);
-	captain->SetSpeedY(0);
-
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z))
 	{
-		this->state_jumping();
+		this->SetState(STATE_STANDING);
+		this->state_standing();
+		captain->SetIsSwing(false);
 		return;
 	}
 
-	this->SetState(STATE_SWING);
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_DOWN))
+	{
+		this->SetState(STATE_JUMPING);
+		captain->SetIsSwing(false);
+		return;
+	}
+
 	anim = captain->GetAnimationsList()[STATE_SWING];
+
+	captain->SetSpeedX(0);
+	captain->SetSpeedY(0);
 }
 
 void CaptainState::state_bleeing_2()
@@ -443,7 +451,6 @@ void CaptainState::Colision()
 	if (captain->IsSwing())
 	{
 		this->SetState(STATE_SWING);
-		this->state_swing();
 	}
 
 	captain->SetIsGrounded(false);
@@ -542,6 +549,10 @@ void CaptainState::Update(DWORD dt)
 
 	case STATE_BLEEING_2:
 		this->state_bleeing_2();
+		break;
+
+	case STATE_SWING:
+		this->state_swing();
 		break;
 
 	default:

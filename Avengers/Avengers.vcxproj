@@ -166,6 +166,7 @@
     <ClInclude Include="GameObjects\State.h" />
     <ClInclude Include="GameObjects\Tank.h" />
     <ClInclude Include="GameObjects\TankState.h" />
+    <ClInclude Include="GameObjects\TwinBricks.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameComponents\Animation.cpp" />
@@ -207,6 +208,7 @@
     <ClCompile Include="GameObjects\State.cpp" />
     <ClCompile Include="GameObjects\Tank.cpp" />
     <ClCompile Include="GameObjects\TankState.cpp" />
+    <ClCompile Include="GameObjects\TwinBricks.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -14,5 +14,5 @@
 14: tank right
 15: bat normal
 16: bat capsule
-17*: twice brick
+17: twin bricks
 18: redbox map 2

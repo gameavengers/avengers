@@ -12,6 +12,7 @@
 #include "../GameObjects/Tank.h"
 #include "../GameObjects/Elevator.h"
 #include "../GameObjects/Bat.h"
+#include "../GameObjects/TwinBricks.h"
 
 #include <vector>
 
@@ -49,14 +50,8 @@ struct GridData
 	}
 };
 
-class RunningMan;
-class Domesto;
-class Gigi;
 class Boss1;
 class Boss2;
-class RedBox;
-class Tank;
-class Elevator;
 class Grid2
 {
 private:
@@ -68,13 +63,8 @@ private:
 
 	Captain* captain;
 
-	RunningMan* runningMan;
-	Domesto* domesto;
-	Gigi* gigi;
 	Boss1* boss1;
 	Boss2* boss2;
-	RedBox* redbox;
-	Tank* tank;
 
 	vector <OnUpdateObject> listObject;
 	

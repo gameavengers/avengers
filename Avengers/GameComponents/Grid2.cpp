@@ -28,6 +28,7 @@ Grid2::Grid2()
 	Bat::LoadResources();
 	Boss2::LoadResources();
 	Bullet::LoadResources();
+	TwinBricks::LoadResources();
 	isDisableBoss2 = true;
 	boss2 = Boss2::GetInstance();
 	
@@ -334,6 +335,17 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 			object->setIsLeft(true);
 		else
 			object->setIsLeft(false);
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 17:
+	{
+		TwinBricks* object = new TwinBricks(tile->x * TILE_SIZE, tile->y * TILE_SIZE);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
 
 		listObject.push_back(temp);
 	}

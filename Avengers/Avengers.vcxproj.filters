@@ -114,6 +114,9 @@
     <ClCompile Include="GameObjects\BatState.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjects\TwinBricks.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameComponents\Debug.h" />
@@ -229,6 +232,9 @@
       <Filter>Header\Object</Filter>
     </ClInclude>
     <ClInclude Include="GameObjects\BatState.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\TwinBricks.h">
       <Filter>Header\Object</Filter>
     </ClInclude>
   </ItemGroup>

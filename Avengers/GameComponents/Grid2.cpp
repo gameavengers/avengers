@@ -205,7 +205,7 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 	break;
 	case 6:
 	{
-		RedBox* object = new RedBox(tile->x * TILE_SIZE, tile->y * TILE_SIZE);
+		RedBox* object = new RedBox(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RedBoxType::MAP_1);
 		OnUpdateObject temp;
 		temp.object = object;
 		temp.tile = tile;
@@ -330,6 +330,17 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 			object->setIsLeft(true);
 		else
 			object->setIsLeft(false);
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 18:
+	{
+		RedBox* object = new RedBox(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RedBoxType::MAP_2);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
 
 		listObject.push_back(temp);
 	}

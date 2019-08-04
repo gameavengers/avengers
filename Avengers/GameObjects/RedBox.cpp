@@ -23,9 +23,11 @@ RedBox::RedBox()
 	collider.height = TILES_HEIGHT_PER_TILE;
 }
 
-RedBox::RedBox(float x, float y)
+RedBox::RedBox(float x, float y, RedBoxType type)
 {
 	this->state = new RedBoxState(this);
+
+	this->type = type;
 
 	this->x = x;
 	this->y = y;
@@ -64,6 +66,24 @@ void RedBox::LoadResources()
 	// RED_BOX_ANI_OPEN
 	anim = new Animation(100);
 	for (int i = 95; i < 96; i++)
+	{
+		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+
+	// RED_BOX_MAP_2_ANI_CLOSE
+	anim = new Animation(100);
+	for (int i = 111; i < 112; i++)
+	{
+		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+
+	// RED_BOX_MAP_2_ANI_OPEN
+	anim = new Animation(100);
+	for (int i = 110; i < 111; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);

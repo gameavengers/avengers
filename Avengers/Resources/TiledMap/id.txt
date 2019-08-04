@@ -15,3 +15,4 @@
 15: bat normal
 16: bat capsule
 17*: twice brick
+18: redbox map 2

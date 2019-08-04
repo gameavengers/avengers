@@ -195,6 +195,7 @@ enum BulletType {
 //
 #define BOSS2_RUN_SPEED				0.1f
 #define BOSS2_RUN_TIME				2500
+#define BOSS2_HOLD_BARREL_TIME		500
 //
 //Elevator
 //

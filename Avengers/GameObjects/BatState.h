@@ -9,6 +9,7 @@ enum StateBat
 	BAT_STATE_IDLE,//đứng yên
 	BAT_STATE_GOING_TO_FLY,//chuẩn bị bay
 	BAT_STATE_FLYING,//bay
+	BAT_STATE_DEAD, //chết
 };
 
 class BatState : public State
@@ -36,6 +37,7 @@ public:
 	void state_idle();
 	void state_going_to_fly();
 	void state_flying();
+	void state_dead();
 
 	void Colision() override;
 	void Update(DWORD dt) override;

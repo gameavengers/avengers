@@ -174,6 +174,15 @@ void BatState::state_flying()
 	}
 }
 
+void BatState::state_dead()
+{
+	this->SetState(BAT_STATE_DEAD);
+	anim = bat->GetAnimationsList()[BAT_STATE_DEAD];
+
+	bat->SetSpeedX(0);
+	bat->SetSpeedY(-GIGI_FLY_SPEED * 2);
+}
+
 void BatState::Colision()
 {
 
@@ -199,6 +208,10 @@ void BatState::Update(DWORD dt)
 
 	case BAT_STATE_FLYING:
 		this->state_flying();
+		break;
+
+	case BAT_STATE_DEAD:
+		this->state_dead();
 		break;
 
 	default:

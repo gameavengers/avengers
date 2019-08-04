@@ -65,20 +65,33 @@ void Bat::LoadResources()
 
 	// BAT_GOING_TO_FLY
 	anim = new Animation(100);
-	for (int i = 99; i < 101; i++)
-	{
-		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		anim->AddFrame(sprite,400);
-	}
+	
+	Sprite * sprite1 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[99], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite1,400);
+
+	Sprite * sprite2 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[100], TEXTURE_TRANS_COLOR);
+	sprite2->SetOffSetX(3);
+	anim->AddFrame(sprite2, 400);
+	
 	animations.push_back(anim);
 
 	// BAT_FLYING
 	anim = new Animation(100);
-	for (int i = 101; i < 103; i++)
-	{
-		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		anim->AddFrame(sprite);
-	}
+
+	Sprite * sprite3 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[101], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite3);
+
+	Sprite * sprite4 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[102], TEXTURE_TRANS_COLOR);
+	sprite4->SetOffSetY(-7);
+	anim->AddFrame(sprite4);
+	
+	animations.push_back(anim);
+
+	// BAT_DEAD
+	anim = new Animation(100);
+
+	anim->AddFrame(sprite4);
+
 	animations.push_back(anim);
 }
 
@@ -91,6 +104,8 @@ void Bat::Update(DWORD dt)
 	float moveY = trunc(this->GetSpeedY()* dt);
 	this->SetPositionX(this->GetPositionX() + moveX);
 	this->SetPositionY(this->GetPositionY() + moveY);
+
+	this->UpdateObjectCollider();
 
 	state->Colision();
 	state->Update(dt);
@@ -105,5 +120,6 @@ void Bat::Render()
 
 void Bat::OnCollision()
 {
-	
+	((BatState*)state)->timeCount = 0;
+	((BatState*)state)->state_dead();
 }

@@ -39,4 +39,6 @@ public:
 	void Update(DWORD dt) override;
 
 	void Render() override;
+
+	void OnCollision();
 };

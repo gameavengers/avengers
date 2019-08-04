@@ -327,7 +327,7 @@ void Captain::Update(DWORD dt)
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_F3))
 	{
 		Game::GetInstance()->SetStage(STAGE_2);
-		this->SetPositionX(280);
+		this->SetPositionX(1000);
 		this->SetPositionY(900);
 		Viewport::GetInstance()->Reset();
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
@@ -452,6 +452,8 @@ void Captain::UpdateCollision(DWORD dt)
 			case 3:
 			case 4:
 			case 5:
+			case 7:
+			case 15:
 				listUpdateObject.at(i).object->OnCollision();
 				break;
 			case 6:

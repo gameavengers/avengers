@@ -78,7 +78,7 @@ void GigiState::state_dead()
 	anim = gigi->GetAnimationsList()[GIGI_STATE_DEAD];
 
 	gigi->SetSpeedX(0);
-	gigi->SetSpeedY(-GIGI_FLY_SPEED);
+	gigi->SetSpeedY(-GIGI_FLY_SPEED * 2);
 }
 
 void GigiState::Colision()

@@ -84,16 +84,16 @@ void Elevator::fly_circle()
 void Elevator::fly_slash()
 {
 	if (this->GetPositionX() <= posx)
-		this->SetSpeedX(ELEVATOR_SPEED);
+		this->SetSpeedX(ELEVATOR_SPEED / 1.2);
 
-	if (this->GetPositionX() >= posx + 100)
-		this->SetSpeedX(-ELEVATOR_SPEED);
+	if (this->GetPositionX() >= posx + 50)
+		this->SetSpeedX(-ELEVATOR_SPEED / 1.2);
 
 	if (this->GetPositionY() <= posy)
-		this->SetSpeedY(ELEVATOR_SPEED);
+		this->SetSpeedY(ELEVATOR_SPEED / 1.2);
 
-	if (this->GetPositionY() >= posy + 100)
-		this->SetSpeedY(-ELEVATOR_SPEED);
+	if (this->GetPositionY() >= posy + 50)
+		this->SetSpeedY(-ELEVATOR_SPEED / 1.2);
 }
 
 void Elevator::fly_horizontal()

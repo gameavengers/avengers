@@ -96,3 +96,9 @@ void Gigi::Render()
 {
 	state->Render();
 }
+
+void Gigi::OnCollision()
+{
+	((GigiState*)state)->timeCount = 0;
+	((GigiState*)state)->state_dead();
+}

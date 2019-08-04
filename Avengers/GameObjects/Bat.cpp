@@ -11,7 +11,7 @@ Bat::Bat()
 	state = BatState::GetInstance(this);
 
 	this->x = 250;
-	this->y = 80;
+	this->y = 150;
 	this->width = 24;
 	this->height = 16;
 
@@ -68,7 +68,7 @@ void Bat::LoadResources()
 	for (int i = 99; i < 101; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		anim->AddFrame(sprite);
+		anim->AddFrame(sprite,400);
 	}
 	animations.push_back(anim);
 
@@ -86,6 +86,11 @@ void Bat::Update(DWORD dt)
 {
 	if (this->disable)
 		return;
+
+	float moveX = trunc(this->GetSpeedX()* dt);
+	float moveY = trunc(this->GetSpeedY()* dt);
+	this->SetPositionX(this->GetPositionX() + moveX);
+	this->SetPositionY(this->GetPositionY() + moveY);
 
 	state->Colision();
 	state->Update(dt);

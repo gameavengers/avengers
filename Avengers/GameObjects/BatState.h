@@ -20,6 +20,7 @@ protected:
 	Animation * anim;
 	DWORD dt;
 
+	int flyStage;
 public:
 	float timeCount;
 	BatState(Bat *bat);

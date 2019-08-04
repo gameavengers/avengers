@@ -25,6 +25,7 @@ Grid2::Grid2()
 	Tank::LoadResources();
 	Gigi::LoadResources();
 	Elevator::LoadResources();
+	Bat::LoadResources();
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -322,6 +323,8 @@ void Grid2::Update(DWORD dt)
 	timeCount += dt;
 	captain->Update(dt);
 	captain->UpdateCollision(dt);
+	Bat::GetInstance()->Update(dt);
+
 	if (spawnboss)
 	boss1->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
@@ -357,7 +360,7 @@ void Grid2::Render()
 {
 	int lCell, rCell, tCell, bCell;
 	this->GetCameraPosOnGrid(lCell, rCell, tCell, bCell);
-
+	
 #pragma region Spawn
 
 	for (int y = bCell; y <= tCell; y++)
@@ -393,6 +396,7 @@ void Grid2::Render()
 		listObject.at(i).object->Render();
 	}
 	captain->Render();
+	Bat::GetInstance()->Render();
 
 	SpawnProjectTile::GetInstance()->RenderBullet();
 	SpawnProjectTile::GetInstance()->RenderItem();

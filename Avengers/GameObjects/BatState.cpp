@@ -15,8 +15,8 @@ BatState::BatState(Bat *bat)
 {
 	this->bat = bat;
 
-	this->state_flying();
-
+	this->state_idle();
+	flyStage = 0;
 }
 
 BatState::~BatState()
@@ -39,17 +39,139 @@ void BatState::state_idle()
 {
 	this->SetState(BAT_STATE_IDLE);
 	anim = bat->GetAnimationsList()[BAT_STATE_IDLE];
+
+	float distanceX = abs(Captain::GetInstance()->GetPositionX() - bat->GetPositionX());
+	float distanceY = abs(Captain::GetInstance()->GetPositionY() - bat->GetPositionY());
+
+	if (distanceX < 64 || distanceY < 64 && timeCount > 300)
+	{
+		timeCount = 0;
+		this->state_going_to_fly();
+	}
 }
 
 void BatState::state_going_to_fly()
 {
 	this->SetState(BAT_STATE_GOING_TO_FLY);
 	anim = bat->GetAnimationsList()[BAT_STATE_GOING_TO_FLY];
+
+	if (timeCount > 1200)
+	{
+		timeCount = 0;
+		this->state_flying();
+	}
 }
 void BatState::state_flying()
 {
 	this->SetState(BAT_STATE_FLYING);
 	anim = bat->GetAnimationsList()[BAT_STATE_FLYING];
+
+	switch (flyStage)
+	{
+	case 0:
+		bat->SetSpeedX(0);
+		bat->SetSpeedY(-0.1f);
+		if (timeCount >= 500)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 1:
+		bat->SetSpeedX(-0.1f);
+		bat->SetSpeedY(0);
+		if (timeCount >= 500)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 2:
+		bat->SetSpeedX(0);
+		bat->SetSpeedY(-0.1f);
+		if (timeCount >= 500)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 3:
+		bat->SetSpeedX(0.1f);
+		bat->SetSpeedY(0);
+		if (timeCount >= 1000)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 4:
+		bat->SetSpeedX(0);
+		bat->SetSpeedY(-0.1f);
+		if (timeCount >= 500)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 5:
+		bat->SetSpeedX(-0.1f);
+		bat->SetSpeedY(0);
+		if (timeCount >= 1000)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 6:
+		bat->SetSpeedX(0);
+		bat->SetSpeedY(0.1f);
+		if (timeCount >= 500)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 7:
+		bat->SetSpeedX(0.1f);
+		bat->SetSpeedY(0);
+		if (timeCount >= 1000)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 8:
+		bat->SetSpeedX(0);
+		bat->SetSpeedY(0.1f);
+		if (timeCount >= 500)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 9:
+		bat->SetSpeedX(-0.1f);
+		bat->SetSpeedY(0);
+		if (timeCount >= 500)
+		{
+			timeCount = 0;
+			flyStage++;
+		}
+		break;
+	case 10:
+		bat->SetSpeedX(0);
+		bat->SetSpeedY(0.1f);
+		if (timeCount >= 500)
+		{
+			bat->SetSpeedX(0);
+			bat->SetSpeedY(0);
+			timeCount = 0;
+			flyStage = 0;
+			//this->state_back_to_idle();
+			this->state_idle();
+		}
+		break;
+	}
 }
 
 void BatState::Colision()

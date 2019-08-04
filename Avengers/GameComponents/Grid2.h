@@ -12,6 +12,7 @@
 #include "../GameObjects/RedBox.h"
 #include "../GameObjects/Tank.h"
 #include "../GameObjects/Elevator.h"
+#include "../GameObjects/Bat.h"
 
 #include <vector>
 

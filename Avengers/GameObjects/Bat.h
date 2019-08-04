@@ -18,7 +18,7 @@ class Bat : public GameObject
 
 public:
 	Bat(float x, float y);
-	void LoadResources();
+	static void LoadResources();
 
 	static Bat *GetInstance();
 

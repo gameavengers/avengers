@@ -6,12 +6,12 @@ Boss2 *Boss2::__instance = NULL;
 
 Boss2::Boss2()
 {
-	LoadResources();
+	//LoadResources();
 
 	state = Boss2State::GetInstance(this);
 
-	this->x = 320;
-	this->y = 85;
+	this->x = 50;
+	this->y = 58;
 	this->width = BOSS2_SPRITE_WIDTH;
 	this->height = BOSS2_SPRITE_HEIGHT;
 
@@ -58,7 +58,7 @@ void Boss2::LoadResources()
 	for (int i = 4; i < 5; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		anim->AddFrame(sprite);
+		anim->AddFrame(sprite, 500);
 	}
 	animations.push_back(anim);
 
@@ -123,6 +123,11 @@ void Boss2::LoadResources()
 
 void Boss2::Update(DWORD dt)
 {
+	float moveX = trunc(this->GetSpeedX()* dt);
+	float moveY = trunc(this->GetSpeedY()* dt);
+	this->SetPositionX(this->GetPositionX() + moveX);
+	this->SetPositionY(this->GetPositionY() + moveY);
+
 	state->Colision();
 	state->Update(dt);
 }

@@ -24,7 +24,12 @@ protected:
 	StateBoss2 stateBoss2;
 	Boss2 *boss2;
 	Animation * anim;
+
+	float runTime;
 public:
+
+	float timeCount;
+
 	Boss2State(Boss2 *boss2);
 	~Boss2State();
 

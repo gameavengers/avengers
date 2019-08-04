@@ -3,6 +3,7 @@
 #include "Boss2State.h"
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
+#include "../GameComponents/Constants.h"
 #include "State.h"
 
 class Boss2 : public GameObject
@@ -17,7 +18,7 @@ class Boss2 : public GameObject
 	DWORD lastFrameTime;
 
 public:
-	void LoadResources();
+	static void LoadResources();
 
 	static Boss2 *GetInstance();
 

@@ -190,6 +190,11 @@ enum BulletType {
 #define BOSS1_PARABOL_JUMP_K		100
 
 //
+//Boss1
+//
+#define BOSS2_RUN_SPEED				0.1f
+#define BOSS2_RUN_TIME				2500
+//
 //Elevator
 //
 #define ELEVATOR_SPEED 0.075f

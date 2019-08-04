@@ -292,8 +292,8 @@ void Captain::Update(DWORD dt)
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
 			}
 			if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
-			{
-				this->SetPositionX(50);
+			{				
+				this->SetPositionX(100);
 				this->SetPositionY(100);
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
@@ -306,6 +306,7 @@ void Captain::Update(DWORD dt)
 	//Chuyển màn nhanh bằng phím
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_F1))
 	{
+		Grid2::GetInstance()->DisableAllObject();
 		Game::GetInstance()->SetStage(STAGE_1);
 		this->SetPositionX(50);
 		this->SetPositionY(100);
@@ -315,6 +316,7 @@ void Captain::Update(DWORD dt)
 	}
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_F2))
 	{
+		Grid2::GetInstance()->DisableAllObject();
 		Game::GetInstance()->SetStage(STAGE_BOSS_1);
 		Grid2::GetInstance()->spawnboss = true;
 		Grid2::GetInstance()->DisableAllObject();
@@ -326,6 +328,7 @@ void Captain::Update(DWORD dt)
 	}
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_F3))
 	{
+		Grid2::GetInstance()->DisableAllObject();
 		Game::GetInstance()->SetStage(STAGE_2);
 		this->SetPositionX(1000);
 		this->SetPositionY(900);
@@ -335,12 +338,14 @@ void Captain::Update(DWORD dt)
 	}
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_F4))
 	{
+		Grid2::GetInstance()->DisableAllObject();
 		Game::GetInstance()->SetStage(STAGE_BOSS_2);
-		this->SetPositionX(50);
+		this->SetPositionX(100);
 		this->SetPositionY(100);
 		Viewport::GetInstance()->Reset();
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
 		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+		Grid2::GetInstance()->isDisableBoss2 = false;
 	}
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_F5))
 	{

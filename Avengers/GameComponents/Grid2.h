@@ -85,6 +85,7 @@ private:
 	void UpdateCurrentTiles();
 
 	float timeCount;
+	
 public:
 	static Grid2* GetInstance();
 
@@ -115,6 +116,7 @@ public:
 	void Render();
 
 	bool spawnboss;
+	bool isDisableBoss2;
 	void DisableAllObject()
 	{
 		for (int i = 0; i < listObject.size(); i++)

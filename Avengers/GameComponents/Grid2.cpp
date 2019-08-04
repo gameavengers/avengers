@@ -26,6 +26,9 @@ Grid2::Grid2()
 	Gigi::LoadResources();
 	Elevator::LoadResources();
 	Bat::LoadResources();
+	Boss2::LoadResources();
+	isDisableBoss2 = true;
+	boss2 = Boss2::GetInstance();
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -358,6 +361,8 @@ void Grid2::Update(DWORD dt)
 
 	if (spawnboss)
 	boss1->Update(dt);
+	if (!isDisableBoss2)
+		boss2->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 	SpawnProjectTile::GetInstance()->UpdateItem(dt);
 
@@ -419,6 +424,8 @@ void Grid2::Render()
 
 	if (spawnboss)
 		boss1->Render();
+	if (!isDisableBoss2)
+		boss2->Render();
 
 	for (int i = 0; i < listObject.size(); i++)
 	{

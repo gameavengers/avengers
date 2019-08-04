@@ -28,6 +28,8 @@ Elevator::Elevator(float x, float y, ElevatorType type)
 {
 	//LoadResources();
 
+	this->timeCount = 0;
+
 	this->disable = false;
 
 	this->posx = x;

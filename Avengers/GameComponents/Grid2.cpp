@@ -303,7 +303,23 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 	break;
 	case 15:
 	{
-		Bat* object = new Bat(tile->x * TILE_SIZE, tile->y * TILE_SIZE);
+		Bat* object = new Bat(tile->x * TILE_SIZE, tile->y * TILE_SIZE, BatType::BAT_NORMAL);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		if (captain->GetPositionX() < object->GetPositionX())
+			object->setIsLeft(true);
+		else
+			object->setIsLeft(false);
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 16:
+	{
+		Bat* object = new Bat(tile->x * TILE_SIZE, tile->y * TILE_SIZE, BatType::BAT_CAPSULE);
 		OnUpdateObject temp;
 		temp.object = object;
 		temp.tile = tile;
@@ -339,9 +355,6 @@ void Grid2::Update(DWORD dt)
 	timeCount += dt;
 	captain->Update(dt);
 	captain->UpdateCollision(dt);
-
-	Elevator::GetInstance()->Update(dt);
-
 
 	if (spawnboss)
 	boss1->Update(dt);
@@ -414,8 +427,6 @@ void Grid2::Render()
 		listObject.at(i).object->Render();
 	}
 	captain->Render();
-
-	Elevator::GetInstance()->Render();
 
 	SpawnProjectTile::GetInstance()->RenderBullet();
 	SpawnProjectTile::GetInstance()->RenderItem();

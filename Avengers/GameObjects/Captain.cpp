@@ -454,6 +454,7 @@ void Captain::UpdateCollision(DWORD dt)
 			case 5:
 			case 7:
 			case 15:
+			case 16:
 				listUpdateObject.at(i).object->OnCollision();
 				break;
 			case 6:

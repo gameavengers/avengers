@@ -12,5 +12,6 @@
 12: tank bottom
 13: tank left
 14: tank right
-15: bat
+15: bat normal
+16: bat capsule
 17*: twice brick

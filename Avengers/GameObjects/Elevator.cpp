@@ -1,4 +1,4 @@
-#include "Elevator.h"
+﻿#include "Elevator.h"
 
 vector<Animation *> Elevator::animations = vector<Animation *>();
 Elevator *Elevator::__instance = NULL;
@@ -6,10 +6,10 @@ Elevator *Elevator::__instance = NULL;
 
 Elevator::Elevator()
 {
-	LoadResources();
+	type = CIRCLE;
 
 	this->x = 250;
-	this->y = 80;
+	this->y = 100;
 	this->width = 32;
 	this->height = 16;
 
@@ -19,6 +19,9 @@ Elevator::Elevator()
 	collider.vy = 0;
 	collider.width = width;
 	collider.height = height;
+
+	this->disable = false;
+	this->timeCount = 0;
 }
 
 Elevator::Elevator(float x, float y, ElevatorType type)
@@ -68,7 +71,14 @@ void Elevator::LoadResources()
 
 void Elevator::fly_circle()
 {
-	
+	float timeOut = 4800;
+	float pi = acos(-1);
+	float delta = timeCount * pi * 2 / timeOut;
+	float speedX = cosf(delta) / 10;
+	float speedY = sinf(delta) / 10;
+
+	this->SetSpeedX(speedX);
+	this->SetSpeedY(speedY);
 }
 
 void Elevator::fly_slash()

@@ -36,6 +36,15 @@ enum StateDomesto
 	DOMESTO_STATE_DEAD,//Chết
 	DOMESTO_STATE_JUMPING,//Nhảy
 };
+enum BulletType {
+	BULLET_NORMAL, //đạn của running man
+	BULLET_TANK, //đạn của mấy tháp súng
+	BULLET_BOSS2, //đạn của con boss 2
+	ROCKET, //tên lửa
+	BULLET_NORMAL_BOSS1, //đạn thường (nhỏ) của boss 1
+	BULLET_SPECIAL_BOSS1, //đạn đặc biệt (lớn) của boss 1
+	GIGIROCKET
+};
 
 #define EVENT_BRICK 1
 #define EVENT_WATER 2

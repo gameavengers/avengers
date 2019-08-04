@@ -37,6 +37,7 @@ protected:
 
 	bool isLeft;
 	bool isFlipped;
+	bool isFlipVertical;
 
 	Collider collider;
 public:
@@ -76,6 +77,8 @@ public:
 	void setIsLeft(bool isleft) { isLeft = isleft; }
 	bool IsLeft() { return isLeft; }
 	bool IsFlipped() { isFlipped = isLeft ? false : true; return isFlipped; }
+	void setIsFlipDown(bool isFlip) { isFlipVertical = isFlip; }
+	bool IsFlipDown() { return isFlipVertical; }
 
 	GameObject();
 	GameObject(float x, float y, float width, float height);

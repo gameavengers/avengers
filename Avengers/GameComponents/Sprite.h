@@ -13,6 +13,7 @@ struct SpriteData {
 	float angle = 0;
 	bool isLeft = false;
 	bool isFlipped = false;
+	bool isFlipVertical = false;
 
 	SpriteData(float iX = 0, float iY = 0, int iWidth = 1, int iHeight = 1)
 	{

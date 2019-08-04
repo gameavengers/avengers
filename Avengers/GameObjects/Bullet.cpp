@@ -259,6 +259,140 @@ void Bullet::RocketUpdate(DWORD dt)
 	}
 }
 
+void Bullet::GiGiRocketUpdate(DWORD dt)
+{
+	int timeOut = 100;
+	if (timeCount < timeOut)
+	{
+
+		timeCount = timeCount - timeOut;
+
+		float distanceX = -(this->GetPositionX() - Captain::GetInstance()->GetPositionX());
+		float distanceY = -(this->GetPositionY() - Captain::GetInstance()->GetPositionY());
+
+		switch (direction)
+		{
+		case 1: // 2 | 8 | 1
+			if (abs(distanceY) < 16 && distanceX < 0)
+				direction = 1;
+			else if (distanceY < 0)
+				direction = 2;
+			else if (distanceY > 0)
+				direction = 8;
+			break;
+		case 2: // 1 | 2 | 3
+			if (distanceY < 0 && distanceX < 0)
+				direction = 2;
+			else if (distanceY > 0)
+				direction = 1;
+			else if (distanceX > 0)
+				direction = 3;
+			break;
+		case 3:	//	2 | 3 | 4
+			if (distanceY < 0 && abs(distanceX) < 16)
+				direction = 3;
+			else if (distanceX < 0)
+				direction = 2;
+			else if (distanceX > 0)
+				direction = 4;
+			break;
+		case 4:	//	3 | 4 | 5
+			if (distanceY < 0 && distanceX > 0)
+				direction = 4;
+			else if (distanceX < 0)
+				direction = 3;
+			else if (distanceY > 0)
+				direction = 5;
+			break;
+		case 5: // 4 | 5 | 6
+			if (abs(distanceY) < 16 && distanceX > 0)
+				direction = 5;
+			else if (distanceY < 0)
+				direction = 4;
+			else if (distanceY > 0)
+				direction = 6;
+			break;
+		case 6: // 5 | 6 | 7
+			if (distanceY > 0 && distanceX > 0)
+				direction = 6;
+			else if (distanceX < 0)
+				direction = 7;
+			else if (distanceY < 0)
+				direction = 5;
+			break;
+		case 7: // 6 | 7 | 8
+			if (distanceY < 0 && abs(distanceX) < 16)
+				direction = 7;
+			else if (distanceX < 0)
+				direction = 8;
+			else if (distanceX > 0)
+				direction = 6;
+			break;
+		case 8:
+			if (distanceY > 0 && distanceX < 0)
+				direction = 8;
+			else if (distanceX > 0)
+				direction = 7;
+			else if (distanceY < 0)
+				direction = 1;
+			break;
+		}
+	}
+
+	float speed = BULLET_NORMAL_SPEED / 2;
+	switch (direction)
+	{
+	case 1:
+		this->setIsLeft(true);
+		this->SetSpeedX(-speed);
+		
+		this->SetSpeedY(0);
+		break;
+	case 2:
+		this->setIsLeft(true);
+		this->setIsFlipDown(true);
+
+		this->SetSpeedX(-speed);
+		this->SetSpeedY(-speed);
+		break;
+	case 3:
+		this->SetSpeedX(0);
+		this->SetSpeedY(-speed);
+		break;
+	case 4:
+		this->setIsLeft(false);
+		this->setIsFlipDown(true);
+
+		this->SetSpeedX(speed);
+		this->SetSpeedY(-speed);
+		break;
+	case 5:
+		this->setIsLeft(false);
+
+		this->SetSpeedX(speed);
+		this->SetSpeedY(0);
+		break;
+	case 6:
+		this->setIsLeft(false);
+		this->setIsFlipDown(false);
+
+		this->SetSpeedX(speed);
+		this->SetSpeedY(speed);
+		break;
+	case 7:
+		this->SetSpeedX(0);
+		this->SetSpeedY(speed);
+		break;
+	case 8:
+		this->setIsLeft(true);
+		this->setIsFlipDown(false);
+
+		this->SetSpeedX(-speed);
+		this->SetSpeedY(speed);
+		break;
+	}
+}
+
 void Bullet::BulletNormalBoss1Update(DWORD dt)
 {
 	/*if (direction == 1)
@@ -356,6 +490,9 @@ void Bullet::Update(DWORD dt)
 	case BulletType::ROCKET:
 		RocketUpdate(dt);
 		break;
+	case BulletType::GIGIROCKET:
+		GiGiRocketUpdate(dt);
+		break;
 	case BulletType::BULLET_NORMAL_BOSS1:
 		BulletNormalBoss1Update(dt);
 		break;
@@ -385,6 +522,7 @@ void Bullet::Render()
 
 	spriteData.isLeft = this->IsLeft();
 	spriteData.isFlipped = this->IsFlipped();
+	spriteData.isFlipVertical = this->IsFlipDown();
 
 	switch (type)
 	{
@@ -422,10 +560,37 @@ void Bullet::Render()
 				this->animations[4]->Render(spriteData);
 			break;
 		}
-		
 	}
 	break;
-
+	case GIGIROCKET:
+		switch (direction)
+		{
+		case 1:			
+			this->animations[ROCKET]->Render(spriteData);
+			break;
+		case 2:			
+			this->animations[4]->Render(spriteData);
+			break;
+		case 3:
+			//thieu Sprite
+			break;
+		case 4:			
+			this->animations[4]->Render(spriteData);
+			break;
+		case 5:			
+			this->animations[ROCKET]->Render(spriteData);
+			break;
+		case 6:
+			this->animations[4]->Render(spriteData);
+			break;
+		case 7:
+			//thieu sprite
+			break;
+		case 8:			
+			this->animations[4]->Render(spriteData);
+			break;
+		}	
+	break;
 	case BULLET_NORMAL_BOSS1:
 	{
 		this->animations[5]->Render(spriteData);

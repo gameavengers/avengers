@@ -41,6 +41,11 @@ void Sprite::SetData(SpriteData spriteData)
 		flipHorizontal = true;
 	else
 		flipHorizontal = false;
+
+	if (spriteData.isFlipVertical)
+		flipVertical = true;
+	else
+		flipHorizontal = false;
 }
 void Sprite::SetRect(RECT rect)
 {

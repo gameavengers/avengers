@@ -1,16 +1,8 @@
 ﻿#pragma once
 #include "../GameComponents/GameObject.h"
+#include "../GameObjects/Captain.h"
 
-enum BulletType {
-	BULLET_NORMAL, //đạn của running man
-	BULLET_TANK, //đạn của mấy tháp súng
-	BULLET_BOSS2, //đạn của con boss 2
-	ROCKET, //tên lửa
-	BULLET_NORMAL_BOSS1, //đạn thường (nhỏ) của boss 1
-	BULLET_SPECIAL_BOSS1, //đạn đặc biệt (lớn) của boss 1
-};
-
-
+class Captain;
 class Bullet : public GameObject
 {
 private:
@@ -35,6 +27,7 @@ public:
 	void BulletTankUpdate(DWORD dt);
 	void BulletBoss2Update(DWORD dt);
 	void RocketUpdate(DWORD dt);
+	void GiGiRocketUpdate(DWORD dt);
 	void BulletNormalBoss1Update(DWORD dt);
 	void BulletSpecialBoss1Update(DWORD dt);
 

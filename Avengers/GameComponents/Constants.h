@@ -120,11 +120,11 @@ enum BulletType {
 
 //Big Energy
 #define BIG_ENERGY_WIDTH 8
-#define BIG_ENERGY_HEIGHT 9
+#define BIG_ENERGY_HEIGHT 10
 
 //Small Energy
 #define SMALL_ENERGY_WIDTH 7
-#define SMALL_ENERGY_HEIGHT 7
+#define SMALL_ENERGY_HEIGHT 10
 
 //Key Crystal
 #define KEY_CRYSTAL_WIDTH 12

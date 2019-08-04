@@ -66,7 +66,7 @@ void GigiState::state_flying()
 		this->shootTimeCount = 0;
 		int direction = gigi->IsLeft() ? 1 : 5;
 		float offsetX = gigi->IsLeft() ? -16 : 16;
-		float offsetY = 10;
+		float offsetY = -5;
 		SpawnProjectTile::GetInstance()->SpawnBullet(gigi->GetPositionX() + offsetX, gigi->GetPositionY() + offsetY,
 			direction, BulletType::GIGIROCKET);
 	}

@@ -6,6 +6,11 @@
 #include "State.h"
 #include "../GameComponents/SpawnProjectTile.h"
 
+enum RedBoxType {
+	MAP_1,
+	MAP_2
+};
+
 class RedBox : public GameObject
 {
 	RedBox();
@@ -17,11 +22,15 @@ class RedBox : public GameObject
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
 
+	RedBoxType type;
+
 public:
-	RedBox(float x, float y);
+	RedBox(float x, float y, RedBoxType type);
 	static void LoadResources();
 
 	static RedBox *GetInstance();
+
+	RedBoxType GetType() { return this->type; }
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }

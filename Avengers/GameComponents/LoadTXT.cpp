@@ -16,7 +16,7 @@ LoadTXT * LoadTXT::Instance()
 RECT* LoadTXT::LoadRect(char * path)
 {
 	vector<RECT*> listRect;
-	RECT* arrayRect = new RECT[110];
+	RECT* arrayRect = new RECT[120];
 	fstream f;
 
 	f.open(path, ios::in);

@@ -1,8 +1,10 @@
 ﻿#include "Bullet.h"
 
+vector<Animation *> Bullet::animations;
+
 Bullet::Bullet(float x, float y, int direction, BulletType type)
 {
-	LoadResources();
+	//LoadResources();
 	Initialize(x, y, direction, type);
 }
 
@@ -155,6 +157,17 @@ void Bullet::LoadResources()
 	}
 	animations.push_back(anim);
 	//-----------------------------------------
+
+	// NO9: GIGI_ROCKET_FLY_DOWN
+	anim = new Animation(100);
+	for (int i = 108; i < 110; i++)
+	{
+		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		if (i == 108)
+			sprite->SetOffSetX(1);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
 }
 
 void Bullet::BulletNormalUpdate(DWORD dt)
@@ -572,7 +585,7 @@ void Bullet::Render()
 			this->animations[4]->Render(spriteData);
 			break;
 		case 3:
-			//thieu Sprite
+			this->animations[9]->Render(spriteData);
 			break;
 		case 4:			
 			this->animations[4]->Render(spriteData);
@@ -584,7 +597,7 @@ void Bullet::Render()
 			this->animations[4]->Render(spriteData);
 			break;
 		case 7:
-			//thieu sprite
+			this->animations[9]->Render(spriteData);
 			break;
 		case 8:			
 			this->animations[4]->Render(spriteData);

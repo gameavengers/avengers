@@ -463,6 +463,7 @@ void Captain::UpdateCollision(DWORD dt)
 				listUpdateObject.at(i).object->OnCollision();
 				break;
 			case 6:
+			case 18:
 				if (shield->IsFlying())
 					listUpdateObject.at(i).object->OnCollision();
 				break;

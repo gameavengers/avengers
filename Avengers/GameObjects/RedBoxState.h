@@ -8,6 +8,8 @@ enum StateRedBox
 {
 	RED_BOX_STATE_CLOSE,
 	RED_BOX_STATE_OPEN,
+	RED_BOX_MAP_2_STATE_CLOSE,
+	RED_BOX_MAP_2_STATE_OPEN,
 };
 
 class RedBoxState : public State

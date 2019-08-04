@@ -26,6 +26,7 @@ Grid2::Grid2()
 	Gigi::LoadResources();
 	Elevator::LoadResources();
 	Bat::LoadResources();
+	Bullet::LoadResources();
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)

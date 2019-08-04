@@ -6,9 +6,7 @@ class Captain;
 class Bullet : public GameObject
 {
 private:
-	void LoadResources();
-
-	vector<Animation *> animations;
+	static vector<Animation *> animations;
 
 	BulletType type;
 	
@@ -18,6 +16,8 @@ private:
 	float timeCount;
 
 public:
+	static void LoadResources();
+
 	Bullet(float x, float y, int direction,BulletType type);
 	~Bullet();
 

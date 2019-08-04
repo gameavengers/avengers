@@ -59,6 +59,7 @@ void Bat::LoadResources()
 	for (int i = 98; i < 99; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetX(-5);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -91,6 +92,19 @@ void Bat::LoadResources()
 	anim = new Animation(100);
 
 	anim->AddFrame(sprite4);
+
+	animations.push_back(anim);
+
+	// BAT_FLYING_2
+	anim = new Animation(100);
+
+	Sprite * sprite5 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[103], TEXTURE_TRANS_COLOR);
+	sprite5->SetOffSetX(5);
+	anim->AddFrame(sprite5);
+
+	Sprite * sprite6 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[102], TEXTURE_TRANS_COLOR);
+	sprite6->SetOffSetY(-7);
+	anim->AddFrame(sprite6);
 
 	animations.push_back(anim);
 }

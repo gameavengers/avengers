@@ -24,6 +24,7 @@ protected:
 	int flyStage;
 public:
 	float timeCount;
+	float timeChangeFlyState;
 	BatState(Bat *bat);
 	~BatState();
 

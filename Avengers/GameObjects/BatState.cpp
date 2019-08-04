@@ -66,6 +66,17 @@ void BatState::state_flying()
 	this->SetState(BAT_STATE_FLYING);
 	anim = bat->GetAnimationsList()[BAT_STATE_FLYING];
 
+	if (timeChangeFlyState > 1000)
+	{
+		anim = bat->GetAnimationsList()[4];
+
+		if (timeChangeFlyState > 2000)
+		{
+			timeChangeFlyState = 0;
+			anim = bat->GetAnimationsList()[BAT_STATE_FLYING];
+		}
+	}
+
 	switch (flyStage)
 	{
 	case 0:
@@ -194,6 +205,7 @@ void BatState::Update(DWORD dt)
 	this->dt = dt;
 
 	this->timeCount += dt;
+	this->timeChangeFlyState += dt;
 	
 	//Update theo state
 	switch (stateBat)

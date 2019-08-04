@@ -5,6 +5,11 @@
 #include "../GameComponents/Game.h"
 #include "State.h"
 
+enum BatType {
+	BAT_NORMAL, 
+	BAT_CAPSULE,
+};
+
 class Bat : public GameObject
 {
 	Bat();
@@ -16,11 +21,15 @@ class Bat : public GameObject
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
 
+	BatType type;
+
 public:
-	Bat(float x, float y);
+	Bat(float x, float y, BatType type);
 	static void LoadResources();
 
 	static Bat *GetInstance();
+
+	BatType GetType() { return this->type; }
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }

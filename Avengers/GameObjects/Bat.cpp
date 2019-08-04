@@ -23,9 +23,11 @@ Bat::Bat()
 	collider.height = height;
 }
 
-Bat::Bat(float x, float y)
+Bat::Bat(float x, float y, BatType type)
 {
-	LoadResources();
+	//LoadResources();
+
+	this->type = type;
 
 	this->state = new BatState(this);
 
@@ -106,6 +108,24 @@ void Bat::LoadResources()
 	sprite6->SetOffSetY(-7);
 	anim->AddFrame(sprite6);
 
+	animations.push_back(anim);
+
+	// BAT_CAPSULE_IDLE
+	anim = new Animation(100);
+	for (int i = 105; i < 106; i++)
+	{
+		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+
+	// BAT_CAPSULE_GOING_TO_FLY
+	anim = new Animation(200);
+	for (int i = 106; i < 108; i++)
+	{
+		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
 	animations.push_back(anim);
 }
 

@@ -38,7 +38,12 @@ void BatState::SetState(StateBat state)
 void BatState::state_idle()
 {
 	this->SetState(BAT_STATE_IDLE);
-	anim = bat->GetAnimationsList()[BAT_STATE_IDLE];
+	
+	if (bat->GetType() == BatType::BAT_NORMAL)
+		anim = bat->GetAnimationsList()[BAT_STATE_IDLE];
+	else
+		anim = bat->GetAnimationsList()[5];
+	
 
 	float distanceX = abs(Captain::GetInstance()->GetPositionX() - bat->GetPositionX());
 	float distanceY = abs(Captain::GetInstance()->GetPositionY() - bat->GetPositionY());
@@ -53,29 +58,57 @@ void BatState::state_idle()
 void BatState::state_going_to_fly()
 {
 	this->SetState(BAT_STATE_GOING_TO_FLY);
-	anim = bat->GetAnimationsList()[BAT_STATE_GOING_TO_FLY];
 
-	if (timeCount > 1200)
+	switch (bat->GetType())
 	{
-		timeCount = 0;
-		this->state_flying();
+	case BatType::BAT_NORMAL:
+		{
+			anim = bat->GetAnimationsList()[BAT_STATE_GOING_TO_FLY];
+			if (timeCount > 1000)
+			{
+				timeCount = 0;
+				this->state_flying();
+			}
+		}
+		break;
+	case BatType::BAT_CAPSULE:
+	{
+		anim = bat->GetAnimationsList()[6];
+		if (timeCount > 300)
+		{
+			timeCount = 0;
+			this->state_flying();
+		}
+	}
+	break;
 	}
 }
+
 void BatState::state_flying()
 {
 	this->SetState(BAT_STATE_FLYING);
 	anim = bat->GetAnimationsList()[BAT_STATE_FLYING];
 
-	if (timeChangeFlyState > 1000)
+	switch (bat->GetType())
 	{
-		anim = bat->GetAnimationsList()[4];
-
-		if (timeChangeFlyState > 2000)
+	case BatType::BAT_NORMAL:
+	{
+		if (timeChangeFlyState > 1000)
 		{
-			timeChangeFlyState = 0;
-			anim = bat->GetAnimationsList()[BAT_STATE_FLYING];
+			anim = bat->GetAnimationsList()[4];
+
+			if (timeChangeFlyState > 2000)
+			{
+				timeChangeFlyState = 0;
+				anim = bat->GetAnimationsList()[BAT_STATE_FLYING];
+			}
 		}
 	}
+	break;
+	case BatType::BAT_CAPSULE:
+	break;
+	}
+
 
 	switch (flyStage)
 	{

@@ -303,7 +303,23 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 	break;
 	case 15:
 	{
-		Bat* object = new Bat(tile->x * TILE_SIZE, tile->y * TILE_SIZE);
+		Bat* object = new Bat(tile->x * TILE_SIZE, tile->y * TILE_SIZE, BatType::BAT_NORMAL);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		if (captain->GetPositionX() < object->GetPositionX())
+			object->setIsLeft(true);
+		else
+			object->setIsLeft(false);
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 16:
+	{
+		Bat* object = new Bat(tile->x * TILE_SIZE, tile->y * TILE_SIZE, BatType::BAT_CAPSULE);
 		OnUpdateObject temp;
 		temp.object = object;
 		temp.tile = tile;

@@ -52,7 +52,14 @@ void Bullet::Initialize(float x, float y, int direction, BulletType type)
 		height = 16;
 	}
 		break;
+	case BARREL:
+	{
+		width = 22;
+		height = 14;
 	}
+		break;
+	}
+	
 
 	this->x = x;
 	this->y = y;
@@ -168,6 +175,15 @@ void Bullet::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	// NO10: BARREL
+	anim = new Animation(100);
+	for (int i = 10; i < 11; i++)
+	{
+		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
 }
 
 void Bullet::BulletNormalUpdate(DWORD dt)
@@ -225,6 +241,18 @@ void Bullet::BulletTankUpdate(DWORD dt)
 
 void Bullet::BulletBoss2Update(DWORD dt)
 {
+	if (direction == 1)
+	{
+		this->setIsLeft(true);
+		this->SetSpeedX(-BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
+	}
+	else
+	{
+		this->setIsLeft(false);
+		this->SetSpeedX(BULLET_NORMAL_SPEED);
+		this->SetSpeedY(0);
+	}
 }
 
 void Bullet::RocketUpdate(DWORD dt)
@@ -467,6 +495,7 @@ void Bullet::BulletSpecialBoss1Update(DWORD dt)
 	{
 		this->SetSpeedX(0);
 		this->SetSpeedY(-CAPTAIN_JUMP_SPEED_Y);
+		this->setIsFlipDown(false);
 	}
 	else
 	{
@@ -474,6 +503,11 @@ void Bullet::BulletSpecialBoss1Update(DWORD dt)
 		this->SetSpeedX(ROCKET_SPEED);
 		this->SetSpeedY(0);
 	}
+}
+
+void Bullet::BarrelUpdate(DWORD dt)
+{
+	
 }
 
 void Bullet::Update(DWORD dt)
@@ -499,6 +533,7 @@ void Bullet::Update(DWORD dt)
 		BulletTankUpdate(dt);
 		break;
 	case BulletType::BULLET_BOSS2:
+		BulletBoss2Update(dt);
 		break;
 	case BulletType::ROCKET:
 		RocketUpdate(dt);
@@ -511,6 +546,9 @@ void Bullet::Update(DWORD dt)
 		break;
 	case BulletType::BULLET_SPECIAL_BOSS1:
 		BulletSpecialBoss1Update(dt);
+		break;
+	case BulletType::BARREL:
+		BarrelUpdate(dt);
 		break;
 	}
 
@@ -616,6 +654,12 @@ void Bullet::Render()
 			this->animations[8]->Render(spriteData);
 		else
 			this->animations[7]->Render(spriteData);
+	}
+	break;
+
+	case BARREL:
+	{
+		this->animations[10]->Render(spriteData);
 	}
 	break;
 	}

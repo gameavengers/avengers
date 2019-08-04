@@ -43,7 +43,8 @@ enum BulletType {
 	ROCKET, //tên lửa
 	BULLET_NORMAL_BOSS1, //đạn thường (nhỏ) của boss 1
 	BULLET_SPECIAL_BOSS1, //đạn đặc biệt (lớn) của boss 1
-	GIGIROCKET
+	GIGIROCKET, // tên lửa gigi
+	BARREL, // thùng gỗ boss 2
 };
 
 #define EVENT_BRICK 1

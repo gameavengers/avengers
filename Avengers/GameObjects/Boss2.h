@@ -4,6 +4,7 @@
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
 #include "../GameComponents/Constants.h"
+#include "../GameComponents/SpawnProjectTile.h"
 #include "State.h"
 
 class Boss2 : public GameObject

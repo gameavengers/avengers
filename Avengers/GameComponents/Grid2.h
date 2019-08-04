@@ -8,7 +8,6 @@
 #include "../GameObjects/Gigi.h"
 #include "../GameObjects/Boss1.h"
 #include "../GameObjects/Boss2.h"
-#include "../GameObjects/Barrel.h"
 #include "../GameObjects/RedBox.h"
 #include "../GameObjects/Tank.h"
 #include "../GameObjects/Elevator.h"
@@ -55,7 +54,6 @@ class Domesto;
 class Gigi;
 class Boss1;
 class Boss2;
-class Barrel;
 class RedBox;
 class Tank;
 class Elevator;
@@ -75,7 +73,6 @@ private:
 	Gigi* gigi;
 	Boss1* boss1;
 	Boss2* boss2;
-	Barrel* barrel;
 	RedBox* redbox;
 	Tank* tank;
 

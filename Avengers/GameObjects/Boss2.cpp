@@ -58,8 +58,13 @@ void Boss2::LoadResources()
 	for (int i = 4; i < 5; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetX(8);
 		anim->AddFrame(sprite, 500);
 	}
+
+	Sprite * sprite4 = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[6], TEXTURE_TRANS_COLOR);
+	anim->AddFrame(sprite4);
+
 	animations.push_back(anim);
 
 	// BOSS2_ANI_HOLD_BOX
@@ -76,6 +81,7 @@ void Boss2::LoadResources()
 	for (int i = 8; i < 9; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetX(8);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);

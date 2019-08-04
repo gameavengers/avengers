@@ -74,6 +74,16 @@ void Boss2State::state_standing_punch()
 	this->SetState(BOSS2_STATE_STANDING_PUNCH);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_STANDING_PUNCH];
 
+	if (this->shootTimeCount > 600)
+	{
+		this->shootTimeCount = 0;
+		int direction = boss2->IsLeft() ? 1 : 5;
+		float offsetX = boss2->IsLeft() ? -16 : 16;
+		float offsetY = -16;
+		SpawnProjectTile::GetInstance()->SpawnBullet(boss2->GetPositionX() + offsetX, boss2->GetPositionY() + offsetY,
+			direction, BulletType::BULLET_BOSS2);
+	}
+
 	if (this->timeCount > 2000)
 	{
 		this->timeCount -= 2000;
@@ -131,6 +141,8 @@ void Boss2State::Colision()
 void Boss2State::Update(DWORD dt)
 {
 	this->timeCount += dt;
+	this->shootTimeCount += dt;
+
 	//Update theo state
 	switch (stateBoss2)
 	{

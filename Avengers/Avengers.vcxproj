@@ -142,7 +142,6 @@
     <ClInclude Include="GameComponents\Sprite.h" />
     <ClInclude Include="GameComponents\TileMap2.h" />
     <ClInclude Include="GameComponents\Viewport.h" />
-    <ClInclude Include="GameObjects\Barrel.h" />
     <ClInclude Include="GameObjects\Bat.h" />
     <ClInclude Include="GameObjects\BatState.h" />
     <ClInclude Include="GameObjects\Boss1.h" />
@@ -161,7 +160,6 @@
     <ClInclude Include="GameObjects\Item.h" />
     <ClInclude Include="GameObjects\RedBox.h" />
     <ClInclude Include="GameObjects\RedBoxState.h" />
-    <ClInclude Include="GameObjects\Rocket.h" />
     <ClInclude Include="GameObjects\RunningMan.h" />
     <ClInclude Include="GameObjects\RunningManState.h" />
     <ClInclude Include="GameObjects\Shield.h" />
@@ -185,7 +183,6 @@
     <ClCompile Include="GameComponents\Sprite.cpp" />
     <ClCompile Include="GameComponents\TileMap2.cpp" />
     <ClCompile Include="GameComponents\Viewport.cpp" />
-    <ClCompile Include="GameObjects\Barrel.cpp" />
     <ClCompile Include="GameObjects\Bat.cpp" />
     <ClCompile Include="GameObjects\BatState.cpp" />
     <ClCompile Include="GameObjects\Boss1.cpp" />
@@ -204,7 +201,6 @@
     <ClCompile Include="GameObjects\Item.cpp" />
     <ClCompile Include="GameObjects\RedBox.cpp" />
     <ClCompile Include="GameObjects\RedBoxState.cpp" />
-    <ClCompile Include="GameObjects\Rocket.cpp" />
     <ClCompile Include="GameObjects\RunningMan.cpp" />
     <ClCompile Include="GameObjects\RunningManState.cpp" />
     <ClCompile Include="GameObjects\Shield.cpp" />

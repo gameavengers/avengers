@@ -26,6 +26,8 @@ protected:
 	Animation * anim;
 
 	float runTime;
+
+	float shootTimeCount;
 public:
 
 	float timeCount;

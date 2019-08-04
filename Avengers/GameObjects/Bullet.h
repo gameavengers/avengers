@@ -30,6 +30,7 @@ public:
 	void GiGiRocketUpdate(DWORD dt);
 	void BulletNormalBoss1Update(DWORD dt);
 	void BulletSpecialBoss1Update(DWORD dt);
+	void BarrelUpdate(DWORD dt);
 
 	bool IsDisable() { return disable; }
 	void Disable() { timeCount = 0; disable = true; }

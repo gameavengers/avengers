@@ -340,9 +340,6 @@ void Grid2::Update(DWORD dt)
 	captain->Update(dt);
 	captain->UpdateCollision(dt);
 
-	Elevator::GetInstance()->Update(dt);
-
-
 	if (spawnboss)
 	boss1->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
@@ -414,8 +411,6 @@ void Grid2::Render()
 		listObject.at(i).object->Render();
 	}
 	captain->Render();
-
-	Elevator::GetInstance()->Render();
 
 	SpawnProjectTile::GetInstance()->RenderBullet();
 	SpawnProjectTile::GetInstance()->RenderItem();

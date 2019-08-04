@@ -10,9 +10,13 @@ Bullet::Bullet(float x, float y, int direction, BulletType type)
 
 void Bullet::Initialize(float x, float y, int direction, BulletType type)
 {
+	this->timeCount = 0;
 	this->type = type;
 
 	this->direction = direction;
+
+	this->SetSpeedX(0);
+	this->SetSpeedY(0);
 
 	switch (type)
 	{
@@ -53,7 +57,8 @@ void Bullet::Initialize(float x, float y, int direction, BulletType type)
 	}
 		break;
 	case BARREL:
-	{
+	{		
+		barrelState = 0;
 		width = 22;
 		height = 14;
 	}
@@ -507,7 +512,40 @@ void Bullet::BulletSpecialBoss1Update(DWORD dt)
 
 void Bullet::BarrelUpdate(DWORD dt)
 {
-	
+	switch (barrelState)
+	{
+	case 0:
+		if (timeCount < BOSS2_HOLD_BARREL_TIME)
+			return;
+		barrelState++;
+		timeCount = 0;
+		break;
+	case 1:
+		switch (direction)
+		{
+		case 1:
+			this->SetSpeedX(-0.065f);
+			this->SetSpeedY(0.1f);
+			break;
+		case 5:
+			this->SetSpeedX(0.065f);
+			this->SetSpeedY(0.1f);
+			break;
+		case 2:
+			this->SetSpeedX(-0.08f);
+			this->SetSpeedY(0.15f);
+			break;
+		case 6:
+			this->SetSpeedX(0.08f);
+			this->SetSpeedY(0.15f);
+			break;
+		}
+		barrelState++;
+		break;
+	case 2:
+		this->SetSpeedY(this->GetSpeedY() - 0.004f);
+		break;
+	}
 }
 
 void Bullet::Update(DWORD dt)

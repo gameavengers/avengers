@@ -44,6 +44,19 @@ void Boss2State::state_idle()
 	{
 		this->timeCount -= 300;
 		this->state_hold_barrel();
+		srand(time(NULL));
+		int randomState = 1;// rand() % 1 + 2;
+
+		if (randomState == 1)
+		{
+			SpawnProjectTile::GetInstance()->SpawnBullet(boss2->GetPositionX(), boss2->GetPositionY(),
+				boss2->IsLeft() ? 1 : 5, BARREL);
+		}
+		else
+		{
+			SpawnProjectTile::GetInstance()->SpawnBullet(boss2->GetPositionX(), boss2->GetPositionY(),
+				boss2->IsLeft() ? 2 : 6, BARREL);
+		}
 	}
 }
 
@@ -96,7 +109,7 @@ void Boss2State::state_hold_barrel()
 	this->SetState(BOSS2_STATE_HOLD_BARREL);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_HOLD_BARREL];
 
-	if (this->timeCount > 500)
+	if (this->timeCount > BOSS2_HOLD_BARREL_TIME)
 	{
 		this->timeCount -= 500;
 		this->state_throw_barrel();

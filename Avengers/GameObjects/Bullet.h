@@ -14,6 +14,7 @@ private:
 	int direction;
 	
 	float timeCount;
+	int barrelState;
 
 public:
 	static void LoadResources();

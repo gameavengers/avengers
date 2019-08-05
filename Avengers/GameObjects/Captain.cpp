@@ -495,6 +495,15 @@ void Captain::UpdateCollision(DWORD dt)
 	{
 		if (listBullet.at(i)->disable)
 			continue;
+		bool isCollideShield = Collision::GetInstance()->AABB(shield->GetCollider(), listBullet.at(i)->GetCollider());
+
+		//Test
+		if (isCollideShield)
+		{
+			listBullet.at(i)->Disable();
+			return;
+		}
+
 		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listBullet.at(i)->GetCollider());
 		
 		if (isCollide)

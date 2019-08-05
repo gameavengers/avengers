@@ -88,6 +88,7 @@ void Bullet::LoadResources()
 	for (int i = 6; i < 7; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(12);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -116,9 +117,12 @@ void Bullet::LoadResources()
 	// Bay ngang
 	anim = new Animation(100);
 	Sprite * sprite1 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
+	//sprite1->SetOffSetX(7);
+	sprite1->SetOffSetY(13);
 	anim->AddFrame(sprite1);
 	Sprite * sprite2 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[17], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite2);
+	sprite2->SetOffSetY(11);
 	animations.push_back(anim);
 
 	// Bay xéo lên

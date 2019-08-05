@@ -86,7 +86,7 @@ void DomestoStayState::state_standing_shoot()
 		this->shootTimeCount = 0;
 		int direction = domesto->IsLeft() ? 1 : 5;
 		float offsetX = domesto->IsLeft() ? -16 : 16;
-		float offsetY = -3;
+		float offsetY = 0;
 		SpawnProjectTile::GetInstance()->SpawnBullet(domesto->GetPositionX() + offsetX, domesto->GetPositionY() + offsetY,
 			direction, BulletType::ROCKET);
 	}

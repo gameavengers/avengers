@@ -202,11 +202,11 @@ void Bullet::LoadResources()
 		{
 		case 53:
 			sprite->SetOffSetX(-5);
-			sprite->SetOffSetY(-3);
+			sprite->SetOffSetY(5);
 			break;
 		case 54:
 			sprite->SetOffSetX(3);
-			sprite->SetOffSetY(0);
+			sprite->SetOffSetY(9);
 			break;
 		}
 		anim->AddFrame(sprite);
@@ -336,6 +336,10 @@ void Bullet::RocketUpdate(DWORD dt)
 		{
 			this->SetSpeedY(BULLET_NORMAL_SPEED);
 		}
+		break;
+	case 9:
+		this->SetSpeedX(0);
+		this->SetSpeedY(0);
 		break;
 	}
 }
@@ -470,6 +474,10 @@ void Bullet::GiGiRocketUpdate(DWORD dt)
 
 		this->SetSpeedX(-speed);
 		this->SetSpeedY(speed);
+		break;
+	case 9:
+		this->SetSpeedX(0);
+		this->SetSpeedY(0);
 		break;
 	}
 }
@@ -691,6 +699,9 @@ void Bullet::Render()
 			else
 				this->animations[4]->Render(spriteData);
 			break;
+		case 9:
+			this->animations[11]->Render(spriteData);
+			break;
 		}
 	}
 	break;
@@ -721,6 +732,9 @@ void Bullet::Render()
 		case 8:			
 			this->animations[4]->Render(spriteData);
 			break;
+		case 9:
+			this->animations[11]->Render(spriteData);
+			break;
 		}	
 	break;
 	case BULLET_NORMAL_BOSS1:
@@ -740,7 +754,10 @@ void Bullet::Render()
 
 	case BARREL:
 	{
-		this->animations[10]->Render(spriteData);
+		if (direction == 9)
+			this->animations[11]->Render(spriteData);
+		else
+			this->animations[10]->Render(spriteData);
 	}
 	break;
 	}

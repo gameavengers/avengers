@@ -26,7 +26,8 @@ enum ObjectType
 	BRICK_NOCOLLISION_BOTTOM,
 	ON_BUTTON,
 	RIVER,
-	ROPE_SWING
+	ROPE_SWING,
+	THORN
 };
 enum StateDomesto
 {
@@ -50,6 +51,7 @@ enum BulletType {
 #define EVENT_BRICK 1
 #define EVENT_WATER 2
 #define EVENT_ROPE_SWING 3
+#define EVENT_THORN 4
 
 //TiledMap
 //

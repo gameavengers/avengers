@@ -137,12 +137,10 @@ void RunningManState::state_dead()
 	runningMan->SetSpeedY(0);
 
 	if (this->timeCount > 200)
-	{
 		anim = runningMan->GetAnimationsList()[4];
 
-		if (this->timeCount > 400)
-			runningMan->disable = true;
-	}
+	if (this->timeCount > 350)
+		runningMan->disable = true;
 }
 
 

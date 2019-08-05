@@ -189,7 +189,7 @@ void Bat::Update(DWORD dt)
 		this->SetPositionX(this->GetPositionX() + moveX);
 		this->SetPositionY(this->GetPositionY() + moveY);
 
-		if (coEventsResult[0]->collisionID == 1)
+		if (coEventsResult[0]->collisionID == 1 || coEventsResult[0]->collisionID == 4)
 		{
 			if (ny == 1)
 			{

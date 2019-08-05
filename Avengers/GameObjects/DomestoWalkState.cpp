@@ -157,12 +157,10 @@ void DomestoWalkState::state_dead()
 	domesto->SetSpeedX(0);
 
 	if (this->timeCount > 200)
-	{
 		anim = domesto->GetAnimationsList()[4];
 
-		if (this->timeCount > 400)
-			domesto->disable = true;
-	}
+	if (this->timeCount > 350)
+		domesto->disable = true;
 }
 
 void DomestoWalkState::state_jumping()

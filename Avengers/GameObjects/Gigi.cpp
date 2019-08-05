@@ -88,7 +88,7 @@ void Gigi::LoadResources()
 		{
 		case 53:
 			sprite->SetOffSetX(-5);
-			sprite->SetOffSetY(-32);
+			sprite->SetOffSetY(-35);
 			break;
 		case 54:
 			sprite->SetOffSetX(3);

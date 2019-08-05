@@ -25,6 +25,8 @@ protected:
 public:
 	float timeCount;
 	float timeChangeFlyState;
+	float disableTimeCount;
+
 	BatState(Bat *bat);
 	~BatState();
 

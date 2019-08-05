@@ -330,7 +330,7 @@ void Captain::Update(DWORD dt)
 	{
 		Grid2::GetInstance()->DisableAllObject();
 		Game::GetInstance()->SetStage(STAGE_2);
-		this->SetPositionX(280);
+		this->SetPositionX(1000);
 		this->SetPositionY(900);
 		Viewport::GetInstance()->Reset();
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
@@ -406,6 +406,15 @@ void Captain::Update(DWORD dt)
 			if (ny == 1)
 			{
 				this->SetIsSwing(true);
+			}
+		}
+
+		if (coEventsResult[0]->collisionID == 4)
+		{
+			if (ny == 1)
+			{
+				this->SetIsGrounded(true);
+				this->SetIsBleeding(true);
 			}
 		}
 	}

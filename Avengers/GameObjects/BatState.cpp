@@ -230,7 +230,7 @@ void BatState::state_dead()
 	{
 		anim = bat->GetAnimationsList()[7];
 
-		if (this->timeCount > 200)
+		if (this->disableTimeCount > 150)
 			bat->disable = true;
 	}
 }
@@ -247,6 +247,9 @@ void BatState::Update(DWORD dt)
 
 	this->timeCount += dt;
 	this->timeChangeFlyState += dt;
+
+	if (bat->isOnGround && stateBat == StateBat::BAT_STATE_DEAD)
+		this->disableTimeCount += dt;
 	
 	//Update theo state
 	switch (stateBat)

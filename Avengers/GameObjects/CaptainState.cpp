@@ -399,6 +399,13 @@ void CaptainState::state_bleeing_2()
 {
 	this->SetState(STATE_BLEEING_2);
 	anim = captain->GetAnimationsList()[STATE_BLEEING_2];
+
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z) || Keyboard::GetInstance()->IsKeyDown(DIK_X))
+	{
+		this->SetState(STATE_STANDING);
+		this->state_standing();
+		return;
+	}
 	
 	if (timeCount >= 300)
 	{

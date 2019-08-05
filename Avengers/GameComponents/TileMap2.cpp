@@ -75,6 +75,10 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation, int mapI
 				{
 					(map.tiles + x + y * size)->type = ObjectType::ROPE_SWING;
 				}
+				if ((map.tiles + x + y * size)->tileId == 162)
+				{
+					(map.tiles + x + y * size)->type = ObjectType::THORN;
+				}
 			}
 			break;
 			case MAP_BOSS_2_ID:

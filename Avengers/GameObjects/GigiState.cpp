@@ -15,6 +15,7 @@ GigiState::GigiState(Gigi *gigi)
 {
 	this->gigi = gigi;
 	this->state_flying();
+	this->disableTimeCount = 0;
 }
 
 GigiState::~GigiState()
@@ -84,7 +85,7 @@ void GigiState::state_dead()
 	{
 		anim = gigi->GetAnimationsList()[2];
 
-		if (this->timeCount > 200)
+		if (this->disableTimeCount > 150)
 			gigi->disable = true;
 	}
 }
@@ -98,6 +99,9 @@ void GigiState::Update(DWORD dt)
 {
 	this->timeCount += dt;
 	this->shootTimeCount += dt;
+
+	if (gigi->isOnGround && stateGigi == StateGigi::GIGI_STATE_DEAD)
+		this->disableTimeCount += dt;
 
 	//Update theo state
 	switch (stateGigi)

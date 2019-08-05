@@ -36,8 +36,12 @@ public:
 	bool IsDisable() { return disable; }
 	void Disable() { timeCount = 0; disable = true; }
 
+	BulletType GetBulletType() { return this->type; }
+
 	void Update(DWORD dt) override;
 	void Render() override;
+
+	void OnCollision();
 
 	bool disable;
 };

@@ -516,7 +516,23 @@ void Captain::UpdateCollision(DWORD dt)
 		
 		if (isCollide)
 		{
-			listBullet.at(i)->Disable();
+			switch (listBullet.at(i)->GetBulletType())
+			{
+			case BulletType::BULLET_BOSS2:
+			case BulletType::BARREL:
+			case BulletType::GIGIROCKET:
+			case BulletType::ROCKET:
+				listBullet.at(i)->disableTimeCount = 0;
+				listBullet.at(i)->OnCollision();
+				break;
+			case BulletType::BULLET_NORMAL:
+			case BulletType::BULLET_NORMAL_BOSS1:
+			case BulletType::BULLET_SPECIAL_BOSS1:
+			case BulletType::BULLET_TANK:
+				listBullet.at(i)->Disable();
+				break;
+			}
+			
 			((CaptainState*)state)->timeCount = 0;
 			this->SetIsBleeding(true);
 			bImortal = true;

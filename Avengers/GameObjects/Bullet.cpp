@@ -189,6 +189,30 @@ void Bullet::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	//-----------Hiệu ứng nổ----------------------------------------------------
+	RECT* listSprite3 = loadTXT.LoadRect((char*)"Resources\\Captain\\Captain.txt");
+
+	// BULLET_ANI_EXPLOSIVE
+	anim = new Animation(50);
+	for (int i = 53; i < 55; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite3[i], TEXTURE_TRANS_COLOR);
+		switch (i)
+		{
+		case 53:
+			sprite->SetOffSetX(-5);
+			sprite->SetOffSetY(-3);
+			break;
+		case 54:
+			sprite->SetOffSetX(3);
+			sprite->SetOffSetY(0);
+			break;
+		}
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+	//-----------Hiệu ứng nổ----------------------------------------------------
 }
 
 void Bullet::BulletNormalUpdate(DWORD dt)
@@ -246,17 +270,28 @@ void Bullet::BulletTankUpdate(DWORD dt)
 
 void Bullet::BulletBoss2Update(DWORD dt)
 {
-	if (direction == 1)
+	switch (direction)
+	{
+	case 1:
 	{
 		this->setIsLeft(true);
 		this->SetSpeedX(-BULLET_NORMAL_SPEED);
 		this->SetSpeedY(0);
 	}
-	else
+		break;
+	case 5:
 	{
 		this->setIsLeft(false);
 		this->SetSpeedX(BULLET_NORMAL_SPEED);
 		this->SetSpeedY(0);
+	}
+		break;
+	case 9:
+	{
+		this->SetSpeedX(0);
+		this->SetSpeedY(0);
+	}
+		break;
 	}
 }
 
@@ -594,6 +629,11 @@ void Bullet::Update(DWORD dt)
 		Disable();
 }
 
+void Bullet::OnCollision()
+{
+	this->direction = 9;
+}
+
 void Bullet::Render()
 {
 	if (this->disable)
@@ -629,7 +669,10 @@ void Bullet::Render()
 
 	case BULLET_BOSS2:
 	{
-		this->animations[BULLET_BOSS2]->Render(spriteData);
+		if (direction == 9)
+			this->animations[11]->Render(spriteData);
+		else
+			this->animations[BULLET_BOSS2]->Render(spriteData);
 	}
 	break;
 

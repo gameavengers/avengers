@@ -79,6 +79,14 @@ void GigiState::state_dead()
 
 	gigi->SetSpeedX(0);
 	gigi->SetSpeedY(-GIGI_FLY_SPEED * 2);
+
+	if (gigi->isOnGround)
+	{
+		anim = gigi->GetAnimationsList()[2];
+
+		if (this->timeCount > 200)
+			gigi->disable = true;
+	}
 }
 
 void GigiState::Colision()

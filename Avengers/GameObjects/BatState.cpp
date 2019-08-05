@@ -225,6 +225,14 @@ void BatState::state_dead()
 
 	bat->SetSpeedX(0);
 	bat->SetSpeedY(-GIGI_FLY_SPEED * 2);
+
+	if (bat->isOnGround)
+	{
+		anim = bat->GetAnimationsList()[7];
+
+		if (this->timeCount > 200)
+			bat->disable = true;
+	}
 }
 
 void BatState::Colision()

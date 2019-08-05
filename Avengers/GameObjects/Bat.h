@@ -27,6 +27,8 @@ public:
 	Bat(float x, float y, BatType type);
 	static void LoadResources();
 
+	bool isOnGround = false;
+
 	static Bat *GetInstance();
 
 	BatType GetType() { return this->type; }

@@ -1,4 +1,4 @@
-#include "RunningMan.h"
+﻿#include "RunningMan.h"
 
 vector<Animation *> RunningMan::animations = vector<Animation *>();
 RunningMan *RunningMan::__instance = NULL;
@@ -107,6 +107,30 @@ void RunningMan::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	//-----------Hiệu ứng nổ----------------------------------------------------
+	RECT* listSprite1 = loadTXT.LoadRect((char*)"Resources\\Captain\\Captain.txt");
+
+	// RUNNING_MAN_ANI_EXPLOSIVE
+	anim = new Animation(50);
+	for (int i = 53; i < 55; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		switch (i)
+		{
+		case 53:
+			sprite->SetOffSetX(-5);
+			sprite->SetOffSetY(-24);
+			break;
+		case 54:
+			sprite->SetOffSetX(3);
+			sprite->SetOffSetY(-21);
+			break;
+		}
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+	//-----------Hiệu ứng nổ----------------------------------------------------
 }
 
 void RunningMan::Update(DWORD dt)

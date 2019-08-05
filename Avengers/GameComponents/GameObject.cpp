@@ -66,6 +66,19 @@ void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &co
 				coEvents.push_back(new ColliedEvent(EVENT_BRICK, time, normalX, normalY));
 			}
 		}
+		else if (tiles[i]->type == ObjectType::THORN)
+		{
+			float time;
+			float normalX;
+			float normalY;
+
+			time = Collision::GetInstance()->SweptAABB(this->GetCollider(), tileCollider, normalX, normalY);
+
+			if (time >= 0 && time < 1.0f && normalY == 1)
+			{
+				coEvents.push_back(new ColliedEvent(EVENT_THORN, time, normalX, normalY));
+			}
+		}
 		else if (tiles[i]->type == ObjectType::RIVER)
 		{
 			float time;

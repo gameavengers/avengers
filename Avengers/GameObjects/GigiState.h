@@ -20,6 +20,7 @@ protected:
 public:
 	float timeCount;
 	float shootTimeCount;
+	float disableTimeCount;
 
 	GigiState(Gigi *gigi);
 	~GigiState();

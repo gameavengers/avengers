@@ -121,10 +121,11 @@ void DomestoStayState::state_dead()
 
 	domesto->SetSpeedX(0);
 
-	if (this->timeCount >= 500)
-	{
+	if (this->timeCount > 200)
+		anim = domesto->GetAnimationsList()[4];
+
+	if (this->timeCount > 350)
 		domesto->disable = true;
-	}
 }
 
 void DomestoStayState::Colision()

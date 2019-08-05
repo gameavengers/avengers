@@ -225,6 +225,14 @@ void BatState::state_dead()
 
 	bat->SetSpeedX(0);
 	bat->SetSpeedY(-GIGI_FLY_SPEED * 2);
+
+	if (bat->isOnGround)
+	{
+		anim = bat->GetAnimationsList()[7];
+
+		if (this->disableTimeCount > 150)
+			bat->disable = true;
+	}
 }
 
 void BatState::Colision()
@@ -239,6 +247,9 @@ void BatState::Update(DWORD dt)
 
 	this->timeCount += dt;
 	this->timeChangeFlyState += dt;
+
+	if (bat->isOnGround && stateBat == StateBat::BAT_STATE_DEAD)
+		this->disableTimeCount += dt;
 	
 	//Update theo state
 	switch (stateBat)

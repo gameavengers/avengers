@@ -15,6 +15,7 @@ GigiState::GigiState(Gigi *gigi)
 {
 	this->gigi = gigi;
 	this->state_flying();
+	this->disableTimeCount = 0;
 }
 
 GigiState::~GigiState()
@@ -66,9 +67,9 @@ void GigiState::state_flying()
 		this->shootTimeCount = 0;
 		int direction = gigi->IsLeft() ? 1 : 5;
 		float offsetX = gigi->IsLeft() ? -16 : 16;
-		float offsetY = 10;
+		float offsetY = -5;
 		SpawnProjectTile::GetInstance()->SpawnBullet(gigi->GetPositionX() + offsetX, gigi->GetPositionY() + offsetY,
-			direction, BulletType::ROCKET);
+			direction, BulletType::GIGIROCKET);
 	}
 }
 
@@ -79,6 +80,14 @@ void GigiState::state_dead()
 
 	gigi->SetSpeedX(0);
 	gigi->SetSpeedY(-GIGI_FLY_SPEED * 2);
+
+	if (gigi->isOnGround)
+	{
+		anim = gigi->GetAnimationsList()[2];
+
+		if (this->disableTimeCount > 150)
+			gigi->disable = true;
+	}
 }
 
 void GigiState::Colision()
@@ -90,6 +99,9 @@ void GigiState::Update(DWORD dt)
 {
 	this->timeCount += dt;
 	this->shootTimeCount += dt;
+
+	if (gigi->isOnGround && stateGigi == StateGigi::GIGI_STATE_DEAD)
+		this->disableTimeCount += dt;
 
 	//Update theo state
 	switch (stateGigi)

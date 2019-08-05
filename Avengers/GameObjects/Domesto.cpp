@@ -1,4 +1,4 @@
-#include "Domesto.h"
+﻿#include "Domesto.h"
 
 vector<Animation *> Domesto::animations = vector<Animation *>();
 Domesto *Domesto::__instance = NULL;
@@ -110,6 +110,30 @@ void Domesto::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	//-----------Hiệu ứng nổ----------------------------------------------------
+	RECT* listSprite1 = loadTXT.LoadRect((char*)"Resources\\Captain\\Captain.txt");
+
+	// DOMESTO_ANI_EXPLOSIVE
+	anim = new Animation(50);
+	for (int i = 53; i < 55; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		switch (i)
+		{
+		case 53:
+			sprite->SetOffSetX(-5);
+			sprite->SetOffSetY(-24);
+			break;
+		case 54:
+			sprite->SetOffSetX(3);
+			sprite->SetOffSetY(-21);
+			break;
+		}
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+	//-----------Hiệu ứng nổ----------------------------------------------------
 }
 
 void Domesto::Update(DWORD dt)

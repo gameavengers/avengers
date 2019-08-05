@@ -76,6 +76,10 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation, int mapI
 				{
 					(map.tiles + x + y * size)->type = ObjectType::ROPE_SWING;
 				}
+				if ((map.tiles + x + y * size)->tileId == 162)
+				{
+					(map.tiles + x + y * size)->type = ObjectType::THORN;
+				}
 			}
 			break;
 			case MAP_BOSS_2_ID:
@@ -153,20 +157,34 @@ void TileMap2::LoadSpawnData(LPCWSTR filePath, int mapId)
 void TileMap2::SetCurrentMap(int mapID)
 {
 	currentMap = &mapList[mapID];
+	//Nếu tồn tại thì xóa để dừng nhạc
+	//Nhớ cho g = NULL ở trong getInstance nha bạn
+	if (g != NULL)
+	{
+		//có thể stop ở đây nhưng delete luôn cho khỏi nặng ram
+		//Sound::GetInstance()->StopSound(g);
+		delete g;
+		g = NULL;
+	}
 	switch (mapID)
 	{
 	case STAGE_1:
-		Sound::GetInstance()->LoopSound(Sound::GetInstance()->LoadSound((LPTSTR)SOUND_JUMPING_ROLE));
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_STAGE_1_2);
 		break;
 	case STAGE_BOSS_1:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_STAGE_BOSS_1);
 		break;
 	case STAGE_2:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_STAGE_1_2);
 		break;
 	case STAGE_BOSS_2:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_STAGE_BOSS_2);
 		break;
 	default:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_DEFAULT);
 		break;
 	}
+	Sound::GetInstance()->LoopSound(g);
 }
 
 void TileMap2::Render(int x, int y)

@@ -37,6 +37,48 @@ StateCaptain CaptainState::GetState()
 void CaptainState::SetState(StateCaptain state)
 {
 	this->stateCaptain = state;
+
+	//Nếu tồn tại thì xóa để dừng nhạc
+	//Nhớ cho g = NULL ở trong getInstance nha bạn
+	if (g != NULL)
+	{
+		//có thể stop ở đây nhưng delete luôn cho khỏi nặng ram
+		//Sound::GetInstance()->StopSound(g);
+		delete g;
+		g = NULL;
+	}
+	switch (state)
+	{
+	case STATE_DASH:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_DASH);
+		break;
+	case STATE_JUMPING_ROLE:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_ROLE);
+		break;
+	case STATE_CROUCH_PUNCH:
+	case STATE_PUNCH:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_PUNCH);
+		break;
+	case STATE_THROW_SHIELD:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_THROW_SHIELD);
+		break;
+	case STATE_CROUCH_SHIELD:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_CROUCH_SHIELD);
+		break;
+	case STATE_JUMPING_KICK:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_JUMPING_KICK);
+		break;
+	case STATE_DIEING:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_DIEING);
+		break;
+	case STATE_SWIMMING:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_SWIM);
+		break;
+	default:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_DEFAULT);
+		break;
+	}
+	Sound::GetInstance()->LoopSound(g);
 }
 
 void CaptainState::state_standing()
@@ -389,6 +431,13 @@ void CaptainState::state_swing()
 		return;
 	}
 
+	if (captain->IsBleeding())
+	{
+		this->SetState(STATE_BLEEING);
+		captain->SetIsSwing(false);
+		return;
+	}
+
 	anim = captain->GetAnimationsList()[STATE_SWING];
 
 	captain->SetSpeedX(0);
@@ -399,6 +448,13 @@ void CaptainState::state_bleeing_2()
 {
 	this->SetState(STATE_BLEEING_2);
 	anim = captain->GetAnimationsList()[STATE_BLEEING_2];
+
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z) || Keyboard::GetInstance()->IsKeyDown(DIK_X))
+	{
+		this->SetState(STATE_STANDING);
+		this->state_standing();
+		return;
+	}
 	
 	if (timeCount >= 300)
 	{

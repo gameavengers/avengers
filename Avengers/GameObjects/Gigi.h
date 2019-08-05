@@ -21,6 +21,8 @@ public:
 	Gigi(float x, float y);
 	static void LoadResources();
 
+	bool isOnGround = false;
+
 	float posx, posy;
 
 	static Gigi *GetInstance();

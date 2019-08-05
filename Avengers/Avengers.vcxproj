@@ -85,7 +85,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dsound.lib;winmm.lib;legacy_stdio_definitions.lib;dinput8.lib;dxguid.lib;DxErr.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -145,7 +145,6 @@
     <ClInclude Include="GameComponents\Sprite.h" />
     <ClInclude Include="GameComponents\TileMap2.h" />
     <ClInclude Include="GameComponents\Viewport.h" />
-    <ClInclude Include="GameObjects\Barrel.h" />
     <ClInclude Include="GameObjects\Bat.h" />
     <ClInclude Include="GameObjects\BatState.h" />
     <ClInclude Include="GameObjects\Boss1.h" />
@@ -164,13 +163,13 @@
     <ClInclude Include="GameObjects\Item.h" />
     <ClInclude Include="GameObjects\RedBox.h" />
     <ClInclude Include="GameObjects\RedBoxState.h" />
-    <ClInclude Include="GameObjects\Rocket.h" />
     <ClInclude Include="GameObjects\RunningMan.h" />
     <ClInclude Include="GameObjects\RunningManState.h" />
     <ClInclude Include="GameObjects\Shield.h" />
     <ClInclude Include="GameObjects\State.h" />
     <ClInclude Include="GameObjects\Tank.h" />
     <ClInclude Include="GameObjects\TankState.h" />
+    <ClInclude Include="GameObjects\TwinBricks.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameComponents\Animation.cpp" />
@@ -190,7 +189,6 @@
     <ClCompile Include="GameComponents\Sprite.cpp" />
     <ClCompile Include="GameComponents\TileMap2.cpp" />
     <ClCompile Include="GameComponents\Viewport.cpp" />
-    <ClCompile Include="GameObjects\Barrel.cpp" />
     <ClCompile Include="GameObjects\Bat.cpp" />
     <ClCompile Include="GameObjects\BatState.cpp" />
     <ClCompile Include="GameObjects\Boss1.cpp" />
@@ -209,13 +207,13 @@
     <ClCompile Include="GameObjects\Item.cpp" />
     <ClCompile Include="GameObjects\RedBox.cpp" />
     <ClCompile Include="GameObjects\RedBoxState.cpp" />
-    <ClCompile Include="GameObjects\Rocket.cpp" />
     <ClCompile Include="GameObjects\RunningMan.cpp" />
     <ClCompile Include="GameObjects\RunningManState.cpp" />
     <ClCompile Include="GameObjects\Shield.cpp" />
     <ClCompile Include="GameObjects\State.cpp" />
     <ClCompile Include="GameObjects\Tank.cpp" />
     <ClCompile Include="GameObjects\TankState.cpp" />
+    <ClCompile Include="GameObjects\TwinBricks.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

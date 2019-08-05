@@ -163,3 +163,9 @@ void Tank::Render()
 {
 	this->state->Render();
 }
+
+void Tank::OnCollision()
+{
+	((TankState*)state)->timeCount = 0;
+	((TankState*)state)->SetDirection(0);
+}

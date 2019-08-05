@@ -3,6 +3,7 @@
 #include "../GameObjects/Bullet.h"
 #include "../GameObjects/Item.h"
 
+class Bullet;
 class SpawnProjectTile
 {
 private:

@@ -26,7 +26,8 @@ enum ObjectType
 	BRICK_NOCOLLISION_BOTTOM,
 	ON_BUTTON,
 	RIVER,
-	ROPE_SWING
+	ROPE_SWING,
+	THORN
 };
 enum StateDomesto
 {
@@ -36,10 +37,21 @@ enum StateDomesto
 	DOMESTO_STATE_DEAD,//Chết
 	DOMESTO_STATE_JUMPING,//Nhảy
 };
+enum BulletType {
+	BULLET_NORMAL, //đạn của running man
+	BULLET_TANK, //đạn của mấy tháp súng
+	BULLET_BOSS2, //đạn của con boss 2
+	ROCKET, //tên lửa
+	BULLET_NORMAL_BOSS1, //đạn thường (nhỏ) của boss 1
+	BULLET_SPECIAL_BOSS1, //đạn đặc biệt (lớn) của boss 1
+	GIGIROCKET, // tên lửa gigi
+	BARREL, // thùng gỗ boss 2
+};
 
 #define EVENT_BRICK 1
 #define EVENT_WATER 2
 #define EVENT_ROPE_SWING 3
+#define EVENT_THORN 4
 
 //TiledMap
 //
@@ -60,9 +72,18 @@ enum StateDomesto
 #define TILES_SET_STAGE_BOSS_2 L"Resources\\TiledMap\\Map-Boss2-Tiles.png"
 
 //SOUND
-//#define SOUND_BACKGROUND L"./Resource/Sound/Background.wav"
-//const LPTSTR SOUND_BACKGROUND = "./Resource/Sound/Background.wav";
-#define SOUND_JUMPING_ROLE L"Resource\\Sound\\Jump_role.wav"
+#define SOUND_DEFAULT L"./Resources/Sound/player_stand.wav"
+#define SOUND_STAGE_1_2 L"./Resources/Sound/Stage1_2.wav"
+#define SOUND_STAGE_BOSS_1 L"./Resources/Sound/boss_wizard_theme.wav"
+#define SOUND_STAGE_BOSS_2 L"./Resources/Sound/Boss2.wav"
+#define SOUND_CAPTAIN_DASH L"./Resources/Sound/player_dash.wav"
+#define SOUND_CAPTAIN_ROLE L"./Resources/Sound/player_rolling.wav"
+#define SOUND_CAPTAIN_PUNCH L"./Resources/Sound/player_punch_kick.wav"
+#define SOUND_CAPTAIN_THROW_SHIELD L"./Resources/Sound/shield_attack.wav"
+#define SOUND_CAPTAIN_CROUCH_SHIELD L"./Resources/Sound/shield_collision.wav"
+#define SOUND_CAPTAIN_JUMPING_KICK L"./Resources/Sound/player_punch_kick.wav"
+#define SOUND_CAPTAIN_DIEING L"./Resources/Sound/player_dead.wav"
+#define SOUND_CAPTAIN_SWIM L"./Resources/Sound/player_diving.wav"
 
 //ENEMY MATRIX
 #define ENEMIES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Enemies-Map-1-Matrix.txt"
@@ -116,11 +137,11 @@ enum StateDomesto
 
 //Big Energy
 #define BIG_ENERGY_WIDTH 8
-#define BIG_ENERGY_HEIGHT 9
+#define BIG_ENERGY_HEIGHT 10
 
 //Small Energy
 #define SMALL_ENERGY_WIDTH 7
-#define SMALL_ENERGY_HEIGHT 7
+#define SMALL_ENERGY_HEIGHT 10
 
 //Key Crystal
 #define KEY_CRYSTAL_WIDTH 12
@@ -185,6 +206,12 @@ enum StateDomesto
 #define BOSS1_PARABOL_JUMP_H		32
 #define BOSS1_PARABOL_JUMP_K		100
 
+//
+//Boss1
+//
+#define BOSS2_RUN_SPEED				0.1f
+#define BOSS2_RUN_TIME				2500
+#define BOSS2_HOLD_BARREL_TIME		500
 //
 //Elevator
 //

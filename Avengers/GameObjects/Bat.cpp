@@ -1,4 +1,4 @@
-#include "Bat.h"
+﻿#include "Bat.h"
 
 vector<Animation *> Bat::animations = vector<Animation *>();
 Bat *Bat::__instance = NULL;
@@ -127,6 +127,30 @@ void Bat::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	//-----------Hiệu ứng nổ----------------------------------------------------
+	RECT* listSprite1 = loadTXT.LoadRect((char*)"Resources\\Captain\\Captain.txt");
+
+	// BAT_ANI_EXPLOSIVE
+	anim = new Animation(50);
+	for (int i = 53; i < 55; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		switch (i)
+		{
+		case 53:
+			sprite->SetOffSetX(-5);
+			sprite->SetOffSetY(-3);
+			break;
+		case 54:
+			sprite->SetOffSetX(3);
+			sprite->SetOffSetY(0);
+			break;
+		}
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+	//-----------Hiệu ứng nổ----------------------------------------------------
 }
 
 void Bat::Update(DWORD dt)
@@ -134,12 +158,48 @@ void Bat::Update(DWORD dt)
 	if (this->disable)
 		return;
 
-	float moveX = trunc(this->GetSpeedX()* dt);
-	float moveY = trunc(this->GetSpeedY()* dt);
-	this->SetPositionX(this->GetPositionX() + moveX);
-	this->SetPositionY(this->GetPositionY() + moveY);
+	//Colision với state để riêng ra
+	vector<ColliedEvent*> coEvents;
+	vector<ColliedEvent*> coEventsResult;
 
+#pragma region	Collide with map
+	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
+
+	coEvents.clear();
+	this->SetDt(dt);
 	this->UpdateObjectCollider();
+	this->MapCollisions(tiles, coEvents);
+
+	if (coEvents.size() == 0)
+	{
+		float moveX = trunc(this->GetSpeedX()* dt);
+		float moveY = trunc(this->GetSpeedY()* dt);
+		this->SetPositionX(this->GetPositionX() + moveX);
+		this->SetPositionY(this->GetPositionY() + moveY);
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+
+		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+
+		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
+		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
+
+		this->SetPositionX(this->GetPositionX() + moveX);
+		this->SetPositionY(this->GetPositionY() + moveY);
+
+		if (coEventsResult[0]->collisionID == 1 || coEventsResult[0]->collisionID == 4)
+		{
+			if (ny == 1)
+			{
+				this->isOnGround = true;
+			}
+		}
+	}
+	for (int i = 0; i < coEvents.size(); i++)
+		delete coEvents[i];
+#pragma endregion
 
 	state->Colision();
 	state->Update(dt);

@@ -26,6 +26,12 @@ Grid2::Grid2()
 	Gigi::LoadResources();
 	Elevator::LoadResources();
 	Bat::LoadResources();
+	Boss2::LoadResources();
+	Bullet::LoadResources();
+	TwinBricks::LoadResources();
+	isDisableBoss2 = true;
+	boss2 = Boss2::GetInstance();
+	
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -204,7 +210,7 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 	break;
 	case 6:
 	{
-		RedBox* object = new RedBox(tile->x * TILE_SIZE, tile->y * TILE_SIZE);
+		RedBox* object = new RedBox(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RedBoxType::MAP_1);
 		OnUpdateObject temp;
 		temp.object = object;
 		temp.tile = tile;
@@ -333,6 +339,28 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 		listObject.push_back(temp);
 	}
 	break;
+	case 17:
+	{
+		TwinBricks* object = new TwinBricks(tile->x * TILE_SIZE, tile->y * TILE_SIZE);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 18:
+	{
+		RedBox* object = new RedBox(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RedBoxType::MAP_2);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
 	}
 }
 
@@ -358,6 +386,8 @@ void Grid2::Update(DWORD dt)
 
 	if (spawnboss)
 	boss1->Update(dt);
+	if (!isDisableBoss2)
+		boss2->Update(dt);
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 	SpawnProjectTile::GetInstance()->UpdateItem(dt);
 
@@ -419,6 +449,8 @@ void Grid2::Render()
 
 	if (spawnboss)
 		boss1->Render();
+	if (!isDisableBoss2)
+		boss2->Render();
 
 	for (int i = 0; i < listObject.size(); i++)
 	{

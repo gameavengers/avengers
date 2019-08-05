@@ -1,7 +1,5 @@
 #include "Sprite.h"
 
-
-
 Sprite::Sprite(LPCWSTR filePath, RECT rect, D3DCOLOR transColor)
 {
 	width = 0;
@@ -67,7 +65,13 @@ D3DXVECTOR2 Sprite::GetCenter()
 }
 D3DXVECTOR2 Sprite::GetOffset()
 {
-	return D3DXVECTOR2();
+	float x = offsetX;
+	float y = offsetY;
+
+	//x = flipHorizontal ? (float)this->width - x : x;
+	//y = flipVertical ? (float)this->height - y : y;
+
+	return D3DXVECTOR2(x, y);
 }
 D3DXVECTOR2 Sprite::GetTranslate()
 {

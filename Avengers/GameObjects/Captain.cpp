@@ -500,8 +500,11 @@ void Captain::UpdateCollision(DWORD dt)
 		//Test
 		if (isCollideShield)
 		{
-			listBullet.at(i)->Disable();
-			return;
+			if (listBullet.at(i)->GetBulletType() == BULLET_NORMAL)
+			{
+				listBullet.at(i)->SetSpeedX(0);
+				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
+			}
 		}
 
 		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listBullet.at(i)->GetCollider());

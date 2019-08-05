@@ -24,6 +24,16 @@ void Bullet::Initialize(float x, float y, int direction, BulletType type)
 	{
 		width = 6;
 		height = 6;
+		if (direction == 1)
+		{
+			this->SetSpeedX(-BULLET_NORMAL_SPEED);
+			this->SetSpeedY(0);
+		}
+		else
+		{
+			this->SetSpeedX(BULLET_NORMAL_SPEED);
+			this->SetSpeedY(0);
+		}
 	}
 		break;
 	case BULLET_TANK:
@@ -221,16 +231,7 @@ void Bullet::LoadResources()
 
 void Bullet::BulletNormalUpdate(DWORD dt)
 {
-	if (direction == 1)
-	{
-		this->SetSpeedX(-BULLET_NORMAL_SPEED);
-		this->SetSpeedY(0);
-	}
-	else
-	{
-		this->SetSpeedX(BULLET_NORMAL_SPEED);
-		this->SetSpeedY(0);
-	}
+	
 }
 
 void Bullet::BulletTankUpdate(DWORD dt)

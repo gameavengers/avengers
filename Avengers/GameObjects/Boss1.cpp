@@ -83,7 +83,7 @@ void Boss1::LoadResources()
 		sprite->SetOffSetY(-16);
 		if (i == 8)
 			sprite->SetOffSetX(1);
-		if (i == 9)
+		else if (i == 9)
 			sprite->SetOffSetX(15);
 		else if (i == 10)
 			sprite->SetOffSetX(17);
@@ -125,7 +125,12 @@ void Boss1::LoadResources()
 	for (int i = 15; i < 18; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-20);
+		if (i == 15)
+			sprite->SetOffSetY(-16);
+		else if (i == 16)
+			sprite->SetOffSetY(-20);
+		else if (i == 17)
+			sprite->SetOffSetY(-20);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);

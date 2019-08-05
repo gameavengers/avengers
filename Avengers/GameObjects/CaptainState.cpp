@@ -389,6 +389,13 @@ void CaptainState::state_swing()
 		return;
 	}
 
+	if (captain->IsBleeding())
+	{
+		this->SetState(STATE_BLEEING);
+		captain->SetIsSwing(false);
+		return;
+	}
+
 	anim = captain->GetAnimationsList()[STATE_SWING];
 
 	captain->SetSpeedX(0);

@@ -330,7 +330,7 @@ void Captain::Update(DWORD dt)
 	{
 		Grid2::GetInstance()->DisableAllObject();
 		Game::GetInstance()->SetStage(STAGE_2);
-		this->SetPositionX(1000);
+		this->SetPositionX(280);
 		this->SetPositionY(900);
 		Viewport::GetInstance()->Reset();
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
@@ -469,6 +469,10 @@ void Captain::UpdateCollision(DWORD dt)
 			case 7:
 			case 15:
 			case 16:
+			case 11:
+			case 12:
+			case 13:
+			case 14:
 				listUpdateObject.at(i).object->OnCollision();
 				break;
 			case 17:

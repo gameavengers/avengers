@@ -149,7 +149,7 @@ void Captain::LoadResources()
 
 	Sprite * sprite5 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
 	//sprite5->SetOffSetY(-16);
-	//sprite5->SetOffSetX(13);
+	sprite5->SetOffSetX(9);
 	anim->AddFrame(sprite5);
 
 	Sprite * sprite6 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[16], TEXTURE_TRANS_COLOR);

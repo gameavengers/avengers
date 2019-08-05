@@ -136,7 +136,7 @@ void Shield::Update(DWORD dt)
 			this->state = SHIELD_CENTER;
 			this->SetSpeedX(0);
 			if (captain->IsLeft())
-				this->SetPositionX(captain->GetPositionX());
+				this->SetPositionX(captain->GetPositionX() + 3);
 			else
 				this->SetPositionX(captain->GetPositionX() + 5);
 			this->SetPositionY(captain->GetPositionY() - 25);

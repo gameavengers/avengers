@@ -204,6 +204,7 @@ void Bullet::LoadResources()
 	for (int i = 10; i < 11; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(28);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -598,6 +599,51 @@ void Bullet::BarrelUpdate(DWORD dt)
 		this->SetSpeedY(this->GetSpeedY() - 0.004f);
 		break;
 	}
+
+	//Colision với state để riêng ra
+	vector<ColliedEvent*> coEvents;
+	vector<ColliedEvent*> coEventsResult;
+
+#pragma region	Collide with map
+	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
+
+	coEvents.clear();
+	this->SetDt(dt);
+	this->UpdateObjectCollider();
+	this->MapCollisions(tiles, coEvents);
+
+	if (coEvents.size() == 0)
+	{
+		float moveX = trunc(this->GetSpeedX()* dt);
+		float moveY = trunc(this->GetSpeedY()* dt);
+		this->SetPositionX(this->GetPositionX() + moveX);
+		this->SetPositionY(this->GetPositionY() + moveY);
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+
+		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+
+		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
+		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
+
+		this->SetPositionX(this->GetPositionX() + moveX);
+		this->SetPositionY(this->GetPositionY() + moveY);
+
+		if (coEventsResult[0]->collisionID == 1)
+		{
+			if (ny == 1)
+			{
+				this->isGoingToDisable = true;
+				this->direction = 9;
+				this->SetSpeedY(0);
+			}
+		}
+	}
+	for (int i = 0; i < coEvents.size(); i++)
+		delete coEvents[i];
+#pragma endregion
 }
 
 void Bullet::Update(DWORD dt)

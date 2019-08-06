@@ -14,6 +14,8 @@ void Item::Initialize(float x, float y, ItemType type)
 
 	this->state = ITEM_APPEAR;
 
+	this->timeCount = 0;
+
 	switch (type)
 	{
 	case FIVE_POINT:

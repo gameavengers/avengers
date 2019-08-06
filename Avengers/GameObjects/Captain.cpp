@@ -477,6 +477,8 @@ void Captain::UpdateCollision(DWORD dt)
 				break;
 			case 6:
 			case 18:
+			case 19:
+			case 20:
 				if (shield->IsFlying())
 					listUpdateObject.at(i).object->OnCollision();
 				break;
@@ -566,6 +568,12 @@ void Captain::UpdateCollision(DWORD dt)
 
 		if (isCollide)
 		{
+			if (listItem.at(i)->GetItemType() == ItemType::KEY_CRYSTAL)
+				this->canGoToNextStage = true;
+			//if (listItem.at(i)->GetItemType() == ItemType::SMALL_ENERGY)
+				// +máu
+			//if (listItem.at(i)->GetItemType() == ItemType::BIG_ENERGY)
+				// +máu
 			listItem.at(i)->Disable();
 		}
 	}

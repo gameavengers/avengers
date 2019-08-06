@@ -76,6 +76,18 @@ void Boss1::LoadResources()
 	for (int i = 8; i < 12; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		switch (i)
+		{
+		case 9:
+			sprite->SetOffSetX(14);
+			break;
+		case 10:
+			sprite->SetOffSetX(16);
+			break;
+		case 11:
+			sprite->SetOffSetX(8);
+			break;
+		}
 		anim->AddFrame(sprite,100);
 	}
 	animations.push_back(anim);
@@ -87,6 +99,15 @@ void Boss1::LoadResources()
 	for (int i = 12; i < 14; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		switch (i)
+		{
+		case 12:
+			sprite->SetOffSetX(13);
+			break;
+		case 13:
+			sprite->SetOffSetX(5);
+			break;
+		}
 		anim->AddFrame(sprite,250);
 	}
 	animations.push_back(anim);
@@ -105,6 +126,16 @@ void Boss1::LoadResources()
 	for (int i = 15; i < 18; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		switch (i)
+		{
+		case 16:
+			sprite->SetOffSetY(-4);
+			sprite->SetOffSetX(-1);
+			break;
+		case 17:
+			sprite->SetOffSetY(-4);
+			break;
+		}
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);

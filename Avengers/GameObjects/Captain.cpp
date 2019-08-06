@@ -11,7 +11,7 @@ Captain::Captain()
 
 	shield = new Shield();
 
-	this->x = 1500;
+	this->x = 250;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -110,12 +110,12 @@ void Captain::LoadResources()
 	anim = new Animation(100);
 
 	Sprite * sprite3 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[11], TEXTURE_TRANS_COLOR);
-	//sprite3->SetOffSetX(0);
+	sprite3->SetOffSetX(-4);
 	anim->AddFrame(sprite3);
 
 	Sprite * sprite4 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[12], TEXTURE_TRANS_COLOR);
 
-	//sprite4->SetOffSetX(16);
+	sprite4->SetOffSetX(12);
 	anim->AddFrame(sprite4);
 
 	animations.push_back(anim);
@@ -124,11 +124,11 @@ void Captain::LoadResources()
 	anim = new Animation(100);
 
 	Sprite * sprite1 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[13], TEXTURE_TRANS_COLOR);
-	//sprite1->SetOffSetX(16);
+	sprite1->SetOffSetX(12);
 	anim->AddFrame(sprite1);
 
 	Sprite * sprite2 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[14], TEXTURE_TRANS_COLOR);
-	//sprite2->SetOffSetX(7);
+	sprite2->SetOffSetX(3);
 	anim->AddFrame(sprite2);
 
 	animations.push_back(anim);
@@ -139,7 +139,7 @@ void Captain::LoadResources()
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
 		
-		//sprite->SetOffSetX(16);
+		sprite->SetOffSetX(12);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -148,12 +148,10 @@ void Captain::LoadResources()
 	anim = new Animation(100);
 
 	Sprite * sprite5 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
-	//sprite5->SetOffSetY(-16);
 	sprite5->SetOffSetX(9);
 	anim->AddFrame(sprite5);
 
 	Sprite * sprite6 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[16], TEXTURE_TRANS_COLOR);
-	//sprite6->SetOffSetX(4);
 	anim->AddFrame(sprite6);
 
 	animations.push_back(anim);
@@ -216,14 +214,15 @@ void Captain::LoadResources()
 	anim = new Animation(200);
 
 	Sprite * sprite9 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[27], TEXTURE_TRANS_COLOR);
+	sprite9->SetOffSetX(4);
 	anim->AddFrame(sprite9);
 
 	Sprite * sprite10 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[28], TEXTURE_TRANS_COLOR);
-	//sprite10->SetOffSetX(1);
+	sprite10->SetOffSetX(5);
 	anim->AddFrame(sprite10);
 
 	Sprite * sprite11 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[29], TEXTURE_TRANS_COLOR);
-	//sprite11->SetOffSetX(-3);
+	sprite11->SetOffSetX(1);
 	anim->AddFrame(sprite11);
 
 	animations.push_back(anim);

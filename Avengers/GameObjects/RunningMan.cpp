@@ -73,7 +73,6 @@ void RunningMan::LoadResources()
 	for (int i = 0; i < 3; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -83,7 +82,6 @@ void RunningMan::LoadResources()
 	for (int i = 3; i < 4; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite,5000);
 	}
 	animations.push_back(anim);
@@ -93,7 +91,6 @@ void RunningMan::LoadResources()
 	for (int i = 4; i < 5; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -103,7 +100,6 @@ void RunningMan::LoadResources()
 	for (int i = 5; i < 6; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -120,11 +116,11 @@ void RunningMan::LoadResources()
 		{
 		case 53:
 			sprite->SetOffSetX(-5);
-			sprite->SetOffSetY(-24);
+			sprite->SetOffSetY(-8);
 			break;
 		case 54:
 			sprite->SetOffSetX(3);
-			sprite->SetOffSetY(-21);
+			sprite->SetOffSetY(-5);
 			break;
 		}
 		anim->AddFrame(sprite);
@@ -194,4 +190,5 @@ void RunningMan::OnCollision()
 {
 	((RunningManState*)state)->timeCount = 0;
 	((RunningManState*)state)->state_dead();
+	/*state->Colision();*/
 }

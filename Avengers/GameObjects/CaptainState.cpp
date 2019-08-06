@@ -59,12 +59,6 @@ void CaptainState::SetState(StateCaptain state)
 	case STATE_PUNCH:
 		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_PUNCH);
 		break;
-	case STATE_THROW_SHIELD:
-		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_THROW_SHIELD);
-		break;
-	case STATE_CROUCH_SHIELD:
-		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_CROUCH_SHIELD);
-		break;
 	case STATE_JUMPING_KICK:
 		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_JUMPING_KICK);
 		break;
@@ -73,10 +67,10 @@ void CaptainState::SetState(StateCaptain state)
 		break;
 	case STATE_SWIMMING:
 		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_SWIM);
-		break;
+		Sound::GetInstance()->PlaySound(g);
+		return;
 	default:
-		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_DEFAULT);
-		break;
+		return;
 	}
 	Sound::GetInstance()->LoopSound(g);
 }
@@ -103,6 +97,12 @@ void CaptainState::state_standing()
 	{
 		if (captain->IsShield()) // Nếu có khiên
 		{
+			if (throw_shield != NULL)
+			{
+				delete throw_shield;
+			}
+			throw_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_THROW_SHIELD);
+			Sound::GetInstance()->PlaySound(throw_shield);
 			this->SetState(STATE_THROW_SHIELD); //Ném khiên
 			this->state_throw_shield();
 			captain->SetIsShield(false);
@@ -268,14 +268,12 @@ void CaptainState::state_crouch()
 
 void CaptainState::state_swimming()
 {
-	this->SetState(STATE_SWIMMING);
-
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z)) // Bàn phím ấn nút Z thì nhảy
 	{
+		Sound::GetInstance()->PlaySound(Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_SWIM));
 		startJumpY = captain->GetPositionY();
 		captain->SetSpeedY(CAPTAIN_JUMP_SPEED_Y);
 		this->SetState(STATE_JUMPING); //Chuyển sang trạng thái nhảy
-
 		captain->SetIsSwimming(false);
 		return;
 	}
@@ -463,6 +461,8 @@ void CaptainState::state_bleeing_2()
 		captain->SetIsBleeding(false);
 		return;
 	}
+
+	captain->SetSpeedX(0);
 }
 
 void CaptainState::KeyHandle()
@@ -483,9 +483,18 @@ void CaptainState::Colision()
 	}
 	
 	//Không chạm đất thì rơi
-	if (!captain->IsGrounded())
+	if (!captain->IsGrounded() && this->GetState() != STATE_SWIMMING && this->GetState() != STATE_DIVING)
 	{
 		this->state_jumping();
+	}
+	else if (this->GetState() == STATE_CROUCH_SHIELD)
+	{
+		if (sound_shield != NULL)
+		{
+			delete sound_shield;
+		}
+		sound_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_CROUCH_SHIELD);
+		Sound::GetInstance()->PlaySound(sound_shield);
 	}
 	else if (this->GetState() == STATE_JUMPING || this->GetState() == STATE_JUMPING_ROLE || this->GetState() == STATE_JUMPING_KICK)
 	{
@@ -497,14 +506,14 @@ void CaptainState::Colision()
 	}
 
 	//Nếu chạm sông thì bơi
-	if (captain->IsSwimming())
+	if (captain->IsSwimming() && this->GetState() != STATE_SWIMMING)
 	{
 		this->SetState(STATE_SWIMMING);
-		this->state_swimming();
+
 	}
 
 	//Đu dây
-	if (captain->IsSwing())
+	if (captain->IsSwing() && this->GetState() != STATE_SWING)
 	{
 		this->SetState(STATE_SWING);
 	}
@@ -529,8 +538,30 @@ void CaptainState::Update(DWORD dt)
 	else
 		captain->SetSpeedX(0);
 
-	if (captain->GetPositionX() < 10)
-		captain->SetPositionX(10);
+	if (captain->GetPositionX() < 0)
+		captain->SetPositionX(0);
+
+	switch (Game::GetInstance()->GetStage())
+	{
+	case STAGE_BOSS_1:
+	case STAGE_BOSS_2:
+		if (!captain->canGoToNextStage)
+		{
+			if (captain->GetPositionX() > 256 - 30)
+				captain->SetPositionX(256 - 30);
+		}
+		break;
+	case STAGE_2:
+		if (!captain->canGoToNextStage)
+		{
+			if (captain->GetPositionX() > 1280 - 30)
+				captain->SetPositionX(1280 - 30);
+
+			if (captain->GetPositionX() < 256)
+				captain->SetPositionX(256);
+		}
+		break;
+	}
 
 	//Update theo state
 	switch (stateCaptain)

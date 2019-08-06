@@ -76,7 +76,6 @@ void Domesto::LoadResources()
 	for (int i = 10; i < 13; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -86,7 +85,6 @@ void Domesto::LoadResources()
 	for (int i = 12; i < 13; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -96,7 +94,6 @@ void Domesto::LoadResources()
 	for (int i = 13; i < 14; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -106,7 +103,6 @@ void Domesto::LoadResources()
 	for (int i = 14; i < 15; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -123,11 +119,11 @@ void Domesto::LoadResources()
 		{
 		case 53:
 			sprite->SetOffSetX(-5);
-			sprite->SetOffSetY(-24);
+			sprite->SetOffSetY(-8);
 			break;
 		case 54:
 			sprite->SetOffSetX(3);
-			sprite->SetOffSetY(-21);
+			sprite->SetOffSetY(-5);
 			break;
 		}
 		anim->AddFrame(sprite);

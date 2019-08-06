@@ -15,6 +15,8 @@ void Bullet::Initialize(float x, float y, int direction, BulletType type)
 
 	this->direction = direction;
 
+	this->disableTimeCount = 0;
+
 	this->SetSpeedX(0);
 	this->SetSpeedY(0);
 
@@ -24,6 +26,16 @@ void Bullet::Initialize(float x, float y, int direction, BulletType type)
 	{
 		width = 6;
 		height = 6;
+		if (direction == 1)
+		{
+			this->SetSpeedX(-BULLET_NORMAL_SPEED);
+			this->SetSpeedY(0);
+		}
+		else
+		{
+			this->SetSpeedX(BULLET_NORMAL_SPEED);
+			this->SetSpeedY(0);
+		}
 	}
 		break;
 	case BULLET_TANK:
@@ -88,6 +100,7 @@ void Bullet::LoadResources()
 	for (int i = 6; i < 7; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(12);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -97,6 +110,7 @@ void Bullet::LoadResources()
 	for (int i = 97; i < 98; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -108,6 +122,7 @@ void Bullet::LoadResources()
 	for (int i = 5; i < 6; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(22);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -116,9 +131,12 @@ void Bullet::LoadResources()
 	// Bay ngang
 	anim = new Animation(100);
 	Sprite * sprite1 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
+	//sprite1->SetOffSetX(7);
+	sprite1->SetOffSetY(13);
 	anim->AddFrame(sprite1);
 	Sprite * sprite2 = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[17], TEXTURE_TRANS_COLOR);
 	anim->AddFrame(sprite2);
+	sprite2->SetOffSetY(11);
 	animations.push_back(anim);
 
 	// Bay xéo lên
@@ -186,6 +204,7 @@ void Bullet::LoadResources()
 	for (int i = 10; i < 11; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(28);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -202,11 +221,11 @@ void Bullet::LoadResources()
 		{
 		case 53:
 			sprite->SetOffSetX(-5);
-			sprite->SetOffSetY(5);
+			sprite->SetOffSetY(20);
 			break;
 		case 54:
 			sprite->SetOffSetX(3);
-			sprite->SetOffSetY(9);
+			sprite->SetOffSetY(24);
 			break;
 		}
 		anim->AddFrame(sprite);
@@ -217,16 +236,7 @@ void Bullet::LoadResources()
 
 void Bullet::BulletNormalUpdate(DWORD dt)
 {
-	if (direction == 1)
-	{
-		this->SetSpeedX(-BULLET_NORMAL_SPEED);
-		this->SetSpeedY(0);
-	}
-	else
-	{
-		this->SetSpeedX(BULLET_NORMAL_SPEED);
-		this->SetSpeedY(0);
-	}
+	
 }
 
 void Bullet::BulletTankUpdate(DWORD dt)
@@ -589,6 +599,51 @@ void Bullet::BarrelUpdate(DWORD dt)
 		this->SetSpeedY(this->GetSpeedY() - 0.004f);
 		break;
 	}
+
+	//Colision với state để riêng ra
+	vector<ColliedEvent*> coEvents;
+	vector<ColliedEvent*> coEventsResult;
+
+#pragma region	Collide with map
+	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
+
+	coEvents.clear();
+	this->SetDt(dt);
+	this->UpdateObjectCollider();
+	this->MapCollisions(tiles, coEvents);
+
+	if (coEvents.size() == 0)
+	{
+		float moveX = trunc(this->GetSpeedX()* dt);
+		float moveY = trunc(this->GetSpeedY()* dt);
+		this->SetPositionX(this->GetPositionX() + moveX);
+		this->SetPositionY(this->GetPositionY() + moveY);
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+
+		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+
+		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
+		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
+
+		this->SetPositionX(this->GetPositionX() + moveX);
+		this->SetPositionY(this->GetPositionY() + moveY);
+
+		if (coEventsResult[0]->collisionID == 1)
+		{
+			if (ny == 1)
+			{
+				this->isGoingToDisable = true;
+				this->direction = 9;
+				this->SetSpeedY(0);
+			}
+		}
+	}
+	for (int i = 0; i < coEvents.size(); i++)
+		delete coEvents[i];
+#pragma endregion
 }
 
 void Bullet::Update(DWORD dt)
@@ -597,6 +652,17 @@ void Bullet::Update(DWORD dt)
 		return;
 
 	this->timeCount += dt;
+
+	if (this->isGoingToDisable)
+	{
+		this->disableTimeCount += dt;
+	}
+
+	if (this->disableTimeCount > 150)
+	{
+		this->isGoingToDisable = false;
+		this->Disable();
+	}
 
 	float moveX = trunc(this->GetSpeedX()* dt);
 	float moveY = trunc(this->GetSpeedY()* dt);
@@ -639,6 +705,7 @@ void Bullet::Update(DWORD dt)
 
 void Bullet::OnCollision()
 {
+	this->isGoingToDisable = true;
 	this->direction = 9;
 }
 

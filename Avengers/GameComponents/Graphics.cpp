@@ -102,7 +102,7 @@ void Graphics::Draw(Sprite *sprite, D3DCOLOR color)
 		return;
 	
 	D3DXVECTOR2 center = sprite->GetCenter();
-	D3DXVECTOR3 offset = D3DXVECTOR3(center.x, center.y, 0);
+	D3DXVECTOR3 offset = D3DXVECTOR3(sprite->GetOffset().x, sprite->GetOffset().y,0);//D3DXVECTOR3(center.x, center.y, 0);
 	D3DXVECTOR2 translate = sprite->GetTranslate();
 	D3DXVECTOR2 scaling = sprite->GetScaling();
 	viewport->SetRenderData(center, translate, scaling);

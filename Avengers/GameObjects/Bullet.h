@@ -22,6 +22,8 @@ public:
 	Bullet(float x, float y, int direction,BulletType type);
 	~Bullet();
 
+	bool isGoingToDisable = false;
+
 	void Initialize(float x, float y, int direction, BulletType type);
 
 	void BulletNormalUpdate(DWORD dt);

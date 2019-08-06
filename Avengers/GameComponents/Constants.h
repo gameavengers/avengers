@@ -23,7 +23,7 @@ enum ObjectType
 {
 	DEFAULT,
 	BRICK,
-	BRICK_NOCOLLISION_BOTTOM,
+	WALL,
 	ON_BUTTON,
 	RIVER,
 	ROPE_SWING,
@@ -52,6 +52,7 @@ enum BulletType {
 #define EVENT_WATER 2
 #define EVENT_ROPE_SWING 3
 #define EVENT_THORN 4
+#define EVENT_WALL 5
 
 //TiledMap
 //
@@ -73,7 +74,7 @@ enum BulletType {
 
 //SOUND
 #define SOUND_DEFAULT L"./Resources/Sound/player_stand.wav"
-#define SOUND_STAGE_1_2 L"./Resources/Sound/Stage1_2.wav"
+#define SOUND_STAGE_1_2 L"./Resources/Sound/main_theme.wav"
 #define SOUND_STAGE_BOSS_1 L"./Resources/Sound/boss_wizard_theme.wav"
 #define SOUND_STAGE_BOSS_2 L"./Resources/Sound/Boss2.wav"
 #define SOUND_CAPTAIN_DASH L"./Resources/Sound/player_dash.wav"
@@ -84,6 +85,7 @@ enum BulletType {
 #define SOUND_CAPTAIN_JUMPING_KICK L"./Resources/Sound/player_punch_kick.wav"
 #define SOUND_CAPTAIN_DIEING L"./Resources/Sound/player_dead.wav"
 #define SOUND_CAPTAIN_SWIM L"./Resources/Sound/player_diving.wav"
+#define SOUND_ENEMY_SHOOT L"./Resources/Sound/weenemy_fire.wav"
 
 //ENEMY MATRIX
 #define ENEMIES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Enemies-Map-1-Matrix.txt"

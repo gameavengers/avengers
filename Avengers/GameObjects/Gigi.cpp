@@ -88,11 +88,11 @@ void Gigi::LoadResources()
 		{
 		case 53:
 			sprite->SetOffSetX(-5);
-			sprite->SetOffSetY(-35);
+			sprite->SetOffSetY(-27);
 			break;
 		case 54:
 			sprite->SetOffSetX(3);
-			sprite->SetOffSetY(-29);
+			sprite->SetOffSetY(-21);
 			break;
 		}
 		anim->AddFrame(sprite);

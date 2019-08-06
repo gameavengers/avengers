@@ -36,6 +36,8 @@ class CaptainState : public State
 protected:
 	//tạo con trỏ âm thanh
 	GSound* g;
+	GSound* sound_shield;
+	GSound* throw_shield;
 
 	static CaptainState * __instance;
 	StateCaptain stateCaptain;

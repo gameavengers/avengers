@@ -46,10 +46,11 @@ void Boss2State::state_idle()
 		this->state_hold_barrel();
 		srand(time(NULL));
 		int randomState = 1;// rand() % 1 + 2;
+		float offsetX = boss2->IsLeft() ? 3 : 5;
 
 		if (randomState == 1)
 		{
-			SpawnProjectTile::GetInstance()->SpawnBullet(boss2->GetPositionX(), boss2->GetPositionY(),
+			SpawnProjectTile::GetInstance()->SpawnBullet(boss2->GetPositionX() + offsetX, boss2->GetPositionY() + 14,
 				boss2->IsLeft() ? 1 : 5, BARREL);
 		}
 		else
@@ -91,8 +92,8 @@ void Boss2State::state_standing_punch()
 	{
 		this->shootTimeCount = 0;
 		int direction = boss2->IsLeft() ? 1 : 5;
-		float offsetX = boss2->IsLeft() ? -16 : 16;
-		float offsetY = -16;
+		float offsetX = boss2->IsLeft() ? -16 : 30;
+		float offsetY = -8;
 		SpawnProjectTile::GetInstance()->SpawnBullet(boss2->GetPositionX() + offsetX, boss2->GetPositionY() + offsetY,
 			direction, BulletType::BULLET_BOSS2);
 	}

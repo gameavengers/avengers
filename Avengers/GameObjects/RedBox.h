@@ -8,7 +8,9 @@
 
 enum RedBoxType {
 	MAP_1,
-	MAP_2
+	MAP_1_EXIT,
+	MAP_2,
+	MAP_2_EXIT
 };
 
 class RedBox : public GameObject

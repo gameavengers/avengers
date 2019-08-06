@@ -43,9 +43,11 @@ void RedBoxState::state_close()
 	switch (redbox->GetType())
 	{
 	case RedBoxType::MAP_1:
+	case RedBoxType::MAP_1_EXIT:
 		anim = redbox->GetAnimationsList()[RED_BOX_STATE_CLOSE];
 		break;
 	case RedBoxType::MAP_2:
+	case RedBoxType::MAP_2_EXIT:
 		anim = redbox->GetAnimationsList()[RED_BOX_MAP_2_STATE_CLOSE];
 		break;
 	}	
@@ -58,9 +60,11 @@ void RedBoxState::state_open()
 	switch (redbox->GetType())
 	{
 	case RedBoxType::MAP_1:
+	case RedBoxType::MAP_1_EXIT:
 		anim = redbox->GetAnimationsList()[RED_BOX_STATE_OPEN];
 		break;
 	case RedBoxType::MAP_2:
+	case RedBoxType::MAP_2_EXIT:
 		anim = redbox->GetAnimationsList()[RED_BOX_MAP_2_STATE_OPEN];
 		break;
 	}
@@ -68,7 +72,19 @@ void RedBoxState::state_open()
 	if (IsSpawn())
 	{
 		srand((int)time(0));
-		SpawnProjectTile::GetInstance()->SpawnItem(redbox->GetPositionX(), redbox->GetPositionY(), ItemType(rand() % 5 + 0));
+
+		switch (redbox->GetType())
+		{
+		case RedBoxType::MAP_1:
+		case RedBoxType::MAP_2:
+			SpawnProjectTile::GetInstance()->SpawnItem(redbox->GetPositionX(), redbox->GetPositionY(), ItemType(rand() % 5 + 0));
+			break;
+		case RedBoxType::MAP_1_EXIT:
+		case RedBoxType::MAP_2_EXIT:
+			SpawnProjectTile::GetInstance()->SpawnItem(redbox->GetPositionX(), redbox->GetPositionY(), ItemType::KEY_CRYSTAL);
+			break;
+		}
+
 		this->SetIsSpawn(false);
 	}
 

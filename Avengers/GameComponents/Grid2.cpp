@@ -361,6 +361,28 @@ void Grid2::SpawnObject(int ObjectID, Tile2* tile)
 		listObject.push_back(temp);
 	}
 	break;
+	case 19:
+	{
+		RedBox* object = new RedBox(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RedBoxType::MAP_1_EXIT);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
+	case 20:
+	{
+		RedBox* object = new RedBox(tile->x * TILE_SIZE, tile->y * TILE_SIZE, RedBoxType::MAP_2_EXIT);
+		OnUpdateObject temp;
+		temp.object = object;
+		temp.tile = tile;
+		tile->bCanSpawn = false;
+
+		listObject.push_back(temp);
+	}
+	break;
 	}
 }
 

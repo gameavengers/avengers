@@ -20,6 +20,10 @@ public:
 
 	void Reset();
 	void Update(DWORD dt);
+
+	bool isLock = false;
+	bool canLock = true;
+
 	bool IsObjectInCamera(GameObject *gameobject);
 	void SetRenderData(D3DXVECTOR2 &center, D3DXVECTOR2 &translate, D3DXVECTOR2 &scaling);
 };

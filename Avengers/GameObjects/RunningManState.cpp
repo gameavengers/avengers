@@ -126,6 +126,12 @@ void RunningManState::state_crouch_shoot()
 	{
 		this->timeCount = 0;
 		this->state_standing_shoot();
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 	}
 }
 
@@ -158,7 +164,12 @@ void RunningManState::state_jumping()
 
 void RunningManState::Colision()
 {
-
+	/*if (sound_shoot != NULL)
+	{
+		delete sound_shoot;
+	}
+	sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+	Sound::GetInstance()->PlaySound(sound_shoot);*/
 }
 
 void RunningManState::Update(DWORD dt)

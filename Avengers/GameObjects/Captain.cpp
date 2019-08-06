@@ -16,11 +16,11 @@ Captain::Captain()
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
 
-	collider.x = x;
+	collider.x = x - 10;
 	collider.y = y;
 	collider.vx = 0;
 	collider.vy = 0;
-	collider.width = CAPTAIN_SPRITE_WIDTH;
+	collider.width = CAPTAIN_SPRITE_WIDTH - 10;
 	collider.height = CAPTAIN_SPRITE_HEIGHT;
 }
 
@@ -43,7 +43,6 @@ void Captain::LoadResources()
 	for (int i = 0; i < 1; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -54,7 +53,6 @@ void Captain::LoadResources()
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
-		sprite->SetOffSetY(-16);
 	}
 	animations.push_back(anim);
 
@@ -64,7 +62,7 @@ void Captain::LoadResources()
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
-		sprite->SetOffSetY(-16);
+		
 	}
 	animations.push_back(anim);
 
@@ -74,7 +72,7 @@ void Captain::LoadResources()
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
 		anim->AddFrame(sprite);
-		sprite->SetOffSetY(-16);
+		
 	}
 	animations.push_back(anim);
 
@@ -83,7 +81,7 @@ void Captain::LoadResources()
 	for (int i = 8; i < 10; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
+		
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -93,7 +91,7 @@ void Captain::LoadResources()
 	for (int i = 6; i < 7; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
+		
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -103,7 +101,7 @@ void Captain::LoadResources()
 	for (int i = 44; i < 46; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
+		
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -112,13 +110,12 @@ void Captain::LoadResources()
 	anim = new Animation(100);
 
 	Sprite * sprite3 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[11], TEXTURE_TRANS_COLOR);
-	sprite3->SetOffSetY(-16);
-	sprite3->SetOffSetX(0);
+	sprite3->SetOffSetX(-4);
 	anim->AddFrame(sprite3);
 
 	Sprite * sprite4 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[12], TEXTURE_TRANS_COLOR);
-	sprite4->SetOffSetY(-16);
-	sprite4->SetOffSetX(16);
+
+	sprite4->SetOffSetX(12);
 	anim->AddFrame(sprite4);
 
 	animations.push_back(anim);
@@ -127,13 +124,11 @@ void Captain::LoadResources()
 	anim = new Animation(100);
 
 	Sprite * sprite1 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[13], TEXTURE_TRANS_COLOR);
-	sprite1->SetOffSetY(-16);
-	sprite1->SetOffSetX(16);
+	sprite1->SetOffSetX(12);
 	anim->AddFrame(sprite1);
 
 	Sprite * sprite2 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[14], TEXTURE_TRANS_COLOR);
-	sprite2->SetOffSetY(-16);
-	sprite2->SetOffSetX(7);
+	sprite2->SetOffSetX(3);
 	anim->AddFrame(sprite2);
 
 	animations.push_back(anim);
@@ -143,8 +138,8 @@ void Captain::LoadResources()
 	for (int i = 10; i < 11; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
-		sprite->SetOffSetX(16);
+		
+		sprite->SetOffSetX(12);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -153,13 +148,10 @@ void Captain::LoadResources()
 	anim = new Animation(100);
 
 	Sprite * sprite5 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
-	sprite5->SetOffSetY(-16);
-	sprite5->SetOffSetX(13);
+	sprite5->SetOffSetX(9);
 	anim->AddFrame(sprite5);
 
 	Sprite * sprite6 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[16], TEXTURE_TRANS_COLOR);
-	sprite6->SetOffSetY(-16);
-	sprite6->SetOffSetX(4);
 	anim->AddFrame(sprite6);
 
 	animations.push_back(anim);
@@ -169,7 +161,6 @@ void Captain::LoadResources()
 	for (int i = 19; i < 20; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -179,7 +170,6 @@ void Captain::LoadResources()
 	for (int i = 18; i < 19; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -189,7 +179,6 @@ void Captain::LoadResources()
 	for (int i = 11; i < 13; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -199,7 +188,6 @@ void Captain::LoadResources()
 	for (int i = 33; i < 34; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -209,7 +197,6 @@ void Captain::LoadResources()
 	for (int i = 34; i < 36; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -219,7 +206,6 @@ void Captain::LoadResources()
 	for (int i = 41; i < 44; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
-		sprite->SetOffSetY(-16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -228,17 +214,15 @@ void Captain::LoadResources()
 	anim = new Animation(200);
 
 	Sprite * sprite9 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[27], TEXTURE_TRANS_COLOR);
-	sprite9->SetOffSetY(-16);
+	sprite9->SetOffSetX(4);
 	anim->AddFrame(sprite9);
 
 	Sprite * sprite10 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[28], TEXTURE_TRANS_COLOR);
-	sprite10->SetOffSetY(-16);
-	sprite10->SetOffSetX(1);
+	sprite10->SetOffSetX(5);
 	anim->AddFrame(sprite10);
 
 	Sprite * sprite11 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[29], TEXTURE_TRANS_COLOR);
-	sprite11->SetOffSetY(-16);
-	sprite11->SetOffSetX(-3);
+	sprite11->SetOffSetX(1);
 	anim->AddFrame(sprite11);
 
 	animations.push_back(anim);
@@ -247,13 +231,10 @@ void Captain::LoadResources()
 	anim = new Animation(10);
 
 	Sprite * sprite7 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[30], TEXTURE_TRANS_COLOR);
-	sprite7->SetOffSetY(-16);
 	anim->AddFrame(sprite7);
 
 	Sprite * sprite8 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[0], TEXTURE_TRANS_COLOR);
-	sprite8->SetOffSetY(-16);
 	anim->AddFrame(sprite8);
-	
 	animations.push_back(anim);
 }
 
@@ -268,13 +249,14 @@ void Captain::Update(DWORD dt)
 {
 	timeCount += dt;
 	// Xử lý chuyển màn
-	if (this->GetSpeedX() > 0 && this->GetPositionX() > TileMap2::GetInstance()->currentMap->size*16 - 50)
+	if (this->GetSpeedX() > 0 && this->GetPositionX() > TileMap2::GetInstance()->currentMap->size*16 - 60 && this->canGoToNextStage)
 	{
 		if (Game::GetInstance()->GetStage() < 4)
 		{
 			Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
 			if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
 			{
+				this->canGoToNextStage = false;
 				Grid2::GetInstance()->DisableAllObject();
 				Grid2::GetInstance()->spawnboss = true;
 				this->SetPositionX(50);
@@ -285,14 +267,17 @@ void Captain::Update(DWORD dt)
 			}
 			if (STAGE_2 == Game::GetInstance()->GetStage())
 			{
+				this->canGoToNextStage = false;
 				this->SetPositionX(280);
 				this->SetPositionY(900);
 				Viewport::GetInstance()->Reset();
+				Viewport::GetInstance()->canLock = true;
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
 			}
 			if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
 			{				
+				this->canGoToNextStage = false;
 				this->SetPositionX(100);
 				this->SetPositionY(100);
 				Viewport::GetInstance()->Reset();
@@ -311,6 +296,7 @@ void Captain::Update(DWORD dt)
 		this->SetPositionX(50);
 		this->SetPositionY(100);
 		Viewport::GetInstance()->Reset();
+		Viewport::GetInstance()->canLock = true;
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_1);
 		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
 	}
@@ -333,6 +319,7 @@ void Captain::Update(DWORD dt)
 		this->SetPositionX(280);
 		this->SetPositionY(900);
 		Viewport::GetInstance()->Reset();
+		Viewport::GetInstance()->canLock = true;
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
 		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
 	}
@@ -362,6 +349,7 @@ void Captain::Update(DWORD dt)
 	coEvents.clear();
 	this->SetDt(dt);
 	this->UpdateObjectCollider();
+	this->collider.x += 5;
 	this->MapCollisions(tiles, coEvents);
 
 	if (coEvents.size() == 0)
@@ -382,7 +370,7 @@ void Captain::Update(DWORD dt)
 
 		this->SetPositionX(this->GetPositionX() + moveX);
 		this->SetPositionY(this->GetPositionY() + moveY);
-
+		//Va chạm đất
 		if (coEventsResult[0]->collisionID == 1)
 		{
 			if (ny == 1)
@@ -390,7 +378,7 @@ void Captain::Update(DWORD dt)
 				this->SetIsGrounded(true);
 			}
 		}
-
+		//Va chạm nước
 		if (coEventsResult[0]->collisionID == 2)
 		{
 			if (ny == 1)
@@ -400,7 +388,7 @@ void Captain::Update(DWORD dt)
 				this->SetPositionX(this->GetPositionX() - 1);
 			}
 		}
-
+		//Va chạm dây
 		if (coEventsResult[0]->collisionID == 3)
 		{
 			if (ny == 1)
@@ -408,13 +396,21 @@ void Captain::Update(DWORD dt)
 				this->SetIsSwing(true);
 			}
 		}
-
+		//Va chạm Enemy
 		if (coEventsResult[0]->collisionID == 4)
 		{
 			if (ny == 1)
 			{
 				this->SetIsGrounded(true);
 				this->SetIsBleeding(true);
+			}
+		}
+
+		if (coEventsResult[0]->collisionID == 5)
+		{
+			if (nx == 1 || nx == -1)
+			{
+				this->SetIsGrounded(true); //xét tạm
 			}
 		}
 	}
@@ -481,6 +477,8 @@ void Captain::UpdateCollision(DWORD dt)
 				break;
 			case 6:
 			case 18:
+			case 19:
+			case 20:
 				if (shield->IsFlying())
 					listUpdateObject.at(i).object->OnCollision();
 				break;
@@ -498,6 +496,13 @@ void Captain::UpdateCollision(DWORD dt)
 		case 3:
 		case 4:
 		case 5:
+		case 7:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
 			((CaptainState*)state)->timeCount = 0;
 			this->SetIsBleeding(true);
 			bImortal = true;
@@ -512,6 +517,26 @@ void Captain::UpdateCollision(DWORD dt)
 	{
 		if (listBullet.at(i)->disable)
 			continue;
+		bool isCollideShield = Collision::GetInstance()->AABB(shield->GetCollider(), listBullet.at(i)->GetCollider());
+
+		//Test
+		if (isCollideShield)
+		{
+			if (listBullet.at(i)->GetBulletType() == BULLET_NORMAL)
+			{
+				listBullet.at(i)->SetSpeedX(0);
+				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
+			}
+
+			if (shield->IsFlying())
+			{
+				if (listBullet.at(i)->GetBulletType() == BARREL)
+				{
+					listBullet.at(i)->OnCollision();
+				}
+			}
+		}
+
 		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listBullet.at(i)->GetCollider());
 		
 		if (isCollide)
@@ -522,7 +547,7 @@ void Captain::UpdateCollision(DWORD dt)
 			case BulletType::BARREL:
 			case BulletType::GIGIROCKET:
 			case BulletType::ROCKET:
-				listBullet.at(i)->disableTimeCount = 0;
+				//listBullet.at(i)->disableTimeCount = 0;
 				listBullet.at(i)->OnCollision();
 				break;
 			case BulletType::BULLET_NORMAL:
@@ -551,6 +576,12 @@ void Captain::UpdateCollision(DWORD dt)
 
 		if (isCollide)
 		{
+			if (listItem.at(i)->GetItemType() == ItemType::KEY_CRYSTAL)
+				this->canGoToNextStage = true;
+			//if (listItem.at(i)->GetItemType() == ItemType::SMALL_ENERGY)
+				// +máu
+			//if (listItem.at(i)->GetItemType() == ItemType::BIG_ENERGY)
+				// +máu
 			listItem.at(i)->Disable();
 		}
 	}

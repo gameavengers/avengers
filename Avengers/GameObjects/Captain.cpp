@@ -249,13 +249,14 @@ void Captain::Update(DWORD dt)
 {
 	timeCount += dt;
 	// Xử lý chuyển màn
-	if (this->GetSpeedX() > 0 && this->GetPositionX() > TileMap2::GetInstance()->currentMap->size*16 - 50)
+	if (this->GetSpeedX() > 0 && this->GetPositionX() > TileMap2::GetInstance()->currentMap->size*16 - 60 && this->canGoToNextStage)
 	{
 		if (Game::GetInstance()->GetStage() < 4)
 		{
 			Game::GetInstance()->SetStage(Game::GetInstance()->GetStage() + 1);
 			if (STAGE_BOSS_1 == Game::GetInstance()->GetStage())
 			{
+				this->canGoToNextStage = false;
 				Grid2::GetInstance()->DisableAllObject();
 				Grid2::GetInstance()->spawnboss = true;
 				this->SetPositionX(50);
@@ -263,26 +264,25 @@ void Captain::Update(DWORD dt)
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
-				Game::GetInstance()->SetStage(STAGE_BOSS_1);
 			}
 			if (STAGE_2 == Game::GetInstance()->GetStage())
 			{
+				this->canGoToNextStage = false;
 				this->SetPositionX(280);
 				this->SetPositionY(900);
 				Viewport::GetInstance()->Reset();
 				Viewport::GetInstance()->canLock = true;
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
-				Game::GetInstance()->SetStage(STAGE_2);
 			}
 			if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
 			{				
+				this->canGoToNextStage = false;
 				this->SetPositionX(100);
 				this->SetPositionY(100);
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
-				Game::GetInstance()->SetStage(STAGE_BOSS_2);
 			}
 		}
 		else this->SetSpeedX(0);
@@ -494,6 +494,13 @@ void Captain::UpdateCollision(DWORD dt)
 		case 3:
 		case 4:
 		case 5:
+		case 7:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
 			((CaptainState*)state)->timeCount = 0;
 			this->SetIsBleeding(true);
 			bImortal = true;

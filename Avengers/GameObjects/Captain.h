@@ -30,6 +30,8 @@ class Captain : public GameObject
 public: 
 	void LoadResources();
 
+	bool canGoToNextStage = false;
+
 	static Captain *GetInstance();
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }

@@ -487,8 +487,27 @@ void CaptainState::Update(DWORD dt)
 	else
 		captain->SetSpeedX(0);
 
-	if (captain->GetPositionX() < 10)
-		captain->SetPositionX(10);
+	if (captain->GetPositionX() < 0)
+		captain->SetPositionX(0);
+
+	switch (Game::GetInstance()->GetStage())
+	{
+	case STAGE_BOSS_1:
+	case STAGE_BOSS_2:
+		if (!captain->canGoToNextStage)
+		{
+			if (captain->GetPositionX() > 256 - 30)
+				captain->SetPositionX(256 - 30);
+		}
+		break;
+	case STAGE_2:
+		if (!captain->canGoToNextStage)
+		{
+			if (captain->GetPositionX() > 1280 - 30)
+				captain->SetPositionX(1280 - 30);
+		}
+		break;
+	}
 
 	//Update theo state
 	switch (stateCaptain)

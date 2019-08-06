@@ -527,6 +527,11 @@ void Captain::UpdateCollision(DWORD dt)
 				listBullet.at(i)->SetSpeedX(0);
 				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
 			}
+
+			if (listBullet.at(i)->GetBulletType() == BARREL)
+			{
+				listBullet.at(i)->OnCollision();
+			}
 		}
 
 		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listBullet.at(i)->GetCollider());

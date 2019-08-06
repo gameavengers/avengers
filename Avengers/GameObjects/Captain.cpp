@@ -528,9 +528,12 @@ void Captain::UpdateCollision(DWORD dt)
 				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
 			}
 
-			if (listBullet.at(i)->GetBulletType() == BARREL)
+			if (shield->IsFlying())
 			{
-				listBullet.at(i)->OnCollision();
+				if (listBullet.at(i)->GetBulletType() == BARREL)
+				{
+					listBullet.at(i)->OnCollision();
+				}
 			}
 		}
 

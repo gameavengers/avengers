@@ -42,8 +42,8 @@ void TankState::state_left()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
-		float offsetX = 0;
-		float offsetY = 0;
+		float offsetX = 3;
+		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
 			1, BulletType::BULLET_TANK);
 	}
@@ -56,8 +56,8 @@ void TankState::state_bottom_left()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
-		float offsetX = 0;
-		float offsetY = 0;
+		float offsetX = 3;
+		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
 			2, BulletType::BULLET_TANK);
 	}
@@ -70,8 +70,8 @@ void TankState::state_bottom()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
-		float offsetX = 0;
-		float offsetY = 0;
+		float offsetX = 3;
+		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
 			3, BulletType::BULLET_TANK);
 	}
@@ -84,8 +84,8 @@ void TankState::state_bottom_right()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
-		float offsetX = 0;
-		float offsetY = 0;
+		float offsetX = 3;
+		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
 			4, BulletType::BULLET_TANK);
 	}
@@ -98,8 +98,8 @@ void TankState::state_top()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
-		float offsetX = 0;
-		float offsetY = 0;
+		float offsetX = 3;
+		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
 			7, BulletType::BULLET_TANK);
 	}
@@ -112,8 +112,8 @@ void TankState::state_top_left()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
-		float offsetX = 0;
-		float offsetY = 0;
+		float offsetX = 3;
+		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
 			8, BulletType::BULLET_TANK);
 	}
@@ -126,8 +126,8 @@ void TankState::state_top_right()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
-		float offsetX = 0;
-		float offsetY = 0;
+		float offsetX = 3;
+		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
 			6, BulletType::BULLET_TANK);
 	}
@@ -140,8 +140,8 @@ void TankState::state_right()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
-		float offsetX = 0;
-		float offsetY = 0;
+		float offsetX = 3;
+		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
 			5, BulletType::BULLET_TANK);
 	}

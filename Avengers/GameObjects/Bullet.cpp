@@ -108,6 +108,7 @@ void Bullet::LoadResources()
 	for (int i = 97; i < 98; i++)
 	{
 		Sprite * sprite = new Sprite(ENEMIES_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -119,6 +120,7 @@ void Bullet::LoadResources()
 	for (int i = 5; i < 6; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(22);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -216,11 +218,11 @@ void Bullet::LoadResources()
 		{
 		case 53:
 			sprite->SetOffSetX(-5);
-			sprite->SetOffSetY(5);
+			sprite->SetOffSetY(20);
 			break;
 		case 54:
 			sprite->SetOffSetX(3);
-			sprite->SetOffSetY(9);
+			sprite->SetOffSetY(24);
 			break;
 		}
 		anim->AddFrame(sprite);

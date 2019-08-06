@@ -91,8 +91,8 @@ void Boss2State::state_standing_punch()
 	{
 		this->shootTimeCount = 0;
 		int direction = boss2->IsLeft() ? 1 : 5;
-		float offsetX = boss2->IsLeft() ? -16 : 16;
-		float offsetY = -16;
+		float offsetX = boss2->IsLeft() ? -16 : 30;
+		float offsetY = -8;
 		SpawnProjectTile::GetInstance()->SpawnBullet(boss2->GetPositionX() + offsetX, boss2->GetPositionY() + offsetY,
 			direction, BulletType::BULLET_BOSS2);
 	}

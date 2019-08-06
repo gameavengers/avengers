@@ -11,7 +11,7 @@ Boss2::Boss2()
 	state = Boss2State::GetInstance(this);
 
 	this->x = 50;
-	this->y = 58;
+	this->y = 71;
 	this->width = BOSS2_SPRITE_WIDTH;
 	this->height = BOSS2_SPRITE_HEIGHT;
 

@@ -263,14 +263,17 @@ void Captain::Update(DWORD dt)
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+				Game::GetInstance()->SetStage(STAGE_BOSS_1);
 			}
 			if (STAGE_2 == Game::GetInstance()->GetStage())
 			{
 				this->SetPositionX(280);
 				this->SetPositionY(900);
 				Viewport::GetInstance()->Reset();
+				Viewport::GetInstance()->canLock = true;
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+				Game::GetInstance()->SetStage(STAGE_2);
 			}
 			if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
 			{				
@@ -279,6 +282,7 @@ void Captain::Update(DWORD dt)
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+				Game::GetInstance()->SetStage(STAGE_BOSS_2);
 			}
 		}
 		else this->SetSpeedX(0);
@@ -292,6 +296,7 @@ void Captain::Update(DWORD dt)
 		this->SetPositionX(50);
 		this->SetPositionY(100);
 		Viewport::GetInstance()->Reset();
+		Viewport::GetInstance()->canLock = true;
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_1);
 		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
 	}
@@ -314,6 +319,7 @@ void Captain::Update(DWORD dt)
 		this->SetPositionX(280);
 		this->SetPositionY(900);
 		Viewport::GetInstance()->Reset();
+		Viewport::GetInstance()->canLock = true;
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
 		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
 	}

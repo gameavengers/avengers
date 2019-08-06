@@ -57,13 +57,41 @@ void Viewport::Update(DWORD dt)
 	int left = (int)SCREEN_WIDTH / 2;
 	int bottom = (int)(TileMap2::GetInstance()->currentMap->height * 16 - SCREEN_HEIGHT / 2 - 16);
 	int top = (int)SCREEN_HEIGHT / 2 - 4;
-	if (captain->GetPositionX() > left && captain->GetPositionX() < right)
+
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_F6))
+		this->isLock = false;
+
+	if (!isLock)
 	{
-		this->x = captain->GetPositionX() - left;
+		if (captain->GetPositionX() > left && captain->GetPositionX() < right)
+		{
+			this->x = captain->GetPositionX() - left;
+		}
+		if (captain->GetPositionY() > top && captain->GetPositionY() < bottom)
+		{
+			this->y = captain->GetPositionY() + top;
+		}
 	}
-	if (captain->GetPositionY() > top && captain->GetPositionY() < bottom)
+
+	switch (Game::GetInstance()->GetStage())
 	{
-		this->y = captain->GetPositionY() + top;
+	case Stage::STAGE_1:
+		if (captain->GetPositionX() > 380 && this->canLock)
+		{
+			this->x = 255;
+			this->isLock = true;
+			this->canLock = false;
+		}
+		break;
+
+	case Stage::STAGE_2:
+		if (captain->GetPositionX() > 650 && captain->GetPositionY() < 100 && this->canLock)
+		{
+			this->x = 512;
+			this->isLock = true;
+			this->canLock = false;
+		}
+		break;
 	}
 }
 

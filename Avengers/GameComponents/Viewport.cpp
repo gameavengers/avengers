@@ -85,6 +85,9 @@ void Viewport::Update(DWORD dt)
 		break;
 
 	case Stage::STAGE_2:
+		if (this->x < 256)
+			this->x = 256;
+
 		if (captain->GetPositionX() > 650 && captain->GetPositionX() < 768 && captain->GetPositionY() < 100 && this->canLock)
 		{
 			this->x = 512;

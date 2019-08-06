@@ -539,7 +539,7 @@ void Captain::UpdateCollision(DWORD dt)
 			case BulletType::BARREL:
 			case BulletType::GIGIROCKET:
 			case BulletType::ROCKET:
-				listBullet.at(i)->disableTimeCount = 0;
+				//listBullet.at(i)->disableTimeCount = 0;
 				listBullet.at(i)->OnCollision();
 				break;
 			case BulletType::BULLET_NORMAL:

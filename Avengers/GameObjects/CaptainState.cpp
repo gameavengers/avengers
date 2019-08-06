@@ -421,6 +421,8 @@ void CaptainState::state_bleeing_2()
 		captain->SetIsBleeding(false);
 		return;
 	}
+
+	captain->SetSpeedX(0);
 }
 
 void CaptainState::KeyHandle()
@@ -505,6 +507,9 @@ void CaptainState::Update(DWORD dt)
 		{
 			if (captain->GetPositionX() > 1280 - 30)
 				captain->SetPositionX(1280 - 30);
+
+			if (captain->GetPositionX() < 256)
+				captain->SetPositionX(256);
 		}
 		break;
 	}

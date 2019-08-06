@@ -15,6 +15,8 @@ void Bullet::Initialize(float x, float y, int direction, BulletType type)
 
 	this->direction = direction;
 
+	this->disableTimeCount = 0;
+
 	this->SetSpeedX(0);
 	this->SetSpeedY(0);
 
@@ -605,6 +607,17 @@ void Bullet::Update(DWORD dt)
 
 	this->timeCount += dt;
 
+	if (this->isGoingToDisable)
+	{
+		this->disableTimeCount += dt;
+	}
+
+	if (this->disableTimeCount > 150)
+	{
+		this->isGoingToDisable = false;
+		this->Disable();
+	}
+
 	float moveX = trunc(this->GetSpeedX()* dt);
 	float moveY = trunc(this->GetSpeedY()* dt);
 	this->SetPositionX(this->GetPositionX() + moveX);
@@ -646,6 +659,7 @@ void Bullet::Update(DWORD dt)
 
 void Bullet::OnCollision()
 {
+	this->isGoingToDisable = true;
 	this->direction = 9;
 }
 

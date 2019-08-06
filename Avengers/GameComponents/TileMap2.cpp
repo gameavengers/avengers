@@ -55,6 +55,10 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation, int mapI
 				{
 					(map.tiles + x + y * size)->type = ObjectType::RIVER;
 				}
+				if ((map.tiles + x + y * size)->tileId == 52 || (map.tiles + x + y * size)->tileId == 53)
+				{
+					(map.tiles + x + y * size)->type = ObjectType::WALL;
+				}
 			}
 			break;
 			case MAP_BOSS_1_ID:
@@ -78,6 +82,10 @@ void TileMap2::LoadTilesData(LPCWSTR filePath, LPCWSTR tileSetLocation, int mapI
 				if ((map.tiles + x + y * size)->tileId == 162)
 				{
 					(map.tiles + x + y * size)->type = ObjectType::THORN;
+				}
+				if (find(_WallStage_2.begin(), _WallStage_2.end(), (map.tiles + x + y * size)->tileId) != _WallStage_2.end())
+				{
+					(map.tiles + x + y * size)->type = ObjectType::WALL;
 				}
 			}
 			break;

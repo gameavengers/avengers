@@ -11,7 +11,7 @@ Captain::Captain()
 
 	shield = new Shield();
 
-	this->x = 250;
+	this->x = 1500;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -398,6 +398,14 @@ void Captain::Update(DWORD dt)
 			{
 				this->SetIsGrounded(true);
 				this->SetIsBleeding(true);
+			}
+		}
+
+		if (coEventsResult[0]->collisionID == 5)
+		{
+			if (nx == 1 || nx == -1)
+			{
+				this->SetIsGrounded(true); //xét tạm
 			}
 		}
 	}

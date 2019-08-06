@@ -53,7 +53,7 @@ void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &co
 		tileCollider.x = tiles[i]->x * TILE_SIZE;
 		tileCollider.y = tiles[i]->y * TILE_SIZE - TILE_SIZE/2;
 
-		if (tiles[i]->type == ObjectType::BRICK || tiles[i]->type == ObjectType::BRICK_NOCOLLISION_BOTTOM)
+		if (tiles[i]->type == ObjectType::BRICK)
 		{
 			float time;
 			float normalX;
@@ -64,6 +64,21 @@ void GameObject::MapCollisions(vector<Tile2 *> &tiles, vector<ColliedEvent*> &co
 			if (time >= 0 && time < 1.0f && normalY == 1)
 			{
 				coEvents.push_back(new ColliedEvent(EVENT_BRICK, time, normalX, normalY));
+			}
+		}
+		else if (tiles[i]->type == ObjectType::WALL)
+		{
+			float time;
+			float normalX;
+			float normalY;
+
+			time = Collision::GetInstance()->SweptAABB(this->GetCollider(), tileCollider, normalX, normalY);
+
+			if (time >= 0 && time < 1.0f)
+			{
+				//trường hợp normalY = -1 không được
+				if (normalX == 1 || normalX == -1 || normalY == -1)
+					coEvents.push_back(new ColliedEvent(EVENT_WALL, time, normalX, normalY));
 			}
 		}
 		else if (tiles[i]->type == ObjectType::THORN)

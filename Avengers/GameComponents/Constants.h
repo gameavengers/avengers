@@ -23,7 +23,7 @@ enum ObjectType
 {
 	DEFAULT,
 	BRICK,
-	BRICK_NOCOLLISION_BOTTOM,
+	WALL,
 	ON_BUTTON,
 	RIVER,
 	ROPE_SWING,
@@ -52,6 +52,7 @@ enum BulletType {
 #define EVENT_WATER 2
 #define EVENT_ROPE_SWING 3
 #define EVENT_THORN 4
+#define EVENT_WALL 5
 
 //TiledMap
 //

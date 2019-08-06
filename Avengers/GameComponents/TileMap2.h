@@ -72,6 +72,8 @@ private:
 
 	const vector<int> _RopeSwingStage_2{ 60, 61, 73 };
 
+	const vector<int> _WallStage_2{ 32, 33, 44, 45, 65, 66, 67, 95, 96, 98, 99, 100, 101, 102, 103, 109, 112, 113, 114, 115, 116, 117, 133, 137, 172, 173, 215, 218, 222, 223, 224, 225, 226, 248, 249, 250, 261, 262, 263, 264, 265, 276 };
+
 public:
 	static TileMap2* GetInstance();
 	MapPack* currentMap;

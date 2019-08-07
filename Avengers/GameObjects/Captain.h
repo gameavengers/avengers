@@ -5,7 +5,9 @@
 #include "../GameComponents/Game.h"
 #include "State.h"
 #include "Shield.h"
+#include "HPBar.h"
 
+class HPBar;
 class Captain : public GameObject
 {
 	Captain();
@@ -27,6 +29,11 @@ class Captain : public GameObject
 	bool bImortal;
 	float timeCount;
 	bool trueImortal;
+
+	HPBar *hp;
+	HPBar *hp1;
+	HPBar *hp2;
+
 public: 
 	void LoadResources();
 

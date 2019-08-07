@@ -70,7 +70,7 @@ private:
 	Boss1* boss1;
 	Boss2* boss2;
 	Exit* exit;
-	HPBar* hpbar;
+	//HPBar* hpbar;
 
 	vector <OnUpdateObject> listObject;
 	

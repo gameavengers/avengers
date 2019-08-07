@@ -36,7 +36,7 @@ Grid2::Grid2()
 	exit = Exit::GetInstance();
 
 	HPBar::LoadResources();
-	hpbar = HPBar::GetInstance();
+	//hpbar = HPBar::GetInstance();
 	
 }
 
@@ -445,7 +445,7 @@ void Grid2::Update(DWORD dt)
 	}
 
 	exit->Update(dt);
-	hpbar->Update(dt);
+	//hpbar->Update(dt);
 }
 
 void Grid2::Render()
@@ -495,5 +495,5 @@ void Grid2::Render()
 	SpawnProjectTile::GetInstance()->RenderItem();
 
 	exit->Render();
-	hpbar->Render();
+	//hpbar->Render();
 }

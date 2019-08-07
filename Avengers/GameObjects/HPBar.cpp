@@ -4,16 +4,31 @@ vector<Animation *> HPBar::animations = vector<Animation *>();
 HPBar *HPBar::__instance = NULL;
 
 
-HPBar::HPBar()
+HPBar::HPBar(int index)
 {
-	this->x = Viewport::GetInstance()->GetPosX() + 32;
-	this->y = Viewport::GetInstance()->GetPosY() - 16;
+	this->index = index;
+	
+	switch (this->index)
+	{
+	case 0:
+		this->x = Viewport::GetInstance()->GetPosX() + 32;
+		this->y = Viewport::GetInstance()->GetPosY() - 16;
+		break;
+	case 1:
+		this->x = Viewport::GetInstance()->GetPosX() + 32;
+		this->y = Viewport::GetInstance()->GetPosY() - 24;
+		break;
+	case 2:
+		this->x = Viewport::GetInstance()->GetPosX() + 32;
+		this->y = Viewport::GetInstance()->GetPosY() - 32;
+		break;
+	}
 }
 
-HPBar *HPBar::GetInstance()
+HPBar *HPBar::GetInstance(int index)
 {
 	if (__instance == NULL)
-		__instance = new HPBar();
+		__instance = new HPBar(index);
 	return __instance;
 }
 
@@ -33,10 +48,21 @@ void HPBar::LoadResources()
 
 void HPBar::Update(DWORD dt)
 {
-	
-
-	this->x = Viewport::GetInstance()->GetPosX() + 32;
-	this->y = Viewport::GetInstance()->GetPosY() - 16;
+	switch (this->index)
+	{
+	case 0:
+		this->x = Viewport::GetInstance()->GetPosX() + 32;
+		this->y = Viewport::GetInstance()->GetPosY() - 16;
+		break;
+	case 1:
+		this->x = Viewport::GetInstance()->GetPosX() + 32;
+		this->y = Viewport::GetInstance()->GetPosY() - 24;
+		break;
+	case 2:
+		this->x = Viewport::GetInstance()->GetPosX() + 32;
+		this->y = Viewport::GetInstance()->GetPosY() - 32;
+		break;
+	}
 }
 
 void HPBar::Render()

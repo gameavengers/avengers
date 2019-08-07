@@ -19,6 +19,7 @@ void Bullet::Initialize(float x, float y, int direction, BulletType type)
 
 	this->SetSpeedX(0);
 	this->SetSpeedY(0);
+	this->setIsFlipDown(true);
 
 	switch (type)
 	{
@@ -156,6 +157,7 @@ void Bullet::LoadResources()
 	for (int i = 23; i < 24; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite2[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(10);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
@@ -174,6 +176,7 @@ void Bullet::LoadResources()
 	for (int i = 18; i < 19; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite2[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(16);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);

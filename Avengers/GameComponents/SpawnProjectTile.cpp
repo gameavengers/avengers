@@ -62,7 +62,7 @@ void SpawnProjectTile::UpdateItem(DWORD dt)
 {
 	for (int i = 0; i < listItem.size(); i++)
 	{
-		listItem.at(i)->Update(dt);
+		this->listItem.at(i)->Update(dt);
 	}
 }
 

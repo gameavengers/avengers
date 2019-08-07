@@ -527,6 +527,10 @@ void Captain::UpdateCollision(DWORD dt)
 				listBullet.at(i)->SetSpeedX(0);
 				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
 			}
+			else
+			{
+				listBullet.at(i)->Disable();
+			}
 
 			if (shield->IsFlying())
 			{
@@ -535,6 +539,8 @@ void Captain::UpdateCollision(DWORD dt)
 					listBullet.at(i)->OnCollision();
 				}
 			}
+
+			
 		}
 
 		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listBullet.at(i)->GetCollider());

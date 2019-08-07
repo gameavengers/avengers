@@ -35,6 +35,7 @@ public:
 	void state_top_right();
 	void state_top();
 	void state_top_left();
+	void state_dead();
 	
 	void Colision() override;
 	void Update(DWORD dt) override;

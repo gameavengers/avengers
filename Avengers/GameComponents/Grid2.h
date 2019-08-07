@@ -13,6 +13,7 @@
 #include "../GameObjects/Elevator.h"
 #include "../GameObjects/Bat.h"
 #include "../GameObjects/TwinBricks.h"
+#include "../GameObjects/Exit.h"
 
 #include <vector>
 
@@ -52,6 +53,7 @@ struct GridData
 
 class Boss1;
 class Boss2;
+class Exit;
 class Grid2
 {
 private:
@@ -65,6 +67,7 @@ private:
 
 	Boss1* boss1;
 	Boss2* boss2;
+	Exit* exit;
 
 	vector <OnUpdateObject> listObject;
 	

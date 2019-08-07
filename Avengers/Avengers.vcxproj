@@ -155,6 +155,7 @@
     <ClInclude Include="GameObjects\DomestoStayState.h" />
     <ClInclude Include="GameObjects\DomestoWalkState.h" />
     <ClInclude Include="GameObjects\Elevator.h" />
+    <ClInclude Include="GameObjects\Exit.h" />
     <ClInclude Include="GameObjects\Gigi.h" />
     <ClInclude Include="GameObjects\GigiState.h" />
     <ClInclude Include="GameObjects\Item.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="GameObjects\DomestoStayState.cpp" />
     <ClCompile Include="GameObjects\DomestoWalkState.cpp" />
     <ClCompile Include="GameObjects\Elevator.cpp" />
+    <ClCompile Include="GameObjects\Exit.cpp" />
     <ClCompile Include="GameObjects\Gigi.cpp" />
     <ClCompile Include="GameObjects\GigiState.cpp" />
     <ClCompile Include="GameObjects\Item.cpp" />

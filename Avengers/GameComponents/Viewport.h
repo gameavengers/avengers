@@ -18,6 +18,9 @@ public:
 
 	RECT GetRect();
 
+	int GetPosX() { return this->x; }
+	int GetPosY() { return this->y; }
+
 	void Reset();
 	void Update(DWORD dt);
 

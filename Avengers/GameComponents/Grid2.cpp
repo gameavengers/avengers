@@ -31,6 +31,9 @@ Grid2::Grid2()
 	TwinBricks::LoadResources();
 	isDisableBoss2 = true;
 	boss2 = Boss2::GetInstance();
+
+	Exit::LoadResources();
+	exit = Exit::GetInstance();
 	
 }
 
@@ -437,6 +440,8 @@ void Grid2::Update(DWORD dt)
 
 		}*/
 	}
+
+	exit->Update(dt);
 }
 
 void Grid2::Render()
@@ -485,5 +490,5 @@ void Grid2::Render()
 	SpawnProjectTile::GetInstance()->RenderBullet();
 	SpawnProjectTile::GetInstance()->RenderItem();
 
-	
+	exit->Render();
 }

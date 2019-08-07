@@ -78,7 +78,7 @@ void Viewport::Update(DWORD dt)
 	case Stage::STAGE_1:
 		if (captain->GetPositionX() > 380 && this->canLock)
 		{
-			this->x = 255;
+			this->x = x;
 			this->isLock = true;
 			this->canLock = false;
 		}
@@ -90,7 +90,7 @@ void Viewport::Update(DWORD dt)
 
 		if (captain->GetPositionX() > 650 && captain->GetPositionX() < 768 && captain->GetPositionY() < 100 && this->canLock)
 		{
-			this->x = 512;
+			this->x = x;
 			this->isLock = true;
 			this->canLock = false;
 		}

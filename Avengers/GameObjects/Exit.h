@@ -1,40 +1,29 @@
 #pragma once
 #include "../GameComponents/GameObject.h"
-#include "TankState.h"
 #include "../GameComponents/Constants.h"
 #include "../GameComponents/Game.h"
-#include "../GameComponents/SpawnProjectTile.h"
-#include "State.h"
 
-enum TankType {
-	TOP,
-	BOTTOM,
-	LEFT,
-	RIGHT
+enum ExitTableState
+{
+	EXIT_TABLE_HIDE,
+	EXIT_TABLE_APPEAR
 };
 
-class Tank : public GameObject
+class Exit : public GameObject
 {
-	Tank();
+	Exit();
 
-	static Tank *__instance;
-
-	State *state;
+	static Exit *__instance;
 
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
 
-	TankType type;
+	ExitTableState state;
 
 public:
-	Tank(float x, float y, TankType type);
 	static void LoadResources();
 
-	int HP = 20;
-
-	TankType GetTankType() { return this->type; }
-
-	static Tank *GetInstance();
+	static Exit *GetInstance();
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }
@@ -50,6 +39,4 @@ public:
 	void Update(DWORD dt) override;
 
 	void Render() override;
-
-	void OnCollision();
 };

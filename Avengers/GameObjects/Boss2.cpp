@@ -21,6 +21,8 @@ Boss2::Boss2()
 	collider.vy = 0;
 	collider.width = BOSS2_SPRITE_WIDTH;
 	collider.height = BOSS2_SPRITE_HEIGHT;
+
+	this->HP = 4;
 }
 
 Boss2 *Boss2::GetInstance()
@@ -129,6 +131,11 @@ void Boss2::LoadResources()
 
 void Boss2::Update(DWORD dt)
 {
+	if (this->disable)
+		return;
+
+	this->UpdateObjectCollider();
+	
 	float moveX = trunc(this->GetSpeedX()* dt);
 	float moveY = trunc(this->GetSpeedY()* dt);
 	this->SetPositionX(this->GetPositionX() + moveX);
@@ -139,5 +146,34 @@ void Boss2::Update(DWORD dt)
 }
 void Boss2::Render()
 {
+	if (this->disable)
+		return;
+	
 	state->Render();
+}
+
+void Boss2::OnCollision()
+{
+	if (((Boss2State*)state)->GetState() == StateBoss2::BOSS2_STATE_BLEEDING
+		|| ((Boss2State*)state)->GetState() == StateBoss2::BOSS2_STATE_DEAD)
+		return;
+
+	this->HP -= 1;
+	((Boss2State*)state)->timeCount = 0;
+
+	if (this->HP > 2)
+	{
+		((Boss2State*)state)->SetState(BOSS2_STATE_BLEEDING);
+		return;
+	}
+	if (this->HP = 2)
+	{
+		((Boss2State*)state)->SetState(BOSS2_STATE_LOSS_HEAD_IDLE);
+		return;
+	}
+	if (this->HP = 0)
+	{
+		((Boss2State*)state)->SetState(BOSS2_STATE_DEAD);
+		return;
+	}
 }

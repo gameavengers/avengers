@@ -2,6 +2,7 @@
 #include "../GameComponents/Constants.h"
 #include "State.h"
 #include "Gigi.h"
+#include "../GameComponents/Sound.h"
 
 class Gigi;
 enum StateGigi
@@ -13,6 +14,8 @@ enum StateGigi
 class GigiState : public State
 {
 protected:
+	GSound* sound_shoot;
+	GSound* sound_dead;
 	static GigiState * __instance;
 	StateGigi stateGigi;
 	Gigi *gigi;

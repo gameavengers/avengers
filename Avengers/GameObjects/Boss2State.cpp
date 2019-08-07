@@ -91,6 +91,12 @@ void Boss2State::state_standing_punch()
 	if (this->shootTimeCount > 600)
 	{
 		this->shootTimeCount = 0;
+		if (sound_bullet != NULL)
+		{
+			delete sound_bullet;
+		}
+		sound_bullet = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOSS1_FLYING);
+		Sound::GetInstance()->PlaySound(sound_bullet);
 		int direction = boss2->IsLeft() ? 1 : 5;
 		float offsetX = boss2->IsLeft() ? -16 : 30;
 		float offsetY = -8;
@@ -145,6 +151,12 @@ void Boss2State::state_dead()
 {
 	this->SetState(BOSS2_STATE_DEAD);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_DEAD];
+	if (sound_dead != NULL)
+	{
+		delete sound_dead;
+	}
+	sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
+	Sound::GetInstance()->PlaySound(sound_dead);
 }
 
 void Boss2State::Colision()

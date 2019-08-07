@@ -65,6 +65,12 @@ void GigiState::state_flying()
 	if (this->shootTimeCount > GIGI_DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOSS1_LAZE);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		int direction = gigi->IsLeft() ? 1 : 5;
 		float offsetX = gigi->IsLeft() ? -16 : 16;
 		float offsetY = -22;
@@ -84,6 +90,12 @@ void GigiState::state_dead()
 	if (gigi->isOnGround)
 	{
 		anim = gigi->GetAnimationsList()[2];
+		if (sound_dead != NULL)
+		{
+			delete sound_dead;
+		}
+		sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
+		Sound::GetInstance()->PlaySound(sound_dead);
 
 		if (this->disableTimeCount > 150)
 			gigi->disable = true;

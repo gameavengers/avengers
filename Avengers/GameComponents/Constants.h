@@ -73,7 +73,7 @@ enum BulletType {
 #define TILES_SET_STAGE_BOSS_2 L"Resources\\TiledMap\\Map-Boss2-Tiles.png"
 
 //SOUND
-#define SOUND_DEFAULT L"./Resources/Sound/player_stand.wav"
+#define SOUND_DEFAULT L"./Resources/Sound/silent.wav"
 #define SOUND_STAGE_1_2 L"./Resources/Sound/main_theme.wav"
 #define SOUND_STAGE_BOSS_1 L"./Resources/Sound/boss_wizard_theme.wav"
 #define SOUND_STAGE_BOSS_2 L"./Resources/Sound/Boss2.wav"
@@ -86,6 +86,15 @@ enum BulletType {
 #define SOUND_CAPTAIN_DIEING L"./Resources/Sound/player_dead.wav"
 #define SOUND_CAPTAIN_SWIM L"./Resources/Sound/player_diving.wav"
 #define SOUND_ENEMY_SHOOT L"./Resources/Sound/weenemy_fire.wav"
+#define SOUND_BOOM L"./Resources/Sound/entity_explode.wav"
+#define SOUND_BOSS1_LAZE L"./Resources/Sound/wizard_laze.wav"
+#define SOUND_BOSS1_FLYING L"./Resources/Sound/wizard_flying.wav"
+#define SOUND_ITEM_RED_BOX L"./Resources/Sound/item_holder.wav"
+#define SOUND_ITEM_HP L"./Resources/Sound/item_hp.wav"
+#define SOUND_ITEM_5 L"./Resources/Sound/item_nomal.wav"
+#define SOUND_ITEM_EXIT L"./Resources/Sound/item_exit_orb.wav"
+#define SOUND_DOOR L"./Resources/Sound/door.wav"
+
 
 //ENEMY MATRIX
 #define ENEMIES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Enemies-Map-1-Matrix.txt"

@@ -2,12 +2,15 @@
 #include "../GameComponents/Constants.h"
 #include "State.h"
 #include "Domesto.h"
+#include "../GameComponents/Sound.h"
 
 class Domesto;
 
 class DomestoStayState : public State
 {
 protected:
+	GSound* sound_shoot;
+	GSound* sound_dead;
 	static DomestoStayState * __instance;
 	StateDomesto stateDomesto;
 	Domesto *domesto;

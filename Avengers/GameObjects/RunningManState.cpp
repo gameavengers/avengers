@@ -89,6 +89,12 @@ void RunningManState::state_standing_shoot()
 	if (this->shootTimeCount > RUNNING_MAN_TIME_OUT_STAND * 1.5)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		int direction = runningMan->IsLeft() ? 1 : 5;
 		float offsetX = runningMan->IsLeft() ? -16 : 16;
 		float offsetY = -3;
@@ -143,7 +149,15 @@ void RunningManState::state_dead()
 	runningMan->SetSpeedY(0);
 
 	if (this->timeCount > 200)
+	{
 		anim = runningMan->GetAnimationsList()[4];
+		if (sound_dead != NULL)
+		{
+			delete sound_dead;
+		}
+		sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
+		Sound::GetInstance()->PlaySound(sound_dead);
+	}
 
 	if (this->timeCount > 350)
 		runningMan->disable = true;

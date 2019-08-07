@@ -42,6 +42,12 @@ void TankState::state_left()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		float offsetX = 3;
 		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
@@ -56,6 +62,12 @@ void TankState::state_bottom_left()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		float offsetX = 3;
 		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
@@ -70,6 +82,12 @@ void TankState::state_bottom()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		float offsetX = 3;
 		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
@@ -84,6 +102,12 @@ void TankState::state_bottom_right()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		float offsetX = 3;
 		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
@@ -98,6 +122,12 @@ void TankState::state_top()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		float offsetX = 3;
 		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
@@ -112,6 +142,12 @@ void TankState::state_top_left()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		float offsetX = 3;
 		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
@@ -126,6 +162,12 @@ void TankState::state_top_right()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		float offsetX = 3;
 		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
@@ -140,6 +182,12 @@ void TankState::state_right()
 	if (this->shootTimeCount > DELAY_ATTACK_TIME)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		float offsetX = 3;
 		float offsetY = -4;
 		SpawnProjectTile::GetInstance()->SpawnBullet(tank->GetPositionX() + offsetX, tank->GetPositionY() + offsetY,
@@ -154,6 +202,12 @@ void TankState::state_dead()
 	if (this->timeCount > 100)
 	{
 		this->timeCount = 0;
+		if (sound_dead != NULL)
+		{
+			delete sound_dead;
+		}
+		sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
+		Sound::GetInstance()->PlaySound(sound_dead);
 		tank->disable = true;
 		return;
 	}

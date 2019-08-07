@@ -2,12 +2,15 @@
 #include "../GameComponents/Constants.h"
 #include "State.h"
 #include "Tank.h"
+#include "../GameComponents/Sound.h"
 
 class Tank;
 
 class TankState : public State
 {
 protected:
+	GSound* sound_shoot;
+	GSound* sound_dead;
 	static TankState * __instance;
 	Tank *tank;
 	Animation * anim;

@@ -32,6 +32,25 @@ StateRedBox RedBoxState::GetState()
 void RedBoxState::SetState(StateRedBox state)
 {
 	this->stateRedBox = state;
+	if (sound_redbox != NULL)
+	{
+		//có thể stop ở đây nhưng delete luôn cho khỏi nặng ram
+		//Sound::GetInstance()->StopSound(g);
+		delete sound_redbox;
+		sound_redbox = NULL;
+	}
+	switch (state)
+	{
+	//case RED_BOX_STATE_CLOSE:
+	case RED_BOX_STATE_OPEN:
+	//case RED_BOX_MAP_2_STATE_CLOSE:
+	case RED_BOX_MAP_2_STATE_OPEN:
+		sound_redbox = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ITEM_RED_BOX);
+		break;
+	default:
+		return;
+	}
+	Sound::GetInstance()->PlaySound(sound_redbox);
 }
 
 void RedBoxState::state_close()
@@ -96,7 +115,7 @@ void RedBoxState::state_open()
 
 void RedBoxState::Colision()
 {
-
+	
 }
 
 void RedBoxState::Update(DWORD dt)

@@ -2,6 +2,7 @@
 #include "../GameComponents/Constants.h"
 #include "State.h"
 #include "RedBox.h"
+#include "../GameComponents/Sound.h"
 
 class RedBox;
 enum StateRedBox
@@ -15,6 +16,7 @@ enum StateRedBox
 class RedBoxState : public State
 {
 protected:
+	GSound* sound_redbox;
 	static RedBoxState * __instance;
 	StateRedBox stateRedBox;
 	RedBox *redbox;

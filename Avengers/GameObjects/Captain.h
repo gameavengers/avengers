@@ -6,6 +6,7 @@
 #include "State.h"
 #include "Shield.h"
 #include "HPBar.h"
+#include "../GameComponents/Sound.h"
 
 class HPBar;
 class Captain : public GameObject
@@ -34,6 +35,9 @@ class Captain : public GameObject
 	HPBar *hp1;
 	HPBar *hp2;
 
+	GSound* sound_colide_shield;
+	GSound* sound_item;
+	GSound* sound_rocket;
 public: 
 	void LoadResources();
 

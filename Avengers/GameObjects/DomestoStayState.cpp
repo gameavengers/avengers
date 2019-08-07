@@ -84,6 +84,12 @@ void DomestoStayState::state_standing_shoot()
 	if (this->shootTimeCount > DOMESTO_TIME_OUT_STAND * 3)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOSS1_LAZE);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		int direction = domesto->IsLeft() ? 1 : 5;
 		float offsetX = domesto->IsLeft() ? -16 : 16;
 		float offsetY = 0;
@@ -103,6 +109,12 @@ void DomestoStayState::state_crouch_shoot()
 	if (this->shootTimeCount > DOMESTO_TIME_OUT_CROUCH * 2)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOSS1_LAZE);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		int direction = domesto->IsLeft() ? 1 : 5;
 		float offsetX = domesto->IsLeft() ? -16 : 16;
 		float offsetY = -16;
@@ -122,7 +134,15 @@ void DomestoStayState::state_dead()
 	domesto->SetSpeedX(0);
 
 	if (this->timeCount > 200)
+	{
 		anim = domesto->GetAnimationsList()[4];
+		if (sound_dead != NULL)
+		{
+			delete sound_dead;
+		}
+		sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
+		Sound::GetInstance()->PlaySound(sound_dead);
+	}	
 
 	if (this->timeCount > 350)
 		domesto->disable = true;

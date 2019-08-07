@@ -189,8 +189,7 @@ void TileMap2::SetCurrentMap(int mapID)
 		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_STAGE_BOSS_2);
 		break;
 	default:
-		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_DEFAULT);
-		break;
+		return;
 	}
 	Sound::GetInstance()->LoopSound(g);
 }

@@ -21,6 +21,8 @@ Boss1::Boss1()
 	collider.vy = 0;
 	collider.width = BOSS1_SPRITE_WIDTH;
 	collider.height = BOSS1_SPRITE_HEIGHT;
+
+	this->HP = 10;
 }
 
 Boss1 *Boss1::GetInstance()
@@ -143,15 +145,44 @@ void Boss1::LoadResources()
 
 void Boss1::Update(DWORD dt)
 {
+	if (this->disable)
+		return;
+	
 	float moveX = trunc(this->GetSpeedX()* dt);
 	float moveY = trunc(this->GetSpeedY()* dt);
 	this->SetPositionX(this->GetPositionX() + moveX);
 	this->SetPositionY(this->GetPositionY() + moveY);
+
+	this->UpdateObjectCollider();
 
 	state->Colision();
 	state->Update(dt);
 }
 void Boss1::Render()
 {
+	if (this->disable)
+		return;
+	
 	state->Render();
+}
+
+void Boss1::OnCollision()
+{
+	if (((Boss1State*)state)->GetState() == StateBoss1::BOSS1_STATE_BLEEDING
+		|| ((Boss1State*)state)->GetState() == StateBoss1::BOSS1_STATE_DEAD)
+		return;
+
+	this->HP -= 1;
+	((Boss1State*)state)->timeCount = 0;
+	
+	if (this->HP > 0)
+	{
+		((Boss1State*)state)->SetState(BOSS1_STATE_BLEEDING);
+		return;
+	}
+	if (this->HP <= 0)
+	{
+		((Boss1State*)state)->SetState(BOSS1_STATE_DEAD);
+		return;
+	}
 }

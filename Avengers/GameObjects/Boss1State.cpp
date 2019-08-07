@@ -55,6 +55,14 @@ void Boss1State::state_bleeding()
 {
 	this->SetState(BOSS1_STATE_BLEEDING);
 	anim = boss1->GetAnimationsList()[BOSS1_STATE_BLEEDING];
+
+	boss1->SetSpeedX(CAPTAIN_WALK_SPEED * (boss1->IsLeft() ? 1 : -1));
+
+	if (timeCount >= 200)
+	{
+		this->state_idle();
+		return;
+	}
 }
 
 void Boss1State::state_dead()
@@ -62,6 +70,13 @@ void Boss1State::state_dead()
 	this->SetState(BOSS1_STATE_DEAD);
 	anim = boss1->GetAnimationsList()[BOSS1_STATE_DEAD];
 	boss1->SetSpeedX(0);
+	boss1->SetSpeedY(0);
+	boss1->SetPositionY(72);
+
+	if (this->timeCount > 300)
+	{
+		boss1->disable = true;
+	}
 }
 
 void Boss1State::state_standing_shoot_1()
@@ -321,6 +336,18 @@ void Boss1State::Behavior_Fly()
 
 void Boss1State::RandomNextState()
 {
+	if (this->GetState() == BOSS1_STATE_DEAD)
+	{
+		this->state_dead();
+		return;
+	}
+	
+	if (this->GetState() == BOSS1_STATE_BLEEDING)
+	{
+		this->state_bleeding();
+		return;
+	}
+	
 	srand(time(NULL));
 	int randomState = rand() % 10 + 1;
 

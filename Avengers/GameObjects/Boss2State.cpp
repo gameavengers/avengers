@@ -81,6 +81,14 @@ void Boss2State::state_bleeding()
 {
 	this->SetState(BOSS2_STATE_BLEEDING);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_BLEEDING];
+
+	boss2->SetSpeedX(0);
+
+	if (timeCount >= 1000)
+	{
+		this->state_idle();
+		return;
+	}
 }
 
 void Boss2State::state_standing_punch()
@@ -139,6 +147,8 @@ void Boss2State::state_loss_head_idle()
 {
 	this->SetState(BOSS2_STATE_LOSS_HEAD_IDLE);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_LOSS_HEAD_IDLE];
+
+	boss2->SetSpeedX(0);
 }
 
 void Boss2State::state_loss_head_running()
@@ -157,6 +167,13 @@ void Boss2State::state_dead()
 	}
 	sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
 	Sound::GetInstance()->PlaySound(sound_dead);
+
+	boss2->SetSpeedX(0);
+
+	if (this->timeCount > 300)
+	{
+		boss2->disable = true;
+	}
 }
 
 void Boss2State::Colision()

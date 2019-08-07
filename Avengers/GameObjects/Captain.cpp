@@ -729,6 +729,58 @@ void Captain::UpdateCollision(DWORD dt)
 		}
 	}
 
+	//Captain collide with boss 1==========================================
+	Boss1* boss1 = Boss1::GetInstance();
+
+	bool isCollideBoss1 = Collision::GetInstance()->AABB(this->GetCollider(), boss1->GetCollider());
+
+	if (isCollideBoss1)
+	{
+		((CaptainState*)state)->timeCount = 0;
+		this->SetIsBleeding(true);
+		boss1->OnCollision();
+		this->HP -= 1;
+		bImortal = true;
+		return;
+	}
+
+	if (boss1->disable)
+		this->canGoToNextStage = true;
+	//====================================================================
+
+	//Shield collide with boss 1==========================================
+	bool isShieldCollideBoss1 = Collision::GetInstance()->AABB(shield->GetCollider(), boss1->GetCollider());
+
+	if (isShieldCollideBoss1 && shield->IsFlying())
+		boss1->OnCollision();
+	//====================================================================
+
+	//Captain collide with boss 2==========================================
+	Boss2* boss2 = Boss2::GetInstance();
+
+	bool isCollideBoss2 = Collision::GetInstance()->AABB(this->GetCollider(), boss2->GetCollider());
+
+	if (isCollideBoss2)
+	{
+		((CaptainState*)state)->timeCount = 0;
+		this->SetIsBleeding(true);
+		this->HP -= 1;
+		bImortal = true;
+		return;
+	}
+
+	if (boss2->disable)
+		this->canGoToNextStage = true;
+	//====================================================================
+
+	//Tạm thời để test, chỗ này phải xử lý làm sao để khiên khi ném ra va chạm với thùng trong lúc boss2 đang bưng thì mới bị dính damage
+	//Shield collide with boss 2==========================================
+	bool isShieldCollideBoss2 = Collision::GetInstance()->AABB(shield->GetCollider(), boss2->GetCollider());
+
+	if (isShieldCollideBoss2 && shield->IsFlying())
+		boss2->OnCollision();
+	//====================================================================
+
 
 	switch (this->HP)
 	{

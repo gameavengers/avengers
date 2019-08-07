@@ -41,7 +41,6 @@ protected:
 	//////Boss State/////
 	//Boss behavior State
 	int behaviorState;
-	float timeCount;
 	//Behavior parameter
 	//Parabol Jump
 	// y= - a * (x-h)^2 + k
@@ -54,6 +53,8 @@ protected:
 public:
 	Boss1State(Boss1 *boss1);
 	~Boss1State();
+
+	float timeCount;
 
 	static Boss1State * GetInstance(Boss1 *boss1);
 

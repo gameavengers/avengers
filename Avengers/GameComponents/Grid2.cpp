@@ -13,6 +13,7 @@ Grid2* Grid2::GetInstance()
 
 Grid2::Grid2()
 {
+	bDisableRespawn = false;
 	captain = Captain::GetInstance();
 	viewport = Viewport::GetInstance();
 	boss1 = Boss1::GetInstance();
@@ -406,6 +407,18 @@ bool Grid2::CheckObjectInsideCamera(GameObject* object)
 	return true;
 }
 
+bool Grid2::CheckTileInsideCamera(Tile2 *tile)
+{
+	if (timeCount < 2000)
+		return true;
+
+	RECT rect = viewport->GetRect();
+	if (tile->x * TILE_SIZE + TILE_SIZE < rect.left		- 64 || tile->x * TILE_SIZE > rect.right	+ 64 ||
+		tile->y * TILE_SIZE + TILE_SIZE < rect.bottom	- 64 || tile->y * TILE_SIZE > rect.top		+ 64)
+		return false;
+	return true;
+}
+
 void Grid2::Update(DWORD dt)
 {
 	timeCount += dt;
@@ -422,14 +435,32 @@ void Grid2::Update(DWORD dt)
 	for (int i = 0; i < listObject.size(); i++)
 	{
 		if (listObject.at(i).disable)
-			continue;
+		{
+			if (listObject.at(i).tile->bCanSpawn)
+				continue;
+			else
+			{
+				if (CheckTileInsideCamera(listObject.at(i).tile))
+				{
+					continue;
+				}
+				else
+				{					
+					listObject.erase(listObject.begin() + i);
+					if (!bDisableRespawn)
+						listObject.at(i).tile->bCanSpawn = true;
+					continue;
+				}
+			}
+		}
+			
 
 		listObject.at(i).object->Update(dt);
 
 		if (!CheckObjectInsideCamera(listObject.at(i).object))
 		{
 			listObject.at(i).disable = true;
-			// listObject.at(i).tile->bCanSpawn = true;
+			//listObject.at(i).tile->bCanSpawn = true;
 		}
 
 		/*if (listObject.at(i).disable)
@@ -471,6 +502,7 @@ void Grid2::Render()
 
 					SpawnObject((listCell + x + y * mapSize)->hasSpawnTiles.at(i)->SpawnObjectID,
 						(listCell + x + y * mapSize)->hasSpawnTiles.at(i));
+					
 					(listCell + x + y * mapSize)->hasSpawnTiles.at(i)->bCanSpawn = false;
 				}
 			}

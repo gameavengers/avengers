@@ -78,6 +78,8 @@ private:
 	void UpdateCurrentTiles();
 
 	float timeCount;
+
+	bool bDisableRespawn;
 	
 public:
 	static Grid2* GetInstance();
@@ -103,6 +105,7 @@ public:
 
 	void SpawnObject(int ObjectID, Tile2* tile);
 	bool CheckObjectInsideCamera(GameObject* object);
+	bool CheckTileInsideCamera(Tile2* tile);
 	vector <OnUpdateObject> GetListUpdateObject() { return listObject; }
 
 	void Update(DWORD dt);

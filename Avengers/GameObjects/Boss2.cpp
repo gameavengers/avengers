@@ -166,12 +166,12 @@ void Boss2::OnCollision()
 		((Boss2State*)state)->SetState(BOSS2_STATE_BLEEDING);
 		return;
 	}
-	if (this->HP = 2)
+	if (this->HP == 2)
 	{
 		((Boss2State*)state)->SetState(BOSS2_STATE_LOSS_HEAD_IDLE);
 		return;
 	}
-	if (this->HP = 0)
+	if (this->HP <= 0)
 	{
 		((Boss2State*)state)->SetState(BOSS2_STATE_DEAD);
 		return;

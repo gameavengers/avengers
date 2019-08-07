@@ -180,7 +180,7 @@ void Boss1::OnCollision()
 		((Boss1State*)state)->SetState(BOSS1_STATE_BLEEDING);
 		return;
 	}
-	if (this->HP == 0)
+	if (this->HP <= 0)
 	{
 		((Boss1State*)state)->SetState(BOSS1_STATE_DEAD);
 		return;

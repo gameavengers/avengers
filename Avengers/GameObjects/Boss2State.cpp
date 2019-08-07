@@ -82,6 +82,8 @@ void Boss2State::state_bleeding()
 	this->SetState(BOSS2_STATE_BLEEDING);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_BLEEDING];
 
+	boss2->SetSpeedX(0);
+
 	if (timeCount >= 1000)
 	{
 		this->state_idle();
@@ -145,6 +147,8 @@ void Boss2State::state_loss_head_idle()
 {
 	this->SetState(BOSS2_STATE_LOSS_HEAD_IDLE);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_LOSS_HEAD_IDLE];
+
+	boss2->SetSpeedX(0);
 }
 
 void Boss2State::state_loss_head_running()

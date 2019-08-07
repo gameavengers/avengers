@@ -11,6 +11,10 @@ Captain::Captain()
 
 	shield = new Shield();
 
+	hp = new HPBar(0);
+	hp1 = new HPBar(1);
+	hp2 = new HPBar(2);
+
 	this->x = 250;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
@@ -422,8 +426,10 @@ void Captain::Update(DWORD dt)
 	shield->Update(dt);
 	state->Colision();
 	state->Update(dt);
-
 	
+	hp->Update(dt);
+	hp1->Update(dt);
+	hp2->Update(dt);
 }
 void Captain::UpdateCollision(DWORD dt)
 {
@@ -597,4 +603,8 @@ void Captain::Render()
 {
 	state->Render();
 	shield->Render();
+	
+	hp->Render();
+	hp1->Render();
+	hp2->Render();
 }

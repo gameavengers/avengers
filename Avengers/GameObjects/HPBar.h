@@ -5,17 +5,19 @@
 
 class HPBar : public GameObject
 {
-	HPBar();
-
 	static HPBar *__instance;
 
 	static vector<Animation *> animations;
 	DWORD lastFrameTime;
 
 public:
+	int index;
+
+	HPBar(int index);
+
 	static void LoadResources();
 
-	static HPBar *GetInstance();
+	static HPBar *GetInstance(int index);
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }
 	void SetLastFrameTime(DWORD lastFrameTime) { this->lastFrameTime = lastFrameTime; }

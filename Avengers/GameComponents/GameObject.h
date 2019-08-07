@@ -43,6 +43,8 @@ protected:
 public:
 	bool disable;
 
+	int HP;
+
 	float disableTimeCount;
 
 	void SetPositionX(float x) { this->x = x; }

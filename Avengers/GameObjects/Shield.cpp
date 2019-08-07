@@ -166,7 +166,8 @@ void Shield::Update(DWORD dt)
 			|| capstate->GetState() == STATE_JUMPING_ROLE 
 			|| capstate->GetState() == STATE_DIVING 
 			|| capstate->GetState() == STATE_SWING
-			|| capstate->GetState() == STATE_BLEEING)
+			|| capstate->GetState() == STATE_BLEEING
+			|| capstate->GetState() == STATE_DIEING)
 		{
 			this->state = SHIELD_HIDE;
 		}

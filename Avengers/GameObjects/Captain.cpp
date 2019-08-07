@@ -83,7 +83,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_JUMP_ROLE
-	anim = new Animation(50);
+	anim = new Animation(200);
 	for (int i = 8; i < 10; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -199,7 +199,7 @@ void Captain::LoadResources()
 	animations.push_back(anim);
 
 	// CAPTAIN_ANI_DIEING
-	anim = new Animation(300);
+	anim = new Animation(1000);
 	for (int i = 34; i < 36; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
@@ -260,6 +260,10 @@ void Captain::Reset()
 		this->SetPositionX(50);
 		this->SetPositionY(100);
 	}
+
+	this->HP = 6;
+
+	this->isDead = false;
 
 	this->canGoToNextStage = false;
 
@@ -454,6 +458,9 @@ void Captain::Update(DWORD dt)
 void Captain::UpdateCollision(DWORD dt)
 {
 	if (trueImortal)
+		return;
+
+	if (this->isDead)
 		return;
 
 	if (bImortal)
@@ -741,8 +748,8 @@ void Captain::UpdateCollision(DWORD dt)
 		hp2->IsDisable(true);
 		break;
 	case 0:
-		this->HP = 6;
-		this->Reset();
+		this->isDead = true;
+		((CaptainState*)state)->timeCount = 0;
 		break;
 	}
 }

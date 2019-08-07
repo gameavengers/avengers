@@ -402,6 +402,17 @@ void CaptainState::state_dieing()
 {
 	this->SetState(STATE_DIEING);
 	anim = captain->GetAnimationsList()[STATE_DIEING];
+
+	if (timeCount >= 1000)
+	{
+		timeCount = 0;
+		captain->Reset();
+		this->SetState(STATE_STANDING);
+		return;
+	}
+
+	captain->SetSpeedX(0);
+
 }
 
 void CaptainState::state_diving()
@@ -516,6 +527,12 @@ void CaptainState::Colision()
 	if (captain->IsSwing() && this->GetState() != STATE_SWING)
 	{
 		this->SetState(STATE_SWING);
+	}
+
+	//Chết
+	if (captain->isDead && this->GetState() != STATE_DIEING)
+	{
+		this->SetState(STATE_DIEING);
 	}
 
 	captain->SetIsGrounded(false);

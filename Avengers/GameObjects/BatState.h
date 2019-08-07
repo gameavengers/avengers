@@ -2,6 +2,7 @@
 #include "../GameComponents/Constants.h"
 #include "State.h"
 #include "Bat.h"
+#include "../GameComponents/Sound.h"
 
 class Bat;
 enum StateBat
@@ -15,6 +16,7 @@ enum StateBat
 class BatState : public State
 {
 protected:
+	GSound* sound_dead;
 	static BatState * __instance;
 	StateBat stateBat;
 	Bat *bat;

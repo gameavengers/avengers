@@ -49,6 +49,7 @@ void Viewport::Reset()
 		x = 0;
 		y = 225;
 	}
+	this->isLock = false;
 }
 void Viewport::Update(DWORD dt)
 {

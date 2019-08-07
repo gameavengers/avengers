@@ -37,6 +37,8 @@ class Captain : public GameObject
 public: 
 	void LoadResources();
 
+	bool isDead = false;
+
 	bool canGoToNextStage = false;
 
 	static Captain *GetInstance();

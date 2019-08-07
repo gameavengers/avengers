@@ -48,6 +48,9 @@ void HPBar::LoadResources()
 
 void HPBar::Update(DWORD dt)
 {
+	if (this->disable)
+		return;
+	
 	switch (this->index)
 	{
 	case 0:
@@ -67,6 +70,9 @@ void HPBar::Update(DWORD dt)
 
 void HPBar::Render()
 {
+	if (this->disable)
+		return;
+	
 	SpriteData spriteData;
 
 	spriteData.width = this->width;

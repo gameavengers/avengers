@@ -12,10 +12,13 @@ class HPBar : public GameObject
 
 public:
 	int index;
+	bool disable = false;
 
 	HPBar(int index);
 
 	static void LoadResources();
+
+	void IsDisable(bool isDisable) { this->disable = isDisable; };
 
 	static HPBar *GetInstance(int index);
 

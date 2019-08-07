@@ -15,6 +15,8 @@ Captain::Captain()
 	hp1 = new HPBar(1);
 	hp2 = new HPBar(2);
 
+	this->HP = 6;
+
 	this->x = 250;
 	this->y = 200;
 	this->width = CAPTAIN_SPRITE_WIDTH;
@@ -244,8 +246,19 @@ void Captain::LoadResources()
 
 void Captain::Reset()
 {
-	this->SetPositionX(200);
-	this->SetPositionY(200);
+	if (Game::GetInstance()->GetStage() == STAGE_2)
+	{
+		this->SetPositionX(280);
+		this->SetPositionY(900);
+	}
+	else
+	{
+		this->SetPositionX(50);
+		this->SetPositionY(100);
+	}
+
+	this->canGoToNextStage = false;
+
 	Viewport::GetInstance()->Reset();
 }
 
@@ -510,8 +523,13 @@ void Captain::UpdateCollision(DWORD dt)
 		case 14:
 		case 15:
 		case 16:
+			if (((CaptainState*)state)->GetState() == StateCaptain::STATE_BLEEING
+				|| ((CaptainState*)state)->GetState() == StateCaptain::STATE_BLEEING_2)
+				return;
+
 			((CaptainState*)state)->timeCount = 0;
 			this->SetIsBleeding(true);
+			this->HP -= 1;
 			bImortal = true;
 			return;
 		}
@@ -534,10 +552,10 @@ void Captain::UpdateCollision(DWORD dt)
 				listBullet.at(i)->SetSpeedX(0);
 				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
 			}
-			else
+			/*else
 			{
 				listBullet.at(i)->Disable();
-			}
+			}*/
 
 			if (shield->IsFlying())
 			{
@@ -571,8 +589,13 @@ void Captain::UpdateCollision(DWORD dt)
 				break;
 			}
 			
+			if (((CaptainState*)state)->GetState() == StateCaptain::STATE_BLEEING 
+				|| ((CaptainState*)state)->GetState() == StateCaptain::STATE_BLEEING_2)
+				return;
+
 			((CaptainState*)state)->timeCount = 0;
 			this->SetIsBleeding(true);
+			this->HP -= 1;
 			bImortal = true;
 			return;
 		}
@@ -591,12 +614,50 @@ void Captain::UpdateCollision(DWORD dt)
 		{
 			if (listItem.at(i)->GetItemType() == ItemType::KEY_CRYSTAL)
 				this->canGoToNextStage = true;
-			//if (listItem.at(i)->GetItemType() == ItemType::SMALL_ENERGY)
-				// +máu
-			//if (listItem.at(i)->GetItemType() == ItemType::BIG_ENERGY)
-				// +máu
+			if (listItem.at(i)->GetItemType() == ItemType::SMALL_ENERGY)
+			{
+				if (this->HP < 6)
+				{
+					this->HP += 2;
+				}
+			}
+			if (listItem.at(i)->GetItemType() == ItemType::BIG_ENERGY)
+			{
+				if (this->HP < 6)
+				{
+					this->HP = 6;
+				}
+			}
+			if (listItem.at(i)->GetItemType() == ItemType::FIVE_POINT)
+			{
+				//để sẵn cho rin bỏ sound vô
+			}
 			listItem.at(i)->Disable();
 		}
+	}
+
+
+	switch (this->HP)
+	{
+	case 6:
+		hp->IsDisable(false);
+		hp1->IsDisable(false);
+		hp2->IsDisable(false);
+		break;
+	case 4:
+		hp->IsDisable(false);
+		hp1->IsDisable(false);
+		hp2->IsDisable(true);
+		break;
+	case 2:
+		hp->IsDisable(false);
+		hp1->IsDisable(true);
+		hp2->IsDisable(true);
+		break;
+	case 0:
+		this->HP = 6;
+		this->Reset();
+		break;
 	}
 }
 void Captain::Render()

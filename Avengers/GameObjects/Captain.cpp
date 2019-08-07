@@ -396,7 +396,7 @@ void Captain::Update(DWORD dt)
 				this->SetIsSwing(true);
 			}
 		}
-		//Va chạm Enemy
+		//Va chạm Gai map 2
 		if (coEventsResult[0]->collisionID == 4)
 		{
 			if (ny == 1)
@@ -406,6 +406,7 @@ void Captain::Update(DWORD dt)
 			}
 		}
 
+		//Va chạm tường
 		if (coEventsResult[0]->collisionID == 5)
 		{
 			if (nx == 1 || nx == -1)

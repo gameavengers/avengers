@@ -161,6 +161,7 @@
     <ClInclude Include="GameObjects\Exit.h" />
     <ClInclude Include="GameObjects\Gigi.h" />
     <ClInclude Include="GameObjects\GigiState.h" />
+    <ClInclude Include="GameObjects\HPBar.h" />
     <ClInclude Include="GameObjects\Item.h" />
     <ClInclude Include="GameObjects\RedBox.h" />
     <ClInclude Include="GameObjects\RedBoxState.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="GameObjects\Exit.cpp" />
     <ClCompile Include="GameObjects\Gigi.cpp" />
     <ClCompile Include="GameObjects\GigiState.cpp" />
+    <ClCompile Include="GameObjects\HPBar.cpp" />
     <ClCompile Include="GameObjects\Item.cpp" />
     <ClCompile Include="GameObjects\RedBox.cpp" />
     <ClCompile Include="GameObjects\RedBoxState.cpp" />

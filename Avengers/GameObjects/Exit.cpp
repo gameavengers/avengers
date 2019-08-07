@@ -34,7 +34,7 @@ void Exit::LoadResources()
 	animations.push_back(anim);
 
 	//APPEAR
-	anim = new Animation(100);
+	anim = new Animation(300);
 	for (int i = 65; i < 67; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);

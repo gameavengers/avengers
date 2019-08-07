@@ -229,6 +229,12 @@ void BatState::state_dead()
 	if (bat->isOnGround)
 	{
 		anim = bat->GetAnimationsList()[7];
+		if (sound_dead != NULL)
+		{
+			delete sound_dead;
+		}
+		sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
+		Sound::GetInstance()->PlaySound(sound_dead);
 
 		if (this->disableTimeCount > 150)
 			bat->disable = true;

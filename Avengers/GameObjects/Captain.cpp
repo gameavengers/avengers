@@ -658,6 +658,13 @@ void Captain::UpdateCollision(DWORD dt)
 			}
 			if (listItem.at(i)->GetItemType() == ItemType::SMALL_ENERGY)
 			{
+				if (sound_item != NULL)
+				{
+					delete sound_item;
+					sound_item = NULL;
+				}
+				sound_item = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ITEM_HP);
+				Sound::GetInstance()->PlaySound(sound_item);
 				if (this->HP < 6)
 				{
 					this->HP += 2;
@@ -665,6 +672,13 @@ void Captain::UpdateCollision(DWORD dt)
 			}
 			if (listItem.at(i)->GetItemType() == ItemType::BIG_ENERGY)
 			{
+				if (sound_item != NULL)
+				{
+					delete sound_item;
+					sound_item = NULL;
+				}
+				sound_item = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ITEM_HP);
+				Sound::GetInstance()->PlaySound(sound_item);
 				if (this->HP < 6)
 				{
 					this->HP = 6;
@@ -672,7 +686,33 @@ void Captain::UpdateCollision(DWORD dt)
 			}
 			if (listItem.at(i)->GetItemType() == ItemType::FIVE_POINT)
 			{
-				//để sẵn cho rin bỏ sound vô
+				if (sound_item != NULL)
+				{
+					delete sound_item;
+					sound_item = NULL;
+				}
+				sound_item = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ITEM_5);
+				Sound::GetInstance()->PlaySound(sound_item);
+			}
+			if (listItem.at(i)->GetItemType() == ItemType::BIG_POWER_STONE)
+			{
+				if (sound_item != NULL)
+				{
+					delete sound_item;
+					sound_item = NULL;
+				}
+				sound_item = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ITEM_5);
+				Sound::GetInstance()->PlaySound(sound_item);
+			}
+			if (listItem.at(i)->GetItemType() == ItemType::SMALL_POWER_STONE)
+			{
+				if (sound_item != NULL)
+				{
+					delete sound_item;
+					sound_item = NULL;
+				}
+				sound_item = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ITEM_5);
+				Sound::GetInstance()->PlaySound(sound_item);
 			}
 			listItem.at(i)->Disable();
 		}

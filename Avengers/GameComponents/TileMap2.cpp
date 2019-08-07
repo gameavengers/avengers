@@ -176,9 +176,9 @@ void TileMap2::SetCurrentMap(int mapID)
 	}
 	switch (mapID)
 	{
-	/*case STAGE_1:
+	case STAGE_1:
 		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_STAGE_1_2);
-		break;*/
+		break;
 	case STAGE_BOSS_1:
 		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_STAGE_BOSS_1);
 		break;

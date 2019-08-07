@@ -191,6 +191,9 @@ void Domesto::Render()
 
 void Domesto::OnCollision()
 {
+	if (((DomestoStayState*)state)->GetState() == StateDomesto::DOMESTO_STATE_DEAD || ((DomestoWalkState*)state)->GetState() == StateDomesto::DOMESTO_STATE_DEAD)
+		return;
+	
 	switch (type)
 	{
 	case STAY_FIRE_STRAIGHT:

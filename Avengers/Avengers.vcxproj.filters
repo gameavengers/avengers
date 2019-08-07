@@ -123,6 +123,12 @@
     <ClCompile Include="GameObjects\TwinBricks.cpp">
       <Filter>Source\Object</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjects\Exit.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\HPBar.cpp">
+      <Filter>Source\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameComponents\Debug.h" />
@@ -250,6 +256,12 @@
       <Filter>Header\Component</Filter>
     </ClInclude>
     <ClInclude Include="GameObjects\TwinBricks.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Exit.h">
+      <Filter>Header\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\HPBar.h">
       <Filter>Header\Object</Filter>
     </ClInclude>
   </ItemGroup>

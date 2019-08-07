@@ -188,6 +188,9 @@ void RunningMan::Render()
 
 void RunningMan::OnCollision()
 {
+	if (((RunningManState*)state)->GetState() == StateRunningMan::RUNNING_MAN_STATE_DEAD)
+		return;
+	
 	((RunningManState*)state)->timeCount = 0;
 	((RunningManState*)state)->state_dead();
 	/*state->Colision();*/

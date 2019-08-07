@@ -396,7 +396,7 @@ void Captain::Update(DWORD dt)
 				this->SetIsSwing(true);
 			}
 		}
-		//Va chạm Enemy
+		//Va chạm Gai map 2
 		if (coEventsResult[0]->collisionID == 4)
 		{
 			if (ny == 1)
@@ -406,6 +406,7 @@ void Captain::Update(DWORD dt)
 			}
 		}
 
+		//Va chạm tường
 		if (coEventsResult[0]->collisionID == 5)
 		{
 			if (nx == 1 || nx == -1)
@@ -534,14 +535,33 @@ void Captain::UpdateCollision(DWORD dt)
 				listBullet.at(i)->SetSpeedX(0);
 				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
 			}
+			else
+			{
+				listBullet.at(i)->Disable();
+				if (sound_colide_shield != NULL)
+				{
+					delete sound_colide_shield;
+					sound_colide_shield = NULL;
+				}
+				sound_colide_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
+				Sound::GetInstance()->PlaySound(sound_colide_shield);
+			}
 
 			if (shield->IsFlying())
 			{
 				if (listBullet.at(i)->GetBulletType() == BARREL)
 				{
 					listBullet.at(i)->OnCollision();
+					if (sound_colide_shield != NULL)
+					{
+						delete sound_colide_shield;
+						sound_colide_shield = NULL;
+					}
+					sound_colide_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
 				}
 			}
+
+			
 		}
 
 		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listBullet.at(i)->GetCollider());

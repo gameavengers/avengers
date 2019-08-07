@@ -195,6 +195,24 @@ void TankState::state_right()
 	}
 }
 
+void TankState::state_dead()
+{
+	anim = tank->GetAnimationsList()[9];
+
+	if (this->timeCount > 100)
+	{
+		this->timeCount = 0;
+		if (sound_dead != NULL)
+		{
+			delete sound_dead;
+		}
+		sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
+		Sound::GetInstance()->PlaySound(sound_dead);
+		tank->disable = true;
+		return;
+	}
+}
+
 void TankState::Colision()
 {
 
@@ -242,6 +260,10 @@ void TankState::Update(DWORD dt)
 
 	case 8:
 		this->state_top_left();
+		break;
+
+	case 9:
+		this->state_dead();
 		break;
 
 	default:

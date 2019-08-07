@@ -203,6 +203,10 @@ void Captain::LoadResources()
 	for (int i = 34; i < 36; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		if (i == 34)
+			sprite->SetOffSetX(8);
+		if (i == 35)
+			sprite->SetOffSetX(4);
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);

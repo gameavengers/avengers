@@ -370,7 +370,7 @@ void Captain::Update(DWORD dt)
 
 		this->SetPositionX(this->GetPositionX() + moveX);
 		this->SetPositionY(this->GetPositionY() + moveY);
-
+		//Va chạm đất
 		if (coEventsResult[0]->collisionID == 1)
 		{
 			if (ny == 1)
@@ -378,7 +378,7 @@ void Captain::Update(DWORD dt)
 				this->SetIsGrounded(true);
 			}
 		}
-
+		//Va chạm nước
 		if (coEventsResult[0]->collisionID == 2)
 		{
 			if (ny == 1)
@@ -388,7 +388,7 @@ void Captain::Update(DWORD dt)
 				this->SetPositionX(this->GetPositionX() - 1);
 			}
 		}
-
+		//Va chạm dây
 		if (coEventsResult[0]->collisionID == 3)
 		{
 			if (ny == 1)
@@ -396,7 +396,7 @@ void Captain::Update(DWORD dt)
 				this->SetIsSwing(true);
 			}
 		}
-
+		//Va chạm Enemy
 		if (coEventsResult[0]->collisionID == 4)
 		{
 			if (ny == 1)

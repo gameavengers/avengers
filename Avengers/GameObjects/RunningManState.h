@@ -2,6 +2,7 @@
 #include "../GameComponents/Constants.h"
 #include "State.h"
 #include "RunningMan.h"
+#include "../GameComponents/Sound.h"
 
 class RunningMan;
 enum StateRunningMan
@@ -16,6 +17,7 @@ enum StateRunningMan
 class RunningManState : public State
 {
 protected:
+	GSound* sound_shoot;
 	static RunningManState * __instance;
 	StateRunningMan stateRunningMan;
 	RunningMan *runningMan;

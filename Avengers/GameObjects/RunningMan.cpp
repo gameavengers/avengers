@@ -193,4 +193,5 @@ void RunningMan::OnCollision()
 	
 	((RunningManState*)state)->timeCount = 0;
 	((RunningManState*)state)->state_dead();
+	/*state->Colision();*/
 }

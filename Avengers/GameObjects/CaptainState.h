@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "../GameComponents/Sound.h"
 #include "../GameComponents/Constants.h"
 #include "State.h"
 #include "Captain.h"
@@ -33,6 +34,11 @@ enum StateCaptain //đặt tên không trùng tên class nào
 class CaptainState : public State
 {
 protected:
+	//tạo con trỏ âm thanh
+	GSound* g;
+	GSound* sound_shield;
+	GSound* throw_shield;
+
 	static CaptainState * __instance;
 	StateCaptain stateCaptain;
 	Captain *captain;

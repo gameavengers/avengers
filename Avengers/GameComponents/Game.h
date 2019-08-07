@@ -6,6 +6,7 @@
 #include "Grid2.h"
 #include "../GameObjects/Captain.h"
 #include <chrono>
+#include "Sound.h"
 
 class Graphics;
 class Keyboard;
@@ -20,6 +21,7 @@ class Game
 	HWND hWnd;									
 
 	Keyboard *keyboard;
+	Sound *sound;
 	Graphics *graphics;
 
 	Captain *captain;

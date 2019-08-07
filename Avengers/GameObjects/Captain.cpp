@@ -278,6 +278,7 @@ void Captain::Update(DWORD dt)
 				Grid2::GetInstance()->spawnboss = true;
 				this->SetPositionX(50);
 				this->SetPositionY(100);
+				this->HP = 6;
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
@@ -287,6 +288,7 @@ void Captain::Update(DWORD dt)
 				this->canGoToNextStage = false;
 				this->SetPositionX(280);
 				this->SetPositionY(900);
+				this->HP = 6;
 				Viewport::GetInstance()->Reset();
 				Viewport::GetInstance()->canLock = true;
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
@@ -297,6 +299,7 @@ void Captain::Update(DWORD dt)
 				this->canGoToNextStage = false;
 				this->SetPositionX(100);
 				this->SetPositionY(100);
+				this->HP = 6;
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
@@ -559,7 +562,10 @@ void Captain::UpdateCollision(DWORD dt)
 				listBullet.at(i)->SetSpeedX(0);
 				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
 			}
-			else
+			else if (listBullet.at(i)->GetBulletType() == BULLET_BOSS2 
+				|| listBullet.at(i)->GetBulletType() == ROCKET 
+				|| listBullet.at(i)->GetBulletType() == GIGIROCKET
+				|| listBullet.at(i)->GetBulletType() == BARREL)
 			{
 				//listBullet.at(i)->Disable();
 				if (sound_colide_shield != NULL)

@@ -432,23 +432,28 @@ void Grid2::Update(DWORD dt)
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 	SpawnProjectTile::GetInstance()->UpdateItem(dt);
 
-	for (int i = 0; i < listObject.size(); i++)
+	int i = 0;
+	while (i < listObject.size())
 	{
 		if (listObject.at(i).disable)
 		{
 			if (listObject.at(i).tile->bCanSpawn)
+			{
+				i++;
 				continue;
+			}
 			else
 			{
 				if (CheckTileInsideCamera(listObject.at(i).tile))
 				{
+					i++;
 					continue;
 				}
 				else
-				{					
-					listObject.erase(listObject.begin() + i);
+				{		
 					if (!bDisableRespawn)
 						listObject.at(i).tile->bCanSpawn = true;
+					listObject.erase(listObject.begin() + i);			
 					continue;
 				}
 			}
@@ -460,19 +465,8 @@ void Grid2::Update(DWORD dt)
 		if (!CheckObjectInsideCamera(listObject.at(i).object))
 		{
 			listObject.at(i).disable = true;
-			//listObject.at(i).tile->bCanSpawn = true;
 		}
-
-		/*if (listObject.at(i).disable)
-		{
-			listObject.at(i).timeCount += dt;
-			if (listObject.at(i).timeCount >= listObject.at(i).delaySpawn)
-			{
-				listObject.at(i).timeCount = 0;
-				listObject.at(i).tile->bCanSpawn = true;
-			}
-
-		}*/
+		i++;
 	}
 
 	exit->Update(dt);

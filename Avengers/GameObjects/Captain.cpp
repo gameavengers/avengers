@@ -729,6 +729,32 @@ void Captain::UpdateCollision(DWORD dt)
 		}
 	}
 
+	//Captain collide with boss 1==========================================
+	Boss1* boss1 = Boss1::GetInstance();
+
+	bool isCollideBoss1 = Collision::GetInstance()->AABB(this->GetCollider(), boss1->GetCollider());
+
+	if (isCollideBoss1)
+	{
+		((CaptainState*)state)->timeCount = 0;
+		this->SetIsBleeding(true);
+		boss1->OnCollision();
+		this->HP -= 1;
+		bImortal = true;
+		return;
+	}
+
+	if (boss1->disable)
+		this->canGoToNextStage = true;
+	//====================================================================
+
+	//Shield collide with boss 1==========================================
+	bool isShieldCollideBoss1 = Collision::GetInstance()->AABB(shield->GetCollider(), boss1->GetCollider());
+
+	if (isShieldCollideBoss1 && shield->IsFlying())
+		boss1->OnCollision();
+	//====================================================================
+
 
 	switch (this->HP)
 	{

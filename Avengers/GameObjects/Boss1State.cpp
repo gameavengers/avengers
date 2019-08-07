@@ -16,6 +16,7 @@ Boss1State::Boss1State(Boss1 *boss1)
 	this->boss1 = boss1;
 	this->state_standing_shoot_1();
 	this->behaviorBoss1 = BehaviorBoss1::Fly;
+	reStateChance = 0;
 }
 
 Boss1State::~Boss1State()
@@ -303,9 +304,9 @@ void Boss1State::Behavior_Fly()
 void Boss1State::RandomNextState()
 {
 	srand(time(NULL));
-	int randomState = rand() % 4 + 1;
+	int randomState = rand() % 10 + 1;
 
-	switch (randomState)
+	/*switch (randomState)
 	{
 	case 1:
 		behaviorBoss1 = BehaviorBoss1::ComboShoot;
@@ -318,6 +319,95 @@ void Boss1State::RandomNextState()
 		break;
 	case 4: 
 		behaviorBoss1 = BehaviorBoss1::FlyNShoot;
+		break;
+	}*/
+
+	switch (behaviorBoss1)
+	{
+	case Shoot:
+		if (randomState < reStateChance)
+		{
+			behaviorBoss1 = BehaviorBoss1::Shoot;
+			reStateChance--;
+		}
+		else if (randomState <= 5)
+		{
+			behaviorBoss1 = BehaviorBoss1::ComboShoot;
+			reStateChance = BOSS1_COMBOSHOOT_RESTATE_CHANCE;
+		}
+		else if (randomState <= 7)
+		{
+			behaviorBoss1 = BehaviorBoss1::Fly;
+			reStateChance = BOSS1_FLY_RESTATE_CHANCE;
+		}
+		else if (randomState <= 10)
+		{
+			behaviorBoss1 = BehaviorBoss1::FlyNShoot;
+			reStateChance = BOSS1_FLYNSHOOT_RESTATE_CHANCE;
+		}
+		break;
+	case ComboShoot:
+		if (randomState < reStateChance)
+		{
+			behaviorBoss1 = BehaviorBoss1::ComboShoot;
+			reStateChance--;
+		}
+		else if (randomState <= 4)
+		{
+			behaviorBoss1 = BehaviorBoss1::Shoot;
+			reStateChance = BOSS1_SHOOT_RESTATE_CHANCE;
+		}
+		else if (randomState <= 7)
+		{
+			behaviorBoss1 = BehaviorBoss1::Fly;
+			reStateChance = BOSS1_FLY_RESTATE_CHANCE;
+		}
+		else if (randomState <= 10)
+		{
+			behaviorBoss1 = BehaviorBoss1::FlyNShoot;
+			reStateChance = BOSS1_FLYNSHOOT_RESTATE_CHANCE;
+		}
+		break;
+	case FlyNShoot:
+		if (randomState < reStateChance)
+		{
+			behaviorBoss1 = BehaviorBoss1::FlyNShoot;
+			reStateChance--;
+		}
+		else if (randomState <= 5)
+		{
+			behaviorBoss1 = BehaviorBoss1::ComboShoot;
+			reStateChance = BOSS1_COMBOSHOOT_RESTATE_CHANCE;
+		}
+		else if (randomState <= 5)
+		{
+			behaviorBoss1 = BehaviorBoss1::Shoot;
+			reStateChance = BOSS1_SHOOT_RESTATE_CHANCE;
+		}
+		else if (randomState <= 5)
+		{
+			behaviorBoss1 = BehaviorBoss1::Fly;
+			reStateChance = BOSS1_FLY_RESTATE_CHANCE;
+		}
+		break;
+	case Fly:
+		if (randomState < reStateChance)
+		{
+			behaviorBoss1 = BehaviorBoss1::Fly;
+			reStateChance--;
+		}
+		else if (randomState <= 5)
+		{
+			behaviorBoss1 = BehaviorBoss1::ComboShoot;
+			reStateChance = BOSS1_COMBOSHOOT_RESTATE_CHANCE;
+		}
+		else if (randomState <= 10)
+		{
+			behaviorBoss1 = BehaviorBoss1::Shoot;
+			reStateChance = BOSS1_SHOOT_RESTATE_CHANCE;
+		}
+		break;
+	default:
 		break;
 	}
 }

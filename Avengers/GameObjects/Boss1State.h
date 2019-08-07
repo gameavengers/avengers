@@ -48,6 +48,7 @@ protected:
 	float k;
 
 	float shootTimeCount;
+	int reStateChance;
 public:
 	Boss1State(Boss1 *boss1);
 	~Boss1State();

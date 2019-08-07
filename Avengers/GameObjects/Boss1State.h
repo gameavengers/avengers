@@ -2,6 +2,7 @@
 #include "../GameComponents/Constants.h"
 #include "State.h"
 #include "Boss1.h"
+#include "../GameComponents/Sound.h"
 
 #include <ctime>
 
@@ -29,6 +30,7 @@ enum BehaviorBoss1
 class Boss1State : public State
 {
 protected:
+	GSound* sound_shoot;
 	static Boss1State * __instance;
 	StateBoss1 stateBoss1;
 	BehaviorBoss1 behaviorBoss1;

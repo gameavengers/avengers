@@ -5,6 +5,7 @@
 #include "../GameComponents/Game.h"
 #include "State.h"
 #include "Shield.h"
+#include "../GameComponents/Sound.h"
 
 class Captain : public GameObject
 {
@@ -27,6 +28,9 @@ class Captain : public GameObject
 	bool bImortal;
 	float timeCount;
 	bool trueImortal;
+	GSound* sound_colide_shield;
+	GSound* sound_item;
+	GSound* sound_rocket;
 public: 
 	void LoadResources();
 

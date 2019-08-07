@@ -524,6 +524,13 @@ void Captain::UpdateCollision(DWORD dt)
 		{
 			if (listBullet.at(i)->GetBulletType() == BULLET_NORMAL)
 			{
+				if (sound_colide_shield != NULL)
+				{
+					delete sound_colide_shield;
+					sound_colide_shield = NULL;
+				}
+				sound_colide_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_CROUCH_SHIELD);
+				Sound::GetInstance()->PlaySound(sound_colide_shield);
 				listBullet.at(i)->SetSpeedX(0);
 				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
 			}
@@ -541,6 +548,10 @@ void Captain::UpdateCollision(DWORD dt)
 		
 		if (isCollide)
 		{
+			if (sound_rocket != NULL)
+			{
+				delete sound_rocket;
+			}
 			switch (listBullet.at(i)->GetBulletType())
 			{
 			case BulletType::BULLET_BOSS2:
@@ -549,16 +560,18 @@ void Captain::UpdateCollision(DWORD dt)
 			case BulletType::ROCKET:
 				//listBullet.at(i)->disableTimeCount = 0;
 				listBullet.at(i)->OnCollision();
+				sound_rocket = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
 				break;
 			case BulletType::BULLET_NORMAL:
 			case BulletType::BULLET_NORMAL_BOSS1:
 			case BulletType::BULLET_SPECIAL_BOSS1:
 			case BulletType::BULLET_TANK:
 				listBullet.at(i)->Disable();
+				sound_rocket = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_DEFAULT);
 				break;
 			}
-			
 			((CaptainState*)state)->timeCount = 0;
+			Sound::GetInstance()->PlaySound(sound_rocket);
 			this->SetIsBleeding(true);
 			bImortal = true;
 			return;
@@ -577,7 +590,16 @@ void Captain::UpdateCollision(DWORD dt)
 		if (isCollide)
 		{
 			if (listItem.at(i)->GetItemType() == ItemType::KEY_CRYSTAL)
+			{
+				if (sound_item != NULL)
+				{
+					delete sound_item;
+					sound_item = NULL;
+				}
+				sound_item = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ITEM_EXIT);
+				Sound::GetInstance()->PlaySound(sound_item);
 				this->canGoToNextStage = true;
+			}
 			//if (listItem.at(i)->GetItemType() == ItemType::SMALL_ENERGY)
 				// +máu
 			//if (listItem.at(i)->GetItemType() == ItemType::BIG_ENERGY)

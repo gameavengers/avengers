@@ -2,6 +2,7 @@
 #include "../GameComponents/Constants.h"
 #include "State.h"
 #include "Boss2.h"
+#include "../GameComponents/Sound.h"
 
 class Boss2;
 enum StateBoss2
@@ -20,6 +21,8 @@ enum StateBoss2
 class Boss2State : public State
 {
 protected:
+	GSound* sound_bullet;
+	GSound* sound_dead;
 	static Boss2State * __instance;
 	StateBoss2 stateBoss2;
 	Boss2 *boss2;

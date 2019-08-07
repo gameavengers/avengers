@@ -72,6 +72,12 @@ void Boss1State::state_standing_shoot_1()
 	if (this->shootTimeCount > BOSS1_TIME_STANDING_SHOOT_1)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOSS1_LAZE);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		int direction = boss1->IsLeft() ? 1 : 5;
 		float offsetX = boss1->IsLeft() ? -8 : 20;
 		float offsetY = -10;
@@ -89,6 +95,12 @@ void Boss1State::state_standing_shoot_2()
 	if (this->shootTimeCount > BOSS1_TIME_STANDING_SHOOT_1 + BOSS1_TIME_STANDING_SHOOT_2 * 2)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOSS1_FLYING);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		int direction = boss1->IsLeft() ? 1 : 5;
 		float offsetX = boss1->IsLeft() ? -8 : 16;
 		float offsetY = -10;
@@ -111,6 +123,12 @@ void Boss1State::state_flying_shoot()
 	if (this->shootTimeCount > BOSS1_TIME_FLY_UP_N_DOWN)
 	{
 		this->shootTimeCount = 0;
+		if (sound_shoot != NULL)
+		{
+			delete sound_shoot;
+		}
+		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOSS1_FLYING);
+		Sound::GetInstance()->PlaySound(sound_shoot);
 		int direction = 3;
 		float offsetX = boss1->IsLeft() ? -8 : 30;
 		float offsetY = -10;

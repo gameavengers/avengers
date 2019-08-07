@@ -18,6 +18,7 @@ class RunningManState : public State
 {
 protected:
 	GSound* sound_shoot;
+	GSound* sound_dead;
 	static RunningManState * __instance;
 	StateRunningMan stateRunningMan;
 	RunningMan *runningMan;

@@ -30,6 +30,8 @@ public:
 	Tank(float x, float y, TankType type);
 	static void LoadResources();
 
+	int HP = 20;
+
 	TankType GetTankType() { return this->type; }
 
 	static Tank *GetInstance();

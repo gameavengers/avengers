@@ -16,6 +16,9 @@ void Game::Init()
 	keyboard = Keyboard::GetInstance();
 	keyboard->InitKeyboard(hWnd);
 
+	sound = Sound::GetInstance();
+	sound->Init_DirectSound(hWnd);
+
 	this->stage = STAGE_1;
 	LoadResources();
 	OutputDebugString(L"[INFO] InitGame done;\n");

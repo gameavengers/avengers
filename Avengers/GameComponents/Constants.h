@@ -72,6 +72,21 @@ enum BulletType {
 #define TILES_SET_MATRIX_STAGE_2 L"Resources\\TiledMap\\Map-2-Tiles.png"
 #define TILES_SET_STAGE_BOSS_2 L"Resources\\TiledMap\\Map-Boss2-Tiles.png"
 
+//SOUND
+#define SOUND_DEFAULT L"./Resources/Sound/player_stand.wav"
+#define SOUND_STAGE_1_2 L"./Resources/Sound/main_theme.wav"
+#define SOUND_STAGE_BOSS_1 L"./Resources/Sound/boss_wizard_theme.wav"
+#define SOUND_STAGE_BOSS_2 L"./Resources/Sound/Boss2.wav"
+#define SOUND_CAPTAIN_DASH L"./Resources/Sound/player_dash.wav"
+#define SOUND_CAPTAIN_ROLE L"./Resources/Sound/player_rolling.wav"
+#define SOUND_CAPTAIN_PUNCH L"./Resources/Sound/player_punch_kick.wav"
+#define SOUND_CAPTAIN_THROW_SHIELD L"./Resources/Sound/shield_attack.wav"
+#define SOUND_CAPTAIN_CROUCH_SHIELD L"./Resources/Sound/shield_collision.wav"
+#define SOUND_CAPTAIN_JUMPING_KICK L"./Resources/Sound/player_punch_kick.wav"
+#define SOUND_CAPTAIN_DIEING L"./Resources/Sound/player_dead.wav"
+#define SOUND_CAPTAIN_SWIM L"./Resources/Sound/player_diving.wav"
+#define SOUND_ENEMY_SHOOT L"./Resources/Sound/weenemy_fire.wav"
+
 //ENEMY MATRIX
 #define ENEMIES_MATRIX_STAGE_1 L"Resources\\TiledMap\\Enemies-Map-1-Matrix.txt"
 #define ENEMIES_MATRIX_STAGE_2 L"Resources\\TiledMap\\Enemies-Map-2-Matrix.txt"

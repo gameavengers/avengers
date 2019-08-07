@@ -1,4 +1,4 @@
-#include "Tank.h"
+﻿#include "Tank.h"
 
 vector<Animation *> Tank::animations = vector<Animation *>();
 Tank *Tank::__instance = NULL;
@@ -152,20 +152,55 @@ void Tank::LoadResources()
 		anim->AddFrame(sprite);
 	}
 	animations.push_back(anim);
+
+	//-----------Hiệu ứng nổ----------------------------------------------------
+	RECT* listSprite1 = loadTXT.LoadRect((char*)"Resources\\Captain\\Captain.txt");
+
+	// TANK_ANI_EXPLOSIVE
+	anim = new Animation(50);
+	for (int i = 53; i < 55; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		switch (i)
+		{
+		case 53:
+			sprite->SetOffSetX(0);
+			sprite->SetOffSetY(0);
+			break;
+		case 54:
+			sprite->SetOffSetX(8);
+			sprite->SetOffSetY(3);
+			break;
+		}
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+	//-----------Hiệu ứng nổ----------------------------------------------------
 }
 
 void Tank::Update(DWORD dt)
 {
+	if (this->disable)
+		return;
+	
 	state->Colision();
 	state->Update(dt);
 }
 void Tank::Render()
 {
+	if (this->disable)
+		return;
+	
 	this->state->Render();
 }
 
 void Tank::OnCollision()
 {
+	this->HP -= 1;
 	((TankState*)state)->timeCount = 0;
-	((TankState*)state)->SetDirection(0);
+
+	if (this->HP > 0)
+		((TankState*)state)->SetDirection(0);
+	else 
+		((TankState*)state)->SetDirection(9);
 }

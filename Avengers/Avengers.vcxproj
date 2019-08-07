@@ -85,7 +85,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dinput8.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dsound.lib;winmm.lib;legacy_stdio_definitions.lib;dinput8.lib;dxguid.lib;DxErr.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
@@ -132,12 +132,15 @@
     <ClInclude Include="GameComponents\Collision.h" />
     <ClInclude Include="GameComponents\Constants.h" />
     <ClInclude Include="GameComponents\Debug.h" />
+    <ClInclude Include="GameComponents\dsutil.h" />
+    <ClInclude Include="GameComponents\dxutil.h" />
     <ClInclude Include="GameComponents\Game.h" />
     <ClInclude Include="GameComponents\GameObject.h" />
     <ClInclude Include="GameComponents\Graphics.h" />
     <ClInclude Include="GameComponents\Grid2.h" />
     <ClInclude Include="GameComponents\Keyboard.h" />
     <ClInclude Include="GameComponents\LoadTXT.h" />
+    <ClInclude Include="GameComponents\Sound.h" />
     <ClInclude Include="GameComponents\SpawnProjectTile.h" />
     <ClInclude Include="GameComponents\Sprite.h" />
     <ClInclude Include="GameComponents\TileMap2.h" />
@@ -155,8 +158,10 @@
     <ClInclude Include="GameObjects\DomestoStayState.h" />
     <ClInclude Include="GameObjects\DomestoWalkState.h" />
     <ClInclude Include="GameObjects\Elevator.h" />
+    <ClInclude Include="GameObjects\Exit.h" />
     <ClInclude Include="GameObjects\Gigi.h" />
     <ClInclude Include="GameObjects\GigiState.h" />
+    <ClInclude Include="GameObjects\HPBar.h" />
     <ClInclude Include="GameObjects\Item.h" />
     <ClInclude Include="GameObjects\RedBox.h" />
     <ClInclude Include="GameObjects\RedBoxState.h" />
@@ -173,6 +178,7 @@
     <ClCompile Include="GameComponents\CollideEvent.cpp" />
     <ClCompile Include="GameComponents\Collision.cpp" />
     <ClCompile Include="GameComponents\Debug.cpp" />
+    <ClCompile Include="GameComponents\dsutil.cpp" />
     <ClCompile Include="GameComponents\Game.cpp" />
     <ClCompile Include="GameComponents\GameObject.cpp" />
     <ClCompile Include="GameComponents\Graphics.cpp" />
@@ -180,6 +186,7 @@
     <ClCompile Include="GameComponents\Keyboard.cpp" />
     <ClCompile Include="GameComponents\LoadTXT.cpp" />
     <ClCompile Include="GameComponents\Main.cpp" />
+    <ClCompile Include="GameComponents\Sound.cpp" />
     <ClCompile Include="GameComponents\SpawnProjectTile.cpp" />
     <ClCompile Include="GameComponents\Sprite.cpp" />
     <ClCompile Include="GameComponents\TileMap2.cpp" />
@@ -197,8 +204,10 @@
     <ClCompile Include="GameObjects\DomestoStayState.cpp" />
     <ClCompile Include="GameObjects\DomestoWalkState.cpp" />
     <ClCompile Include="GameObjects\Elevator.cpp" />
+    <ClCompile Include="GameObjects\Exit.cpp" />
     <ClCompile Include="GameObjects\Gigi.cpp" />
     <ClCompile Include="GameObjects\GigiState.cpp" />
+    <ClCompile Include="GameObjects\HPBar.cpp" />
     <ClCompile Include="GameObjects\Item.cpp" />
     <ClCompile Include="GameObjects\RedBox.cpp" />
     <ClCompile Include="GameObjects\RedBoxState.cpp" />

@@ -37,6 +37,42 @@ StateCaptain CaptainState::GetState()
 void CaptainState::SetState(StateCaptain state)
 {
 	this->stateCaptain = state;
+
+	//Nếu tồn tại thì xóa để dừng nhạc
+	//Nhớ cho g = NULL ở trong getInstance nha bạn
+	if (g != NULL)
+	{
+		//có thể stop ở đây nhưng delete luôn cho khỏi nặng ram
+		//Sound::GetInstance()->StopSound(g);
+		delete g;
+		g = NULL;
+	}
+	switch (state)
+	{
+	case STATE_DASH:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_DASH);
+		break;
+	case STATE_JUMPING_ROLE:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_ROLE);
+		break;
+	case STATE_CROUCH_PUNCH:
+	case STATE_PUNCH:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_PUNCH);
+		break;
+	case STATE_JUMPING_KICK:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_JUMPING_KICK);
+		break;
+	case STATE_DIEING:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_DIEING);
+		break;
+	case STATE_SWIMMING:
+		g = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_SWIM);
+		Sound::GetInstance()->PlaySound(g);
+		return;
+	default:
+		return;
+	}
+	Sound::GetInstance()->LoopSound(g);
 }
 
 void CaptainState::state_standing()
@@ -61,6 +97,12 @@ void CaptainState::state_standing()
 	{
 		if (captain->IsShield()) // Nếu có khiên
 		{
+			if (throw_shield != NULL)
+			{
+				delete throw_shield;
+			}
+			throw_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_THROW_SHIELD);
+			Sound::GetInstance()->PlaySound(throw_shield);
 			this->SetState(STATE_THROW_SHIELD); //Ném khiên
 			this->state_throw_shield();
 			captain->SetIsShield(false);
@@ -226,14 +268,12 @@ void CaptainState::state_crouch()
 
 void CaptainState::state_swimming()
 {
-	this->SetState(STATE_SWIMMING);
-
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z)) // Bàn phím ấn nút Z thì nhảy
 	{
+		Sound::GetInstance()->PlaySound(Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_SWIM));
 		startJumpY = captain->GetPositionY();
 		captain->SetSpeedY(CAPTAIN_JUMP_SPEED_Y);
 		this->SetState(STATE_JUMPING); //Chuyển sang trạng thái nhảy
-
 		captain->SetIsSwimming(false);
 		return;
 	}
@@ -443,9 +483,18 @@ void CaptainState::Colision()
 	}
 	
 	//Không chạm đất thì rơi
-	if (!captain->IsGrounded())
+	if (!captain->IsGrounded() && this->GetState() != STATE_SWIMMING && this->GetState() != STATE_DIVING)
 	{
 		this->state_jumping();
+	}
+	else if (this->GetState() == STATE_CROUCH_SHIELD)
+	{
+		if (sound_shield != NULL)
+		{
+			delete sound_shield;
+		}
+		sound_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_CROUCH_SHIELD);
+		Sound::GetInstance()->PlaySound(sound_shield);
 	}
 	else if (this->GetState() == STATE_JUMPING || this->GetState() == STATE_JUMPING_ROLE || this->GetState() == STATE_JUMPING_KICK)
 	{
@@ -457,14 +506,14 @@ void CaptainState::Colision()
 	}
 
 	//Nếu chạm sông thì bơi
-	if (captain->IsSwimming())
+	if (captain->IsSwimming() && this->GetState() != STATE_SWIMMING)
 	{
 		this->SetState(STATE_SWIMMING);
-		this->state_swimming();
+
 	}
 
 	//Đu dây
-	if (captain->IsSwing())
+	if (captain->IsSwing() && this->GetState() != STATE_SWING)
 	{
 		this->SetState(STATE_SWING);
 	}

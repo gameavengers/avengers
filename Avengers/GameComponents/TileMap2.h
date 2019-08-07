@@ -1,5 +1,5 @@
-#pragma once
-
+﻿#pragma once
+#include "Sound.h"
 #include <d3dx9.h>
 #include <d3d9.h>
 #include <vector>
@@ -58,6 +58,8 @@ struct MapPack {
 class TileMap2
 {
 private:
+	//tạo con trỏ âm thanh
+	GSound* g;
 
 	static TileMap2* _instance;
 	

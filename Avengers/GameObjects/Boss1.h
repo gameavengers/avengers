@@ -20,6 +20,8 @@ class Boss1 : public GameObject
 public:
 	void LoadResources();
 
+	bool isGrounded = false;
+
 	static Boss1 *GetInstance();
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }

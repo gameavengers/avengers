@@ -42,6 +42,7 @@ void Boss1State::state_idle()
 	this->SetState(BOSS1_STATE_IDLE);
 	anim = boss1->GetAnimationsList()[BOSS1_STATE_IDLE];
 	boss1->SetSpeedX(0);
+	boss1->SetSpeedY(0);
 }
 
 void Boss1State::state_running()
@@ -53,16 +54,23 @@ void Boss1State::state_running()
 
 void Boss1State::state_bleeding()
 {
-	this->SetState(BOSS1_STATE_BLEEDING);
-	anim = boss1->GetAnimationsList()[BOSS1_STATE_BLEEDING];
-
 	boss1->SetSpeedX(CAPTAIN_WALK_SPEED * (boss1->IsLeft() ? 1 : -1));
+	boss1->SetSpeedY(boss1->GetSpeedY() - CAPTAIN_GRAVITY);
+
+	if (boss1->isGrounded && this->GetState() == BOSS1_STATE_FLYING)
+	{
+		this->state_idle();
+		return;
+	}
 
 	if (timeCount >= 200)
 	{
 		this->state_idle();
 		return;
 	}
+
+	this->SetState(BOSS1_STATE_BLEEDING);
+	anim = boss1->GetAnimationsList()[BOSS1_STATE_BLEEDING];
 }
 
 void Boss1State::state_dead()

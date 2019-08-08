@@ -66,13 +66,30 @@ void Boss2State::state_running()
 	this->SetState(BOSS2_STATE_RUNNING);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_RUNNING];
 
-	boss2->SetSpeedX(boss2->IsLeft() ? -BOSS2_RUN_SPEED : BOSS2_RUN_SPEED);
-
-	if (this->timeCount > BOSS2_RUN_TIME)
+	if (!boss2->IsLeft() && boss2->GetPositionX() < 200)
 	{
-		this->timeCount -= BOSS2_RUN_TIME;
-		this->state_idle();
+		boss2->SetSpeedX(BOSS2_RUN_SPEED);
+	}
+
+	if (!boss2->IsLeft() && boss2->GetPositionX() > 200)
+	{
+		this->timeCount = 0;
 		boss2->SetSpeedX(0);
+		this->state_idle();
+		return;
+	}
+
+	if (boss2->IsLeft() && boss2->GetPositionX() > 30)
+	{
+		boss2->SetSpeedX(-BOSS2_RUN_SPEED);
+	}
+
+	if (boss2->IsLeft() && boss2->GetPositionX() < 30)
+	{
+		this->timeCount = 0;
+		boss2->SetSpeedX(0);
+		this->state_idle();
+		return;
 	}
 }
 
@@ -165,8 +182,6 @@ void Boss2State::state_loss_head_running()
 	this->SetState(BOSS2_STATE_LOSS_HEAD_RUNNING);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_LOSS_HEAD_RUNNING];
 
-	boss2->SetSpeedX(boss2->IsLeft() ? -BOSS2_RUN_SPEED : BOSS2_RUN_SPEED);
-
 	if (this->shootTimeCount > 1000)
 	{
 		this->shootTimeCount = 0;
@@ -183,11 +198,30 @@ void Boss2State::state_loss_head_running()
 			direction, BulletType::BULLET_BOSS2);
 	}
 
-	if (this->timeCount > BOSS2_RUN_TIME)
+	if (!boss2->IsLeft() && boss2->GetPositionX() < 200)
 	{
-		this->timeCount -= BOSS2_RUN_TIME;
+		boss2->SetSpeedX(BOSS2_RUN_SPEED);
+	}
+
+	if (!boss2->IsLeft() && boss2->GetPositionX() > 200)
+	{
+		this->timeCount = 0;
 		boss2->SetSpeedX(0);
 		this->state_loss_head_idle();
+		return;
+	}
+
+	if (boss2->IsLeft() && boss2->GetPositionX() > 30)
+	{
+		boss2->SetSpeedX(-BOSS2_RUN_SPEED);
+	}
+
+	if (boss2->IsLeft() && boss2->GetPositionX() < 30)
+	{
+		this->timeCount = 0;
+		boss2->SetSpeedX(0);
+		this->state_loss_head_idle();
+		return;
 	}
 }
 

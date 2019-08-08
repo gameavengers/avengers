@@ -94,6 +94,7 @@ enum BulletType {
 #define SOUND_ITEM_5 L"./Resources/Sound/item_nomal.wav"
 #define SOUND_ITEM_EXIT L"./Resources/Sound/item_exit_orb.wav"
 #define SOUND_DOOR L"./Resources/Sound/door.wav"
+#define SOUND_LOCK_SCREEN L"./Resources/Sound/action_theme.wav"
 
 
 //ENEMY MATRIX

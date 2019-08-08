@@ -2,6 +2,7 @@
 #include "d3d9.h"
 #include "d3dx9.h"
 #include "Constants.h"
+#include "Sound.h"
 
 class GameObject;
 class Viewport
@@ -12,6 +13,7 @@ class Viewport
 	int height;
 	int x;
 	int y;
+	GSound* sound_lock;
 public:
 	static Viewport *GetInstance();
 	~Viewport();

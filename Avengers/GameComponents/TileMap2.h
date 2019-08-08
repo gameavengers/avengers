@@ -62,6 +62,7 @@ class TileMap2
 private:
 	//tạo con trỏ âm thanh
 	GSound* g;
+	GSound* glock;
 
 	static TileMap2* _instance;
 	
@@ -89,4 +90,6 @@ public:
 
 	D3DCOLOR color;
 	bool isTurnOffLight;
+
+	void soundLock(bool lock);
 };

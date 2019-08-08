@@ -73,7 +73,6 @@ void Boss2State::state_running()
 		this->timeCount -= BOSS2_RUN_TIME;
 		this->state_idle();
 		boss2->SetSpeedX(0);
-		boss2->SetSpeedY(0);
 	}
 }
 
@@ -86,7 +85,7 @@ void Boss2State::state_bleeding()
 
 	if (timeCount >= 1000)
 	{
-		this->state_idle();
+		this->state_standing_punch();
 		return;
 	}
 }
@@ -96,7 +95,7 @@ void Boss2State::state_standing_punch()
 	this->SetState(BOSS2_STATE_STANDING_PUNCH);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_STANDING_PUNCH];
 
-	if (this->shootTimeCount > 600)
+	if (this->shootTimeCount > 1300)
 	{
 		this->shootTimeCount = 0;
 		if (sound_bullet != NULL)
@@ -121,6 +120,8 @@ void Boss2State::state_standing_punch()
 
 void Boss2State::state_hold_barrel()
 {
+	boss2->isHoldBarrrel = true;
+	
 	this->SetState(BOSS2_STATE_HOLD_BARREL);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_HOLD_BARREL];
 
@@ -133,12 +134,14 @@ void Boss2State::state_hold_barrel()
 
 void Boss2State::state_throw_barrel()
 {
+	boss2->isHoldBarrrel = false;
+	
 	this->SetState(BOSS2_STATE_THROW_BARREL);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_THROW_BARREL];
 
-	if (this->timeCount > 500)
+	if (this->timeCount > 1500)
 	{
-		this->timeCount -= 500;
+		this->timeCount -= 1500;
 		this->state_standing_punch();
 	}
 }
@@ -148,32 +151,66 @@ void Boss2State::state_loss_head_idle()
 	this->SetState(BOSS2_STATE_LOSS_HEAD_IDLE);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_LOSS_HEAD_IDLE];
 
-	boss2->SetSpeedX(0);
+	boss2->setIsLeft(Captain::GetInstance()->GetPositionX() - boss2->GetPositionX() > 0 ? false : true);
+
+	if (this->timeCount > 500)
+	{
+		this->timeCount -= 500;
+		this->state_loss_head_running();
+	}
 }
 
 void Boss2State::state_loss_head_running()
 {
 	this->SetState(BOSS2_STATE_LOSS_HEAD_RUNNING);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_LOSS_HEAD_RUNNING];
+
+	boss2->SetSpeedX(boss2->IsLeft() ? -BOSS2_RUN_SPEED : BOSS2_RUN_SPEED);
+
+	if (this->shootTimeCount > 1000)
+	{
+		this->shootTimeCount = 0;
+		if (sound_bullet != NULL)
+		{
+			delete sound_bullet;
+		}
+		sound_bullet = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOSS1_FLYING);
+		Sound::GetInstance()->PlaySound(sound_bullet);
+		int direction = boss2->IsLeft() ? 1 : 5;
+		float offsetX = boss2->IsLeft() ? -16 : 30;
+		float offsetY = -8;
+		SpawnProjectTile::GetInstance()->SpawnBullet(boss2->GetPositionX() + offsetX, boss2->GetPositionY() + offsetY,
+			direction, BulletType::BULLET_BOSS2);
+	}
+
+	if (this->timeCount > BOSS2_RUN_TIME)
+	{
+		this->timeCount -= BOSS2_RUN_TIME;
+		boss2->SetSpeedX(0);
+		this->state_loss_head_idle();
+	}
 }
 
 void Boss2State::state_dead()
 {
 	this->SetState(BOSS2_STATE_DEAD);
 	anim = boss2->GetAnimationsList()[BOSS2_STATE_DEAD];
-	if (sound_dead != NULL)
-	{
-		delete sound_dead;
-	}
-	sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
-	Sound::GetInstance()->PlaySound(sound_dead);
 
 	boss2->SetSpeedX(0);
 
-	if (this->timeCount > 300)
+	if (this->timeCount > 1000)
 	{
-		boss2->disable = true;
+		anim = boss2->GetAnimationsList()[9];
+		if (sound_dead != NULL)
+		{
+			delete sound_dead;
+		}
+		sound_dead = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
+		Sound::GetInstance()->PlaySound(sound_dead);
 	}
+
+	if (this->timeCount > 1100)
+		boss2->disable = true;
 }
 
 void Boss2State::Colision()

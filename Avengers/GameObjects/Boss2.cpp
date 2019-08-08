@@ -1,4 +1,4 @@
-#include "Boss2.h"
+﻿#include "Boss2.h"
 
 vector<Animation *> Boss2::animations = vector<Animation *>();
 Boss2 *Boss2::__instance = NULL;
@@ -22,7 +22,7 @@ Boss2::Boss2()
 	collider.width = BOSS2_SPRITE_WIDTH;
 	collider.height = BOSS2_SPRITE_HEIGHT;
 
-	this->HP = 4;
+	this->HP = 6;
 }
 
 Boss2 *Boss2::GetInstance()
@@ -61,7 +61,7 @@ void Boss2::LoadResources()
 	{
 		Sprite * sprite = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
 		sprite->SetOffSetX(8);
-		anim->AddFrame(sprite, 500);
+		anim->AddFrame(sprite, 1000);
 	}
 
 	Sprite * sprite4 = new Sprite(BOSS2_TEXTURE_LOCATION, listSprite[6], TEXTURE_TRANS_COLOR);
@@ -127,6 +127,30 @@ void Boss2::LoadResources()
 	anim->AddFrame(sprite3);
 	
 	animations.push_back(anim);
+
+	//-----------Hiệu ứng nổ----------------------------------------------------
+	RECT* listSprite1 = loadTXT.LoadRect((char*)"Resources\\Captain\\Captain.txt");
+
+	// BOSS2_ANI_EXPLOSIVE
+	anim = new Animation(50);
+	for (int i = 53; i < 55; i++)
+	{
+		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite1[i], TEXTURE_TRANS_COLOR);
+		switch (i)
+		{
+		case 53:
+			sprite->SetOffSetX(-5);
+			sprite->SetOffSetY(-8);
+			break;
+		case 54:
+			sprite->SetOffSetX(3);
+			sprite->SetOffSetY(-5);
+			break;
+		}
+		anim->AddFrame(sprite);
+	}
+	animations.push_back(anim);
+	//-----------Hiệu ứng nổ----------------------------------------------------
 }
 
 void Boss2::Update(DWORD dt)
@@ -155,23 +179,25 @@ void Boss2::Render()
 void Boss2::OnCollision()
 {
 	if (((Boss2State*)state)->GetState() == StateBoss2::BOSS2_STATE_BLEEDING
-		|| ((Boss2State*)state)->GetState() == StateBoss2::BOSS2_STATE_DEAD)
+		|| ((Boss2State*)state)->GetState() == StateBoss2::BOSS2_STATE_DEAD
+		|| ((Boss2State*)state)->GetState() == StateBoss2::BOSS2_STATE_LOSS_HEAD_IDLE)
 		return;
 
 	this->HP -= 1;
 	((Boss2State*)state)->timeCount = 0;
 
-	if (this->HP > 2)
+	if (this->HP > 4)
 	{
 		((Boss2State*)state)->SetState(BOSS2_STATE_BLEEDING);
 		return;
 	}
-	if (this->HP == 2)
+	if (this->HP == 4)
 	{
+		this->isLostHead = true;
 		((Boss2State*)state)->SetState(BOSS2_STATE_LOSS_HEAD_IDLE);
 		return;
 	}
-	if (this->HP <= 0)
+	if (this->HP < 0)
 	{
 		((Boss2State*)state)->SetState(BOSS2_STATE_DEAD);
 		return;

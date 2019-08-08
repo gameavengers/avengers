@@ -21,6 +21,9 @@ class Boss2 : public GameObject
 public:
 	static void LoadResources();
 
+	bool isHoldBarrrel = false;
+	bool isLostHead = false;
+
 	static Boss2 *GetInstance();
 
 	DWORD GetLastFrameTime() { return this->lastFrameTime; }

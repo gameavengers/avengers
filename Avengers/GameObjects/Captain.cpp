@@ -311,6 +311,7 @@ void Captain::Update(DWORD dt)
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
+				Grid2::GetInstance()->isDisableBoss2 = false;
 			}
 		}
 		else this->SetSpeedX(0);
@@ -551,6 +552,7 @@ void Captain::UpdateCollision(DWORD dt)
 
 
 	//Collide with bullets
+	Boss2* boss2 = Boss2::GetInstance();
 	vector<Bullet*> listBullet = SpawnProjectTile::GetInstance()->listBullet;
 	for (int i = 0; i < listBullet.size(); i++)
 	{
@@ -600,6 +602,8 @@ void Captain::UpdateCollision(DWORD dt)
 					}
 					sound_colide_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOOM);
 				}
+				if (boss2->isHoldBarrrel)
+					boss2->OnCollision();
 			}
 
 			
@@ -756,8 +760,6 @@ void Captain::UpdateCollision(DWORD dt)
 	//====================================================================
 
 	//Captain collide with boss 2==========================================
-	Boss2* boss2 = Boss2::GetInstance();
-
 	bool isCollideBoss2 = Collision::GetInstance()->AABB(this->GetCollider(), boss2->GetCollider());
 
 	if (isCollideBoss2)
@@ -768,16 +770,12 @@ void Captain::UpdateCollision(DWORD dt)
 		bImortal = true;
 		return;
 	}
-
-	if (boss2->disable)
-		this->canGoToNextStage = true;
 	//====================================================================
 
-	//Tạm thời để test, chỗ này phải xử lý làm sao để khiên khi ném ra va chạm với thùng trong lúc boss2 đang bưng thì mới bị dính damage
 	//Shield collide with boss 2==========================================
 	bool isShieldCollideBoss2 = Collision::GetInstance()->AABB(shield->GetCollider(), boss2->GetCollider());
 
-	if (isShieldCollideBoss2 && shield->IsFlying())
+	if (isShieldCollideBoss2 && shield->IsFlying() && boss2->isLostHead)
 		boss2->OnCollision();
 	//====================================================================
 

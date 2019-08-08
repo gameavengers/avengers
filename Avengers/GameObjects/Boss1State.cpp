@@ -73,7 +73,7 @@ void Boss1State::state_dead()
 	boss1->SetSpeedY(0);
 	boss1->SetPositionY(72);
 
-	if (this->deadTimeCount > 300)
+	if (this->deadTimeCount > 2000)
 	{
 		boss1->disable = true;
 	}

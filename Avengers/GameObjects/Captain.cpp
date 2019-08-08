@@ -17,7 +17,7 @@ Captain::Captain()
 
 	this->HP = 6;
 
-	this->x = 1500;
+	this->x = 50;
 	this->y = 150;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;

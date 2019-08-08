@@ -65,7 +65,7 @@ void Boss1::LoadResources()
 	animations.push_back(anim);
 
 	// BOSS1_ANI_DEAD
-	anim = new Animation(100);
+	anim = new Animation(300);
 	for (int i = 6; i < 8; i++)
 	{
 		Sprite * sprite = new Sprite(BOSS1_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);

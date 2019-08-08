@@ -1,6 +1,8 @@
 #include "Viewport.h"
 #include "Game.h"
 #include "Debug.h"
+#include "TileMap2.h"
+
 
 Viewport *Viewport::__instance = NULL;
 
@@ -81,6 +83,7 @@ void Viewport::Update(DWORD dt)
 		{
 			this->x = x;
 			this->isLock = true;
+			TileMap2::GetInstance()->soundLock(isLock);
 			this->canLock = false;
 		}
 		break;
@@ -93,6 +96,7 @@ void Viewport::Update(DWORD dt)
 		{
 			this->x = x;
 			this->isLock = true;
+			TileMap2::GetInstance()->soundLock(isLock);
 			this->canLock = false;
 		}
 		break;

@@ -241,7 +241,9 @@ void CaptainState::state_crouch()
 	//HandleKey
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_Z))//bay xuống
 	{
-		
+		if (STAGE_BOSS_1 == Game::GetInstance()->GetStage() || STAGE_BOSS_2 == Game::GetInstance()->GetStage())
+			return;
+
 		captain->SetPositionY(captain->GetPositionY() - 0.5);
 		return;
 	}

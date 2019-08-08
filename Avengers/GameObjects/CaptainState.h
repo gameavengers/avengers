@@ -46,8 +46,9 @@ protected:
 	RECT* listSprite;
 	float startJumpY;
 	float startDash;
-	
-public: 
+	float time_delay;
+	bool isdelay;
+public:
 	float timeCount;
 	CaptainState(Captain *captain);
 	~CaptainState();

@@ -111,9 +111,9 @@ enum BulletType {
 
 //Giá trị tốc độ đi, tốc độ nhảy, trọng lực
 #define CAPTAIN_WALK_SPEED		0.07f
-#define CAPTAIN_JUMP_SPEED_Y	0.2f
-#define CAPTAIN_GRAVITY			0.04f
-#define CAPTAIN_JUMP_MAX		100
+#define CAPTAIN_JUMP_SPEED_Y	0.3f
+#define CAPTAIN_GRAVITY			0.03f
+#define CAPTAIN_JUMP_MAX		95
 
 #define CAPTAIN_TEXTURE_LOCATION L"Resources\\Captain\\Captain.png"
 #define TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(255, 0, 255)

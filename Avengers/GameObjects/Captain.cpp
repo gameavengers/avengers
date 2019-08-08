@@ -828,8 +828,8 @@ void Captain::UpdateCollision(DWORD dt)
 		return;
 	}
 
-	if (boss1->disable)
-		this->canGoToNextStage = true;
+	//if (boss1->disable)
+		//this->canGoToNextStage = true;
 	//====================================================================
 
 	//Shield collide with boss 1==========================================

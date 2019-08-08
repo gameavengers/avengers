@@ -166,7 +166,7 @@ float Collision::SweptAABB(Collider c1, Collider c2, float &normalx, float &norm
 }
 
 // NEED FIX
-void Collision::FilterCollision(
+void Collision::GetNearestCollision(
 	vector<ColliedEvent*> &coEvents,
 	vector<ColliedEvent*> &coEventsResult,
 	float &min_tx, float &min_ty,
@@ -216,5 +216,98 @@ void Collision::FilterCollision(
 	}
 
 	if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
+	if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
+}
+
+void Collision::GetNearestCollisionX(
+	vector<ColliedEvent*> &coEvents,
+	vector<ColliedEvent*> &coEventsResult,
+	float &min_tx, float &min_ty,
+	float &nx, float &ny)
+{
+	if (coEvents.size() == 1)
+	{
+		min_tx = coEvents[0]->time;
+	}
+
+	min_tx = 1.0f;
+	min_ty = 1.0f;
+	int min_ix = -1;
+	int min_iy = -1;
+
+	nx = 0.0f;
+	ny = 0.0f;
+
+	coEventsResult.clear();
+
+	for (int i = 0; i < coEvents.size(); i++)
+	{
+		ColliedEvent* c = coEvents[i];
+
+		if (c->isAABBCollision)
+		{
+			coEventsResult.push_back(c);
+			ny = 1;
+			return;
+		}
+
+		if (c->nx == 0)
+			continue;
+
+		if (c->time < min_tx && c->nx != 0)
+		{
+			min_tx = c->time;
+			nx = c->nx;
+			min_ix = i;
+		}
+	}
+
+	if (min_ix >= 0) coEventsResult.push_back(coEvents[min_ix]);
+}
+
+void Collision::GetNearestCollisionY(
+	vector<ColliedEvent*> &coEvents,
+	vector<ColliedEvent*> &coEventsResult,
+	float &min_tx, float &min_ty,
+	float &nx, float &ny)
+{
+	if (coEvents.size() == 1)
+	{
+		min_tx = coEvents[0]->time;
+	}
+
+	min_tx = 1.0f;
+	min_ty = 1.0f;
+	int min_ix = -1;
+	int min_iy = -1;
+
+	nx = 0.0f;
+	ny = 0.0f;
+
+	coEventsResult.clear();
+
+	for (int i = 0; i < coEvents.size(); i++)
+	{
+		ColliedEvent* c = coEvents[i];
+
+		if (c->isAABBCollision)
+		{
+			coEventsResult.push_back(c);
+			ny = 1;
+			return;
+		}
+
+		if (c->ny == 0)
+			continue;
+		//NEED FIX
+
+		if (c->time < min_ty  && c->ny != 0)
+		{
+			min_ty = c->time;
+			ny = c->ny;
+			min_iy = i;
+		}
+	}
+
 	if (min_iy >= 0) coEventsResult.push_back(coEvents[min_iy]);
 }

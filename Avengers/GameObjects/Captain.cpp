@@ -426,7 +426,7 @@ void Captain::Update(DWORD dt)
 	{
 		float min_tx, min_ty, nx = 0, ny;
 
-		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		Collision::GetInstance()->GetNearestCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
 		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
 		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
@@ -475,9 +475,16 @@ void Captain::Update(DWORD dt)
 		{
 			if (nx == 1 || nx == -1)
 			{
-				this->SetIsGrounded(true); //xét tạm
+				vector<ColliedEvent*> NearestY;
+				Collision::GetInstance()->GetNearestCollisionY(coEvents, NearestY, min_tx, min_ty, nx, ny);
+				if (NearestY.size() > 0)
+					if (NearestY[0]->collisionID == 1)
+						this->SetIsGrounded(true); //xét tạm
+
 				if (((CaptainState*)state)->GetState() == STATE_DASH)
 					((CaptainState*)state)->SetState(STATE_STANDING);
+
+
 			}
 		}
 		if (coEventsResult[0]->collisionID == 6)

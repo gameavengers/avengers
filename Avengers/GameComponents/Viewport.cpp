@@ -52,6 +52,7 @@ void Viewport::Reset()
 		y = 225;
 	}
 	this->isLock = false;
+	TileMap2::GetInstance()->soundLock(isLock);
 }
 void Viewport::Update(DWORD dt)
 {
@@ -62,8 +63,11 @@ void Viewport::Update(DWORD dt)
 	int top = (int)SCREEN_HEIGHT / 2 - 4;
 
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_F6))
+	{
 		this->isLock = false;
-
+		TileMap2::GetInstance()->soundLock(isLock);
+	}
+		
 	if (!isLock)
 	{
 		if (captain->GetPositionX() > left && captain->GetPositionX() < right)

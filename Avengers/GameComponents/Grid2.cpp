@@ -448,8 +448,10 @@ void Grid2::SpawnUpdate(DWORD dt)
 		if (viewport->isLock)
 		{
 			spawnMode = 2;
-			if (killAmount >= 7)
+			if (killAmount >= 7) {
 				viewport->isLock = false;
+				TileMap2::GetInstance()->soundLock(viewport->isLock);
+			}
 		}
 		else
 			spawnMode = 1;

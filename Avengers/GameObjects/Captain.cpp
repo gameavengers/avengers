@@ -752,6 +752,9 @@ void Captain::UpdateCollision(DWORD dt)
 
 	if (isCollideBoss1)
 	{
+		if (boss1->disable)
+			return;
+
 		((CaptainState*)state)->timeCount = 0;
 		this->SetIsBleeding(true);
 		boss1->OnCollision();
@@ -776,6 +779,9 @@ void Captain::UpdateCollision(DWORD dt)
 
 	if (isCollideBoss2)
 	{
+		if (boss2->disable)
+			return;
+		
 		((CaptainState*)state)->timeCount = 0;
 		this->SetIsBleeding(true);
 		this->HP -= 1;

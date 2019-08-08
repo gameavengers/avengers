@@ -38,6 +38,8 @@ Grid2::Grid2()
 
 	HPBar::LoadResources();
 	//hpbar = HPBar::GetInstance();
+	spawnMode = 1;
+	killAmount = 0;
 	
 }
 
@@ -432,6 +434,26 @@ void Grid2::Update(DWORD dt)
 	SpawnProjectTile::GetInstance()->UpdateBullet(dt);
 	SpawnProjectTile::GetInstance()->UpdateItem(dt);
 
+	SpawnUpdate(dt);
+
+	exit->Update(dt);
+	//hpbar->Update(dt);
+}
+
+void Grid2::SpawnUpdate(DWORD dt)
+{
+	if (Game::GetInstance()->GetStage() == STAGE_1)
+	{
+		if (viewport->isLock)
+		{
+			spawnMode = 2;
+			if (killAmount >= 7)
+				viewport->isLock = false;
+		}
+		else
+			spawnMode = 1;
+	}
+
 	int i = 0;
 	while (i < listObject.size())
 	{
@@ -444,23 +466,37 @@ void Grid2::Update(DWORD dt)
 			}
 			else
 			{
-				if (CheckTileInsideCamera(listObject.at(i).tile))
+				switch (spawnMode)
 				{
-					i++;
+				case 1:	//Inside Screen Spawn
+					if (CheckTileInsideCamera(listObject.at(i).tile))
+					{
+						i++;
+						continue;
+					}
+					else
+					{
+						if (!bDisableRespawn)
+							listObject.at(i).tile->bCanSpawn = true;
+						listObject.erase(listObject.begin() + i);
+						continue;
+					}
+					break;
+				case 2: //On Dead Creture Spawn
+					listObject.at(i).tile->bCanSpawn = true;
+					listObject.erase(listObject.begin() + i);
+					killAmount++;
 					continue;
 				}
-				else
-				{		
-					if (!bDisableRespawn)
-						listObject.at(i).tile->bCanSpawn = true;
-					listObject.erase(listObject.begin() + i);			
-					continue;
-				}
+
 			}
 		}
-			
+
 
 		listObject.at(i).object->Update(dt);
+
+		if (listObject.at(i).object->disable)
+			listObject.at(i).disable = true;
 
 		if (!CheckObjectInsideCamera(listObject.at(i).object))
 		{
@@ -468,9 +504,6 @@ void Grid2::Update(DWORD dt)
 		}
 		i++;
 	}
-
-	exit->Update(dt);
-	//hpbar->Update(dt);
 }
 
 void Grid2::Render()
@@ -493,6 +526,10 @@ void Grid2::Render()
 				{
 					if (!(listCell + x + y * mapSize)->hasSpawnTiles.at(i)->bCanSpawn)
 						continue;
+
+					if ((listCell + x + y * mapSize)->hasSpawnTiles.at(i)->x == 17 &&
+						(listCell + x + y * mapSize)->hasSpawnTiles.at(i)->y == 5)
+						int a = 0;
 
 					SpawnObject((listCell + x + y * mapSize)->hasSpawnTiles.at(i)->SpawnObjectID,
 						(listCell + x + y * mapSize)->hasSpawnTiles.at(i));

@@ -172,6 +172,14 @@ void RunningMan::Update(DWORD dt)
 				this->SetIsGrounded(true);
 			}
 		}
+
+		if (coEventsResult[0]->collisionID == 2)
+		{
+			if (ny == 1)
+			{
+				this->disable = true;
+			}
+		}
 	}
 	for (UINT i = 0; i < coEvents.size(); i++)
 		delete coEvents[i];

@@ -331,6 +331,7 @@ void Bullet::RocketUpdate(DWORD dt)
 		break;
 	case 6:		//Top-Right
 		this->setIsLeft(false);
+		this->setIsFlipDown(false);
 		this->SetSpeedX(BULLET_NORMAL_SPEED);
 
 		if (timeCount > ROCKET_CHANGE_DIRECTION_TIME)
@@ -343,6 +344,7 @@ void Bullet::RocketUpdate(DWORD dt)
 		break;
 	case 8:		//Top-Left
 		this->setIsLeft(true);
+		this->setIsFlipDown(false);
 		this->SetSpeedX(-BULLET_NORMAL_SPEED);
 
 		if (timeCount > ROCKET_CHANGE_DIRECTION_TIME)

@@ -547,12 +547,18 @@ void CaptainState::Update(DWORD dt)
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_RIGHT))
 	{
 		captain->setIsLeft(false);
-		captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -1 : 1));
+		if (this->GetState() == STATE_SWIMMING)
+			captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -1.5 : 1.5));
+		else
+			captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -1 : 1));
 	}
 	else if (Keyboard::GetInstance()->IsKeyDown(DIK_LEFT))
 	{
 		captain->setIsLeft(true);
-		captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -1 : 1));
+		if (this->GetState() == STATE_SWIMMING)
+			captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -1.5 : 1.5));
+		else
+			captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -1 : 1));
 	}
 	else
 		captain->SetSpeedX(0);

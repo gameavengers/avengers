@@ -142,7 +142,7 @@ void Domesto::Update(DWORD dt)
 
 	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
 
-	this->SetSpeedY(this->GetSpeedY() - 0.035f);
+	this->SetSpeedY(this->GetSpeedY() - 0.04f);
 
 	coEvents.clear();
 	this->SetDt(dt);

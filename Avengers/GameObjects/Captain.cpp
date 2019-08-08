@@ -797,7 +797,7 @@ void Captain::UpdateCollision(DWORD dt)
 
 	if (isCollideBoss1)
 	{
-		if (boss1->disable)
+		if (boss1->disable || !Grid2::GetInstance()->spawnboss)
 			return;
 
 		((CaptainState*)state)->timeCount = 0;
@@ -824,7 +824,7 @@ void Captain::UpdateCollision(DWORD dt)
 
 	if (isCollideBoss2)
 	{
-		if (boss2->disable)
+		if (boss2->disable || Grid2::GetInstance()->isDisableBoss2)
 			return;
 		
 		((CaptainState*)state)->timeCount = 0;

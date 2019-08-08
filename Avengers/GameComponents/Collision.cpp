@@ -26,7 +26,7 @@ bool Collision::AABB(const Collider &c1, const Collider &c2)
 Collider Collision::GetSweptBroadphaseRect(const Collider &object)
 {
 	Collider broadphaseBox;
-	broadphaseBox.x = object.vx == 0 ? object.x : object.x + object.vx * object.dt;
+	broadphaseBox.x = object.vx > 0 ? object.x : object.x + object.vx * object.dt;
 	broadphaseBox.y = object.vy < 0 ? object.y : object.y + object.vy * object.dt;
 	broadphaseBox.width = object.width +abs(object.vx * object.dt);
 	broadphaseBox.height = object.height +abs(object.vy * object.dt);

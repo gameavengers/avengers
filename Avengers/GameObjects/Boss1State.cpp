@@ -73,7 +73,7 @@ void Boss1State::state_dead()
 	boss1->SetSpeedY(0);
 	boss1->SetPositionY(72);
 
-	if (this->timeCount > 300)
+	if (this->deadTimeCount > 300)
 	{
 		boss1->disable = true;
 	}
@@ -500,6 +500,7 @@ void Boss1State::Update(DWORD dt)
 {
 	timeCount += dt;
 	this->shootTimeCount += dt;
+	this->deadTimeCount += dt;
 
 	switch (this->behaviorBoss1)
 	{

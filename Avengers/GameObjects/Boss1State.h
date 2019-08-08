@@ -55,6 +55,7 @@ public:
 	~Boss1State();
 
 	float timeCount;
+	float deadTimeCount;
 
 	static Boss1State * GetInstance(Boss1 *boss1);
 

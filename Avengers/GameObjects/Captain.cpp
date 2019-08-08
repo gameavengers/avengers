@@ -367,6 +367,15 @@ void Captain::Update(DWORD dt)
 	{
 		trueImortal = !trueImortal;
 	}
+	if (Keyboard::GetInstance()->IsKeyDown(DIK_F7))
+	{
+		static bool isBatDen = false;
+		if (!isBatDen)
+			TileMap2::GetInstance()->color = D3DCOLOR_RGBA(30, 30, 30, 255);
+		else
+			TileMap2::GetInstance()->color = D3DCOLOR_RGBA(255, 255, 255, 255);
+		isBatDen = !isBatDen;
+	}
 	
 	//Colision với state để riêng ra
 	vector<ColliedEvent*> coEvents;

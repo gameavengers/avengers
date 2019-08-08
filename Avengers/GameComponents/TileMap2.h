@@ -27,6 +27,8 @@ struct Tile2 {
 	Collider *colider;
 	int SpawnObjectID;
 	bool bCanSpawn = true;
+	D3DCOLOR color = D3DCOLOR_RGBA(255,255,255,255);
+	D3DCOLOR turnoffColor = D3DCOLOR_RGBA(0, 0, 0, 255);
 };
 
 struct TileSet {
@@ -84,4 +86,7 @@ public:
 
 	void Render(int x, int y);
 	void Render(Tile2* itile);
+
+	D3DCOLOR color;
+	bool isTurnOffLight;
 };

@@ -15,6 +15,7 @@ TileMap2 * TileMap2::GetInstance()
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_2, TILES_SET_MATRIX_STAGE_2, MAP_2_ID);
 		_instance->LoadSpawnData(ENEMIES_MATRIX_STAGE_2, MAP_2_ID);
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_2, TILES_SET_STAGE_BOSS_2, MAP_BOSS_2_ID);
+		_instance->isTurnOffLight = false;
 	}
 	return _instance;
 }
@@ -224,13 +225,18 @@ void TileMap2::Render(Tile2* itile)
 	spriteData.y = itile->y * TILE_SIZE;
 	
 	spriteData.isLeft = true;
-
+	spriteData.color = this->color;
+	
+	/*if (!this>isTurnOffLight)
+		spriteData.color = itile->color;
+	else
+		spriteData.color = itile->turnoffColor;*/
 
 	Sprite* temp = currentMap->GetSpriteByID(itile->tileId);
 	temp->SetData(spriteData);
 	
 
-	Graphics::GetInstance()->Draw(temp);
+	Graphics::GetInstance()->Draw(temp, spriteData.color);
 }
 
 

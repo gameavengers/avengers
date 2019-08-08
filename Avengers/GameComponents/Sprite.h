@@ -14,8 +14,9 @@ struct SpriteData {
 	bool isLeft = false;
 	bool isFlipped = false;
 	bool isFlipVertical = false;
+	D3DCOLOR color = D3DCOLOR_RGBA(255,255,255,255);
 
-	SpriteData(float iX = 0, float iY = 0, int iWidth = 1, int iHeight = 1)
+	/*SpriteData(float iX = 0, float iY = 0, int iWidth = 1, int iHeight = 1)
 	{
 		x = iX;
 		y = iY;
@@ -23,7 +24,8 @@ struct SpriteData {
 		height = iHeight;
 		scale = 1;
 		angle = 0;
-	}
+	}*/
+	
 };
 class Sprite
 {

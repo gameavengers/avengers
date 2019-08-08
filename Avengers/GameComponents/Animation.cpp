@@ -26,7 +26,7 @@ void Animation::Render(SpriteData spriteData)
 
 	frames[curFrame].first->SetData(spriteData);
 	//Vẽ frame hiện tại
-	Graphics::GetInstance()->Draw(frames[curFrame].first);
+	Graphics::GetInstance()->Draw(frames[curFrame].first, spriteData.color);
 
 	//Xử lí các frames
 	

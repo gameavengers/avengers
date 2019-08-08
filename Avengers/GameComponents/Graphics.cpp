@@ -119,9 +119,10 @@ void Graphics::Draw(Sprite *sprite, D3DCOLOR color)
 		sprite->GetAngle(),
 		&translate
 	);
+	D3DCOLOR co = color;
 
 	spriteHandler->SetTransform(&matrix);
-	spriteHandler->Draw(sprite->GetTexture(), &(sprite->GetRect()), &offset, NULL, color);
+	spriteHandler->Draw(sprite->GetTexture(), &(sprite->GetRect()), &offset, NULL, co);
 }
 //Hàm hủy Graphics chính
 Graphics::~Graphics()

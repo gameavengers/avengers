@@ -443,7 +443,7 @@ void Grid2::Update(DWORD dt)
 
 void Grid2::SpawnUpdate(DWORD dt)
 {
-	if (Game::GetInstance()->GetStage() == STAGE_1)
+	if (Game::GetInstance()->GetStage() == STAGE_1 || Game::GetInstance()->GetStage() == STAGE_2)
 	{
 		if (viewport->isLock)
 		{

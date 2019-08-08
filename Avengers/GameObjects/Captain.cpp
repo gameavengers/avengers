@@ -17,7 +17,7 @@ Captain::Captain()
 
 	this->HP = 6;
 
-	this->x = 50;
+	this->x = 1500;
 	this->y = 150;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
@@ -476,6 +476,8 @@ void Captain::Update(DWORD dt)
 			if (nx == 1 || nx == -1)
 			{
 				this->SetIsGrounded(true); //xét tạm
+				if (((CaptainState*)state)->GetState() == STATE_DASH)
+					((CaptainState*)state)->SetState(STATE_STANDING);
 			}
 		}
 		if (coEventsResult[0]->collisionID == 6)

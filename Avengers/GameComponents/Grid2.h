@@ -80,6 +80,8 @@ private:
 	float timeCount;
 
 	bool bDisableRespawn;
+	int spawnMode;		//1: Inside Screen Spawn, 2: OnDead Creature Spawn
+	int killAmount;	//Condition to get out spawn area
 	
 public:
 	static Grid2* GetInstance();
@@ -109,6 +111,7 @@ public:
 	vector <OnUpdateObject> GetListUpdateObject() { return listObject; }
 
 	void Update(DWORD dt);
+	void SpawnUpdate(DWORD dt);
 	void Render();
 
 	bool spawnboss;

@@ -439,6 +439,8 @@ void Captain::Update(DWORD dt)
 		{
 			if (nx == 1 || nx == -1)
 			{
+				if (((CaptainState*)state)->GetState() == STATE_DASH)
+					int a = 0;
 				this->SetIsGrounded(true); //xét tạm
 			}
 		}

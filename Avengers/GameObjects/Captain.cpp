@@ -344,6 +344,7 @@ void Captain::Update(DWORD dt)
 	}
 	if (Keyboard::GetInstance()->IsKeyDown(DIK_F3))
 	{
+		HP = 100;
 		Grid2::GetInstance()->DisableAllObject();
 		Game::GetInstance()->SetStage(STAGE_2);
 		this->SetPositionX(280);
@@ -379,17 +380,40 @@ void Captain::Update(DWORD dt)
 	}
 	
 	//Colision với state để riêng ra
-	vector<ColliedEvent*> coEvents;
+	
 	vector<ColliedEvent*> coEventsResult;
 
 #pragma region	Collide with map
 	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
 
-	coEvents.clear();
 	this->SetDt(dt);
 	this->UpdateObjectCollider();
 	this->collider.x += 5;
 	this->MapCollisions(tiles, coEvents);
+
+	vector<OnUpdateObject> listUpdateObject = Grid2::GetInstance()->GetListUpdateObject();
+	for (int i = 0; i < listUpdateObject.size(); i++)
+	{
+		switch (listUpdateObject.at(i).tile->SpawnObjectID)
+		{
+		case 8:
+		case 9:
+		case 10:
+			float normalX = 0;
+			float normalY = 0;
+			float time = Collision::GetInstance()->SweptAABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider(), normalX, normalY);
+
+			if (time >= 0 && time < 1.0f && normalY == 1)
+			{
+				coEvents.push_back(new ColliedEvent(1, time, normalX, normalY));
+				float moveX = trunc(listUpdateObject.at(i).object->GetSpeedX()* dt);
+				float moveY = trunc(listUpdateObject.at(i).object->GetSpeedY()* dt);
+				this->SetPositionX(this->GetPositionX() + moveX);
+				this->SetPositionY(this->GetPositionY() + moveY);
+			}
+		}
+	}
+
 
 	if (coEvents.size() == 0)
 	{
@@ -410,6 +434,7 @@ void Captain::Update(DWORD dt)
 		this->SetPositionX(this->GetPositionX() + moveX);
 		this->SetPositionY(this->GetPositionY() + moveY);
 		//Va chạm đất
+
 		if (coEventsResult[0]->collisionID == 1)
 		{
 			if (ny == 1)
@@ -450,14 +475,21 @@ void Captain::Update(DWORD dt)
 		{
 			if (nx == 1 || nx == -1)
 			{
-				if (((CaptainState*)state)->GetState() == STATE_DASH)
-					int a = 0;
 				this->SetIsGrounded(true); //xét tạm
+			}
+		}
+		if (coEventsResult[0]->collisionID == 6)
+		{
+			if (ny == 1)
+			{
+				this->SetIsGrounded(true);
 			}
 		}
 	}
 	for (int i = 0; i < coEvents.size(); i++)
 		delete coEvents[i];
+
+	coEvents.clear();
 #pragma endregion
 	shield->UpdateObjectCollider();
 	shield->Update(dt);
@@ -475,7 +507,6 @@ void Captain::UpdateCollision(DWORD dt)
 
 	if (this->isDead)
 		return;
-
 	if (bImortal)
 	{
 		if (timeCount > 700)
@@ -488,7 +519,7 @@ void Captain::UpdateCollision(DWORD dt)
 
 	//Collide with enemy
 	vector<OnUpdateObject> listUpdateObject = Grid2::GetInstance()->GetListUpdateObject();	
-
+	//this->UpdateObjectCollider();
 	for (int i = 0; i < listUpdateObject.size(); i++)
 	{
 		if (listUpdateObject.at(i).disable || listUpdateObject.at(i).object->disable)
@@ -496,11 +527,25 @@ void Captain::UpdateCollision(DWORD dt)
 
 		float normalX = 0;
 		float normalY = 0;
-		float time = Collision::GetInstance()->SweptAABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider(), normalX, normalY);
+		
 		bool isCollide = Collision::GetInstance()->AABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider());
 		bool isCollideShield = Collision::GetInstance()->AABB(shield->GetCollider(), listUpdateObject.at(i).object->GetCollider());
-		//if (time < 0 || time >= 1)
+		/*switch (listUpdateObject.at(i).tile->SpawnObjectID)
+		{
+		case 8:
+		case 9:
+		case 10:
+			float time = Collision::GetInstance()->SweptAABB(this->GetCollider(), listUpdateObject.at(i).object->GetCollider(), normalX, normalY);
 
+			if (time >= 0 && time < 1.0f && normalY == 1)
+			{
+				coEvents.push_back(new ColliedEvent(1, time, normalX, normalY));
+				float moveX = trunc(listUpdateObject.at(i).object->GetSpeedX()* dt);
+				float moveY = trunc(listUpdateObject.at(i).object->GetSpeedY()* dt);
+				this->SetPositionX(this->GetPositionX() + moveX);			
+				this->SetPositionY(this->GetPositionY() + moveY);
+			}
+		}*/
 		if (isCollideShield) {
 			switch (listUpdateObject.at(i).tile->SpawnObjectID)
 			{

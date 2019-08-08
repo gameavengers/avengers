@@ -40,7 +40,7 @@ Grid2::Grid2()
 	//hpbar = HPBar::GetInstance();
 	spawnMode = 1;
 	killAmount = 0;
-	
+
 }
 
 void Grid2::InitializeMapGrid(TileMap2 *tileMap2)
@@ -424,8 +424,9 @@ bool Grid2::CheckTileInsideCamera(Tile2 *tile)
 void Grid2::Update(DWORD dt)
 {
 	timeCount += dt;
-	captain->Update(dt);
+	captain->UpdateObjectCollider();
 	captain->UpdateCollision(dt);
+	captain->Update(dt);
 
 	if (spawnboss)
 	boss1->Update(dt);

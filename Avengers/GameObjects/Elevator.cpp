@@ -6,7 +6,7 @@ Elevator *Elevator::__instance = NULL;
 
 Elevator::Elevator()
 {
-	type = CIRCLE;
+	type = HORIZONTAL;
 
 	this->x = 250;
 	this->y = 100;
@@ -136,6 +136,8 @@ void Elevator::Update(DWORD dt)
 	default:
 		break;
 	}
+
+	this->UpdateObjectCollider();
 
 }
 void Elevator::Render()

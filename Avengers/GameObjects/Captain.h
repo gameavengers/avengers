@@ -38,6 +38,8 @@ class Captain : public GameObject
 	GSound* sound_colide_shield;
 	GSound* sound_item;
 	GSound* sound_rocket;
+
+	vector<ColliedEvent*> coEvents;
 public: 
 	void LoadResources();
 

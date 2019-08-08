@@ -16,6 +16,7 @@ TileMap2 * TileMap2::GetInstance()
 		_instance->LoadSpawnData(ENEMIES_MATRIX_STAGE_2, MAP_2_ID);
 		_instance->LoadTilesData(TILES_MATRIX_STAGE_BOSS_2, TILES_SET_STAGE_BOSS_2, MAP_BOSS_2_ID);
 		_instance->isTurnOffLight = false;
+		_instance->color = D3DCOLOR_RGBA(255, 255, 255, 255);
 	}
 	return _instance;
 }

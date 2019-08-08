@@ -502,6 +502,18 @@ void Boss1State::Update(DWORD dt)
 	this->shootTimeCount += dt;
 	this->deadTimeCount += dt;
 
+	if (this->GetState() == BOSS1_STATE_DEAD)
+	{
+		this->state_dead();
+		return;
+	}
+
+	if (this->GetState() == BOSS1_STATE_BLEEDING)
+	{
+		this->state_bleeding();
+		return;
+	}
+
 	switch (this->behaviorBoss1)
 	{
 	case Shoot:

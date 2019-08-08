@@ -285,7 +285,7 @@ void Captain::Update(DWORD dt)
 				Grid2::GetInstance()->DisableAllObject();
 				Grid2::GetInstance()->spawnboss = true;
 				this->SetPositionX(50);
-				this->SetPositionY(100);
+				this->SetPositionY(250);
 				this->HP = 6;
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
@@ -337,7 +337,7 @@ void Captain::Update(DWORD dt)
 		Game::GetInstance()->SetStage(STAGE_BOSS_1);
 		Grid2::GetInstance()->spawnboss = true;
 		this->SetPositionX(50);
-		this->SetPositionY(100);
+		this->SetPositionY(230);
 		Viewport::GetInstance()->Reset();
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
 		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
@@ -634,6 +634,18 @@ void Captain::UpdateCollision(DWORD dt)
 				listBullet.at(i)->SetSpeedX(0);
 				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
 			}
+			else if (listBullet.at(i)->GetBulletType() == BULLET_NORMAL_BOSS1)
+			{
+				if (sound_colide_shield != NULL)
+				{
+					delete sound_colide_shield;
+					sound_colide_shield = NULL;
+				}
+				sound_colide_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_CROUCH_SHIELD);
+				Sound::GetInstance()->PlaySound(sound_colide_shield);
+				listBullet.at(i)->SetDirection(7);
+				listBullet.at(i)->SetSpeedX(-listBullet.at(i)->GetSpeedX());
+			}
 			else if (listBullet.at(i)->GetBulletType() == BULLET_BOSS2 
 				|| listBullet.at(i)->GetBulletType() == ROCKET 
 				|| listBullet.at(i)->GetBulletType() == GIGIROCKET
@@ -707,7 +719,6 @@ void Captain::UpdateCollision(DWORD dt)
 			return;
 		}
 	}
-
 
 	//Collide with items
 	vector<Item*> listItem = SpawnProjectTile::GetInstance()->listItem;

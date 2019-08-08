@@ -165,6 +165,7 @@ void Boss1::Update(DWORD dt)
 		float moveY = trunc(this->GetSpeedY()* dt);
 		this->SetPositionX(this->GetPositionX() + moveX);
 		this->SetPositionY(this->GetPositionY() + moveY);
+		this->isGrounded = false;
 	}
 	else
 	{

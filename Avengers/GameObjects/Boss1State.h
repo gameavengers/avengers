@@ -68,7 +68,7 @@ public:
 	void state_running();
 	void state_bleeding();
 	void state_dead();
-	void state_standing_shoot_1();
+	void state_standing_shoot_1(int type = 1);	//1: Bắn 3 viên nhỏ	2: 2 viên nhỏ 1 viên to
 	void state_standing_shoot_2();
 	void state_flying();
 	void state_flying_shoot();

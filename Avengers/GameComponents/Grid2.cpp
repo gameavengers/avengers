@@ -449,7 +449,10 @@ void Grid2::SpawnUpdate(DWORD dt)
 		{
 			spawnMode = 2;
 			if (killAmount >= 7)
+			{
 				viewport->isLock = false;
+				killAmount = 0;
+			}
 		}
 		else
 			spawnMode = 1;

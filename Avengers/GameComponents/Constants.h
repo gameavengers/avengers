@@ -128,7 +128,7 @@ enum BulletType {
 
 #define SHIELD_WIDTH 16
 #define SHIELD_HEIGHT 16
-#define SHIELD_SPEED 0.4f
+#define SHIELD_SPEED 0.28f
 
 //Items
 #define ITEM_APPEAR 0

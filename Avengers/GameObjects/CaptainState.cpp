@@ -361,7 +361,7 @@ void CaptainState::state_crouch_shield()
 
 void CaptainState::state_dash()
 {
-	captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -5 : 5));
+	captain->SetSpeedX(CAPTAIN_WALK_SPEED * (captain->IsLeft() ? -4 : 4));
 
 	if (startDash != NULL && abs(captain->GetPositionX() - startDash) >= 150)
 	{

@@ -17,8 +17,8 @@ Captain::Captain()
 
 	this->HP = 6;
 
-	this->x = 250;
-	this->y = 200;
+	this->x = 50;
+	this->y = 150;
 	this->width = CAPTAIN_SPRITE_WIDTH;
 	this->height = CAPTAIN_SPRITE_HEIGHT;
 
@@ -294,6 +294,7 @@ void Captain::Update(DWORD dt)
 			if (STAGE_2 == Game::GetInstance()->GetStage())
 			{
 				this->canGoToNextStage = false;
+				Grid2::GetInstance()->DisableAllObject();
 				this->SetPositionX(280);
 				this->SetPositionY(900);
 				this->HP = 6;
@@ -305,6 +306,7 @@ void Captain::Update(DWORD dt)
 			if (STAGE_BOSS_2 == Game::GetInstance()->GetStage())
 			{				
 				this->canGoToNextStage = false;
+				Grid2::GetInstance()->DisableAllObject();
 				this->SetPositionX(100);
 				this->SetPositionY(100);
 				this->HP = 6;
@@ -334,7 +336,6 @@ void Captain::Update(DWORD dt)
 		Grid2::GetInstance()->DisableAllObject();
 		Game::GetInstance()->SetStage(STAGE_BOSS_1);
 		Grid2::GetInstance()->spawnboss = true;
-		Grid2::GetInstance()->DisableAllObject();
 		this->SetPositionX(50);
 		this->SetPositionY(100);
 		Viewport::GetInstance()->Reset();

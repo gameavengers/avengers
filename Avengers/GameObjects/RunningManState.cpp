@@ -96,7 +96,7 @@ void RunningManState::state_standing_shoot()
 		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_ENEMY_SHOOT);
 		Sound::GetInstance()->PlaySound(sound_shoot);
 		int direction = runningMan->IsLeft() ? 1 : 5;
-		float offsetX = runningMan->IsLeft() ? -16 : 16;
+		float offsetX = runningMan->IsLeft() ? 0 : 16;
 		float offsetY = -3;
 		SpawnProjectTile::GetInstance()->SpawnBullet(runningMan->GetPositionX() + offsetX, runningMan->GetPositionY() + offsetY,
 													direction, BulletType::BULLET_NORMAL);

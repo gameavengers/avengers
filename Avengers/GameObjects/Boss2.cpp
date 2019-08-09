@@ -22,7 +22,7 @@ Boss2::Boss2()
 	collider.width = BOSS2_SPRITE_WIDTH;
 	collider.height = BOSS2_SPRITE_HEIGHT;
 
-	this->HP = 6;
+	this->HP = 7;
 }
 
 Boss2 *Boss2::GetInstance()

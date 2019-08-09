@@ -15,7 +15,7 @@ Captain::Captain()
 	hp1 = new HPBar(1);
 	hp2 = new HPBar(2);
 
-	this->HP = 6;
+	this->HP = 10;
 
 	this->x = 50;
 	this->y = 150;

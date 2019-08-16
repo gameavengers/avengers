@@ -100,6 +100,16 @@ void Shield::Update(DWORD dt)
 				this->SetPositionX(captain->GetPositionX() + 7);
 			this->SetPositionY(captain->GetPositionY() - 4);
 		}
+		if (capstate->GetState() == STATE_SWING)
+		{
+			this->state = SHIELD_CENTER;
+			this->SetSpeedX(0);
+			if (captain->IsLeft())
+				this->SetPositionX(captain->GetPositionX() + 2);
+			else
+				this->SetPositionX(captain->GetPositionX() + 7);
+			this->SetPositionY(captain->GetPositionY() - 20);
+		}
 		if (capstate->GetState() == STATE_CROUCH)
 		{
 			this->state = SHIELD_SIDE;
@@ -165,7 +175,6 @@ void Shield::Update(DWORD dt)
 		if (capstate->GetState() == STATE_SWIMMING 
 			|| capstate->GetState() == STATE_JUMPING_ROLE 
 			|| capstate->GetState() == STATE_DIVING 
-			|| capstate->GetState() == STATE_SWING
 			|| capstate->GetState() == STATE_BLEEING
 			|| capstate->GetState() == STATE_DIEING)
 		{

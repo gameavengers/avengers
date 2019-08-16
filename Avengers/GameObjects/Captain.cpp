@@ -15,7 +15,7 @@ Captain::Captain()
 	hp1 = new HPBar(1);
 	hp2 = new HPBar(2);
 
-	this->HP = 10;
+	this->HP = 20;
 
 	this->x = 50;
 	this->y = 150;
@@ -97,6 +97,7 @@ void Captain::LoadResources()
 	for (int i = 6; i < 7; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(-1);
 		
 		anim->AddFrame(sprite);
 	}
@@ -154,10 +155,11 @@ void Captain::LoadResources()
 	anim = new Animation(100);
 
 	Sprite * sprite5 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
-	sprite5->SetOffSetX(9);
+	sprite5->SetOffSetX(13);
 	anim->AddFrame(sprite5);
 
 	Sprite * sprite6 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[16], TEXTURE_TRANS_COLOR);
+	sprite6->SetOffSetX(4);
 	anim->AddFrame(sprite6);
 
 	animations.push_back(anim);
@@ -286,7 +288,7 @@ void Captain::Update(DWORD dt)
 				Grid2::GetInstance()->spawnboss = true;
 				this->SetPositionX(50);
 				this->SetPositionY(250);
-				this->HP = 6;
+				this->HP = 20;
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
@@ -297,7 +299,7 @@ void Captain::Update(DWORD dt)
 				Grid2::GetInstance()->DisableAllObject();
 				this->SetPositionX(280);
 				this->SetPositionY(900);
-				this->HP = 6;
+				this->HP = 20;
 				Viewport::GetInstance()->Reset();
 				Viewport::GetInstance()->canLock = true;
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
@@ -309,7 +311,7 @@ void Captain::Update(DWORD dt)
 				Grid2::GetInstance()->DisableAllObject();
 				this->SetPositionX(100);
 				this->SetPositionY(100);
-				this->HP = 6;
+				this->HP = 20;
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());

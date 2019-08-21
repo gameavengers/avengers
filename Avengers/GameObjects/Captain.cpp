@@ -15,7 +15,7 @@ Captain::Captain()
 	hp1 = new HPBar(1);
 	hp2 = new HPBar(2);
 
-	this->HP = 6;
+	this->HP = 20;
 
 	this->x = 50;
 	this->y = 150;
@@ -97,6 +97,7 @@ void Captain::LoadResources()
 	for (int i = 6; i < 7; i++)
 	{
 		Sprite * sprite = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[i], TEXTURE_TRANS_COLOR);
+		sprite->SetOffSetY(-1);
 		
 		anim->AddFrame(sprite);
 	}
@@ -154,10 +155,11 @@ void Captain::LoadResources()
 	anim = new Animation(100);
 
 	Sprite * sprite5 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[15], TEXTURE_TRANS_COLOR);
-	sprite5->SetOffSetX(9);
+	sprite5->SetOffSetX(13);
 	anim->AddFrame(sprite5);
 
 	Sprite * sprite6 = new Sprite(CAPTAIN_TEXTURE_LOCATION, listSprite[16], TEXTURE_TRANS_COLOR);
+	sprite6->SetOffSetX(4);
 	anim->AddFrame(sprite6);
 
 	animations.push_back(anim);
@@ -285,8 +287,8 @@ void Captain::Update(DWORD dt)
 				Grid2::GetInstance()->DisableAllObject();
 				Grid2::GetInstance()->spawnboss = true;
 				this->SetPositionX(50);
-				this->SetPositionY(100);
-				this->HP = 6;
+				this->SetPositionY(250);
+				this->HP = 20;
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
@@ -297,7 +299,7 @@ void Captain::Update(DWORD dt)
 				Grid2::GetInstance()->DisableAllObject();
 				this->SetPositionX(280);
 				this->SetPositionY(900);
-				this->HP = 6;
+				this->HP = 20;
 				Viewport::GetInstance()->Reset();
 				Viewport::GetInstance()->canLock = true;
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_2);
@@ -309,7 +311,7 @@ void Captain::Update(DWORD dt)
 				Grid2::GetInstance()->DisableAllObject();
 				this->SetPositionX(100);
 				this->SetPositionY(100);
-				this->HP = 6;
+				this->HP = 20;
 				Viewport::GetInstance()->Reset();
 				TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_2);
 				Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
@@ -337,7 +339,7 @@ void Captain::Update(DWORD dt)
 		Game::GetInstance()->SetStage(STAGE_BOSS_1);
 		Grid2::GetInstance()->spawnboss = true;
 		this->SetPositionX(50);
-		this->SetPositionY(100);
+		this->SetPositionY(230);
 		Viewport::GetInstance()->Reset();
 		TileMap2::GetInstance()->SetCurrentMap(STAGE_BOSS_1);
 		Grid2::GetInstance()->InitializeMapGrid(TileMap2::GetInstance());
@@ -426,7 +428,7 @@ void Captain::Update(DWORD dt)
 	{
 		float min_tx, min_ty, nx = 0, ny;
 
-		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		Collision::GetInstance()->GetNearestCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
 		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
 		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
@@ -475,7 +477,16 @@ void Captain::Update(DWORD dt)
 		{
 			if (nx == 1 || nx == -1)
 			{
-				this->SetIsGrounded(true); //xét tạm
+				vector<ColliedEvent*> NearestY;
+				Collision::GetInstance()->GetNearestCollisionY(coEvents, NearestY, min_tx, min_ty, nx, ny);
+				if (NearestY.size() > 0)
+					if (NearestY[0]->collisionID == 1)
+						this->SetIsGrounded(true); //xét tạm
+
+				if (((CaptainState*)state)->GetState() == STATE_DASH)
+					((CaptainState*)state)->SetState(STATE_STANDING);
+
+
 			}
 		}
 		if (coEventsResult[0]->collisionID == 6)
@@ -632,6 +643,18 @@ void Captain::UpdateCollision(DWORD dt)
 				listBullet.at(i)->SetSpeedX(0);
 				listBullet.at(i)->SetSpeedY(BULLET_NORMAL_SPEED);
 			}
+			else if (listBullet.at(i)->GetBulletType() == BULLET_NORMAL_BOSS1)
+			{
+				if (sound_colide_shield != NULL)
+				{
+					delete sound_colide_shield;
+					sound_colide_shield = NULL;
+				}
+				sound_colide_shield = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_CAPTAIN_CROUCH_SHIELD);
+				Sound::GetInstance()->PlaySound(sound_colide_shield);
+				listBullet.at(i)->SetDirection(7);
+				listBullet.at(i)->SetSpeedX(-listBullet.at(i)->GetSpeedX());
+			}
 			else if (listBullet.at(i)->GetBulletType() == BULLET_BOSS2 
 				|| listBullet.at(i)->GetBulletType() == ROCKET 
 				|| listBullet.at(i)->GetBulletType() == GIGIROCKET
@@ -705,7 +728,6 @@ void Captain::UpdateCollision(DWORD dt)
 			return;
 		}
 	}
-
 
 	//Collide with items
 	vector<Item*> listItem = SpawnProjectTile::GetInstance()->listItem;
@@ -797,7 +819,7 @@ void Captain::UpdateCollision(DWORD dt)
 
 	if (isCollideBoss1)
 	{
-		if (boss1->disable)
+		if (boss1->disable || !Grid2::GetInstance()->spawnboss)
 			return;
 
 		((CaptainState*)state)->timeCount = 0;
@@ -808,8 +830,8 @@ void Captain::UpdateCollision(DWORD dt)
 		return;
 	}
 
-	if (boss1->disable)
-		this->canGoToNextStage = true;
+	//if (boss1->disable)
+		//this->canGoToNextStage = true;
 	//====================================================================
 
 	//Shield collide with boss 1==========================================
@@ -824,7 +846,7 @@ void Captain::UpdateCollision(DWORD dt)
 
 	if (isCollideBoss2)
 	{
-		if (boss2->disable)
+		if (boss2->disable || Grid2::GetInstance()->isDisableBoss2)
 			return;
 		
 		((CaptainState*)state)->timeCount = 0;

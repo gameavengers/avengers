@@ -443,14 +443,21 @@ void Grid2::Update(DWORD dt)
 
 void Grid2::SpawnUpdate(DWORD dt)
 {
-	if (Game::GetInstance()->GetStage() == STAGE_1)
+	if (Game::GetInstance()->GetStage() == STAGE_1 || Game::GetInstance()->GetStage() == STAGE_2)
 	{
 		if (viewport->isLock)
 		{
 			spawnMode = 2;
+<<<<<<< HEAD
 			if (killAmount >= 7) {
 				viewport->isLock = false;
 				TileMap2::GetInstance()->soundLock(viewport->isLock);
+=======
+			if (killAmount >= 7)
+			{
+				viewport->isLock = false;
+				killAmount = 0;
+>>>>>>> 09ff65b392ce48458c018599bd10b90d4121956e
 			}
 		}
 		else

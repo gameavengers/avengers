@@ -52,7 +52,11 @@ void Viewport::Reset()
 		y = 225;
 	}
 	this->isLock = false;
+<<<<<<< HEAD
 	TileMap2::GetInstance()->soundLock(isLock);
+=======
+	this->canLock = true;
+>>>>>>> 09ff65b392ce48458c018599bd10b90d4121956e
 }
 void Viewport::Update(DWORD dt)
 {

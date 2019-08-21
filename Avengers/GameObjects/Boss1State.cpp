@@ -15,7 +15,7 @@ Boss1State::Boss1State(Boss1 *boss1)
 {
 	this->boss1 = boss1;
 	this->state_standing_shoot_1();
-	this->behaviorBoss1 = BehaviorBoss1::Fly;
+	this->behaviorBoss1 = BehaviorBoss1::ComboShoot;
 	reStateChance = 0;
 }
 
@@ -42,6 +42,7 @@ void Boss1State::state_idle()
 	this->SetState(BOSS1_STATE_IDLE);
 	anim = boss1->GetAnimationsList()[BOSS1_STATE_IDLE];
 	boss1->SetSpeedX(0);
+	boss1->SetSpeedY(0);
 }
 
 void Boss1State::state_running()
@@ -53,16 +54,28 @@ void Boss1State::state_running()
 
 void Boss1State::state_bleeding()
 {
-	this->SetState(BOSS1_STATE_BLEEDING);
-	anim = boss1->GetAnimationsList()[BOSS1_STATE_BLEEDING];
-
 	boss1->SetSpeedX(CAPTAIN_WALK_SPEED * (boss1->IsLeft() ? 1 : -1));
+	boss1->SetSpeedY(boss1->GetSpeedY() - CAPTAIN_GRAVITY);
 
-	if (timeCount >= 200)
+	if (boss1->isGrounded && timeCount >= 200)
+	{
+		this->state_idle();
+		ChangeBossDirection();
+		boss1->SetSpeedX(0);
+		boss1->SetSpeedY(0);
+		behaviorState = 0;
+		RandomNextState();
+		return;
+	}
+
+	/*if (timeCount >= 200)
 	{
 		this->state_idle();
 		return;
-	}
+	}*/
+
+	this->SetState(BOSS1_STATE_BLEEDING);
+	anim = boss1->GetAnimationsList()[BOSS1_STATE_BLEEDING];
 }
 
 void Boss1State::state_dead()
@@ -73,13 +86,13 @@ void Boss1State::state_dead()
 	boss1->SetSpeedY(0);
 	boss1->SetPositionY(72);
 
-	if (this->deadTimeCount > 300)
+	if (this->deadTimeCount > 2000)
 	{
 		boss1->disable = true;
 	}
 }
 
-void Boss1State::state_standing_shoot_1()
+void Boss1State::state_standing_shoot_1(int type)
 {
 	this->SetState(BOSS1_STATE_STANDING_SHOOT_1);
 	anim = boss1->GetAnimationsList()[BOSS1_STATE_STANDING_SHOOT_1];
@@ -94,11 +107,26 @@ void Boss1State::state_standing_shoot_1()
 		}
 		sound_shoot = Sound::GetInstance()->LoadSound((LPTSTR)SOUND_BOSS1_LAZE);
 		Sound::GetInstance()->PlaySound(sound_shoot);
-		int direction = boss1->IsLeft() ? 1 : 5;
+		int direction;
+		if (type == 2)
+		{
+			direction = boss1->IsLeft() ? 1 : 5;
+		}
+		else
+		{
+			if (abs(Captain::GetInstance()->GetPositionY() - boss1->GetPositionY()) < 20)
+				direction = boss1->IsLeft() ? 1 : 5;
+			else
+				direction = boss1->IsLeft() ? 8 : 6;
+		}
 		float offsetX = boss1->IsLeft() ? -8 : 20;
-		float offsetY = -10;
-		SpawnProjectTile::GetInstance()->SpawnBullet(boss1->GetPositionX() + offsetX, boss1->GetPositionY() + offsetY,
-			direction, BulletType::BULLET_NORMAL_BOSS1);
+		float offsetY = -14;
+		if (type == 1)
+			SpawnProjectTile::GetInstance()->SpawnBullet(boss1->GetPositionX() + offsetX, boss1->GetPositionY() + offsetY,
+				direction, BulletType::BULLET_NORMAL_BOSS1);
+		else
+			SpawnProjectTile::GetInstance()->SpawnBullet(boss1->GetPositionX() + offsetX, boss1->GetPositionY() + offsetY,
+				direction, BulletType::BULLET_SPECIAL_BOSS1);
 	}
 }
 
@@ -173,23 +201,29 @@ void Boss1State::Behavior_Shoot()
 
 void Boss1State::Behavior_ComboShoot()
 {	
+	srand(time(NULL));
+	int type = rand() % 2 + 1;
 	switch (behaviorState)
 	{
 	case 0:
 		this->state_running();	
 		this->NextStateIn(BOSS1_TIME_RUN);
+		this->shootTimeCount = 300;
 		break;
 	case 1:
 		this->state_standing_shoot_1();
-		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1);
+		if (this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1))
+			this->shootTimeCount = 300;
 		break;
 	case 2:
 		this->state_standing_shoot_1();
-		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1);
+		if (this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1))
+			this->shootTimeCount = 300;
 		break;
 	case 3:
-		this->state_standing_shoot_1();
-		this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1);
+		this->state_standing_shoot_1(type);
+		if (this->NextStateIn(BOSS1_TIME_STANDING_SHOOT_1))
+			this->shootTimeCount = 0;
 		break;
 	default:
 		ChangeBossDirection();
@@ -238,14 +272,15 @@ void Boss1State::Behavior_FlyAndShoot()
 		}
 
 		break;
-	case 2:
+	case 2:	// Bay xuong
 		this->state_flying();
 		boss1->SetSpeedX(0);
 		boss1->SetSpeedY(-BOSS1_FLY_SPEED);
 
-		if (boss1->GetPositionY() <= 72)
+		//if (boss1->GetPositionY() <= 72)
+		if (boss1->isGrounded)
 		{
-			boss1->SetPositionY(72);
+			//boss1->SetPositionY(72);
 			this->behaviorState++;
 		}
 		break;
@@ -267,13 +302,13 @@ void Boss1State::Behavior_FlyAndShoot()
 			behaviorState = 1;
 		}
 
-		if (!boss1->IsLeft() && boss1->GetPositionX() >= 220)
+		if (!boss1->IsLeft() && boss1->GetPositionX() >= Viewport::GetInstance()->GetRect().right - 30)
 		{
-			this->behaviorState++;
+			behaviorState = 2;
 		}
-		else if (boss1->IsLeft() && boss1->GetPositionX() <= 10)
+		else if (boss1->IsLeft() && boss1->GetPositionX() <= Viewport::GetInstance()->GetRect().left + 10)
 		{
-			this->behaviorState++;
+			behaviorState = 2;
 		}
 		break;
 	}
@@ -298,9 +333,15 @@ void Boss1State::Behavior_Fly()
 			h = (boss1->GetPositionX() - BOSS1_PARABOL_JUMP_H);
 
 		k = BOSS1_PARABOL_JUMP_K + boss1->GetPositionY();
-		this->behaviorState++;
+
+		if (h + BOSS1_PARABOL_JUMP_H > Viewport::GetInstance()->GetRect().right ||
+			h - BOSS1_PARABOL_JUMP_H < Viewport::GetInstance()->GetRect().left)
+			this->behaviorState = 2;
+		else
+			this->behaviorState++;
 		break;
 	case 1:
+		this->state_flying();
 		posX = walkSpeed + boss1->GetPositionX();
 		posY = -a * (posX - h) * (posX - h) + k;
 		boss1->SetSpeedX(walkSpeed);
@@ -501,6 +542,18 @@ void Boss1State::Update(DWORD dt)
 	timeCount += dt;
 	this->shootTimeCount += dt;
 	this->deadTimeCount += dt;
+
+	if (this->GetState() == BOSS1_STATE_DEAD)
+	{
+		this->state_dead();
+		return;
+	}
+
+	if (this->GetState() == BOSS1_STATE_BLEEDING)
+	{
+		this->state_bleeding();
+		return;
+	}
 
 	switch (this->behaviorBoss1)
 	{

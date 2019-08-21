@@ -1,5 +1,5 @@
 ﻿#pragma once
-
+#include <dinput.h>
 
 //Tên ứng dụng
 #define WINDOW_CLASS_NAME L"Avengers"
@@ -111,9 +111,9 @@ enum BulletType {
 
 //Giá trị tốc độ đi, tốc độ nhảy, trọng lực
 #define CAPTAIN_WALK_SPEED		0.07f
-#define CAPTAIN_JUMP_SPEED_Y	0.2f
-#define CAPTAIN_GRAVITY			0.04f
-#define CAPTAIN_JUMP_MAX		100
+#define CAPTAIN_JUMP_SPEED_Y	0.3f
+#define CAPTAIN_GRAVITY			0.03f
+#define CAPTAIN_JUMP_MAX		95
 
 #define CAPTAIN_TEXTURE_LOCATION L"Resources\\Captain\\Captain.png"
 #define TEXTURE_TRANS_COLOR D3DCOLOR_XRGB(255, 0, 255)
@@ -243,3 +243,12 @@ enum BulletType {
 //
 #define GIGI_FLY_SPEED 0.07f
 #define GIGI_DELAY_ATTACK_TIME 3000
+
+//Keyboard
+#define KEY_ATTACK  DIK_X
+#define KEY_JUMP	DIK_Z
+#define KEY_DASH	DIK_C
+#define KEY_LEFT	DIK_LEFT
+#define KEY_RIGHT	DIK_RIGHT
+#define KEY_UP		DIK_UP
+#define KEY_DOWN	DIK_DOWN

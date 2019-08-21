@@ -199,10 +199,12 @@ void TileMap2::SetCurrentMap(int mapID)
 void TileMap2::soundLock(bool lock)//Truyền vào khóa lock
 {
 	//Nếu k khóa và có con trỏ g thì loop nhạc
-	if (lock == false && this->g != NULL)
+	if (lock == false)
 	{
-		Sound::GetInstance()->StopSound(glock);
-		Sound::GetInstance()->LoopSound(g);
+		if (this->g != NULL)
+			Sound::GetInstance()->StopSound(glock);
+		if (this->glock != NULL)
+			Sound::GetInstance()->LoopSound(g);
 		return; //Thoát luôn
 	}
 

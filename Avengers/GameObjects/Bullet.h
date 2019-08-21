@@ -35,6 +35,8 @@ public:
 	void BulletSpecialBoss1Update(DWORD dt);
 	void BarrelUpdate(DWORD dt);
 
+	void SetDirection(int direct) { this->direction = direct; }
+
 	bool IsDisable() { return disable; }
 	void Disable() { timeCount = 0; disable = true; }
 

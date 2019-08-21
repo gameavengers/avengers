@@ -25,6 +25,11 @@ public:
 	bool AABB(const Collider &c1, const Collider &c2);
 	Collider GetSweptBroadphaseRect(const Collider &object);
 	float SweptAABB(Collider c1, Collider c2, float &normalx, float &normaly);
-	void FilterCollision(vector<ColliedEvent*> &coEvents, vector<ColliedEvent*> &coEventsResult,
+	void GetNearestCollision(vector<ColliedEvent*> &coEvents, vector<ColliedEvent*> &coEventsResult,
 		float &min_tx, float &min_ty, float &nx, float &ny);
+	void GetNearestCollisionX(vector<ColliedEvent*> &coEvents, vector<ColliedEvent*> &coEventsResult,
+		float &min_tx, float &min_ty, float &nx, float &ny);
+	void GetNearestCollisionY(vector<ColliedEvent*> &coEvents, vector<ColliedEvent*> &coEventsResult,
+		float &min_tx, float &min_ty, float &nx, float &ny);
+
 };

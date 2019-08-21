@@ -499,19 +499,6 @@ void Bullet::GiGiRocketUpdate(DWORD dt)
 
 void Bullet::BulletNormalBoss1Update(DWORD dt)
 {
-	/*if (direction == 1)
-	{
-		this->setIsLeft(true);
-		this->SetSpeedX(-BULLET_NORMAL_SPEED);
-		this->SetSpeedY(0);
-	}
-	else
-	{
-		this->setIsLeft(false);
-		this->SetSpeedX(BULLET_NORMAL_SPEED);
-		this->SetSpeedY(0);
-	}*/
-
 	switch (direction)
 	{
 	case 1:		//Left
@@ -537,6 +524,8 @@ void Bullet::BulletNormalBoss1Update(DWORD dt)
 
 		break;
 	case 7:		//Top
+		//this->SetSpeedX(-this->GetSpeedX());
+		this->SetSpeedY(BULLET_NORMAL_SPEED);
 		break;
 	case 8:		//Top-Left
 		this->setIsLeft(true);
@@ -628,7 +617,7 @@ void Bullet::BarrelUpdate(DWORD dt)
 	{
 		float min_tx, min_ty, nx = 0, ny;
 
-		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		Collision::GetInstance()->GetNearestCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
 		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
 		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
@@ -811,10 +800,12 @@ void Bullet::Render()
 	break;
 	case BULLET_NORMAL_BOSS1:
 	{
-		this->animations[5]->Render(spriteData);
+		if (direction != 6 && direction != 8)
+			this->animations[5]->Render(spriteData);
+		else
+			this->animations[6]->Render(spriteData);
 	}
 	break;
-
 	case BULLET_SPECIAL_BOSS1:
 	{
 		if (direction == 3)
@@ -823,7 +814,6 @@ void Bullet::Render()
 			this->animations[7]->Render(spriteData);
 	}
 	break;
-
 	case BARREL:
 	{
 		if (direction == 9)

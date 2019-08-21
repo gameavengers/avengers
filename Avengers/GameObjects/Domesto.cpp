@@ -142,7 +142,7 @@ void Domesto::Update(DWORD dt)
 
 	vector<Tile2 *> tiles = Grid2::GetInstance()->GetNearbyTiles(this->GetRect());
 
-	this->SetSpeedY(this->GetSpeedY() - CAPTAIN_GRAVITY);
+	this->SetSpeedY(this->GetSpeedY() - 0.04f);
 
 	coEvents.clear();
 	this->SetDt(dt);
@@ -151,6 +151,13 @@ void Domesto::Update(DWORD dt)
 
 	if (coEvents.size() == 0)
 	{
+		if (type == WALK_FIRE_STAIGHT)
+		{
+			if (((DomestoWalkState*)state)->GetState() == DOMESTO_STATE_WALKING)
+			{
+				//Goi ham Jump va chuyen sang state Jump
+			}
+		}
 		float moveX = trunc(this->GetSpeedX()* dt);
 		float moveY = trunc(this->GetSpeedY()* dt);
 		this->SetPositionX(this->GetPositionX() + moveX);
@@ -160,7 +167,7 @@ void Domesto::Update(DWORD dt)
 	{
 		float min_tx, min_ty, nx = 0, ny;
 
-		Collision::GetInstance()->FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+		Collision::GetInstance()->GetNearestCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
 		float moveX = min_tx * this->GetSpeedX() * dt + nx * 0.4;
 		float moveY = min_ty * this->GetSpeedY() * dt + ny * 0.4;
@@ -173,6 +180,7 @@ void Domesto::Update(DWORD dt)
 			if (ny == 1)
 			{
 				this->SetIsGrounded(true);
+				this->SetSpeedY(0);
 			}
 		}
 	}
